@@ -32,6 +32,23 @@ ID                 : [A-Za-z_][A-Za-z0-9_]* ;
 
 //Literals
 
+INT_LIT
+    : DecDigitNoZero DecDigit*
+    | DecDigit
+    ;
+
+BOOL_LIT : 'true' | 'false';
+
+DOUBLE_LIT
+     : DecDigits '.' DecDigits
+     | DecDigits
+     ;
+
+FLOAT_LIT
+    : DOUBLE_LIT [fF]
+    | DecDigits [fF]
+    ;
+
 fragment DecDigit: '0'..'9';
 fragment DecDigitNoZero: '1'..'9';
 fragment DecDigitOrSeparator: DecDigit | '_';
