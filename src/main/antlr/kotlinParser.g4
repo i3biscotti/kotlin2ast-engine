@@ -2,15 +2,15 @@ parser grammar kotlinParser;
 
 options{ tokenVocab=kotlinLexer; }
 
-kotlinFile: line+ (NEWLINE | EOF);
+kotlinFile: lines=line+;
 
-line: statement;
+line: statement (NEWLINE | EOF);
 
 /*
- var name = "Simone";
- val age : Int = 16;
- var height : Double = 1.75;
- const val text = "Hello World";
+ var name = "Simone"
+ val age : Int = 16
+ var height : Double = 1.75
+ const val text = "Hello World"
  */
 
  /* TASK 1 : VARIABILI
