@@ -44,11 +44,6 @@ DOUBLE_LIT
      | DecDigits
      ;
 
-FLOAT_LIT
-    : DOUBLE_LIT [fF]
-    | DecDigits [fF]
-    ;
-
 fragment DecDigit: '0'..'9';
 fragment DecDigitNoZero: '1'..'9';
 fragment DecDigitOrSeparator: DecDigit | '_';
