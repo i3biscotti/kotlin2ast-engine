@@ -5,13 +5,7 @@ buildscript {
         mavenCentral()
         maven {
             name 'JFrog OSS snapshot repo'
-            url  'https://oss.jfrog.org/oss-snapshot-local/'
-        }
-        maven {
-            url "https://maven.pkg.jetbrains.space/public/p/ktor/eap"
-        }
-        maven {
-            url "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+            url 'https://oss.jfrog.org/oss-snapshot-local/'
         }
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -20,7 +14,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.ktor.plugin:plugin:2.2.3"
+        classpath "io.ktor.plugin:plugin:2.3.7"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }
@@ -40,7 +34,7 @@ application {
     mainClassName = 'MainKt'
 }
 
-kotlin{
+kotlin {
     jvmToolchain(11)
 }
 
@@ -52,6 +46,9 @@ repositories {
 dependencies {
     antlr "org.antlr:antlr4:4.13.1"
     implementation "org.antlr:antlr4-runtime:4.13.1"
+    implementation "io.ktor:ktor-server-core:2.3.7"
+    implementation "io.ktor:ktor-server-netty:2.3.7"
+    implementation "org.slf4j:slf4j-simple:2.0.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
@@ -59,17 +56,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
-tasks{
+tasks {
     generateGrammarSource {
         arguments += ['-visitor']
     }
 }
 
 compileKotlin {
-   dependsOn("generateGrammarSource")
+    dependsOn("generateGrammarSource")
 }
 
-compileTestKotlin{
+compileTestKotlin {
     dependsOn("generateGrammarSource")
 }
 
