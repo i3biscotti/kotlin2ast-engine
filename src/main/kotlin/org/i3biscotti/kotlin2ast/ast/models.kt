@@ -26,7 +26,7 @@ enum class VariableValueType {
     Double,
     String,
     Boolean,
-    reference
+    Reference
 }
 
 enum class VariableType {
