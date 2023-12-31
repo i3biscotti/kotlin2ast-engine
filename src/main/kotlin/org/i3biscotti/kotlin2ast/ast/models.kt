@@ -7,18 +7,20 @@ data class Point(val line: Int, val column: Int)
 
 data class Position(val start: Point, val end: Point)
 
-open class Node(position: Position)
+interface Node {
+    val position: Position?
+}
 
-data class KotlinFile(val lines: List<Statement>, val position: Position) : Node(position)
+data class KotlinFile(val lines: List<Statement>, override val position: Position?) : Node
 
-open class Statement(position: Position) : Node(position)
+open class Statement(override val position: Position?) : Node
 
 data class VarDeclarationStatement(
     val type: VariableType,
     val name: String,
-    val valueType: VariableValueType,
+    val valueType: VariableValueType?,
     val value: Expression,
-    val position: Position
+    override val position: Position?
 ) : Statement(position)
 
 enum class VariableValueType {
@@ -26,25 +28,25 @@ enum class VariableValueType {
     Double,
     String,
     Boolean,
-    reference
+    Reference
 }
 
 enum class VariableType {
     variable, immutable, constant
 }
 
-open class Expression(position: Position) : Node(position)
+open class Expression(override val position: Position?) : Node
 
 data class Assignment(
     val name: String,
     val value: Expression,
-    val position: Position
+    override val position: Position?
 ) : Statement(position)
 
-data class initLit(val value: String, val position: Position) : Expression(position)
+data class IntLit(val value: String, override val position: Position?) : Expression(position)
 
-data class DecLit(val value: String, val position: Position) : Expression(position)
+data class DecLit(val value: String, override val position: Position?) : Expression(position)
 
-data class StringLit(val value: String, val position: Position) : Expression(position)
+data class StringLit(val value: String, override val position: Position?) : Expression(position)
 
-data class BooleanLit(val value: String, val position: Position) : Expression(position)
+data class BooleanLit(val value: String, override val position: Position?) : Expression(position)
