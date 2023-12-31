@@ -1,5 +1,8 @@
 package org.i3biscotti.kotlin2ast.ast
 
+import org.antlr.v4.gui.PostScriptDocument
+import java.lang.Thread.State
+
 data class Point(val line: Int, val column: Int)
 
 data class Position(val start: Point, val end: Point)
@@ -19,7 +22,11 @@ data class VarDeclarationStatement(
 ) : Statement(position)
 
 enum class VariableValueType {
-
+    Int,
+    Double,
+    String,
+    Boolean,
+    reference
 }
 
 enum class VariableType {
@@ -27,3 +34,17 @@ enum class VariableType {
 }
 
 open class Expression(position: Position) : Node(position)
+
+data class Assignment(
+    val name: String,
+    val value: Expression,
+    val position: Position
+) : Statement(position)
+
+data class initLit(val value: String, val position: Position) : Expression(position)
+
+data class DecLit(val value: String, val position: Position) : Expression(position)
+
+data class StringLit(val value: String, val position: Position) : Expression(position)
+
+data class BooleanLit(val value: String, val position: Position) : Expression(position)
