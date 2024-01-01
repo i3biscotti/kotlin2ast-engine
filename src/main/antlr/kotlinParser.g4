@@ -22,9 +22,9 @@ line: statement (NEWLINE | EOF);
     ;
 
  variableDeclaration
-    : VAR ID (COLONS type)? ASSIGN expression       #VarDeclarationStatement
-    | VAL ID (COLONS type)? ASSIGN expression       #ValDeclarationStatement
-    | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclarationStatement
+    : VAR ID (COLONS type)? ASSIGN expression       #VarDeclaration
+    | VAL ID (COLONS type)? ASSIGN expression       #ValDeclaration
+    | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclaration
     ;
 
  assign : ID ASSIGN expression;

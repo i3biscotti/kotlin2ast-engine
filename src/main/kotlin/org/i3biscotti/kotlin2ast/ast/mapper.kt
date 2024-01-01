@@ -44,9 +44,9 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
 
 fun VariableDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     return when (this) {
-        is VarDeclarationStatementContext -> toAst(considerPosition)
-        is ValDeclarationStatementContext -> toAst(considerPosition)
-        is ConstDeclarationStatementContext -> toAst(considerPosition)
+        is VarDeclarationContext -> toAst(considerPosition)
+        is ValDeclarationContext -> toAst(considerPosition)
+        is ConstDeclarationContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
@@ -64,7 +64,7 @@ fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType {
 }
 
 
-fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun VarDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst()
     val valueType = antlr4ToAstValueType(this.type())
@@ -79,7 +79,7 @@ fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
 }
 
 
-fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun ValDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst()
     val valueType = antlr4ToAstValueType(this.type())
@@ -94,7 +94,7 @@ fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
 }
 
 
-fun ConstDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun ConstDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst()
     val valueType = antlr4ToAstValueType(this.type())
