@@ -16,12 +16,15 @@ line: statement (NEWLINE | EOF);
  /* TASK 1 : VARIABILI
  --------------------------------------------*/
 
- statement : variableDeclaration | assign;
+ statement
+    : variableDeclaration #VariableDeclarationStatement
+    | assign #AssignStatement
+    ;
 
  variableDeclaration
-    : VAR ID (COLONS type)? ASSIGN expression       #varDeclaration
-    | VAL ID (COLONS type)? ASSIGN expression       #valDeclaration
-    | CONST ID (COLONS type)? ASSIGN expression     #constDeclaration
+    : VAR ID (COLONS type)? ASSIGN expression       #VarDeclarationStatement
+    | VAL ID (COLONS type)? ASSIGN expression       #ValDeclarationStatement
+    | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclarationStatement
     ;
 
  assign : ID ASSIGN expression;

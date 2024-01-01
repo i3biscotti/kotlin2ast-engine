@@ -3,7 +3,6 @@ package org.i3biscotti.kotlin2ast.ast
 import org.antlr.v4.runtime.*
 import kotlinParser.*
 
-
 fun Token.startPoint(): Point {
     return Point(line, charPositionInLine)
 }
@@ -26,7 +25,7 @@ fun ParserRuleContext.toPosition(considerPosition: Boolean): Position? {
 fun KotlinFileContext.toAst(considerPosition: Boolean = false): KotlinFile {
     val astLines = mutableListOf<Statement>()
 
-    for (line in lines()) {
+    for (line in this.line()) {
         val statement = line.statement()
         astLines.add(statement?.toAst(considerPosition)!!)
     }
@@ -35,18 +34,18 @@ fun KotlinFileContext.toAst(considerPosition: Boolean = false): KotlinFile {
 }
 
 
-fun StatementContext.toAst(considerPosition: Boolean = false): KotlinFile {
+fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
     return when (this) {
-        is VariableDeclarationStatementContext -> toAst(considerPosition)
+        is VariableDeclarationStatementContext -> variableDeclaration().toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
 
 
-fun varDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun VariableDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     return when (this) {
         is VarDeclarationStatementContext -> toAst(considerPosition)
-        is FinalDeclarationStatementContext -> toAst(considerPosition)
+        is ValDeclarationStatementContext -> toAst(considerPosition)
         is ConstDeclarationStatementContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
@@ -71,7 +70,7 @@ fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
-        VariableType.VARIABLE,
+        VariableType.constant,
         name,
         valueType,
         value,
@@ -80,13 +79,13 @@ fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
 }
 
 
-fun FinalDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst()
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
-        VariableType.IMMUTABLE,
+        VariableType.immutable,
         name,
         valueType,
         value,
@@ -101,7 +100,7 @@ fun ConstDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclar
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
-        VariableType.CONSTANT,
+        VariableType.constant,
         name,
         valueType,
         value,
