@@ -53,10 +53,30 @@ fragment DecDigits
     | DecDigit
     ;
 
-StringLiteral
+STRING_LIT
   : UnterminatedStringLiteral '"'
   ;
 
 UnterminatedStringLiteral
   : '"' (~["\\\r\n] | '\\' (. | EOF))*
   ;
+
+//TASK 2
+PLUS                        : '+';
+MINUS                       : '-';
+DIVISION                    : '/';
+TIMES                       : '*';
+MODULE                      : '%';
+
+GREATER_EQUAL_THAN          : '>=';
+LOWER_EQUAL_THAN            : '<=';
+GREATER_THAN                : '>';
+LOWER_THAN                  : '<';
+EQUAL                       : '==';
+
+AND                         : '&&';
+OR                          : '||';
+NOT                         : '!';
+
+PAREN_OPEN                  : '(';
+PAREN_CLOSE                 : ')';
