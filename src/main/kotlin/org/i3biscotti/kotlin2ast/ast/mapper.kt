@@ -66,7 +66,7 @@ fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType {
 
 fun VarDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
-    val value = this.expression().toAst()
+    val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
@@ -81,7 +81,7 @@ fun VarDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatem
 
 fun ValDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
-    val value = this.expression().toAst()
+    val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
@@ -96,7 +96,7 @@ fun ValDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatem
 
 fun ConstDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
-    val value = this.expression().toAst()
+    val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
@@ -106,4 +106,15 @@ fun ConstDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStat
         value,
         toPosition(considerPosition)!!
     )
+}
+
+
+fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
+    return when(this) {
+        is BoolLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
+        is IntLiteralExpressionContext -> IntLit(text, toPosition(considerPosition))
+        is DoubleLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
+        is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
+        else -> throw NotImplementedError()
+    }
 }
