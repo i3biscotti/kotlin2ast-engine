@@ -73,6 +73,7 @@ LOWER_EQUAL_THAN            : '<=';
 GREATER_THAN                : '>';
 LOWER_THAN                  : '<';
 EQUAL                       : '==';
+NOT_EQUAL                   : '!=';
 
 AND                         : '&&';
 OR                          : '||';
