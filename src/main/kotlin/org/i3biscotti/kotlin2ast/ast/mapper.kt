@@ -22,7 +22,7 @@ fun ParserRuleContext.toPosition(considerPosition: Boolean): Position? {
 }
 
 
-fun KotlinFileContext.toAst(considerPosition: Boolean = false): KotlinFile {
+fun KotlinFileContext.toAst(considerPosition: Boolean = false): ProgramFile {
     val astLines = mutableListOf<Statement>()
 
     for (line in this.line()) {
@@ -30,7 +30,7 @@ fun KotlinFileContext.toAst(considerPosition: Boolean = false): KotlinFile {
         astLines.add(statement?.toAst(considerPosition)!!)
     }
 
-    return KotlinFile(astLines, toPosition(considerPosition)!!)
+    return ProgramFile(astLines, toPosition(considerPosition)!!)
 }
 
 

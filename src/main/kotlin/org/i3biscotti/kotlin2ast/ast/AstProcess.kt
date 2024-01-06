@@ -4,13 +4,13 @@ typealias ProcessOperationCallback = (Node) -> Unit
 
 fun Node.process(operation: ProcessOperationCallback){
     when(this){
-        is KotlinFile -> this.process(operation)
+        is ProgramFile -> this.process(operation)
         is Statement -> this.process(operation)
         is Expression -> this.process(operation)
     }
 }
 
-fun KotlinFile.process(operation: ProcessOperationCallback){
+fun ProgramFile.process(operation: ProcessOperationCallback){
     operation(this)
 
     for (line in lines){ line.process(operation) }
@@ -21,7 +21,7 @@ fun Statement.process(operation: ProcessOperationCallback){
 
     when(this){
         is VarDeclarationStatement -> this.value.process(operation)
-        is Assignment -> this.value.process(operation)
+        is AssignmentStatement -> this.value.process(operation)
     }
 }
 

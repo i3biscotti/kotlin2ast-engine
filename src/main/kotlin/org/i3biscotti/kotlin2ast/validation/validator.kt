@@ -18,7 +18,7 @@ private fun Node.isBefore(other: Node): Boolean {
     return otherLine > nodeLine || (otherLine == nodeLine && otherCol > nodeCol)
 }
 
-fun KotlinFile.validate() : LinkedList<KotlinLangError> {
+fun ProgramFile.validate() : LinkedList<KotlinLangError> {
     val errors = LinkedList<KotlinLangError>()
     val variablesRegistry = HashMap<String, VarDeclarationStatement>()
 
@@ -39,7 +39,7 @@ fun KotlinFile.validate() : LinkedList<KotlinLangError> {
         }
     }
 
-    this.specificProcess(Assignment::class.java) {
+    this.specificProcess(AssignmentStatement::class.java) {
         if (!variablesRegistry.containsKey(it.name)) {
             errors.add(KotlinLangError("Variable ${it.name} not declared", it.position?.start))
         } else if (it.isBefore(variablesRegistry[it.name]!!)) {
