@@ -46,6 +46,7 @@ expression
     | left=expression NEWLINE* operand=MINUS NEWLINE* right=expression                  #BinaryMathExpression
     | left=expression NEWLINE* operand=TIMES NEWLINE* right=expression                  #BinaryMathExpression
     | left=expression NEWLINE* operand=DIVISION NEWLINE* right=expression               #BinaryMathExpression
+    | left=expression NEWLINE* operand=MODULE* right=expression                         #BinaryMathExpression
     | left=expression NEWLINE* operand=AND NEWLINE* right=expression                    #BinaryLogicExpression
     | left=expression NEWLINE* operand=OR NEWLINE* right=expression                     #BinaryLogicExpression
     | left=expression NEWLINE* operand=GREATER_THAN NEWLINE* right=expression           #BinaryLogicExpression
@@ -53,12 +54,11 @@ expression
     | left=expression NEWLINE* operand=GREATER_EQUAL_THAN NEWLINE* right=expression     #BinaryLogicExpression
     | left=expression NEWLINE* operand=LOWER_EQUAL_THAN NEWLINE* right=expression       #BinaryLogicExpression
     | left=expression NEWLINE* operand=EQUAL NEWLINE* right=expression                  #BinaryLogicExpression
+    | left=expression NEWLINE* operand=NOT_EQUAL NEWLINE* right=expression              #BinaryLogicExpression
     | operand=MINUS NEWLINE* value=expression                                           #UnaryMathExpression
     | operand=PLUS NEWLINE* value=expression                                            #UnaryMathExpression
     | NOT NEWLINE* value=expression                                                     #UnaryLogicNegationExpression
-    | PAREN_OPEN NEWLINE* value=expression NEWLINE* PAREN_OPEN                          #ParenthesisExpression
+    | PAREN_OPEN NEWLINE* value=expression NEWLINE* PAREN_CLOSE                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
     ;
-
-
 
