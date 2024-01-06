@@ -42,20 +42,21 @@ expression
     | value=INT_LIT                                                                     #IntLiteralExpression
     | value=DOUBLE_LIT                                                                  #DoubleLiteralExpression
     | value=STRING_LIT                                                                  #StringLiteralExpression
-    | left=expression NEWLINE* openand=PLUS NEWLINE* right=expression                   #BinaryMathExpression
-    | left=expression NEWLINE* openand=MINUS NEWLINE* right=expression                  #BinaryMathExpression
-    | left=expression NEWLINE* openand=TIMES NEWLINE* right=expression                  #BinaryMathExpression
-    | left=expression NEWLINE* openand=DIVISION NEWLINE* right=expression               #BinaryMathExpression
-    | left=expression NEWLINE* openand=AND NEWLINE* right=expression                    #BinaryLogicExpression
-    | left=expression NEWLINE* openand=OR NEWLINE* right=expression                     #BinaryLogicExpression
-    | left=expression NEWLINE* openand=GREATER_THAN NEWLINE* right=expression           #BinaryLogicExpression
-    | left=expression NEWLINE* openand=LOWER_THAN NEWLINE* right=expression             #BinaryLogicExpression
-    | left=expression NEWLINE* openand=GREATER_EQUAL_THAN NEWLINE* right=expression     #BinaryLogicExpression
-    | left=expression NEWLINE* openand=LOWER_EQUAL_THAN NEWLINE* right=expression       #BinaryLogicExpression
-    | left=expression NEWLINE* openand=EQUAL NEWLINE* right=expression                  #BinaryLogicExpression
-    | MINUS NEWLINE* value=expression                                                   #UnaryMathNegationExpression
-    | NOT NEWLINE* value=expression                                                     #UnatyLogicNegationExpression
-    | PAREN_OPEN NEWLINE* value=expression NEWLINE* PAREN_OPEN                          #ParenthesysExpression
+    | left=expression NEWLINE* operand=PLUS NEWLINE* right=expression                   #BinaryMathExpression
+    | left=expression NEWLINE* operand=MINUS NEWLINE* right=expression                  #BinaryMathExpression
+    | left=expression NEWLINE* operand=TIMES NEWLINE* right=expression                  #BinaryMathExpression
+    | left=expression NEWLINE* operand=DIVISION NEWLINE* right=expression               #BinaryMathExpression
+    | left=expression NEWLINE* operand=AND NEWLINE* right=expression                    #BinaryLogicExpression
+    | left=expression NEWLINE* operand=OR NEWLINE* right=expression                     #BinaryLogicExpression
+    | left=expression NEWLINE* operand=GREATER_THAN NEWLINE* right=expression           #BinaryLogicExpression
+    | left=expression NEWLINE* operand=LOWER_THAN NEWLINE* right=expression             #BinaryLogicExpression
+    | left=expression NEWLINE* operand=GREATER_EQUAL_THAN NEWLINE* right=expression     #BinaryLogicExpression
+    | left=expression NEWLINE* operand=LOWER_EQUAL_THAN NEWLINE* right=expression       #BinaryLogicExpression
+    | left=expression NEWLINE* operand=EQUAL NEWLINE* right=expression                  #BinaryLogicExpression
+    | operand=MINUS NEWLINE* value=expression                                           #UnaryMathExpression
+    | operand=PLUS NEWLINE* value=expression                                            #UnaryMathExpression
+    | NOT NEWLINE* value=expression                                                     #UnaryLogicNegationExpression
+    | PAREN_OPEN NEWLINE* value=expression NEWLINE* PAREN_OPEN                          #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
     ;
 
