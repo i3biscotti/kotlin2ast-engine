@@ -1,8 +1,5 @@
 package org.i3biscotti.kotlin2ast.ast
 
-import org.antlr.v4.gui.PostScriptDocument
-import java.lang.Thread.State
-
 data class Point(val line: Int, val column: Int)
 
 data class Position(val start: Point, val end: Point)
@@ -11,7 +8,7 @@ interface Node {
     val position: Position?
 }
 
-data class KotlinFile(val lines: List<Statement>, override val position: Position?) : Node
+data class ProgramFile(val lines: List<Statement>, override val position: Position?) : Node
 
 open class Statement(override val position: Position?) : Node
 
@@ -37,7 +34,7 @@ enum class VariableType {
 
 open class Expression(override val position: Position?) : Node
 
-data class Assignment(
+data class AssignmentStatement(
     val name: String,
     val value: Expression,
     override val position: Position?
