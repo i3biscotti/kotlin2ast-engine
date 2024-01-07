@@ -4,32 +4,51 @@ import io.ktor.server.response . *
 import io.ktor.server.routing . *
 import io.ktor.server.engine . *
 import io.ktor.server.netty . *
+import org.i3biscotti.kotlin2ast.ast.serialize
+import org.i3biscotti.kotlin2ast.parser.KotlinParser
+import org.i3biscotti.kotlin2ast.transpiler.transpile
 
 fun main(args: Array<String>) {
-    val input = CharStreams.fromString("""
+
+    val code = """
         | val a : Int = 2
-        | val b : Int = "Ciaooo"
-    """.trimMargin())
+        | const b : String = "Ciaooo"
+        | c = 2.3
+    """.trimMargin()
 
-    val lexer = kotlinLexer(input)
+    val result = KotlinParser.parse(code)
 
-    //val tSequences = lexer.allTokens.joinToString(separator = " ") {lexer.ruleNames[it.type - 1] }
-    //println(tSequences)
+    if (result.errors.isEmpty()) {
+        println(
+            """
+            |The AST is:
+            |${result.root?.serialize()}
+            |
+            |The transpiled code is:
+            |${result.root?.transpile()}
+            """.trimMargin()
+        )
+    } else {
+        // Everything after this is in red
+        val red = "\u001b[31m"
 
-    val tokens = CommonTokenStream(lexer)
-    val parser = kotlinParser(tokens)
+    // Resets previous color codes
+        val reset = "\u001b[0m"
+        println(
+            """$red
+               ${result.errors.joinToString("\n")}
+               $reset
+            """.trimIndent()
+        )
 
-    val root = parser.kotlinFile()
-
-    for (line in root.line()) {
-        print(line.statement().children.size)
     }
 
-    embeddedServer(Netty, port = 8080) {
-        routing {
-            get("/") {
-                call.respondText("Hello, world!")
-            }
-        }
-    }.start(wait = true)
+
+//    embeddedServer(Netty, port = 8080) {
+//        routing {
+//            get("/") {
+//                call.respondText("Hello, world!")
+//            }
+//        }
+//    }.start(wait = true)
 }
