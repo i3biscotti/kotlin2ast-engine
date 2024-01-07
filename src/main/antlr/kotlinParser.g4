@@ -17,17 +17,11 @@ line: statement (NEWLINE | EOF);
  --------------------------------------------*/
 
  statement
-    : variableDeclaration #VariableDeclarationStatement
-    | assign #AssignStatement
+    : VAR ID (COLONS type)? ASSIGN expression       #VarDeclarationStatement
+    | VAL ID (COLONS type)? ASSIGN expression       #ValDeclarationStatement
+    | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclarationStatement
+    | ID ASSIGN expression                          #AssignStatement
     ;
-
- variableDeclaration
-    : VAR ID (COLONS type)? ASSIGN expression       #VarDeclaration
-    | VAL ID (COLONS type)? ASSIGN expression       #ValDeclaration
-    | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclaration
-    ;
-
- assign : ID ASSIGN expression;
 
  type
     : STRING       #stringType

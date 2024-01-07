@@ -12,7 +12,7 @@ fun Node.transpile(): String {
 }
 
 fun ProgramFile.transpile(): String {
-    return lines.joinToString("\n") { transpile() }
+    return lines.joinToString("\n") { it.transpile() }
 }
 
 fun Statement.transpile(): String {

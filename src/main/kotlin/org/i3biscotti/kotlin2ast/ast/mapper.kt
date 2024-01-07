@@ -36,35 +36,28 @@ fun KotlinFileContext.toAst(considerPosition: Boolean = false): ProgramFile {
 
 fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
     return when (this) {
-        is VariableDeclarationStatementContext -> variableDeclaration().toAst(considerPosition)
+        is VarDeclarationStatementContext -> toAst(considerPosition)
+        is ValDeclarationStatementContext -> toAst(considerPosition)
+        is ConstDeclarationStatementContext -> toAst(considerPosition)
+        is AssignStatementContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
 
-
-fun VariableDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
-    return when (this) {
-        is VarDeclarationContext -> toAst(considerPosition)
-        is ValDeclarationContext -> toAst(considerPosition)
-        is ConstDeclarationContext -> toAst(considerPosition)
-        else -> throw NotImplementedError()
-    }
-}
-
-
-fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType {
+fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType? {
     return when (type) {
         is IntTypeContext -> VariableValueType.Int
         is DoubleTypeContext -> VariableValueType.Double
         is BooleanTypeContext -> VariableValueType.Boolean
         is StringTypeContext -> VariableValueType.String
         is ReferenceTypeContext -> VariableValueType.Reference
-        else -> throw NotImplementedError()
+        null -> null
+        else -> throw NotImplementedError("$type is not implemented")
     }
 }
 
 
-fun VarDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
@@ -79,7 +72,7 @@ fun VarDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatem
 }
 
 
-fun ValDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
@@ -94,7 +87,7 @@ fun ValDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatem
 }
 
 
-fun ConstDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
+fun ConstDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
     val value = this.expression().toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
@@ -109,8 +102,21 @@ fun ConstDeclarationContext.toAst(considerPosition: Boolean): VarDeclarationStat
 }
 
 
+fun AssignStatementContext.toAst(considerPosition: Boolean): AssignmentStatement {
+
+    val name = this.ID().text
+    val value = this.expression().toAst(considerPosition)
+
+    return AssignmentStatement(
+        name,
+        value,
+        toPosition(considerPosition)!!
+    )
+}
+
+
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
-    return when(this) {
+    return when (this) {
         is BoolLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
         is IntLiteralExpressionContext -> IntLit(text, toPosition(considerPosition))
         is DoubleLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))

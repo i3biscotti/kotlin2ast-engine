@@ -23,7 +23,7 @@ object KotlinParser {
         val parsingResult = KotlinAntlrParser.parse(inputStream)
         return if (parsingResult.isCorrect()) {
 
-            val programFile: ProgramFile = parsingResult.root!!.toAst()
+            val programFile: ProgramFile = parsingResult.root!!.toAst(true)
             val semanticErrors = programFile.validate()
 
             KotlinParsingResult(programFile, parsingResult.errors + semanticErrors)
