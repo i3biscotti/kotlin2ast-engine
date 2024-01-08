@@ -34,7 +34,7 @@ fun VarDeclarationStatement.transpile(): String {
         null -> ""
     }
 
-    val variableTypeTranspiled = when (type) {
+    val variableTypeTranspiled = when (varType) {
         VariableType.immutable -> "val"
         VariableType.variable -> "var"
         VariableType.constant -> "const"
