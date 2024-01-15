@@ -20,7 +20,7 @@ interface Node {
 data class ProgramFile(val lines: List<Statement>, override val position: Position?) : Node
 
 @Serializable
-sealed class Statement : Node{
+sealed class Statement : Node {
     abstract override val position: Position?
 }
 
@@ -34,12 +34,16 @@ data class VarDeclarationStatement(
     override val position: Position?
 ) : Statement()
 
-enum class VariableValueType {
-    Int,
-    Double,
-    String,
-    Boolean,
-    Reference
+@Serializable
+@SerialName("VariableValueType")
+data class VariableValueType(val name: String) {
+    companion object {
+        val INT = VariableValueType("int")
+        val DOUBLE = VariableValueType("double")
+        val STRING = VariableValueType("string")
+        val BOOLEAN = VariableValueType("boolean")
+        val VOID = VariableValueType("void")
+    }
 }
 
 enum class VariableType {
@@ -55,7 +59,7 @@ data class AssignmentStatement(
 ) : Statement()
 
 @Serializable
-sealed class Expression :Node {
+sealed class Expression : Node {
     abstract override val position: Position?
 }
 
@@ -74,3 +78,21 @@ data class StringLit(val value: String, override val position: Position?) : Expr
 @Serializable
 @SerialName("BooleanLit")
 data class BooleanLit(val value: String, override val position: Position?) : Expression()
+@Serializable
+@SerialName("FunctionCallExpression")
+data class FunctionCallExpression(val name: String, val parameters: List<Expression>, override val position: Position?) :
+    Expression()
+
+@Serializable
+@SerialName("Parameter")
+data class Parameter(val name: String, val valueType: VariableValueType, override val position: Position?) : Node
+
+@Serializable
+@SerialName("FunctionDefinitionStatement")
+data class FunctionDefinitionStatement(
+    val name: String,
+    val parameters: List<Parameter>,
+    val returnType: VariableValueType?,
+    val statements: List<Statement>,
+    override val position: Position?
+) : Statement();

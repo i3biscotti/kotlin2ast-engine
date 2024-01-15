@@ -1,5 +1,6 @@
 package org.i3biscotti.kotlin2ast.ast
 
+import io.ktor.http.*
 import org.antlr.v4.runtime.*
 import kotlinParser.*
 
@@ -40,17 +41,19 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
         is ValDeclarationStatementContext -> toAst(considerPosition)
         is ConstDeclarationStatementContext -> toAst(considerPosition)
         is AssignStatementContext -> toAst(considerPosition)
+        is FunctionDefinitionStatementContext -> functionDefinition().toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
 
 fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType? {
     return when (type) {
-        is IntTypeContext -> VariableValueType.Int
-        is DoubleTypeContext -> VariableValueType.Double
-        is BooleanTypeContext -> VariableValueType.Boolean
-        is StringTypeContext -> VariableValueType.String
-        is ReferenceTypeContext -> VariableValueType.Reference
+        is IntTypeContext -> VariableValueType.INT
+        is DoubleTypeContext -> VariableValueType.DOUBLE
+        is BooleanTypeContext -> VariableValueType.BOOLEAN
+        is StringTypeContext -> VariableValueType.STRING
+        is UnitTypeContext -> VariableValueType.VOID
+        is CustomTypeContext -> VariableValueType(type.ID().text)
         null -> null
         else -> throw NotImplementedError("$type is not implemented")
     }
@@ -121,6 +124,29 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is IntLiteralExpressionContext -> IntLit(text, toPosition(considerPosition))
         is DoubleLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
+        is FunctionCallExpressionContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
+}
+
+fun FunctionCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression{
+    val fnName = name.text
+    val parameters = expression().map { it.toAst(considerPosition) }
+
+    return FunctionCallExpression(fnName, parameters, toPosition(considerPosition))
+}
+
+fun ParameterContext.toAst(considerPosition: Boolean): Parameter {
+    val paramName = ID().text
+    val paramType = antlr4ToAstValueType(type())!!
+
+    return Parameter(paramName, paramType, toPosition(considerPosition))
+}
+
+fun FunctionDefinitionContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
+    val nameText = name.text
+    val returnType = antlr4ToAstValueType(returnType) ?: VariableValueType.VOID
+    val parameters = parameter().map { it.toAst(considerPosition) }
+    val statements = block().statement().map { it.toAst(considerPosition) }
+    return FunctionDefinitionStatement(nameText, parameters, returnType, statements, toPosition(considerPosition))
 }

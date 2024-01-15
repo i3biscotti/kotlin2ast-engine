@@ -26,12 +26,12 @@ fun Statement.transpile(): String {
 fun VarDeclarationStatement.transpile(): String {
     val valueTranspiled = value.transpile()
     val valueTypeTranspiled = when (valueType) {
-        VariableValueType.Int -> ": Int"
-        VariableValueType.Boolean -> ": Boolean"
-        VariableValueType.Double -> ": Double"
-        VariableValueType.String -> ": String"
-        VariableValueType.Reference -> ": object"
-        null -> ""
+        VariableValueType.INT -> ": Int"
+        VariableValueType.BOOLEAN -> ": Boolean"
+        VariableValueType.DOUBLE -> ": Double"
+        VariableValueType.STRING -> ": String"
+        VariableValueType.VOID -> ": Unit"
+        else -> ": $name"
     }
 
     val variableTypeTranspiled = when (varType) {

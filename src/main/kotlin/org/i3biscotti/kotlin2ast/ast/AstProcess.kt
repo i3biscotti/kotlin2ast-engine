@@ -22,6 +22,7 @@ fun Statement.process(operation: ProcessOperationCallback){
     when(this){
         is VarDeclarationStatement -> this.value.process(operation)
         is AssignmentStatement -> this.value.process(operation)
+        is FunctionDefinitionStatement -> operation(this)
     }
 }
 

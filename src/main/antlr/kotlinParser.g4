@@ -4,7 +4,7 @@ options{ tokenVocab=kotlinLexer; }
 
 kotlinFile: lines=line+;
 
-line: statement (NEWLINE | EOF);
+line: statement EOF?;
 
 /*
  var name = "Simone"
@@ -21,14 +21,16 @@ line: statement (NEWLINE | EOF);
     | VAL ID (COLONS type)? ASSIGN expression       #ValDeclarationStatement
     | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclarationStatement
     | ID ASSIGN expression                          #AssignStatement
+    | functionDefinition                            #FunctionDefinitionStatement
     ;
 
  type
-    : STRING       #stringType
-    | INT          #intType
-    | DOUBLE       #doubleType
-    | BOOLEAN      #booleanType
-    | ID           #referenceType
+    : STRING       #StringType
+    | INT          #IntType
+    | DOUBLE       #DoubleType
+    | BOOLEAN      #BooleanType
+    | UNIT         #UnitType
+    | ID           #CustomType
     ;
 
 expression
@@ -36,23 +38,37 @@ expression
     | value=INT_LIT                                                                     #IntLiteralExpression
     | value=DOUBLE_LIT                                                                  #DoubleLiteralExpression
     | value=STRING_LIT                                                                  #StringLiteralExpression
-    | left=expression NEWLINE* operand=PLUS NEWLINE* right=expression                   #BinaryMathExpression
-    | left=expression NEWLINE* operand=MINUS NEWLINE* right=expression                  #BinaryMathExpression
-    | left=expression NEWLINE* operand=TIMES NEWLINE* right=expression                  #BinaryMathExpression
-    | left=expression NEWLINE* operand=DIVISION NEWLINE* right=expression               #BinaryMathExpression
-    | left=expression NEWLINE* operand=MODULE* right=expression                         #BinaryMathExpression
-    | left=expression NEWLINE* operand=AND NEWLINE* right=expression                    #BinaryLogicExpression
-    | left=expression NEWLINE* operand=OR NEWLINE* right=expression                     #BinaryLogicExpression
-    | left=expression NEWLINE* operand=GREATER_THAN NEWLINE* right=expression           #BinaryLogicExpression
-    | left=expression NEWLINE* operand=LOWER_THAN NEWLINE* right=expression             #BinaryLogicExpression
-    | left=expression NEWLINE* operand=GREATER_EQUAL_THAN NEWLINE* right=expression     #BinaryLogicExpression
-    | left=expression NEWLINE* operand=LOWER_EQUAL_THAN NEWLINE* right=expression       #BinaryLogicExpression
-    | left=expression NEWLINE* operand=EQUAL NEWLINE* right=expression                  #BinaryLogicExpression
-    | left=expression NEWLINE* operand=NOT_EQUAL NEWLINE* right=expression              #BinaryLogicExpression
-    | operand=MINUS NEWLINE* value=expression                                           #UnaryMathExpression
-    | operand=PLUS NEWLINE* value=expression                                            #UnaryMathExpression
-    | NOT NEWLINE* value=expression                                                     #UnaryLogicNegationExpression
-    | PAREN_OPEN NEWLINE* value=expression NEWLINE* PAREN_CLOSE                         #ParenthesisExpression
+    | left=expression     operand=PLUS                  right=expression                #BinaryMathExpression
+    | left=expression     operand=MINUS                 right=expression                #BinaryMathExpression
+    | left=expression     operand=TIMES                 right=expression                #BinaryMathExpression
+    | left=expression     operand=DIVISION              right=expression                #BinaryMathExpression
+    | left=expression     operand=MODULE*               right=expression                #BinaryMathExpression
+    | left=expression     operand=AND                   right=expression                #BinaryLogicExpression
+    | left=expression     operand=OR                    right=expression                #BinaryLogicExpression
+    | left=expression     operand=GREATER_THAN          right=expression                #BinaryLogicExpression
+    | left=expression     operand=LOWER_THAN            right=expression                #BinaryLogicExpression
+    | left=expression     operand=GREATER_EQUAL_THAN    right=expression                #BinaryLogicExpression
+    | left=expression     operand=LOWER_EQUAL_THAN      right=expression                #BinaryLogicExpression
+    | left=expression     operand=EQUAL                 right=expression                #BinaryLogicExpression
+    | left=expression     operand=NOT_EQUAL             right=expression                #BinaryLogicExpression
+    |                     operand=MINUS                 value=expression                #UnaryMathExpression
+    |                     operand=PLUS                  value=expression                #UnaryMathExpression
+    | NOT  value=expression                                                             #UnaryLogicNegationExpression
+    | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
+    | name=ID PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE                    #FunctionCallExpression
     ;
+
+parameter
+    : ID COLONS type
+    ;
+
+block: GRAPH_OPEN statements=statement* GRAPH_CLOSE;
+
+functionDefinition
+    : FUN name=ID PAREN_OPEN
+        (parameter COMMA)* parameter?
+    PAREN_CLOSE
+    (COLONS returnType=type)?
+    block;
 

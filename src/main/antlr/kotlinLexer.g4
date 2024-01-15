@@ -11,8 +11,7 @@ const val text = "Hello World";
 --------------------------------------------*/
 
 // Whitespace
-NEWLINE            : '\r\n' | '\r' | '\n' ;
-WS                 : [\t ]+ -> skip ;
+WS                  : [ \t\r\n]+ -> skip ;
 
 VAL                 : 'val';
 CONST               : 'const';
@@ -20,15 +19,14 @@ VAR                 : 'var';
 
 COLONS              : ':';
 ASSIGN              : '=';
+COMMA               : ',';
 
 //Atomic types
 INT                 : 'Int';
 DOUBLE              : 'Double';
 STRING              : 'String';
 BOOLEAN             : 'Boolean';
-
-// Identifiers
-ID                 : [A-Za-z_][A-Za-z0-9_]* ;
+UNIT                : 'Unit';
 
 //Literals
 
@@ -81,3 +79,10 @@ NOT                         : '!';
 
 PAREN_OPEN                  : '(';
 PAREN_CLOSE                 : ')';
+
+FUN                         : 'fun';
+GRAPH_OPEN                  : '{';
+GRAPH_CLOSE                 : '}';
+
+// Identifiers
+ID                 : [A-Za-z_][A-Za-z0-9_]* ;
