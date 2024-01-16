@@ -96,3 +96,72 @@ data class FunctionDefinitionStatement(
     val statements: List<Statement>,
     override val position: Position?
 ) : Statement();
+
+
+//task 2
+sealed class BinaryExpression(
+    open val left: Expression,
+    open val right: Expression,
+    override val position: Position?
+) : Expression()
+
+enum class MathOperand {
+    plus,
+    minus,
+    times,
+    division,
+    module
+}
+
+enum class LogicOperand {
+    and,
+    or,
+    not,
+    equal,
+    notEqual,
+    lessThan,
+    lessThanOrEqual,
+    greaterThan,
+    greaterThanOrEqual
+}
+
+data class BinaryMathExpression(
+    override val position: Position?,
+    val operand: MathOperand,
+    override val left: Expression,
+    override val right: Expression
+    ) :  BinaryExpression(left, right, position)
+
+data class BinaryLogicExpression(
+    override val position: Position?,
+    val operand: LogicOperand,
+    override val left: Expression,
+    override val right: Expression
+) :  BinaryExpression(left, right, position)
+
+sealed class UnaryExpression(
+    open val value: Expression,
+    override val position: Position?
+) :  Expression()
+
+data class UnaryMathExpression(
+    override val position: Position?,
+    val operand: MathOperand,
+    override val value: Expression,
+    ) :  UnaryExpression(value, position)
+
+data class UnaryLogicNegationExpression(
+    override val position: Position?,
+    override val value: Expression
+
+    ) :  UnaryExpression(value, position)
+
+data class ParenthesisExpression(
+    val value: Expression,
+    override val position: Position?
+) :  Expression()
+
+data class VarReferenceExpression(
+    val value: String,
+    override val position: Position?
+) :  Expression()
