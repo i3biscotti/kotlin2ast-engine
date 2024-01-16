@@ -3,6 +3,7 @@ package org.i3biscotti.kotlin2ast.ast
 import io.ktor.http.*
 import org.antlr.v4.runtime.*
 import kotlinParser.*
+import org.antlr.v4.runtime.tree.TerminalNode
 
 fun Token.startPoint(): Point {
     return Point(line, charPositionInLine)
@@ -58,7 +59,6 @@ fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType? {
         else -> throw NotImplementedError("$type is not implemented")
     }
 }
-
 
 fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarationStatement {
     val name = this.ID().text
@@ -125,8 +125,105 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is DoubleLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
         is FunctionCallExpressionContext -> toAst(considerPosition)
+        is BinaryMathExpressionContext -> toAst(considerPosition)
+        is BinaryLogicExpressionContext -> toAst(considerPosition)
+        is UnaryMathExpressionContext -> toAst(considerPosition)
+        is UnaryLogicNegationExpressionContext -> toAst(considerPosition)
+        is ParenthesisExpressionContext -> toAst(considerPosition)
+        is VarReferenceExpressionContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
+}
+
+//task2
+
+fun VarReferenceExpressionContext.toAst(considerPosition: Boolean): VarReferenceExpression {
+    val name = this.value.text
+        return VarReferenceExpression(
+            name,
+            toPosition(considerPosition)!!
+        )
+}
+
+fun BinaryMathExpressionContext.toAst(considerPosition: Boolean): BinaryMathExpression {
+
+    val left = this.left.toAst(considerPosition)
+    val right = this.right.toAst(considerPosition)
+    val operand: MathOperand = when(this.operand.text) {
+        "+" -> MathOperand.plus
+        "-" -> MathOperand.minus
+        "*" -> MathOperand.times
+        "/" -> MathOperand.division
+        "|" -> MathOperand.module
+        else -> throw NotImplementedError()
+    }
+
+    return BinaryMathExpression(
+        toPosition(considerPosition)!!,
+        operand,
+        left,
+        right,
+    )
+}
+
+fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicExpression {
+
+    val left = this.left.toAst(considerPosition)
+    val right = this.right.toAst(considerPosition)
+    val operand: LogicOperand = when(this.operand.text) {
+        "&&" -> LogicOperand.and
+        "||" -> LogicOperand.or
+        "==" -> LogicOperand.equal
+        "!=" -> LogicOperand.notEqual
+        "<" -> LogicOperand.lessThan
+        "<=" -> LogicOperand.lessThanOrEqual
+        ">" -> LogicOperand.greaterThan
+        ">=" -> LogicOperand.greaterThanOrEqual
+        else -> throw NotImplementedError()
+    }
+
+    return BinaryLogicExpression(
+        toPosition(considerPosition)!!,
+        operand,
+        left,
+        right,
+    )
+}
+
+fun UnaryMathExpressionContext.toAst(considerPosition: Boolean): UnaryMathExpression {
+
+    val value = this.expression().toAst(considerPosition)
+    val operand: MathOperand = when(this.operand.text) {
+        "+" -> MathOperand.plus
+        "-" -> MathOperand.minus
+        else -> throw NotImplementedError()
+    }
+
+    return UnaryMathExpression(
+        toPosition(considerPosition)!!,
+        operand,
+        value
+    )
+}
+
+fun UnaryLogicNegationExpressionContext.toAst(considerPosition: Boolean): UnaryLogicNegationExpression {
+
+    val value = this.expression().toAst(considerPosition)
+
+    return UnaryLogicNegationExpression(
+        toPosition(considerPosition)!!,
+        value
+    )
+}
+
+fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisExpression {
+
+    val value = this.expression().toAst(considerPosition)
+
+    return ParenthesisExpression(
+        value,
+        toPosition(considerPosition)!!
+    )
 }
 
 fun FunctionCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression{
