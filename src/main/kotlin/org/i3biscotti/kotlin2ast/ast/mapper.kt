@@ -3,7 +3,6 @@ package org.i3biscotti.kotlin2ast.ast
 import io.ktor.http.*
 import org.antlr.v4.runtime.*
 import kotlinParser.*
-import org.antlr.v4.runtime.tree.TerminalNode
 
 fun Token.startPoint(): Point {
     return Point(line, charPositionInLine)
