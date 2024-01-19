@@ -1,17 +1,15 @@
 import org.antlr.v4.runtime.ParserRuleContext
-import org.i3biscotti.kotlin2ast.ast.models.ProgramFile
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
-import org.i3biscotti.kotlin2ast.parser.KotlinParser
 import org.i3biscotti.kotlin2ast.toParseTree
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class ParserTest {
     private fun parseResource(
         resourceName: String,
     ): ParserRuleContext {
-        val parseResult = this.javaClass
-            .getResourceAsStream("/${resourceName}.txt")
-            ?.let { KotlinAntlrParser.parse(it) }
+        val resource = this.javaClass.getResourceAsStream("/${resourceName}.txt")
+        val parseResult = resource?.let { KotlinAntlrParser.parse(it) }
 
         if (parseResult != null) {
             if (parseResult.isCorrect()) {
@@ -28,29 +26,86 @@ class ParserTest {
 
     @Test
     fun testVarDeclarationStatement(){
-        val programFile = parseResource("task1/varDeclarationStatement.txt")
+        val programFile = parseResource("task1/varDeclarationStatement")
             .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    VarDeclarationStatement
+            |      T[var]
+            |      T[name]
+            |      T[=]
+            |      StringLiteralExpression
+            |        T["Simone"]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
     }
 
     @Test
     fun testValDeclarationStatement(){
-        val programFile = parseResource("task1/valDeclarationStatement.txt")
+        val programFile = parseResource("task1/valDeclarationStatement")
             .toParseTree()
 
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    VarDeclarationStatement
+            |      T[val]
+            |      T[age]
+            |      T[=]
+            |      IntLiteralExpression
+            |        T[16]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
     }
 
     @Test
     fun testConstDeclarationStatement(){
-        val programFile = parseResource("task1/constDeclarationStatement.txt")
+        val programFile = parseResource("task1/constDeclarationStatement")
             .toParseTree()
 
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    VarDeclarationStatement
+            |      T[var]
+            |      T[name]
+            |      T[=]
+            |      StringLiteralExpression
+            |        T["Simone"]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
     }
 
     @Test
     fun testAssignmentStatement(){
-        val programFile = parseResource("task1/assignmentStatement.txt")
+        val programFile = parseResource("task1/assignmentStatement")
             .toParseTree()
 
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    VarDeclarationStatement
+            |      T[var]
+            |      T[name]
+            |      T[=]
+            |      StringLiteralExpression
+            |        T["Simone"]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
     }
 
     //endregion
