@@ -1,10 +1,10 @@
-parser grammar kotlinParser;
+parser grammar KotlinParser;
 
-options{ tokenVocab=kotlinLexer; }
+options{ tokenVocab=KotlinLexer; }
 
 kotlinFile: lines=line+;
 
-line: statement EOF?;
+line: statement (NL | EOF);
 
 /*
  var name = "Simone"
@@ -22,6 +22,9 @@ line: statement EOF?;
     | CONST ID (COLONS type)? ASSIGN expression     #ConstDeclarationStatement
     | ID ASSIGN expression                          #AssignStatement
     | functionDefinition                            #FunctionDefinitionStatement
+    | classDefinition                               #ClassDefinitionStatement
+    | expression                                    #ExpressionDefinitionStatement
+    | objectProperty ASSIGN expression              #ObjectPropertyAssignStatement
     ;
 
  type
@@ -56,14 +59,16 @@ expression
     | NOT  value=expression                                                             #UnaryLogicNegationExpression
     | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
-    | name=ID PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE                    #FunctionCallExpression
+    | functionCall                                                                      #FunctionCallExpression
+    | objectProperty                                                                    #ObjectPropertyExpression
+    | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;
 
 parameter
-    : ID COLONS type
+    : (VAL | VAR )? ID COLONS type
     ;
 
-block: GRAPH_OPEN statements=statement* GRAPH_CLOSE;
+block: GRAPH_OPEN NL* (statement NL+)* NL* GRAPH_CLOSE;
 
 functionDefinition
     : FUN name=ID PAREN_OPEN
@@ -72,3 +77,24 @@ functionDefinition
     (COLONS returnType=type)?
     block;
 
+classDefinition:
+    CLASS name=ID PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE GRAPH_OPEN NL* (classStatement NL+)* GRAPH_CLOSE;
+
+classStatement
+   : initBlock                  #InitStatement
+   | constructorBlock           #SecondaryConstructorStatement
+   | functionDefinition         #MethodStatement
+   ;
+
+initBlock: INIT GRAPH_OPEN NL* (statement NL+)*  GRAPH_CLOSE ;
+
+constructorBlock:
+    CONSTRUCTOR PAREN_OPEN NL*
+        (parameter COMMA)* parameter?
+    PAREN_CLOSE COLONS thisConstructor block?;
+
+thisConstructor: THIS PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE;
+
+functionCall: name=ID PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE;
+objectProperty: objectName=(ID | THIS) DOT propertyName=ID;
+objectMethodCall: objectName=(ID | THIS) DOT functionCall;

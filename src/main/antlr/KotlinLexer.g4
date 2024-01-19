@@ -1,4 +1,4 @@
-lexer grammar kotlinLexer;
+lexer grammar KotlinLexer;
 
 /*
 var name = "Simone";
@@ -11,7 +11,8 @@ const val text = "Hello World";
 --------------------------------------------*/
 
 // Whitespace
-WS                  : [ \t\r\n]+ -> skip ;
+NL                  : '\r\n' | '\r' | '\n' ;
+WS                  : [\t ]+ -> skip ;
 
 VAL                 : 'val';
 CONST               : 'const';
@@ -42,21 +43,8 @@ DOUBLE_LIT
      | DecDigits
      ;
 
-fragment DecDigit: '0'..'9';
-fragment DecDigitNoZero: '1'..'9';
-fragment DecDigitOrSeparator: DecDigit | '_';
-
-fragment DecDigits
-    : DecDigit DecDigitOrSeparator* DecDigit
-    | DecDigit
-    ;
-
 STRING_LIT
   : UnterminatedStringLiteral '"'
-  ;
-
-UnterminatedStringLiteral
-  : '"' (~["\\\r\n] | '\\' (. | EOF))*
   ;
 
 //TASK 2
@@ -84,5 +72,25 @@ FUN                         : 'fun';
 GRAPH_OPEN                  : '{';
 GRAPH_CLOSE                 : '}';
 
+CLASS                       : 'class';
+CONSTRUCTOR                 : 'constructor';
+INIT                        : 'init';
+THIS                        : 'this';
+DOT                         : '.';
+
 // Identifiers
 ID                 : [A-Za-z_][A-Za-z0-9_]* ;
+
+
+UnterminatedStringLiteral
+  : '"' (~["\\\r\n] | '\\' (. | EOF))*
+  ;
+
+fragment DecDigit: '0'..'9';
+fragment DecDigitNoZero: '1'..'9';
+fragment DecDigitOrSeparator: DecDigit | '_';
+
+fragment DecDigits
+    : DecDigit DecDigitOrSeparator* DecDigit
+    | DecDigit
+    ;

@@ -1,20 +1,17 @@
 package org.i3biscotti.kotlin2ast.parser
 
-import kotlinLexer
-import kotlinParser
-import kotlinParser.*
+import KotlinParser
+import KotlinLexer
 import org.antlr.v4.runtime.*
 import org.antlr.v4.runtime.atn.*
 import org.antlr.v4.runtime.dfa.DFA
-import org.i3biscotti.kotlin2ast.ast.*
+import org.i3biscotti.kotlin2ast.ast.models.Point
 import java.io.ByteArrayInputStream
-import java.io.File
-import java.io.FileInputStream
 import java.io.InputStream
 import java.nio.charset.Charset
 import java.util.*
 
-data class AntlrParsingResult(val root: KotlinFileContext?, val errors: List<KotlinLangError>) {
+data class AntlrParsingResult(val root: KotlinParser.KotlinFileContext?, val errors: List<KotlinLangError>) {
     fun isCorrect() = errors.isEmpty() && root != null
 }
 
@@ -69,12 +66,12 @@ object KotlinAntlrParser {
             }
         }
 
-        val lexer = kotlinLexer(CharStreams.fromStream(inputStream))
+        val lexer = KotlinLexer(CharStreams.fromStream(inputStream))
         lexer.removeErrorListeners()
         lexer.addErrorListener(errorListener)
 
         val tokens = CommonTokenStream(lexer)
-        val parser = kotlinParser(tokens)
+        val parser = KotlinParser(tokens)
         parser.removeErrorListeners()
         parser.addErrorListener(errorListener)
 
