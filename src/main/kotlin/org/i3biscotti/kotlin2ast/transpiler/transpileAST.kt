@@ -1,6 +1,6 @@
 package org.i3biscotti.kotlin2ast.transpiler
 
-import org.i3biscotti.kotlin2ast.ast.*
+import org.i3biscotti.kotlin2ast.ast.models.*
 
 fun Node.transpile(): String {
     return when (this) {
@@ -24,7 +24,6 @@ fun Statement.transpile(): String {
 }
 
 fun VarDeclarationStatement.transpile(): String {
-    val valueTranspiled = value.transpile()
     val valueTypeTranspiled = when (valueType) {
         VariableValueType.INT -> ": Int"
         VariableValueType.BOOLEAN -> ": Boolean"
@@ -40,12 +39,18 @@ fun VarDeclarationStatement.transpile(): String {
         VariableType.constant -> "const"
     }
 
-    return "$variableTypeTranspiled $name $valueTypeTranspiled = $valueTranspiled"
+    var declarationTranspiled = "$variableTypeTranspiled $name $valueTypeTranspiled"
+
+    if (value != null) {
+        val valueTranspiled = value.transpile()
+        declarationTranspiled = "$declarationTranspiled= $valueTranspiled"
+    }
+
+    return declarationTranspiled
 }
 
 fun AssignmentStatement.transpile(): String {
     val valueTranspiled = value.transpile()
-
     return "$name = $valueTranspiled"
 }
 

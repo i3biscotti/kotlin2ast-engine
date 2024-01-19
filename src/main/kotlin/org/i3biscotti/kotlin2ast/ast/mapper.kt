@@ -1,18 +1,16 @@
 package org.i3biscotti.kotlin2ast.ast
 
-import io.ktor.http.*
 import org.antlr.v4.runtime.*
-import kotlinParser.*
+import KotlinParser.*
+import org.i3biscotti.kotlin2ast.ast.models.*
 
 fun Token.startPoint(): Point {
     return Point(line, charPositionInLine)
 }
 
-
 fun Token.endPoint(): Point {
     return Point(line, charPositionInLine + (text?.length ?: 0))
 }
-
 
 fun ParserRuleContext.toPosition(considerPosition: Boolean): Position? {
     return if (considerPosition) {
@@ -21,7 +19,6 @@ fun ParserRuleContext.toPosition(considerPosition: Boolean): Position? {
         null
     }
 }
-
 
 fun KotlinFileContext.toAst(considerPosition: Boolean = false): ProgramFile {
     val astLines = mutableListOf<Statement>()
@@ -41,7 +38,9 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
         is ValDeclarationStatementContext -> toAst(considerPosition)
         is ConstDeclarationStatementContext -> toAst(considerPosition)
         is AssignStatementContext -> toAst(considerPosition)
-        is FunctionDefinitionStatementContext -> functionDefinition().toAst(considerPosition)
+        is FunctionDefinitionStatementContext -> toAst(considerPosition)
+        is ExpressionDefinitionStatementContext -> toAst(considerPosition)
+        is ClassDefinitionStatementContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
@@ -116,6 +115,10 @@ fun AssignStatementContext.toAst(considerPosition: Boolean): AssignmentStatement
     )
 }
 
+fun ExpressionDefinitionStatementContext.toAst(considerPosition: Boolean): ExpressionDefinitionStatement {
+    val exp = expression().toAst(considerPosition)
+    return ExpressionDefinitionStatement(exp, toPosition(considerPosition))
+}
 
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
     return when (this) {
@@ -130,7 +133,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is UnaryLogicNegationExpressionContext -> toAst(considerPosition)
         is ParenthesisExpressionContext -> toAst(considerPosition)
         is VarReferenceExpressionContext -> toAst(considerPosition)
-        else -> throw NotImplementedError()
+        else -> throw NotImplementedError("${this.javaClass.kotlin.simpleName} not implemented")
     }
 }
 
@@ -138,17 +141,17 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
 
 fun VarReferenceExpressionContext.toAst(considerPosition: Boolean): VarReferenceExpression {
     val name = this.value.text
-        return VarReferenceExpression(
-            name,
-            toPosition(considerPosition)!!
-        )
+    return VarReferenceExpression(
+        name,
+        toPosition(considerPosition)!!
+    )
 }
 
 fun BinaryMathExpressionContext.toAst(considerPosition: Boolean): BinaryMathExpression {
 
     val left = this.left.toAst(considerPosition)
     val right = this.right.toAst(considerPosition)
-    val operand: MathOperand = when(this.operand.text) {
+    val operand: MathOperand = when (this.operand.text) {
         "+" -> MathOperand.plus
         "-" -> MathOperand.minus
         "*" -> MathOperand.times
@@ -169,7 +172,7 @@ fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicEx
 
     val left = this.left.toAst(considerPosition)
     val right = this.right.toAst(considerPosition)
-    val operand: LogicOperand = when(this.operand.text) {
+    val operand: LogicOperand = when (this.operand.text) {
         "&&" -> LogicOperand.and
         "||" -> LogicOperand.or
         "==" -> LogicOperand.equal
@@ -192,7 +195,7 @@ fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicEx
 fun UnaryMathExpressionContext.toAst(considerPosition: Boolean): UnaryMathExpression {
 
     val value = this.expression().toAst(considerPosition)
-    val operand: MathOperand = when(this.operand.text) {
+    val operand: MathOperand = when (this.operand.text) {
         "+" -> MathOperand.plus
         "-" -> MathOperand.minus
         else -> throw NotImplementedError()
@@ -225,24 +228,129 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
     )
 }
 
-fun FunctionCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression{
-    val fnName = name.text
-    val parameters = expression().map { it.toAst(considerPosition) }
+fun FunctionCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression {
+    val fn = functionCall()
+    val fnName = fn.name.text
+    val parameters = fn.expression().map { it.toAst(considerPosition) }
 
     return FunctionCallExpression(fnName, parameters, toPosition(considerPosition))
 }
 
 fun ParameterContext.toAst(considerPosition: Boolean): Parameter {
     val paramName = ID().text
-    val paramType = antlr4ToAstValueType(type())!!
+    val paramValueType = antlr4ToAstValueType(type())!!
+    var paramType = ParameterType.TYPE
 
-    return Parameter(paramName, paramType, toPosition(considerPosition))
+    if (VAR() != null || VAL() != null) {
+        paramType = ParameterType.THIS
+    }
+
+    return Parameter(paramType, paramName, paramValueType, toPosition(considerPosition))
 }
 
-fun FunctionDefinitionContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
-    val nameText = name.text
-    val returnType = antlr4ToAstValueType(returnType) ?: VariableValueType.VOID
-    val parameters = parameter().map { it.toAst(considerPosition) }
-    val statements = block().statement().map { it.toAst(considerPosition) }
+fun FunctionDefinitionStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
+    val fn = functionDefinition()
+
+    val nameText = fn.name.text
+    val returnType = antlr4ToAstValueType(fn.returnType) ?: VariableValueType.VOID
+    val parameters = fn.parameter().map { it.toAst(considerPosition) }
+    val statements = fn.block().statement().map { it.toAst(considerPosition) }
     return FunctionDefinitionStatement(nameText, parameters, returnType, statements, toPosition(considerPosition))
+}
+
+fun ClassDefinitionStatementContext.toAst(considerPosition: Boolean): ClassDefinitionStatement {
+    val cls = classDefinition()
+    val classStatements = cls.classStatement()
+    val classParameters = cls.parameter()
+
+    val className = cls.name.text
+
+    var initBlockStatements: List<StatementContext> = listOf()
+    val initStatementContextsFound = classStatements.filterIsInstance<InitStatementContext>()
+
+    if (initStatementContextsFound.isNotEmpty()) {
+        initBlockStatements = initStatementContextsFound[0].initBlock()!!.statement()
+    }
+
+    val secondaryConstructors = classStatements.filterIsInstance<SecondaryConstructorStatementContext>()
+    val methods = classStatements
+        .filterIsInstance<MethodStatementContext>()
+        .map { it.toAst(considerPosition) }
+
+
+    val mainConstructorParameters = classParameters.map {
+        it.toAst(considerPosition)
+    }
+
+    val mainConstructorStatements = initBlockStatements.map { it.toAst(considerPosition) }
+
+    val mainConstructor = ConstructorDefinitionStatement(
+        cls.name.text,
+        "",
+        mainConstructorParameters,
+        mainConstructorStatements,
+        null,
+        toPosition(considerPosition)
+    )
+
+    var constructorCounter = 1
+
+    val otherConstructors = secondaryConstructors.map {
+        val block = it.constructorBlock()
+        val parameters = block.parameter().map { it.toAst(considerPosition) }
+        val statement = block.block()?.statement()?.map { it.toAst(considerPosition) } ?: listOf()
+
+        val thisConstructor = block.thisConstructor().toAst(considerPosition)
+
+        ConstructorDefinitionStatement(
+            cls.name.text,
+            "s${constructorCounter++}",
+            parameters,
+            statement,
+            thisConstructor,
+            toPosition(considerPosition)
+        )
+    }
+
+    val constructors = listOf(mainConstructor) + otherConstructors
+
+    val properties = classParameters
+        .filter { it.VAL() != null || it.VAR() != null }
+        .map { it.toAstPropertyDeclaration(considerPosition) }
+
+    return ClassDefinitionStatement(
+        className,
+        properties,
+        constructors,
+        methods,
+        toPosition(considerPosition)
+    )
+}
+
+fun MethodStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
+    val fn = functionDefinition()
+
+    val nameText = fn.name.text
+    val returnType = antlr4ToAstValueType(fn.returnType) ?: VariableValueType.VOID
+    val parameters = fn.parameter().map { it.toAst(considerPosition) }
+    val statements = fn.block().statement().map { it.toAst(considerPosition) }
+    return FunctionDefinitionStatement(nameText, parameters, returnType, statements, toPosition(considerPosition))
+}
+
+fun ThisConstructorContext.toAst(considerPosition: Boolean): ThisConstructorDefinition {
+    val params = expression().map { it.toAst(considerPosition) }
+    return ThisConstructorDefinition(params, toPosition(considerPosition))
+}
+
+fun ParameterContext.toAstPropertyDeclaration(considerPosition: Boolean): PropertyDeclaration {
+    val name = ID().text
+    val type = antlr4ToAstValueType(type())
+
+    return PropertyDeclaration(
+        VariableType.immutable,
+        name,
+        type!!,
+        null,
+        toPosition(considerPosition)
+    )
 }

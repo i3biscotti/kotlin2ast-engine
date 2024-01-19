@@ -1,6 +1,10 @@
 package org.i3biscotti.kotlin2ast.validation
 
 import org.i3biscotti.kotlin2ast.ast.*
+import org.i3biscotti.kotlin2ast.ast.models.AssignmentStatement
+import org.i3biscotti.kotlin2ast.ast.models.Node
+import org.i3biscotti.kotlin2ast.ast.models.ProgramFile
+import org.i3biscotti.kotlin2ast.ast.models.VarDeclarationStatement
 import org.i3biscotti.kotlin2ast.parser.KotlinLangError
 import org.i3biscotti.kotlin2ast.parser.specificProcess
 import java.util.HashMap
@@ -18,7 +22,7 @@ private fun Node.isBefore(other: Node): Boolean {
     return otherLine > nodeLine || (otherLine == nodeLine && otherCol > nodeCol)
 }
 
-fun ProgramFile.validate() : LinkedList<KotlinLangError> {
+fun ProgramFile.validate(): LinkedList<KotlinLangError> {
     val errors = LinkedList<KotlinLangError>()
     val variablesRegistry = HashMap<String, VarDeclarationStatement>()
 
@@ -26,7 +30,7 @@ fun ProgramFile.validate() : LinkedList<KotlinLangError> {
         if (variablesRegistry.containsKey(it.name)) {
             errors.add(KotlinLangError("${it.name} is already declared", it.position?.start))
         } else {
-            val implicitValueType = it.value.getType()
+            val implicitValueType = it.value?.getType()
             val explicitValueType = it.valueType
 
             if (explicitValueType == null) {
