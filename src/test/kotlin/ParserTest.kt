@@ -54,9 +54,12 @@ class ParserTest {
             """
             |KotlinFile
             |  Line
-            |    VarDeclarationStatement
+            |    ValDeclarationStatement
             |      T[val]
             |      T[age]
+            |      T[:]
+            |      IntType
+            |        T[Int]
             |      T[=]
             |      IntLiteralExpression
             |        T[16]
@@ -75,12 +78,15 @@ class ParserTest {
             """
             |KotlinFile
             |  Line
-            |    VarDeclarationStatement
-            |      T[var]
-            |      T[name]
+            |    ConstDeclarationStatement
+            |      T[const]
+            |      T[isOld]
+            |      T[:]
+            |      BooleanType
+            |        T[Boolean]
             |      T[=]
-            |      StringLiteralExpression
-            |        T["Simone"]
+            |      BoolLiteralExpression
+            |        T[true]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -96,12 +102,11 @@ class ParserTest {
             """
             |KotlinFile
             |  Line
-            |    VarDeclarationStatement
-            |      T[var]
-            |      T[name]
+            |    AssignStatement
+            |      T[height]
             |      T[=]
-            |      StringLiteralExpression
-            |        T["Simone"]
+            |      DoubleLiteralExpression
+            |        T[12.3]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()

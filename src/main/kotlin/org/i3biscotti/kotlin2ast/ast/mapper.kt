@@ -5,11 +5,11 @@ import KotlinParser.*
 import org.i3biscotti.kotlin2ast.ast.models.*
 
 fun Token.startPoint(): Point {
-    return Point(line, charPositionInLine)
+    return Point(line, charPositionInLine + 1)
 }
 
 fun Token.endPoint(): Point {
-    return Point(line, charPositionInLine + (text?.length ?: 0))
+    return Point(line, charPositionInLine + 1 + (text?.length ?: 0))
 }
 
 fun ParserRuleContext.toPosition(considerPosition: Boolean): Position? {
@@ -28,7 +28,7 @@ fun KotlinFileContext.toAst(considerPosition: Boolean = false): ProgramFile {
         astLines.add(statement?.toAst(considerPosition)!!)
     }
 
-    return ProgramFile(astLines, toPosition(considerPosition)!!)
+    return ProgramFile(astLines, toPosition(considerPosition))
 }
 
 
@@ -64,11 +64,11 @@ fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
     val valueType = antlr4ToAstValueType(this.type())
 
     return VarDeclarationStatement(
-        VariableType.constant,
+        VariableType.variable,
         name,
         valueType,
         value,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 
@@ -83,7 +83,7 @@ fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclarat
         name,
         valueType,
         value,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 
@@ -98,7 +98,7 @@ fun ConstDeclarationStatementContext.toAst(considerPosition: Boolean): VarDeclar
         name,
         valueType,
         value,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 
@@ -111,7 +111,7 @@ fun AssignStatementContext.toAst(considerPosition: Boolean): AssignmentStatement
     return AssignmentStatement(
         name,
         value,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 
@@ -122,9 +122,9 @@ fun ExpressionDefinitionStatementContext.toAst(considerPosition: Boolean): Expre
 
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
     return when (this) {
-        is BoolLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
+        is BoolLiteralExpressionContext -> BooleanLitExpression(text, toPosition(considerPosition))
         is IntLiteralExpressionContext -> IntLit(text, toPosition(considerPosition))
-        is DoubleLiteralExpressionContext -> BooleanLit(text, toPosition(considerPosition))
+        is DoubleLiteralExpressionContext -> DecLit(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
         is FunctionCallExpressionContext -> toAst(considerPosition)
         is BinaryMathExpressionContext -> toAst(considerPosition)
@@ -143,7 +143,7 @@ fun VarReferenceExpressionContext.toAst(considerPosition: Boolean): VarReference
     val name = this.value.text
     return VarReferenceExpression(
         name,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 
@@ -161,7 +161,7 @@ fun BinaryMathExpressionContext.toAst(considerPosition: Boolean): BinaryMathExpr
     }
 
     return BinaryMathExpression(
-        toPosition(considerPosition)!!,
+        toPosition(considerPosition),
         operand,
         left,
         right,
@@ -185,7 +185,7 @@ fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicEx
     }
 
     return BinaryLogicExpression(
-        toPosition(considerPosition)!!,
+        toPosition(considerPosition),
         operand,
         left,
         right,
@@ -202,7 +202,7 @@ fun UnaryMathExpressionContext.toAst(considerPosition: Boolean): UnaryMathExpres
     }
 
     return UnaryMathExpression(
-        toPosition(considerPosition)!!,
+        toPosition(considerPosition),
         operand,
         value
     )
@@ -213,7 +213,7 @@ fun UnaryLogicNegationExpressionContext.toAst(considerPosition: Boolean): UnaryL
     val value = this.expression().toAst(considerPosition)
 
     return UnaryLogicNegationExpression(
-        toPosition(considerPosition)!!,
+        toPosition(considerPosition),
         value
     )
 }
@@ -224,7 +224,7 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
 
     return ParenthesisExpression(
         value,
-        toPosition(considerPosition)!!
+        toPosition(considerPosition)
     )
 }
 

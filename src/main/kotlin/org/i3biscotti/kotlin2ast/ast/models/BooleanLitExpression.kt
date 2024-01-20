@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("BooleanLit")
-data class BooleanLit(val value: String, override val position: Position?) : Expression()
+data class BooleanLitExpression(val value: String, override val position: Position?) : Expression()

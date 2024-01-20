@@ -1,1 +1,1 @@
-const text : Boolean = "Hello World"
+const isOld : Boolean = true

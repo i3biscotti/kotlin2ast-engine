@@ -2,7 +2,7 @@ package org.i3biscotti.kotlin2ast.ast.serialization
 
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.*
-import org.i3biscotti.kotlin2ast.ast.*
+import org.i3biscotti.kotlin2ast.ast.models.*
 
 val module = SerializersModule {
     polymorphic(Node::class) {
@@ -12,7 +12,8 @@ val module = SerializersModule {
         subclass(IntLit::class)
         subclass(DecLit::class)
         subclass(StringLit::class)
-        subclass(BooleanLit::class)
+        subclass(BooleanLitExpression::class)
+        subclass(ClassDefinitionStatement::class)
     }
 }
 

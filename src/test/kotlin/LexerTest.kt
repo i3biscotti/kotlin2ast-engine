@@ -4,8 +4,9 @@ import java.util.*
 import kotlin.test.assertEquals
 
 class LexerTest {
-    private fun lexerForCode(code: String): KotlinLexer {
-        val lexer = KotlinLexer(CharStreams.fromString(code))
+    private fun lexerForResource(resourceName: String): KotlinLexer {
+        val resource = this.javaClass.getResourceAsStream("/${resourceName}.txt")
+        val lexer = KotlinLexer(CharStreams.fromStream(resource))
         return lexer
     }
 
@@ -26,56 +27,32 @@ class LexerTest {
     @Test
     fun testVarDeclarationStatement() {
         assertEquals(
-            listOf("VAR", "ID", "ASSIGN", "INT_LIT", "EOF"),
-            tokens(lexerForCode("var a = 1"))
-        )
-    }
-
-    @Test
-    fun testVarTypedDeclarationStatement() {
-        assertEquals(
-            listOf("VAR", "ID", "COLONS", "DOUBLE", "ASSIGN", "DOUBLE_LIT", "EOF"),
-            tokens(lexerForCode("var b : Double = 1.2"))
+            listOf("VAR", "ID", "ASSIGN", "STRING_LIT", "EOF"),
+            tokens(lexerForResource("task1/VarDeclarationStatement"))
         )
     }
 
     @Test
     fun testValDeclarationStatement() {
         assertEquals(
-            listOf("VAL", "ID", "ASSIGN", "STRING_LIT", "EOF"),
-            tokens(lexerForCode("val a = \"Hello World\""))
-        )
-    }
-
-    @Test
-    fun testValTypedDeclarationStatement() {
-        assertEquals(
-            listOf("VAL", "ID", "COLONS", "BOOLEAN", "ASSIGN", "BOOL_LIT", "EOF"),
-            tokens(lexerForCode("val a : Boolean = true"))
+            listOf("VAL", "ID", "COLONS", "INT", "ASSIGN", "INT_LIT", "EOF"),
+            tokens(lexerForResource("task1/ValDeclarationStatement"))
         )
     }
 
     @Test
     fun testConstDeclarationStatement() {
         assertEquals(
-            listOf("CONST", "ID", "ASSIGN", "STRING_LIT", "EOF"),
-            tokens(lexerForCode("const a = \"Hello World\""))
-        )
-    }
-
-    @Test
-    fun testConstTypedDeclarationStatement() {
-        assertEquals(
-            listOf("CONST", "ID", "COLONS", "INT", "ASSIGN", "INT_LIT", "EOF"),
-            tokens(lexerForCode("const a : Int = 1"))
+            listOf("CONST", "ID","COLONS", "BOOLEAN", "ASSIGN", "BOOL_LIT", "EOF"),
+            tokens(lexerForResource("task1/constDeclarationStatement"))
         )
     }
 
     @Test
     fun testAssignmentStatement() {
         assertEquals(
-            listOf("ID", "ASSIGN", "STRING_LIT", "EOF"),
-            tokens(lexerForCode("s = \"Assign This\""))
+            listOf("ID", "ASSIGN", "DOUBLE_LIT", "EOF"),
+            tokens(lexerForResource("task1/assignmentStatement"))
         )
     }
     //endregion
