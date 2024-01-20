@@ -6,6 +6,6 @@ import kotlinx.serialization.*
 @Serializable
 @SerialName("VarReferenceExpression")
 data class VarReferenceExpression(
-    val value: String,
+    val name: String,
     override val position: Position?
 ) : Expression()
