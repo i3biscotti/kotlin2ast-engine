@@ -1,6 +1,7 @@
 package org.i3biscotti.kotlin2ast.transpiler
 
 import org.i3biscotti.kotlin2ast.ast.models.*
+import java.lang.UnsupportedOperationException
 
 fun Node.transpile(): String {
     return when (this) {
@@ -62,4 +63,59 @@ fun Expression.transpile(): String {
         is StringLit -> value
         else -> throw NotImplementedError()
     }
+}
+
+fun BinaryLogicExpression.transpile(): String {
+    val leftTranspiled = left.transpile()
+    val operand = when (this.operand) {
+        LogicOperand.and -> "&&"
+        LogicOperand.or -> "||"
+        LogicOperand.equal -> "=="
+        LogicOperand.notEqual -> "!="
+        LogicOperand.lessThan -> "<"
+        LogicOperand.lessThanOrEqual -> "<="
+        LogicOperand.greaterThan -> ">"
+        LogicOperand.greaterThanOrEqual -> ">="
+        LogicOperand.not -> throw UnsupportedOperationException()
+    }
+    val rightTranspiled = right.transpile()
+    return "$leftTranspiled + $operand + $rightTranspiled"
+}
+
+fun BinaryMathExpression.transpile(): String {
+    val leftTranspiled = left.transpile()
+    val operand = when (this.operand) {
+        MathOperand.plus -> "+"
+        MathOperand.minus -> "-"
+        MathOperand.times -> "*"
+        MathOperand.division -> "/"
+        MathOperand.module -> "|"
+    }
+    val rightTranspiled = right.transpile()
+    return "$leftTranspiled + $operand + $rightTranspiled"
+}
+
+fun UnaryLogicNegationExpression.transpile(): Expression {
+    return value
+}
+
+fun UnaryMathExpression.transpile(): String {
+    val valueTranspiled = value.transpile()
+    val operand = when (this.operand) {
+        MathOperand.plus -> "+"
+        MathOperand.minus -> "-"
+        MathOperand.times -> throw UnsupportedOperationException()
+        MathOperand.division -> throw UnsupportedOperationException()
+        MathOperand.module -> throw UnsupportedOperationException()
+    }
+    return "$operand $valueTranspiled"
+}
+
+fun VarReferenceExpression.transpile(): String {
+    return name
+}
+
+fun ParenthesisExpression.transpile(): String {
+    val valueTranspiled = value.transpile()
+    return "( $valueTranspiled )"
 }
