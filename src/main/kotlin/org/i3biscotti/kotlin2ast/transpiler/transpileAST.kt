@@ -59,7 +59,7 @@ fun Expression.transpile(): String {
     return when (this) {
         is IntLit -> value
         is DecLit -> value
-        is BooleanLit -> value
+        is BooleanLitExpression -> value
         is StringLit -> value
         else -> throw NotImplementedError()
     }
