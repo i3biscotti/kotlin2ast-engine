@@ -25,27 +25,31 @@ fun Statement.transpile(): String {
 }
 
 fun VarDeclarationStatement.transpile(): String {
-    val valueTypeTranspiled = when (valueType) {
-        VariableValueType.INT -> ": Int"
-        VariableValueType.BOOLEAN -> ": Boolean"
-        VariableValueType.DOUBLE -> ": Double"
-        VariableValueType.STRING -> ": String"
-        VariableValueType.VOID -> ": Unit"
-        else -> ": $name"
-    }
-
     val variableTypeTranspiled = when (varType) {
         VariableType.immutable -> "val"
         VariableType.variable -> "var"
         VariableType.constant -> "const"
     }
 
-    var declarationTranspiled = "$variableTypeTranspiled $name $valueTypeTranspiled"
+    var declarationTranspiled = "$variableTypeTranspiled $name"
 
-    if (value != null) {
-        val valueTranspiled = value.transpile()
-        declarationTranspiled = "$declarationTranspiled= $valueTranspiled"
+    val valueTypeTranspiled = when (valueType) {
+        VariableValueType.INT -> "Int"
+        VariableValueType.BOOLEAN -> "Boolean"
+        VariableValueType.DOUBLE -> "Double"
+        VariableValueType.STRING -> "String"
+        VariableValueType.VOID -> "Unit"
+        null -> ""
+        else -> valueType.name
     }
+
+
+
+    if ( valueTypeTranspiled.isNotEmpty()) {
+        declarationTranspiled = "$declarationTranspiled : $valueTypeTranspiled"
+    }
+
+    declarationTranspiled = "$declarationTranspiled = ${value.transpile()}"
 
     return declarationTranspiled
 }
