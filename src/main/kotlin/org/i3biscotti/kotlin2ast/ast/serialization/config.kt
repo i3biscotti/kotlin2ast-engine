@@ -9,7 +9,7 @@ val module = SerializersModule {
         subclass(ProgramFile::class)
         subclass(VarDeclarationStatement::class)
         subclass(AssignmentStatement::class)
-        subclass(IntLit::class)
+        subclass(IntLiteralExpression::class)
         subclass(DecLit::class)
         subclass(StringLit::class)
         subclass(BooleanLitExpression::class)

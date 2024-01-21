@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("BinaryMathExpression")
 data class BinaryMathExpression(
-    override val position: Position?,
     val operand: MathOperand,
     override val left: Expression,
-    override val right: Expression
+    override val right: Expression,
+    override val position: Position?,
 ) : BinaryExpression()

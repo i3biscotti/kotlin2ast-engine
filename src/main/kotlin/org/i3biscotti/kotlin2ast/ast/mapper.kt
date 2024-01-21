@@ -41,6 +41,7 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
         is FunctionDefinitionStatementContext -> toAst(considerPosition)
         is ExpressionDefinitionStatementContext -> toAst(considerPosition)
         is ClassDefinitionStatementContext -> toAst(considerPosition)
+        is ReturnStatementContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
 }
@@ -120,10 +121,15 @@ fun ExpressionDefinitionStatementContext.toAst(considerPosition: Boolean): Expre
     return ExpressionDefinitionStatement(exp, toPosition(considerPosition))
 }
 
+fun ReturnStatementContext.toAst(considerPosition: Boolean): ReturnStatement {
+    val exp = expression().toAst(considerPosition)
+    return ReturnStatement(exp, toPosition(considerPosition))
+}
+
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
     return when (this) {
         is BoolLiteralExpressionContext -> BooleanLitExpression(text, toPosition(considerPosition))
-        is IntLiteralExpressionContext -> IntLit(text, toPosition(considerPosition))
+        is IntLiteralExpressionContext -> IntLiteralExpression(text, toPosition(considerPosition))
         is DoubleLiteralExpressionContext -> DecLit(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
         is FunctionCallExpressionContext -> toAst(considerPosition)
@@ -136,6 +142,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         else -> throw NotImplementedError("${this.javaClass.kotlin.simpleName} not implemented")
     }
 }
+
 
 //task2
 
@@ -161,10 +168,10 @@ fun BinaryMathExpressionContext.toAst(considerPosition: Boolean): BinaryMathExpr
     }
 
     return BinaryMathExpression(
-        toPosition(considerPosition),
         operand,
         left,
         right,
+        toPosition(considerPosition),
     )
 }
 
@@ -185,10 +192,10 @@ fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicEx
     }
 
     return BinaryLogicExpression(
-        toPosition(considerPosition),
         operand,
         left,
         right,
+        toPosition(considerPosition),
     )
 }
 

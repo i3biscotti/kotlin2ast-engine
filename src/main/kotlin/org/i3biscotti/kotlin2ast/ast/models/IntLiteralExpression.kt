@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("IntLit")
-data class IntLit(val value: String, override val position: Position?) : Expression()
+data class IntLiteralExpression(val value: String, override val position: Position?) : Expression()

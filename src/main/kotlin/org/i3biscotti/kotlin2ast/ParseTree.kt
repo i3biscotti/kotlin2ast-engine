@@ -40,7 +40,9 @@ fun ParserRuleContext.toParseTree(): ParseTreeNode {
     children.forEach { c ->
         when (c) {
             is ParserRuleContext -> res.child(c.toParseTree())
-            is TerminalNode -> res.child(ParseTreeLeaf(c.text))
+            is TerminalNode -> if (!c.text.contains("\r") && !c.text.contains("\n")) {
+                res.child(ParseTreeLeaf(c.text))
+            }
         }
     }
 

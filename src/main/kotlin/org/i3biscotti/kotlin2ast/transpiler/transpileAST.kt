@@ -20,6 +20,8 @@ fun Statement.transpile(): String {
     return when (this) {
         is VarDeclarationStatement -> transpile()
         is AssignmentStatement -> transpile()
+        is ReturnStatement -> transpile()
+        is FunctionDefinitionStatement -> transpile()
         else -> throw NotImplementedError()
     }
 }
@@ -43,9 +45,7 @@ fun VarDeclarationStatement.transpile(): String {
         else -> valueType.name
     }
 
-
-
-    if ( valueTypeTranspiled.isNotEmpty()) {
+    if (valueTypeTranspiled.isNotEmpty()) {
         declarationTranspiled = "$declarationTranspiled : $valueTypeTranspiled"
     }
 
@@ -59,12 +59,76 @@ fun AssignmentStatement.transpile(): String {
     return "$name = $valueTranspiled"
 }
 
+fun FunctionDefinitionStatement.transpile(): String {
+    var functionStatement = "fun $name"
+
+    if (parameters.isNotEmpty()) {
+        val params = parameters.joinToString(", ") {
+            val type = when (it.valueType) {
+                VariableValueType.INT -> "Int"
+                VariableValueType.BOOLEAN -> "Boolean"
+                VariableValueType.DOUBLE -> "Double"
+                VariableValueType.STRING -> "String"
+                VariableValueType.VOID -> "Unit"
+                else -> it.valueType.name
+            }
+            "${it.name} : $type" }
+
+        functionStatement += "($params)"
+    } else {
+        functionStatement += "()"
+    }
+
+    if (returnType != null) {
+        val rType = when (returnType) {
+            VariableValueType.INT -> "Int"
+            VariableValueType.BOOLEAN -> "Boolean"
+            VariableValueType.DOUBLE -> "Double"
+            VariableValueType.STRING -> "String"
+            VariableValueType.VOID -> "Unit"
+            else -> returnType.name
+        }
+
+        functionStatement += " : $rType"
+    }
+
+
+    if (statements.isNotEmpty()) {
+        val statementsTranspiled = statements.joinToString("\n") { it.transpile() }
+        functionStatement += """
+        | {
+        |$statementsTranspiled
+        |}
+        """.trimMargin()
+    } else {
+        functionStatement += " {}"
+    }
+
+    return functionStatement
+}
+
+fun ReturnStatement.transpile(): String {
+    return if (value != null) {
+        val valueTranspiled = value.transpile()
+        "return $valueTranspiled"
+    } else {
+        "return"
+    }
+}
+
 fun Expression.transpile(): String {
     return when (this) {
-        is IntLit -> value
+        is IntLiteralExpression -> value
         is DecLit -> value
         is BooleanLitExpression -> value
         is StringLit -> value
+        is BinaryMathExpression -> transpile()
+        is BinaryLogicExpression -> transpile()
+        is UnaryMathExpression -> transpile()
+        is UnaryLogicNegationExpression -> transpile()
+        is VarReferenceExpression -> transpile()
+        is ParenthesisExpression -> transpile()
+        is FunctionCallExpression -> transpile()
         else -> throw NotImplementedError()
     }
 }
@@ -83,7 +147,7 @@ fun BinaryLogicExpression.transpile(): String {
         LogicOperand.not -> throw UnsupportedOperationException()
     }
     val rightTranspiled = right.transpile()
-    return "$leftTranspiled + $operand + $rightTranspiled"
+    return "$leftTranspiled $operand $rightTranspiled"
 }
 
 fun BinaryMathExpression.transpile(): String {
@@ -96,11 +160,11 @@ fun BinaryMathExpression.transpile(): String {
         MathOperand.module -> "|"
     }
     val rightTranspiled = right.transpile()
-    return "$leftTranspiled + $operand + $rightTranspiled"
+    return "$leftTranspiled $operand $rightTranspiled"
 }
 
-fun UnaryLogicNegationExpression.transpile(): Expression {
-    return value
+fun UnaryLogicNegationExpression.transpile(): String {
+    return "! ${value.transpile()}"
 }
 
 fun UnaryMathExpression.transpile(): String {
@@ -122,4 +186,9 @@ fun VarReferenceExpression.transpile(): String {
 fun ParenthesisExpression.transpile(): String {
     val valueTranspiled = value.transpile()
     return "( $valueTranspiled )"
+}
+
+fun FunctionCallExpression.transpile(): String {
+    val params = parameters.map { it.transpile() }.joinToString(", ")
+    return "$name($params)"
 }

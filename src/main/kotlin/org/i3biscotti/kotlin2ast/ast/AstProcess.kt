@@ -29,6 +29,7 @@ fun Statement.process(operation: ProcessOperationCallback) {
         is ExpressionDefinitionStatement -> this.expression.process(operation)
         is FunctionDefinitionStatement -> process(operation)
         is ClassDefinitionStatement -> process(operation)
+        is ReturnStatement -> this.value?.process(operation)
         is ConstructorDefinitionStatement -> return
     }
 }
