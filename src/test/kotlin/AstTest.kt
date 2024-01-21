@@ -1,8 +1,6 @@
 import org.i3biscotti.kotlin2ast.ast.models.*
 import org.i3biscotti.kotlin2ast.ast.toAst
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
-import org.i3biscotti.kotlin2ast.parser.KotlinParser
-import org.i3biscotti.kotlin2ast.transpiler.transpile
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -54,7 +52,7 @@ class AstTest {
                         VariableType.immutable,
                         "age",
                         VariableValueType.INT,
-                        IntLit("16", null),
+                        IntLiteralExpression("16", null),
                         null
                     )
                 ),
@@ -99,6 +97,167 @@ class AstTest {
                     )
                 ),
                 null
+            ),
+            programFile
+        )
+    }
+
+
+    //endregion
+
+    //region Task 7
+    @Test
+    fun voidFunctionWithoutParams() {
+        val programFile = parseResource("task7/voidFunctionWithoutParams")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    FunctionDefinitionStatement(
+                        "emptyFunction",
+                        listOf(),
+                        VariableValueType.VOID,
+                        listOf(),
+                        null
+                    )
+                ),
+                null
+            ), programFile
+        )
+    }
+
+    @Test
+    fun intSumFunction() {
+        val programFile = parseResource("task7/intSumFunction")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    FunctionDefinitionStatement(
+                        "sum",
+                        listOf(
+                            Parameter(
+                                ParameterType.TYPE,
+                                "a",
+                                VariableValueType.INT,
+                                null,
+                            ),
+                            Parameter(
+                                ParameterType.TYPE,
+                                "b",
+                                VariableValueType.INT,
+                                null,
+                            )
+                        ),
+                        VariableValueType.INT,
+                        listOf(
+                            ReturnStatement(
+                                BinaryMathExpression(
+                                    MathOperand.plus,
+                                    VarReferenceExpression("a", null),
+                                    VarReferenceExpression("b", null),
+                                    null,
+                                ),
+                                null,
+                            )
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    fun callFunction() {
+        val programFile = parseResource("task7/callFunction")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    FunctionDefinitionStatement(
+                        "operations",
+                        listOf(
+                            Parameter(
+                                ParameterType.TYPE,
+                                "a",
+                                VariableValueType.INT,
+                                null,
+                            ),
+                            Parameter(
+                                ParameterType.TYPE,
+                                "b",
+                                VariableValueType.INT,
+                                null,
+                            ),
+                            Parameter(
+                                ParameterType.TYPE,
+                                "c",
+                                VariableValueType.BOOLEAN,
+                                null,
+                            )
+                        ),
+                        VariableValueType.BOOLEAN,
+                        listOf(
+                            VarDeclarationStatement(
+                                VariableType.variable,
+                                "aIsGreaterThanB",
+                               null,
+                                BinaryLogicExpression(
+                                    LogicOperand.greaterThan,
+                                    VarReferenceExpression("a", null),
+                                    VarReferenceExpression("b", null),
+                                    null
+                                ),
+                                null,
+                            ),
+                            VarDeclarationStatement(
+                                VariableType.immutable,
+                                "isGreaterAndCondition",
+                                null,
+                                BinaryLogicExpression(
+                                    LogicOperand.and,
+                                    VarReferenceExpression("aIsGreaterThanB", null),
+                                    VarReferenceExpression("c", null),
+                                    null
+                                ),
+                                null,
+                            ),
+                            ReturnStatement(
+                                VarReferenceExpression("isGreaterAndCondition", null),
+                                null,
+                            )
+                        ),
+                        null
+                    ),
+                    FunctionDefinitionStatement(
+                        "main",
+                        listOf(),
+                        VariableValueType.VOID,
+                        listOf(
+                            VarDeclarationStatement(
+                                VariableType.immutable,
+                                "result",
+                                null,
+
+                                FunctionCallExpression(
+                                    "operations",
+                                    listOf(
+                                        IntLiteralExpression("11",null),
+                                        IntLiteralExpression("12",null),
+                                        BooleanLitExpression("false",null)
+                                    ),
+                                    null,
+                                ),
+                                null,
+                            )
+                        ),
+                        null
+                    )
+                ),
+                null,
             ),
             programFile
         )

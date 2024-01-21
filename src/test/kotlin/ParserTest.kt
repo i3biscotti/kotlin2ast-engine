@@ -17,7 +17,7 @@ class ParserTest {
             } else {
                 throw Exception(parseResult.errors.first().message)
             }
-        }else{
+        } else {
             throw Exception("result was null")
         }
     }
@@ -25,7 +25,7 @@ class ParserTest {
     //region Task 1
 
     @Test
-    fun testVarDeclarationStatement(){
+    fun testVarDeclarationStatement() {
         val programFile = parseResource("task1/varDeclarationStatement")
             .toParseTree()
 
@@ -46,7 +46,7 @@ class ParserTest {
     }
 
     @Test
-    fun testValDeclarationStatement(){
+    fun testValDeclarationStatement() {
         val programFile = parseResource("task1/valDeclarationStatement")
             .toParseTree()
 
@@ -70,7 +70,7 @@ class ParserTest {
     }
 
     @Test
-    fun testConstDeclarationStatement(){
+    fun testConstDeclarationStatement() {
         val programFile = parseResource("task1/constDeclarationStatement")
             .toParseTree()
 
@@ -94,7 +94,7 @@ class ParserTest {
     }
 
     @Test
-    fun testAssignmentStatement(){
+    fun testAssignmentStatement() {
         val programFile = parseResource("task1/assignmentStatement")
             .toParseTree()
 
@@ -112,7 +112,174 @@ class ParserTest {
             programFile.multiLineString()
         )
     }
+    //endregion
 
+    //region Task 7
+    @org.junit.Test
+    fun voidFunctionWithoutParams() {
+        val programFile = parseResource("task7/voidFunctionWithoutParams")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    FunctionDefinitionStatement
+            |      FunctionDefinition
+            |        T[fun]
+            |        T[emptyFunction]
+            |        T[(]
+            |        T[)]
+            |        Block
+            |          T[{]
+            |          T[}]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @org.junit.Test
+    fun intSumFunction() {
+        val programFile = parseResource("task7/intSumFunction")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    FunctionDefinitionStatement
+            |      FunctionDefinition
+            |        T[fun]
+            |        T[sum]
+            |        T[(]
+            |        Parameter
+            |          T[a]
+            |          T[:]
+            |          IntType
+            |            T[Int]
+            |        T[,]
+            |        Parameter
+            |          T[b]
+            |          T[:]
+            |          IntType
+            |            T[Int]
+            |        T[)]
+            |        T[:]
+            |        IntType
+            |          T[Int]
+            |        Block
+            |          T[{]
+            |          ReturnStatement
+            |            T[return]
+            |            BinaryMathExpression
+            |              VarReferenceExpression
+            |                T[a]
+            |              T[+]
+            |              VarReferenceExpression
+            |                T[b]
+            |          T[}]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @org.junit.Test
+    fun callFunction() {
+        val programFile = parseResource("task7/callFunction")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    FunctionDefinitionStatement
+            |      FunctionDefinition
+            |        T[fun]
+            |        T[operations]
+            |        T[(]
+            |        Parameter
+            |          T[a]
+            |          T[:]
+            |          IntType
+            |            T[Int]
+            |        T[,]
+            |        Parameter
+            |          T[b]
+            |          T[:]
+            |          IntType
+            |            T[Int]
+            |        T[,]
+            |        Parameter
+            |          T[c]
+            |          T[:]
+            |          BooleanType
+            |            T[Boolean]
+            |        T[)]
+            |        T[:]
+            |        BooleanType
+            |          T[Boolean]
+            |        Block
+            |          T[{]
+            |          VarDeclarationStatement
+            |            T[var]
+            |            T[aIsGreaterThanB]
+            |            T[=]
+            |            BinaryLogicExpression
+            |              VarReferenceExpression
+            |                T[a]
+            |              T[>]
+            |              VarReferenceExpression
+            |                T[b]
+            |          ValDeclarationStatement
+            |            T[val]
+            |            T[isGreaterAndCondition]
+            |            T[=]
+            |            BinaryLogicExpression
+            |              VarReferenceExpression
+            |                T[aIsGreaterThanB]
+            |              T[&&]
+            |              VarReferenceExpression
+            |                T[c]
+            |          ReturnStatement
+            |            T[return]
+            |            VarReferenceExpression
+            |              T[isGreaterAndCondition]
+            |          T[}]
+            |  Line
+            |    FunctionDefinitionStatement
+            |      FunctionDefinition
+            |        T[fun]
+            |        T[main]
+            |        T[(]
+            |        T[)]
+            |        Block
+            |          T[{]
+            |          ValDeclarationStatement
+            |            T[val]
+            |            T[result]
+            |            T[=]
+            |            FunctionCallExpression
+            |              FunctionCall
+            |                T[operations]
+            |                T[(]
+            |                IntLiteralExpression
+            |                  T[11]
+            |                T[,]
+            |                IntLiteralExpression
+            |                  T[12]
+            |                T[,]
+            |                BoolLiteralExpression
+            |                  T[false]
+            |                T[)]
+            |          T[}]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+
+    }
     //endregion
 
 }

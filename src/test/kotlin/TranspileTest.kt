@@ -18,7 +18,7 @@ class TranspileTest {
         }
     }
 
-
+    //region Task 1
     @Test
     fun testVarDeclarationStatement() {
         val programFile = parseResource("task1/varDeclarationStatement")
@@ -63,4 +63,49 @@ class TranspileTest {
     }
 
     //endregion
+
+    //region Task 7
+    @Test
+    fun voidFunctionWithoutParams() {
+        val programFile = parseResource("task7/voidFunctionWithoutParams")
+        assertEquals(
+            "fun emptyFunction() : Unit {}",
+            programFile
+        )
+
+
+    }
+
+    @Test
+    fun intSumFunction() {
+        val programFile = parseResource("task7/intSumFunction")
+        assertEquals(
+            """
+            |fun sum(a : Int, b : Int) : Int {
+            |    return a + b
+            |}
+            """.trimMargin(),
+            programFile
+        )
+    }
+
+    @Test
+    fun callFunction() {
+        val programFile = parseResource("task7/callFunction")
+        assertEquals(
+            """
+            |fun operations(a : Int, b : Int, c : Boolean) : Boolean {
+            |    var aIsGreaterThanB = a > b
+            |    val isGreaterAndCondition = aIsGreaterThanB && c
+            |    return isGreaterAndCondition
+            |}
+            |fun main() : Unit {
+            |    val result = operations(11, 12, false)
+            |}
+            """.trimMargin(),
+            programFile
+        )
+    }
+    //endregion
+
 }
