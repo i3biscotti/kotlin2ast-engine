@@ -71,6 +71,7 @@ PAREN_CLOSE                 : ')';
 FUN                         : 'fun';
 GRAPH_OPEN                  : '{';
 GRAPH_CLOSE                 : '}';
+RETURN                      : 'return';
 
 CLASS                       : 'class';
 CONSTRUCTOR                 : 'constructor';

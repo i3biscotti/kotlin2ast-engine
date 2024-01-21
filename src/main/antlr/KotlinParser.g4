@@ -4,7 +4,7 @@ options{ tokenVocab=KotlinLexer; }
 
 kotlinFile: lines=line+;
 
-line: statement (NL | EOF);
+line: statement (NL* | EOF);
 
 /*
  var name = "Simone"
@@ -25,6 +25,7 @@ line: statement (NL | EOF);
     | classDefinition                               #ClassDefinitionStatement
     | expression                                    #ExpressionDefinitionStatement
     | objectProperty ASSIGN expression              #ObjectPropertyAssignStatement
+    | RETURN expression                             #ReturnStatement
     ;
 
  type
