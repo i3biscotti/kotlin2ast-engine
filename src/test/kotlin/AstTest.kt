@@ -2,6 +2,7 @@ import org.i3biscotti.kotlin2ast.ast.models.*
 import org.i3biscotti.kotlin2ast.ast.toAst
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.i3biscotti.kotlin2ast.parser.KotlinParser
+import org.i3biscotti.kotlin2ast.transpiler.transpile
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -13,7 +14,8 @@ class AstTest {
         val parseResult = resource?.let { KotlinAntlrParser.parse(it) }
 
         if (parseResult != null) {
-            return parseResult.root?.toAst(false) ?: throw Exception("ProgramFile was null")
+            return parseResult.root?.toAst(false)
+                ?: throw Exception("ProgramFile was null")
         } else {
             throw Exception("result was null")
         }
