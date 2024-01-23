@@ -79,7 +79,7 @@ functionDefinition
     block;
 
 classDefinition:
-    CLASS name=ID PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE GRAPH_OPEN NL* (classStatement NL+)* GRAPH_CLOSE;
+    CLASS name=ID (PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE)? GRAPH_OPEN NL* (classStatement NL+)* GRAPH_CLOSE;
 
 classStatement
    : initBlock                  #InitStatement
