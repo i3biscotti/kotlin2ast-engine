@@ -93,15 +93,12 @@ class LexerTest {
     fun callFunction() {
         assertEquals(
             listOf(
-                "FUN",
-                "ID",
-                "PAREN_OPEN",
+                "FUN", "ID", "PAREN_OPEN",
                 "ID", "COLONS", "INT", "COMMA",
                 "ID", "COLONS", "INT", "COMMA",
                 "ID", "COLONS", "BOOLEAN",
                 "PAREN_CLOSE",
-                "COLONS",
-                "BOOLEAN",
+                "COLONS", "BOOLEAN",
                 "GRAPH_OPEN",
                 "NL",
                 "VAR", "ID", "ASSIGN", "ID", "GREATER_THAN", "ID", "NL",
@@ -129,5 +126,93 @@ class LexerTest {
             tokens(lexerForResource("task7/callFunction"))
         )
     }
+    //endregion
+
+    //region Task 8
+    @Test
+    fun emptyClass() {
+        assertEquals(
+            listOf("CLASS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
+            tokens(lexerForResource("task8/emptyClass"))
+        )
+    }
+
+    @Test
+    fun classWithProperties() {
+        assertEquals(
+            listOf(
+                "CLASS", "ID", "PAREN_OPEN",
+                "VAL", "ID", "COLONS", "INT", "COMMA",
+                "VAL", "ID", "COLONS", "BOOLEAN",
+                "PAREN_CLOSE", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"
+            ),
+            tokens(lexerForResource("task8/classWithProperties"))
+        )
+    }
+
+    @Test
+    fun classWithMethods() {
+        assertEquals(
+            listOf(
+                "CLASS", "ID", "PAREN_OPEN",
+                "VAL", "ID", "COLONS", "INT", "COMMA",
+                "VAR", "ID", "COLONS", "BOOLEAN",
+                "PAREN_CLOSE", "GRAPH_OPEN", "NL",
+
+                "FUN", "ID", "PAREN_OPEN",
+                "ID", "COLONS", "INT",
+                "PAREN_CLOSE", "COLONS", "INT", "GRAPH_OPEN", "NL",
+                "ID", "ASSIGN", "ID", "LOWER_EQUAL_THAN", "ID","NL",
+                "RETURN", "ID", "PLUS", "ID", "NL",
+                "GRAPH_CLOSE", "NL",
+
+                "GRAPH_CLOSE", "EOF"
+            ),
+            tokens(lexerForResource("task8/classWithMethods"))
+        )
+    }
+
+    @Test
+    fun classWithMultipleConstructors() {
+        assertEquals(
+            listOf(
+                "CLASS", "ID", "PAREN_OPEN",
+                "VAL", "ID", "COLONS", "INT", "COMMA",
+                "VAL", "ID", "COLONS", "DOUBLE",
+                "PAREN_CLOSE", "GRAPH_OPEN", "NL",
+
+                "CONSTRUCTOR", "PAREN_OPEN",
+                "ID", "COLONS", "INT",
+                "PAREN_CLOSE", "COLONS", "THIS", "PAREN_OPEN",
+                "ID", "COMMA",
+                "DOUBLE_LIT",
+                "PAREN_CLOSE", "NL",
+
+                "GRAPH_CLOSE", "EOF"
+            ),
+            tokens(lexerForResource("task8/classWithMultipleConstructors"))
+        )
+    }
+
+    @Test
+    fun privateClass() {
+        assertEquals(
+            listOf("PRIVATE", "CLASS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
+            tokens(lexerForResource("task8/privateClass"))
+        )
+    }
+
+    @Test
+    fun classHierarchy() {
+        assertEquals(
+            listOf("CLASS", "ID", "COLONS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
+            tokens(lexerForResource("task8/classHierarchy"))
+        )
+    }
+
+    //endregion
+
+    //region Task 9
+
     //endregion
 }
