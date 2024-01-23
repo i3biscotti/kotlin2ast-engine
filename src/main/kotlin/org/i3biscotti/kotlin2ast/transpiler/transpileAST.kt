@@ -3,6 +3,10 @@ package org.i3biscotti.kotlin2ast.transpiler
 import org.i3biscotti.kotlin2ast.ast.models.*
 import java.lang.UnsupportedOperationException
 
+val space = "    "
+
+fun generateIdentationSpace( depth: Int) = space.repeat(depth)
+
 fun Node.transpile(): String {
     return when (this) {
         is ProgramFile -> transpile()
@@ -16,17 +20,16 @@ fun ProgramFile.transpile(): String {
     return lines.joinToString("\n") { it.transpile() }
 }
 
-fun Statement.transpile(): String {
+fun Statement.transpile(depth: Int = 0): String {
     return when (this) {
-        is VarDeclarationStatement -> transpile()
-        is AssignmentStatement -> transpile()
-        is ReturnStatement -> transpile()
-        is FunctionDefinitionStatement -> transpile()
+        is VarDeclarationStatement -> transpile(depth)
+        is AssignmentStatement -> transpile(depth)
+        is ReturnStatement -> transpile(depth)
+        is FunctionDefinitionStatement -> transpile(depth)
         else -> throw NotImplementedError()
     }
 }
-
-fun VarDeclarationStatement.transpile(): String {
+fun VarDeclarationStatement.transpile(depth: Int = 0): String {
     val variableTypeTranspiled = when (varType) {
         VariableType.immutable -> "val"
         VariableType.variable -> "var"
@@ -49,17 +52,17 @@ fun VarDeclarationStatement.transpile(): String {
         declarationTranspiled = "$declarationTranspiled : $valueTypeTranspiled"
     }
 
-    declarationTranspiled = "$declarationTranspiled = ${value.transpile()}"
+    declarationTranspiled = "${generateIdentationSpace(depth)}$declarationTranspiled = ${value.transpile()}"
 
     return declarationTranspiled
 }
 
-fun AssignmentStatement.transpile(): String {
+fun AssignmentStatement.transpile(depth: Int = 0): String {
     val valueTranspiled = value.transpile()
-    return "$name = $valueTranspiled"
+    return "${generateIdentationSpace(depth)}$name = $valueTranspiled"
 }
 
-fun FunctionDefinitionStatement.transpile(): String {
+fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
     var functionStatement = "fun $name"
 
     if (parameters.isNotEmpty()) {
@@ -94,21 +97,21 @@ fun FunctionDefinitionStatement.transpile(): String {
 
 
     if (statements.isNotEmpty()) {
-        val statementsTranspiled = statements.joinToString("\n") { it.transpile() }
-        functionStatement += """
-        | {
+        val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth+1) }
+        functionStatement = """
+        |${generateIdentationSpace(depth)}$functionStatement {
         |$statementsTranspiled
-        |}
+        |${generateIdentationSpace(depth)}}
         """.trimMargin()
     } else {
-        functionStatement += " {}"
+        functionStatement = "${generateIdentationSpace(depth)}$functionStatement {}"
     }
 
     return functionStatement
 }
 
-fun ReturnStatement.transpile(): String {
-    return if (value != null) {
+fun ReturnStatement.transpile(depth: Int = 0): String {
+    return generateIdentationSpace(depth) + if (value != null) {
         val valueTranspiled = value.transpile()
         "return $valueTranspiled"
     } else {
