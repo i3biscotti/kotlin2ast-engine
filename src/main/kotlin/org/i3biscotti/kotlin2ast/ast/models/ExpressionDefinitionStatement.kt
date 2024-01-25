@@ -5,4 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("ExpressionDefinitionStatement")
-data class ExpressionDefinitionStatement(val expression: Expression, override val position: Position?) : Statement()
+data class ExpressionDefinitionStatement(
+    val expression: Expression,
+    override val position: Position?
+) : Statement()
