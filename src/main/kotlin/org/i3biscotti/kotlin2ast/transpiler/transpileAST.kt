@@ -26,6 +26,7 @@ fun Statement.transpile(depth: Int = 0): String {
         is AssignmentStatement -> transpile(depth)
         is ReturnStatement -> transpile(depth)
         is FunctionDefinitionStatement -> transpile(depth)
+        is ExpressionDefinitionStatement -> transpile(depth)
         else -> throw NotImplementedError()
     }
 }
@@ -55,6 +56,11 @@ fun VarDeclarationStatement.transpile(depth: Int = 0): String {
     declarationTranspiled = "${generateIdentationSpace(depth)}$declarationTranspiled = ${value.transpile()}"
 
     return declarationTranspiled
+}
+
+fun ExpressionDefinitionStatement.transpile(depth: Int = 0): String {
+    val expressionTranspiled = expression.transpile()
+    return "${generateIdentationSpace(depth)}$expressionTranspiled"
 }
 
 fun AssignmentStatement.transpile(depth: Int = 0): String {
@@ -188,7 +194,7 @@ fun VarReferenceExpression.transpile(): String {
 
 fun ParenthesisExpression.transpile(): String {
     val valueTranspiled = value.transpile()
-    return "( $valueTranspiled )"
+    return "($valueTranspiled)"
 }
 
 fun FunctionCallExpression.transpile(): String {
