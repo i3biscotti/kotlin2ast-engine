@@ -79,9 +79,22 @@ INIT                        : 'init';
 THIS                        : 'this';
 DOT                         : '.';
 
+//TASK3
+
+IF                          : 'if';
+ELSE_IF                     : 'else' 'if';
+ELSE                        : 'else';
+
+//TASK4
+
+WHILE                       : 'while';
+
+//TASK5
+FOR                         : 'for';
+LIST_OF                     : 'listOf';
+
 // Identifiers
 ID                 : [A-Za-z_][A-Za-z0-9_]* ;
-
 
 UnterminatedStringLiteral
   : '"' (~["\\\r\n] | '\\' (. | EOF))*
