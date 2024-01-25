@@ -29,7 +29,7 @@ class TranspileTest {
         )
     }
 
-
+//task1
     @Test
     fun testValDeclarationStatement() {
         val programFile = parseResource("task1/valDeclarationStatement")
@@ -62,6 +62,17 @@ class TranspileTest {
         )
     }
 
+//task2
+
+    @Test
+    fun testExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/expressionDefinitionStatement")
+
+        assertEquals(
+            "(3 + 4) * (3 + 7)",
+            programFile
+        )
+    }
     //endregion
 
     //region Task 7
