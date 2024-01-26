@@ -92,7 +92,7 @@ class AstTest {
                 listOf(
                     AssignmentStatement(
                         "height",
-                        DecLit("12.3", null),
+                        DoubleLiteralExpression("12.3", null),
                         null
                     )
                 ),
@@ -204,7 +204,7 @@ class AstTest {
                             VarDeclarationStatement(
                                 VariableType.variable,
                                 "aIsGreaterThanB",
-                               null,
+                                null,
                                 BinaryLogicExpression(
                                     LogicOperand.greaterThan,
                                     VarReferenceExpression("a", null),
@@ -245,9 +245,9 @@ class AstTest {
                                 FunctionCallExpression(
                                     "operations",
                                     listOf(
-                                        IntLiteralExpression("11",null),
-                                        IntLiteralExpression("12",null),
-                                        BooleanLitExpression("false",null)
+                                        IntLiteralExpression("11", null),
+                                        IntLiteralExpression("12", null),
+                                        BooleanLitExpression("false", null)
                                     ),
                                     null,
                                 ),
@@ -261,6 +261,300 @@ class AstTest {
             ),
             programFile
         )
+    }
+    //endregion
+
+    //region Task 8
+    @Test
+    fun emptyClass() {
+        val programFile = parseResource("task8/emptyClass")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ClassDefinitionStatement(
+                        "SimpleClass",
+                        listOf(),
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "SimpleClass",
+                                "",
+                                listOf(),
+                                listOf(),
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    fun classWithProperties() {
+        val programFile = parseResource("task8/classWithProperties")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ClassDefinitionStatement(
+                        "SimpleClass",
+                        listOf(
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "prop1",
+                                VariableValueType.INT,
+                                null,
+                                null
+                            ),
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "pro2",
+                                VariableValueType.BOOLEAN,
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "SimpleClass",
+                                "",
+                                listOf(
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "prop1",
+                                        VariableValueType.INT,
+                                        null
+                                    ),
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "pro2",
+                                        VariableValueType.BOOLEAN,
+                                        null
+                                    )
+                                ),
+                                listOf(),
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+
+    }
+
+    @Test
+    fun classWithMethods() {
+        val programFile = parseResource("task8/classWithMethods")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ClassDefinitionStatement(
+                        "SimpleClass",
+                        listOf(
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "prop1",
+                                VariableValueType.INT,
+                                null,
+                                null
+                            ),
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "pro2",
+                                VariableValueType.BOOLEAN,
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "SimpleClass",
+                                "",
+                                listOf(
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "prop1",
+                                        VariableValueType.INT,
+                                        null
+                                    ),
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "pro2",
+                                        VariableValueType.BOOLEAN,
+                                        null
+                                    )
+                                ),
+                                listOf(),
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(
+                            FunctionDefinitionStatement(
+                                "sum",
+                                listOf(
+                                    Parameter(
+                                        ParameterType.TYPE,
+                                        "value",
+                                        VariableValueType.INT,
+                                        null
+                                    )
+                                ),
+                                VariableValueType.INT,
+                                listOf(
+                                    AssignmentStatement(
+                                        "pro2",
+                                        BinaryLogicExpression(
+                                            LogicOperand.lessThanOrEqual,
+                                            VarReferenceExpression("value", null),
+                                            VarReferenceExpression("prop1", null),
+                                            null
+                                        ),
+                                        null
+                                    ),
+                                    ReturnStatement(
+                                        BinaryMathExpression(
+                                            MathOperand.plus,
+                                            VarReferenceExpression("value", null),
+                                            VarReferenceExpression("prop1", null),
+                                            null
+                                        ),
+                                        null
+                                    )
+                                ),
+                                null
+                            )
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    fun classWithMultipleConstructors() {
+        val programFile = parseResource("task8/classWithMultipleConstructors")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ClassDefinitionStatement(
+                        "MultiplePass",
+                        listOf(
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "a",
+                                VariableValueType.INT,
+                                null,
+                                null
+                            ),
+                            PropertyDeclaration(
+                                VariableType.immutable,
+                                "b",
+                                VariableValueType.DOUBLE,
+                                null,
+                                null
+                            )
+                        ),
+
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "MultiplePass",
+                                "",
+                                listOf(
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "a",
+                                        VariableValueType.INT,
+                                        null
+                                    ),
+                                    Parameter(
+                                        ParameterType.THIS,
+                                        "b",
+                                        VariableValueType.DOUBLE,
+                                        null
+                                    )
+                                ),
+                                listOf(),
+                                null,
+                                null
+                            ),
+                            ConstructorDefinitionStatement(
+                                "MultiplePass",
+                                "s1",
+                                listOf(
+                                    Parameter(
+                                        ParameterType.TYPE,
+                                        "a",
+                                        VariableValueType.INT,
+                                        null
+                                    ),
+
+                                ),
+                                listOf(),
+                                ThisConstructorDefinition(
+                                    listOf(
+                                        VarReferenceExpression("a", null),
+                                        DoubleLiteralExpression("12.1", null)
+                                    ),
+                                    null,
+                                ),
+                                null
+                            )
+                        ),
+                        listOf(),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    fun privateClass() {
+        val programFile = parseResource("task8/privateClass")
+        TODO()
+
+        assertEquals(
+            ProgramFile(
+                listOf(),
+                null,
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    fun classHierarchy() {
+        TODO()
+        val programFile = parseResource("task8/classHierarchy")
+
+        assertEquals(
+            ProgramFile(
+                listOf(),
+                null,
+            ),
+            programFile
+        )
+
     }
     //endregion
 }
