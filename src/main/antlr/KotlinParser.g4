@@ -4,7 +4,7 @@ options{ tokenVocab=KotlinLexer; }
 
 kotlinFile: lines=line+;
 
-line: statement (NL* | EOF);
+line: statement (NL+ | EOF);
 
 /*
  var name = "Simone"
@@ -79,13 +79,19 @@ functionDefinition
     block;
 
 classDefinition:
-    CLASS name=ID (PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE)? GRAPH_OPEN NL* (classStatement NL+)* GRAPH_CLOSE;
+    CLASS name=ID (PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE)?
+    GRAPH_OPEN (NL+ (classStatement NL+)* )? GRAPH_CLOSE;
 
 classStatement
    : initBlock                  #InitStatement
    | constructorBlock           #SecondaryConstructorStatement
-   | functionDefinition         #MethodStatement
+   | functionDefinition         #MethodDefinitionStatement
    ;
+
+/*
+removed BooleanLit.kt and fixed VarDeclarationStatement transpiling logic
+
+*/
 
 initBlock: INIT GRAPH_OPEN NL* (statement NL+)*  GRAPH_CLOSE ;
 
