@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("DecLit")
-data class DecLit(val value: String, override val position: Position?) : Expression()
+data class DoubleLiteralExpression(val value: String, override val position: Position?) : Expression()

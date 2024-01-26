@@ -128,7 +128,7 @@ fun ReturnStatement.transpile(depth: Int = 0): String {
 fun Expression.transpile(): String {
     return when (this) {
         is IntLiteralExpression -> value
-        is DecLit -> value
+        is DoubleLiteralExpression -> value
         is BooleanLitExpression -> value
         is StringLit -> value
         is BinaryMathExpression -> transpile()

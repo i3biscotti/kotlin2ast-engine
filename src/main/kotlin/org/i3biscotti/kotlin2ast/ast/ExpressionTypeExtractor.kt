@@ -6,7 +6,7 @@ fun Expression.getType(): VariableValueType {
     return when (this) {
         is IntLiteralExpression -> VariableValueType.INT
         is BooleanLitExpression -> VariableValueType.BOOLEAN
-        is DecLit -> VariableValueType.DOUBLE
+        is DoubleLiteralExpression -> VariableValueType.DOUBLE
         is StringLit -> VariableValueType.STRING
         else -> throw NotImplementedError()
     }

@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.*
 import KotlinParser.*
 import org.i3biscotti.kotlin2ast.ast.models.*
 
+
 fun Token.startPoint(): Point {
     return Point(line, charPositionInLine + 1)
 }
@@ -130,7 +131,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
     return when (this) {
         is BoolLiteralExpressionContext -> BooleanLitExpression(text, toPosition(considerPosition))
         is IntLiteralExpressionContext -> IntLiteralExpression(text, toPosition(considerPosition))
-        is DoubleLiteralExpressionContext -> DecLit(text, toPosition(considerPosition))
+        is DoubleLiteralExpressionContext -> DoubleLiteralExpression(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
         is FunctionCallExpressionContext -> toAst(considerPosition)
         is BinaryMathExpressionContext -> toAst(considerPosition)
@@ -281,7 +282,7 @@ fun ClassDefinitionStatementContext.toAst(considerPosition: Boolean): ClassDefin
 
     val secondaryConstructors = classStatements.filterIsInstance<SecondaryConstructorStatementContext>()
     val methods = classStatements
-        .filterIsInstance<MethodStatementContext>()
+        .filterIsInstance<MethodDefinitionStatementContext>()
         .map { it.toAst(considerPosition) }
 
 
@@ -334,7 +335,7 @@ fun ClassDefinitionStatementContext.toAst(considerPosition: Boolean): ClassDefin
     )
 }
 
-fun MethodStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
+fun MethodDefinitionStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
     val fn = functionDefinition()
 
     val nameText = fn.name.text
