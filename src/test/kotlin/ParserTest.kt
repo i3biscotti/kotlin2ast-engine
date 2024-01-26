@@ -1,7 +1,7 @@
 import org.antlr.v4.runtime.ParserRuleContext
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.i3biscotti.kotlin2ast.toParseTree
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class ParserTest {
@@ -185,7 +185,7 @@ class ParserTest {
         )
     }
 
-    @org.junit.Test
+    @Test
     fun callFunction() {
         val programFile = parseResource("task7/callFunction")
             .toParseTree()
@@ -282,4 +282,233 @@ class ParserTest {
     }
     //endregion
 
+    //region Task 8
+    @Test
+    fun emptyClass(){
+        val programFile = parseResource("task8/emptyClass")
+            .toParseTree()
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[class]
+                |        T[SimpleClass]
+                |        T[{]
+                |        T[}]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    fun classWithProperties() {
+        val programFile = parseResource("task8/classWithProperties")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[class]
+                |        T[SimpleClass]
+                |        T[(]
+                |        Parameter
+                |          T[val]
+                |          T[prop1]
+                |          T[:]
+                |          IntType
+                |            T[Int]
+                |        T[,]
+                |        Parameter
+                |          T[val]
+                |          T[pro2]
+                |          T[:]
+                |          BooleanType
+                |            T[Boolean]
+                |        T[)]
+                |        T[{]
+                |        T[}]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    fun classWithMethods() {
+        val programFile = parseResource("task8/classWithMethods")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[class]
+                |        T[SimpleClass]
+                |        T[(]
+                |        Parameter
+                |          T[val]
+                |          T[prop1]
+                |          T[:]
+                |          IntType
+                |            T[Int]
+                |        T[,]
+                |        Parameter
+                |          T[var]
+                |          T[pro2]
+                |          T[:]
+                |          BooleanType
+                |            T[Boolean]
+                |        T[)]
+                |        T[{]
+                |        MethodDefinitionStatement
+                |          FunctionDefinition
+                |            T[fun]
+                |            T[sum]
+                |            T[(]
+                |            Parameter
+                |              T[value]
+                |              T[:]
+                |              IntType
+                |                T[Int]
+                |            T[)]
+                |            T[:]
+                |            IntType
+                |              T[Int]
+                |            Block
+                |              T[{]
+                |              AssignStatement
+                |                T[pro2]
+                |                T[=]
+                |                BinaryLogicExpression
+                |                  VarReferenceExpression
+                |                    T[value]
+                |                  T[<=]
+                |                  VarReferenceExpression
+                |                    T[prop1]
+                |              ReturnStatement
+                |                T[return]
+                |                BinaryMathExpression
+                |                  VarReferenceExpression
+                |                    T[value]
+                |                  T[+]
+                |                  VarReferenceExpression
+                |                    T[prop1]
+                |              T[}]
+                |        T[}]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    fun classWithMultipleConstructors() {
+        val programFile = parseResource("task8/classWithMultipleConstructors")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[class]
+                |        T[MultiplePass]
+                |        T[(]
+                |        Parameter
+                |          T[val]
+                |          T[a]
+                |          T[:]
+                |          IntType
+                |            T[Int]
+                |        T[,]
+                |        Parameter
+                |          T[val]
+                |          T[b]
+                |          T[:]
+                |          DoubleType
+                |            T[Double]
+                |        T[)]
+                |        T[{]
+                |        SecondaryConstructorStatement
+                |          ConstructorBlock
+                |            T[constructor]
+                |            T[(]
+                |            Parameter
+                |              T[a]
+                |              T[:]
+                |              IntType
+                |                T[Int]
+                |            T[)]
+                |            T[:]
+                |            ThisConstructor
+                |              T[this]
+                |              T[(]
+                |              VarReferenceExpression
+                |                T[a]
+                |              T[,]
+                |              DoubleLiteralExpression
+                |                T[12.1]
+                |              T[)]
+                |        T[}]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    fun privateClass() {
+        val programFile = parseResource("task8/privateClass")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[private]
+                |        T[class]
+                |        T[SecretWar]
+                |        T[{]
+                |        T[}]
+                |    T[<EOF>]
+            """.trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    fun classHierarchy() {
+        val programFile = parseResource("task8/classHierarchy")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ClassDefinitionStatement
+                |      ClassDefinition
+                |        T[class]
+                |        T[SecretWars]
+                |        T[:]
+                |        CustomType
+                |          T[Marvel]
+                |        T[{]
+                |        T[}]
+                |    T[<EOF>]
+            """.trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
 }

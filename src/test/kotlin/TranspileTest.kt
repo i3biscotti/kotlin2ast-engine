@@ -83,8 +83,6 @@ class TranspileTest {
             "fun emptyFunction() : Unit {}",
             programFile
         )
-
-
     }
 
     @Test
