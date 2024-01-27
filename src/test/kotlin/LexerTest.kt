@@ -58,6 +58,22 @@ class LexerTest : ITest{
     override fun testExpressionDefinitionStatement() {
         TODO("Not yet implemented")
     }
+
+    override fun testBinaryMathExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testBinaryLogicExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testUnaryMathExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testUnaryLogicExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
     //endregion
 
     //region Task 7

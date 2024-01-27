@@ -21,8 +21,23 @@ class TestValidation : ITest{
         TODO("Not yet implemented")
     }
 
-    @Test
     override fun testExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testBinaryMathExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testBinaryLogicExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testUnaryMathExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testUnaryLogicExpressionDefinitionStatement() {
         TODO("Not yet implemented")
     }
 
