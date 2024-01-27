@@ -15,6 +15,18 @@ interface ITest {
 
     //region Task2
     fun testExpressionDefinitionStatement()
+
+
+    fun testBinaryMathExpressionDefinitionStatement()
+
+
+    fun testBinaryLogicExpressionDefinitionStatement()
+
+
+    fun testUnaryMathExpressionDefinitionStatement()
+
+
+    fun testUnaryLogicExpressionDefinitionStatement()
     //endregion
 
     //region Task 7
