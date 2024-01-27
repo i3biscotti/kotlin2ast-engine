@@ -173,7 +173,7 @@ fun BinaryMathExpression.transpile(): String {
 }
 
 fun UnaryLogicNegationExpression.transpile(): String {
-    return "! ${value.transpile()}"
+    return "!${value.transpile()}"
 }
 
 fun UnaryMathExpression.transpile(): String {
