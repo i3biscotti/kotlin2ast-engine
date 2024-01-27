@@ -26,6 +26,10 @@ line: statement (NL+ | EOF);
     | expression                                    #ExpressionDefinitionStatement
     | objectProperty ASSIGN expression              #ObjectPropertyAssignStatement
     | RETURN expression                             #ReturnStatement
+    | ifDefinition                                  #IfDefinitionStatement
+    | whileDefinition                               #WhileDefinitionStatement
+    | forDefinition                                 #ForDefinitionStatement
+    | listOfDefinition                              #ListOfDefinitionStatement
     ;
 
  type
@@ -64,6 +68,28 @@ expression
     | objectProperty                                                                    #ObjectPropertyExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;
+
+//task3
+ifDefinition :
+    IF PAREN_OPEN ifCondition=expression PAREN_CLOSE ifBlock=block
+    (ELSE IF PAREN_OPEN elseIfCondition=expression PAREN_CLOSE elseIfBlock=block)*
+    (ELSE elseBlock=block)?
+    ;
+
+//task4
+whileDefinition :
+    WHILE PAREN_OPEN whileCondition=expression PAREN_CLOSE whileBlock=block
+    ;
+
+//task5
+forDefinition :
+    FOR PAREN_OPEN ID IN forCondition=expression PAREN_CLOSE forBlock=block
+    ;
+
+listOfDefinition :
+    LIST_OF PAREN_OPEN listOfCondition=expression PAREN_CLOSE
+    ;
+
 
 parameter
     : (VAL | VAR )? ID COLONS type
