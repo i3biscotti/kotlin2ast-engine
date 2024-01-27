@@ -4,7 +4,7 @@ import org.i3biscotti.kotlin2ast.transpiler.transpile
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class TranspileTest {
+class TranspileTest : ITest {
     private fun parseResource(
         resourceName: String,
     ): String {
@@ -20,7 +20,7 @@ class TranspileTest {
 
     //region Task 1
     @Test
-    fun testVarDeclarationStatement() {
+    override fun testVarDeclarationStatement() {
         val programFile = parseResource("task1/varDeclarationStatement")
 
         assertEquals(
@@ -29,9 +29,8 @@ class TranspileTest {
         )
     }
 
-//task1
     @Test
-    fun testValDeclarationStatement() {
+    override fun testValDeclarationStatement() {
         val programFile = parseResource("task1/valDeclarationStatement")
 
         assertEquals(
@@ -40,9 +39,8 @@ class TranspileTest {
         )
     }
 
-
     @Test
-    fun testConstDeclarationStatement() {
+    override fun testConstDeclarationStatement() {
         val programFile = parseResource("task1/constDeclarationStatement")
 
         assertEquals(
@@ -51,9 +49,8 @@ class TranspileTest {
         )
     }
 
-
     @Test
-    fun testAssignmentStatement() {
+    override fun testAssignmentStatement() {
         val programFile = parseResource("task1/assignmentStatement")
 
         assertEquals(
@@ -61,11 +58,11 @@ class TranspileTest {
             programFile
         )
     }
+    //endregion
 
-//task2
-
+    //region Task2
     @Test
-    fun testExpressionDefinitionStatement() {
+    override fun testExpressionDefinitionStatement() {
         val programFile = parseResource("task2/expressionDefinitionStatement")
 
         assertEquals(
@@ -77,7 +74,7 @@ class TranspileTest {
 
     //region Task 7
     @Test
-    fun voidFunctionWithoutParams() {
+    override fun voidFunctionWithoutParams() {
         val programFile = parseResource("task7/voidFunctionWithoutParams")
         assertEquals(
             "fun emptyFunction() : Unit {}",
@@ -86,7 +83,7 @@ class TranspileTest {
     }
 
     @Test
-    fun intSumFunction() {
+    override fun intSumFunction() {
         val programFile = parseResource("task7/intSumFunction")
         assertEquals(
             """
@@ -99,7 +96,7 @@ class TranspileTest {
     }
 
     @Test
-    fun callFunction() {
+    override fun callFunction() {
         val programFile = parseResource("task7/callFunction")
         assertEquals(
             """
@@ -112,6 +109,79 @@ class TranspileTest {
             |    val result = operations(11, 12, false)
             |}
             """.trimMargin(),
+            programFile
+        )
+    }
+    //endregion
+
+    //region Task 8
+    @Test
+    override fun emptyClass() {
+        val programFile = parseResource("task8/emptyClass")
+
+        assertEquals(
+            "class SimpleClass {}",
+            programFile
+        )
+    }
+
+    @Test
+    override fun classWithProperties() {
+        val programFile = parseResource("task8/classWithProperties")
+
+        assertEquals(
+            "class SimpleClass(val prop1 : Int, val pro2 : Boolean) {}",
+            programFile
+        )
+    }
+
+    @Test
+    override fun classWithMethods() {
+        val programFile = parseResource("task8/classWithMethods")
+
+        assertEquals(
+            """
+            |class SimpleClass(val prop1 : Int, var pro2 : Boolean) {
+            |    fun sum(value: Int) : Int {
+            |        pro2 = value <= prop1
+            |        return value + prop1
+            |    }
+            |}    
+            |""".trimMargin(),
+            programFile
+        )
+    }
+
+    @Test
+    override fun classWithMultipleConstructors() {
+        val programFile = parseResource("task8/classWithMultipleConstructors")
+
+        assertEquals(
+            """
+            |class MultiplePass(val a : Int, val b : Double){
+            |    constructor(a : Int) : this(a, 12.1)
+            |}   
+            |""".trimMargin(),
+            programFile
+        )
+    }
+
+    @Test
+    override fun privateClass() {
+        val programFile = parseResource("task8/privateClass")
+
+        assertEquals(
+            "private class SecretWar {}",
+            programFile
+        )
+    }
+
+    @Test
+    override fun classHierarchy() {
+        val programFile = parseResource("task8/classHierarchy")
+
+        assertEquals(
+            "class SecretWars : Marvel {}",
             programFile
         )
     }

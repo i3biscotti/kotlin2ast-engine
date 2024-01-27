@@ -4,7 +4,7 @@ import org.i3biscotti.kotlin2ast.toParseTree
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class ParserTest {
+class ParserTest : ITest{
     private fun parseResource(
         resourceName: String,
     ): ParserRuleContext {
@@ -23,9 +23,8 @@ class ParserTest {
     }
 
     //region Task 1
-
     @Test
-    fun testVarDeclarationStatement() {
+    override fun testVarDeclarationStatement() {
         val programFile = parseResource("task1/varDeclarationStatement")
             .toParseTree()
 
@@ -46,7 +45,7 @@ class ParserTest {
     }
 
     @Test
-    fun testValDeclarationStatement() {
+    override fun testValDeclarationStatement() {
         val programFile = parseResource("task1/valDeclarationStatement")
             .toParseTree()
 
@@ -70,7 +69,7 @@ class ParserTest {
     }
 
     @Test
-    fun testConstDeclarationStatement() {
+    override fun testConstDeclarationStatement() {
         val programFile = parseResource("task1/constDeclarationStatement")
             .toParseTree()
 
@@ -94,7 +93,7 @@ class ParserTest {
     }
 
     @Test
-    fun testAssignmentStatement() {
+    override fun testAssignmentStatement() {
         val programFile = parseResource("task1/assignmentStatement")
             .toParseTree()
 
@@ -112,11 +111,15 @@ class ParserTest {
             programFile.multiLineString()
         )
     }
+
+    override fun testExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
     //endregion
 
     //region Task 7
-    @org.junit.Test
-    fun voidFunctionWithoutParams() {
+    @Test
+    override fun voidFunctionWithoutParams() {
         val programFile = parseResource("task7/voidFunctionWithoutParams")
             .toParseTree()
 
@@ -139,8 +142,8 @@ class ParserTest {
         )
     }
 
-    @org.junit.Test
-    fun intSumFunction() {
+    @Test
+    override fun intSumFunction() {
         val programFile = parseResource("task7/intSumFunction")
             .toParseTree()
 
@@ -186,7 +189,7 @@ class ParserTest {
     }
 
     @Test
-    fun callFunction() {
+    override fun callFunction() {
         val programFile = parseResource("task7/callFunction")
             .toParseTree()
 
@@ -284,7 +287,7 @@ class ParserTest {
 
     //region Task 8
     @Test
-    fun emptyClass(){
+    override fun emptyClass(){
         val programFile = parseResource("task8/emptyClass")
             .toParseTree()
         assertEquals(
@@ -304,7 +307,7 @@ class ParserTest {
     }
 
     @Test
-    fun classWithProperties() {
+    override fun classWithProperties() {
         val programFile = parseResource("task8/classWithProperties")
             .toParseTree()
 
@@ -340,7 +343,7 @@ class ParserTest {
     }
 
     @Test
-    fun classWithMethods() {
+    override fun classWithMethods() {
         val programFile = parseResource("task8/classWithMethods")
             .toParseTree()
 
@@ -410,7 +413,7 @@ class ParserTest {
     }
 
     @Test
-    fun classWithMultipleConstructors() {
+    override fun classWithMultipleConstructors() {
         val programFile = parseResource("task8/classWithMultipleConstructors")
             .toParseTree()
 
@@ -466,7 +469,7 @@ class ParserTest {
     }
 
     @Test
-    fun privateClass() {
+    override fun privateClass() {
         val programFile = parseResource("task8/privateClass")
             .toParseTree()
 
@@ -488,7 +491,7 @@ class ParserTest {
     }
 
     @Test
-    fun classHierarchy() {
+    override fun classHierarchy() {
         val programFile = parseResource("task8/classHierarchy")
             .toParseTree()
 

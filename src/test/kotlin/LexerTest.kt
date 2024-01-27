@@ -3,7 +3,7 @@ import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
 
-class LexerTest {
+class LexerTest : ITest{
     private fun lexerForResource(resourceName: String): KotlinLexer {
         val resource = this.javaClass.getResourceAsStream("/${resourceName}.txt")
         val lexer = KotlinLexer(CharStreams.fromStream(resource))
@@ -22,10 +22,9 @@ class LexerTest {
         return tokens
     }
 
-
     //region Task 1
     @Test
-    fun testVarDeclarationStatement() {
+    override fun testVarDeclarationStatement() {
         assertEquals(
             listOf("VAR", "ID", "ASSIGN", "STRING_LIT", "EOF"),
             tokens(lexerForResource("task1/VarDeclarationStatement"))
@@ -33,7 +32,7 @@ class LexerTest {
     }
 
     @Test
-    fun testValDeclarationStatement() {
+    override fun testValDeclarationStatement() {
         assertEquals(
             listOf("VAL", "ID", "COLONS", "INT", "ASSIGN", "INT_LIT", "EOF"),
             tokens(lexerForResource("task1/ValDeclarationStatement"))
@@ -41,7 +40,7 @@ class LexerTest {
     }
 
     @Test
-    fun testConstDeclarationStatement() {
+    override fun testConstDeclarationStatement() {
         assertEquals(
             listOf("CONST", "ID", "COLONS", "BOOLEAN", "ASSIGN", "BOOL_LIT", "EOF"),
             tokens(lexerForResource("task1/constDeclarationStatement"))
@@ -49,17 +48,21 @@ class LexerTest {
     }
 
     @Test
-    fun testAssignmentStatement() {
+    override fun testAssignmentStatement() {
         assertEquals(
             listOf("ID", "ASSIGN", "DOUBLE_LIT", "EOF"),
             tokens(lexerForResource("task1/assignmentStatement"))
         )
     }
+
+    override fun testExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
     //endregion
 
     //region Task 7
     @Test
-    fun voidFunctionWithoutParams() {
+    override fun voidFunctionWithoutParams() {
         assertEquals(
             listOf("FUN", "ID", "PAREN_OPEN", "PAREN_CLOSE", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
             tokens(lexerForResource("task7/voidFunctionWithoutParams"))
@@ -67,7 +70,7 @@ class LexerTest {
     }
 
     @Test
-    fun intSumFunction() {
+    override fun intSumFunction() {
         assertEquals(
             listOf(
                 "FUN",
@@ -90,7 +93,7 @@ class LexerTest {
     }
 
     @Test
-    fun callFunction() {
+    override fun callFunction() {
         assertEquals(
             listOf(
                 "FUN", "ID", "PAREN_OPEN",
@@ -130,7 +133,7 @@ class LexerTest {
 
     //region Task 8
     @Test
-    fun emptyClass() {
+    override fun emptyClass() {
         assertEquals(
             listOf("CLASS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
             tokens(lexerForResource("task8/emptyClass"))
@@ -138,7 +141,7 @@ class LexerTest {
     }
 
     @Test
-    fun classWithProperties() {
+    override fun classWithProperties() {
         assertEquals(
             listOf(
                 "CLASS", "ID", "PAREN_OPEN",
@@ -151,7 +154,7 @@ class LexerTest {
     }
 
     @Test
-    fun classWithMethods() {
+    override fun classWithMethods() {
         assertEquals(
             listOf(
                 "CLASS", "ID", "PAREN_OPEN",
@@ -173,7 +176,7 @@ class LexerTest {
     }
 
     @Test
-    fun classWithMultipleConstructors() {
+    override fun classWithMultipleConstructors() {
         assertEquals(
             listOf(
                 "CLASS", "ID", "PAREN_OPEN",
@@ -195,7 +198,7 @@ class LexerTest {
     }
 
     @Test
-    fun privateClass() {
+    override fun privateClass() {
         assertEquals(
             listOf("PRIVATE", "CLASS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
             tokens(lexerForResource("task8/privateClass"))
@@ -203,13 +206,12 @@ class LexerTest {
     }
 
     @Test
-    fun classHierarchy() {
+    override fun classHierarchy() {
         assertEquals(
             listOf("CLASS", "ID", "COLONS", "ID", "GRAPH_OPEN", "GRAPH_CLOSE", "EOF"),
             tokens(lexerForResource("task8/classHierarchy"))
         )
     }
-
     //endregion
 
     //region Task 9

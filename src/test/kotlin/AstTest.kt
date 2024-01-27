@@ -4,7 +4,7 @@ import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class AstTest {
+class AstTest : ITest{
     private fun parseResource(
         resourceName: String,
     ): ProgramFile {
@@ -21,7 +21,7 @@ class AstTest {
 
     //region Task 1
     @Test
-    fun testVarDeclarationStatement() {
+    override fun testVarDeclarationStatement() {
         val programFile = parseResource("task1/varDeclarationStatement")
 
         assertEquals(
@@ -42,7 +42,7 @@ class AstTest {
     }
 
     @Test
-    fun testValDeclarationStatement() {
+    override fun testValDeclarationStatement() {
         val programFile = parseResource("task1/valDeclarationStatement")
 
         assertEquals(
@@ -63,7 +63,7 @@ class AstTest {
     }
 
     @Test
-    fun testConstDeclarationStatement() {
+    override fun testConstDeclarationStatement() {
         val programFile = parseResource("task1/constDeclarationStatement")
 
         assertEquals(
@@ -84,7 +84,7 @@ class AstTest {
     }
 
     @Test
-    fun testAssignmentStatement() {
+    override fun testAssignmentStatement() {
         val programFile = parseResource("task1/assignmentStatement")
 
         assertEquals(
@@ -102,12 +102,14 @@ class AstTest {
         )
     }
 
-
+    override fun testExpressionDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
     //endregion
 
     //region Task 7
     @Test
-    fun voidFunctionWithoutParams() {
+    override fun voidFunctionWithoutParams() {
         val programFile = parseResource("task7/voidFunctionWithoutParams")
 
         assertEquals(
@@ -127,7 +129,7 @@ class AstTest {
     }
 
     @Test
-    fun intSumFunction() {
+    override fun intSumFunction() {
         val programFile = parseResource("task7/intSumFunction")
 
         assertEquals(
@@ -171,7 +173,7 @@ class AstTest {
     }
 
     @Test
-    fun callFunction() {
+    override fun callFunction() {
         val programFile = parseResource("task7/callFunction")
 
         assertEquals(
@@ -266,7 +268,7 @@ class AstTest {
 
     //region Task 8
     @Test
-    fun emptyClass() {
+    override fun emptyClass() {
         val programFile = parseResource("task8/emptyClass")
 
         assertEquals(
@@ -296,7 +298,7 @@ class AstTest {
     }
 
     @Test
-    fun classWithProperties() {
+    override fun classWithProperties() {
         val programFile = parseResource("task8/classWithProperties")
 
         assertEquals(
@@ -355,7 +357,7 @@ class AstTest {
     }
 
     @Test
-    fun classWithMethods() {
+    override fun classWithMethods() {
         val programFile = parseResource("task8/classWithMethods")
 
         assertEquals(
@@ -448,7 +450,7 @@ class AstTest {
     }
 
     @Test
-    fun classWithMultipleConstructors() {
+    override fun classWithMultipleConstructors() {
         val programFile = parseResource("task8/classWithMultipleConstructors")
 
         assertEquals(
@@ -529,7 +531,7 @@ class AstTest {
     }
 
     @Test
-    fun privateClass() {
+    override fun privateClass() {
         val programFile = parseResource("task8/privateClass")
         TODO()
 
@@ -543,7 +545,7 @@ class AstTest {
     }
 
     @Test
-    fun classHierarchy() {
+    override fun classHierarchy() {
         TODO()
         val programFile = parseResource("task8/classHierarchy")
 
