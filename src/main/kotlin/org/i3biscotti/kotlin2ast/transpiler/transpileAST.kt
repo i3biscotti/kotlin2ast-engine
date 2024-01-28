@@ -5,7 +5,7 @@ import java.lang.UnsupportedOperationException
 
 val space = "    "
 
-fun generateIdentationSpace( depth: Int) = space.repeat(depth)
+fun generateIndentationSpace(depth: Int) = space.repeat(depth)
 
 fun Node.transpile(): String {
     return when (this) {
@@ -27,9 +27,22 @@ fun Statement.transpile(depth: Int = 0): String {
         is ReturnStatement -> transpile(depth)
         is FunctionDefinitionStatement -> transpile(depth)
         is ExpressionDefinitionStatement -> transpile(depth)
+        is ClassDefinitionStatement -> transpile(depth)
         else -> throw NotImplementedError()
     }
 }
+
+fun VariableValueType.transpile(): String {
+    return when (this) {
+        VariableValueType.INT -> "Int"
+        VariableValueType.BOOLEAN -> "Boolean"
+        VariableValueType.DOUBLE -> "Double"
+        VariableValueType.STRING -> "String"
+        VariableValueType.VOID -> "Unit"
+        else -> name
+    }
+}
+
 fun VarDeclarationStatement.transpile(depth: Int = 0): String {
     val variableTypeTranspiled = when (varType) {
         VariableType.immutable -> "val"
@@ -39,33 +52,25 @@ fun VarDeclarationStatement.transpile(depth: Int = 0): String {
 
     var declarationTranspiled = "$variableTypeTranspiled $name"
 
-    val valueTypeTranspiled = when (valueType) {
-        VariableValueType.INT -> "Int"
-        VariableValueType.BOOLEAN -> "Boolean"
-        VariableValueType.DOUBLE -> "Double"
-        VariableValueType.STRING -> "String"
-        VariableValueType.VOID -> "Unit"
-        null -> ""
-        else -> valueType.name
-    }
+    val valueTypeTranspiled = valueType?.transpile() ?: ""
 
     if (valueTypeTranspiled.isNotEmpty()) {
         declarationTranspiled = "$declarationTranspiled : $valueTypeTranspiled"
     }
 
-    declarationTranspiled = "${generateIdentationSpace(depth)}$declarationTranspiled = ${value.transpile()}"
+    declarationTranspiled = "${generateIndentationSpace(depth)}$declarationTranspiled = ${value.transpile()}"
 
     return declarationTranspiled
 }
 
 fun ExpressionDefinitionStatement.transpile(depth: Int = 0): String {
     val expressionTranspiled = expression.transpile()
-    return "${generateIdentationSpace(depth)}$expressionTranspiled"
+    return "${generateIndentationSpace(depth)}$expressionTranspiled"
 }
 
 fun AssignmentStatement.transpile(depth: Int = 0): String {
     val valueTranspiled = value.transpile()
-    return "${generateIdentationSpace(depth)}$name = $valueTranspiled"
+    return "${generateIndentationSpace(depth)}$name = $valueTranspiled"
 }
 
 fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
@@ -73,15 +78,9 @@ fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
 
     if (parameters.isNotEmpty()) {
         val params = parameters.joinToString(", ") {
-            val type = when (it.valueType) {
-                VariableValueType.INT -> "Int"
-                VariableValueType.BOOLEAN -> "Boolean"
-                VariableValueType.DOUBLE -> "Double"
-                VariableValueType.STRING -> "String"
-                VariableValueType.VOID -> "Unit"
-                else -> it.valueType.name
-            }
-            "${it.name} : $type" }
+            val type =it.valueType.transpile()
+            "${it.name}: $type"
+        }
 
         functionStatement += "($params)"
     } else {
@@ -89,35 +88,131 @@ fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
     }
 
     if (returnType != null) {
-        val rType = when (returnType) {
-            VariableValueType.INT -> "Int"
-            VariableValueType.BOOLEAN -> "Boolean"
-            VariableValueType.DOUBLE -> "Double"
-            VariableValueType.STRING -> "String"
-            VariableValueType.VOID -> "Unit"
-            else -> returnType.name
-        }
-
+        val rType = returnType.transpile()
         functionStatement += " : $rType"
     }
 
 
     if (statements.isNotEmpty()) {
-        val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth+1) }
+        val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
         functionStatement = """
-        |${generateIdentationSpace(depth)}$functionStatement {
+        |${generateIndentationSpace(depth)}$functionStatement {
         |$statementsTranspiled
-        |${generateIdentationSpace(depth)}}
+        |${generateIndentationSpace(depth)}}
         """.trimMargin()
     } else {
-        functionStatement = "${generateIdentationSpace(depth)}$functionStatement {}"
+        functionStatement = "${generateIndentationSpace(depth)}$functionStatement {}"
     }
 
     return functionStatement
 }
 
+fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
+    var classStatement = "class $name"
+
+    var classBodyBlock = "{}"
+
+    if (methods.isNotEmpty() || constructors.isNotEmpty()) {
+        val mainConstructor = constructors.firstOrNull { it.thisConstructor == null }
+
+        var initBlockTranspiled = ""
+
+        if (mainConstructor != null) {
+            val mainConstructorParamsTranspiled = mainConstructor.parameters.map {
+                val paramName = it.name
+                val propFound = properties.firstOrNull { it.name == paramName }
+                val valueTypeTranspiled = it.valueType.transpile()
+
+                if (propFound != null) {
+                    val propKeyword = when (propFound.varType) {
+                        VariableType.variable -> "var"
+                        VariableType.immutable -> "val"
+                        VariableType.constant -> "const"
+                    }
+
+                    "$propKeyword $paramName : $valueTypeTranspiled"
+                } else {
+                    "$paramName : $valueTypeTranspiled"
+                }
+            }.joinToString(", ")
+
+            if (mainConstructorParamsTranspiled.isNotEmpty()) {
+                classStatement = "$classStatement($mainConstructorParamsTranspiled)"
+            }
+
+            if (mainConstructor.body.isNotEmpty()) {
+                val initStatements = mainConstructor.body.joinToString("\n") {
+                    it.transpile(depth + 2)
+                }
+
+                initBlockTranspiled = """
+                    |${generateIndentationSpace(depth + 1)}init {
+                    |$initStatements
+                    |${generateIndentationSpace(depth + 1)}}
+                    """.trimMargin()
+
+            }
+        }
+
+        val otherConstructors = constructors
+            .filter { it.thisConstructor != null }
+            .joinToString("\n ") { it.transpile(depth) }
+
+        val methodsTranspiled = methods.joinToString("\n") { it.transpile(depth + 1) }
+
+        classBodyBlock = "{"
+        var mustAddLineBreak = false
+
+        if (initBlockTranspiled.isNotEmpty()) {
+            mustAddLineBreak = true
+            classBodyBlock += "\n$initBlockTranspiled"
+        }
+
+        if (otherConstructors.isNotEmpty()) {
+            mustAddLineBreak = true
+            classBodyBlock += "\n$otherConstructors"
+        }
+
+        if (methodsTranspiled.isNotEmpty()) {
+            mustAddLineBreak = true
+            classBodyBlock += "\n$methodsTranspiled"
+        }
+
+        if (mustAddLineBreak) {
+            classBodyBlock += "\n"
+        }
+
+        classBodyBlock += "}"
+    }
+
+    classStatement = "${generateIndentationSpace(depth)}$classStatement $classBodyBlock"
+
+    return classStatement
+}
+
+fun ConstructorDefinitionStatement.transpile(depth: Int = 0): String {
+    val params = parameters.joinToString(", ") { "${it.name} : ${it.valueType.transpile()}" }
+    val thisConstructorParams = thisConstructor!!.parameters
+        .joinToString(", ") { it.transpile() }
+
+    val constructorBlock = if (body.isNotEmpty()) {
+        val statements = body.joinToString("\n")
+        { it.transpile(depth + 2) }
+
+        """
+        | {
+        |$statements
+        |${generateIndentationSpace(depth + 1)}}
+        """.trimMargin()
+    } else {
+        ""
+    }
+
+    return "${generateIndentationSpace(depth + 1)}constructor($params) : this($thisConstructorParams)$constructorBlock"
+}
+
 fun ReturnStatement.transpile(depth: Int = 0): String {
-    return generateIdentationSpace(depth) + if (value != null) {
+    return generateIndentationSpace(depth) + if (value != null) {
         val valueTranspiled = value.transpile()
         "return $valueTranspiled"
     } else {
@@ -198,6 +293,6 @@ fun ParenthesisExpression.transpile(): String {
 }
 
 fun FunctionCallExpression.transpile(): String {
-    val params = parameters.map { it.transpile() }.joinToString(", ")
+    val params = parameters.joinToString(", ") { it.transpile() }
     return "$name($params)"
 }

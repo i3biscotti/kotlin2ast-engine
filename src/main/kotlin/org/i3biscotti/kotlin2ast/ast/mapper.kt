@@ -353,9 +353,16 @@ fun ThisConstructorContext.toAst(considerPosition: Boolean): ThisConstructorDefi
 fun ParameterContext.toAstPropertyDeclaration(considerPosition: Boolean): PropertyDeclaration {
     val name = ID().text
     val type = antlr4ToAstValueType(type())
+    val propertyType = if(VAR() != null){
+        VariableType.variable
+    }else if(VAL() !=null ){
+        VariableType.immutable
+    }else {
+        throw  UnsupportedOperationException("Property $name not supported")
+    }
 
     return PropertyDeclaration(
-        VariableType.immutable,
+        propertyType,
         name,
         type!!,
         null,
