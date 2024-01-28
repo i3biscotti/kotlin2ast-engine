@@ -1,4 +1,4 @@
-fun operations(a : Int, b : Int, c : Boolean ) : Boolean {
+fun operations(a: Int, b: Int, c: Boolean ) : Boolean {
     var aIsGreaterThanB = a > b
     val isGreaterAndCondition = aIsGreaterThanB && c
 

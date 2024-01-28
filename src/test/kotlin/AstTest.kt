@@ -392,7 +392,7 @@ class AstTest : ITest{
                                 null
                             ),
                             PropertyDeclaration(
-                                VariableType.immutable,
+                                VariableType.variable,
                                 "pro2",
                                 VariableValueType.BOOLEAN,
                                 null,

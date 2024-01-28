@@ -127,7 +127,7 @@ class TranspileTest : ITest {
         val programFile = parseResource("task7/intSumFunction")
         assertEquals(
             """
-            |fun sum(a : Int, b : Int) : Int {
+            |fun sum(a: Int, b: Int) : Int {
             |    return a + b
             |}
             """.trimMargin(),
@@ -140,7 +140,7 @@ class TranspileTest : ITest {
         val programFile = parseResource("task7/callFunction")
         assertEquals(
             """
-            |fun operations(a : Int, b : Int, c : Boolean) : Boolean {
+            |fun operations(a: Int, b: Int, c: Boolean) : Boolean {
             |    var aIsGreaterThanB = a > b
             |    val isGreaterAndCondition = aIsGreaterThanB && c
             |    return isGreaterAndCondition
@@ -186,8 +186,8 @@ class TranspileTest : ITest {
             |        pro2 = value <= prop1
             |        return value + prop1
             |    }
-            |}    
-            |""".trimMargin(),
+            |}
+            """.trimMargin(),
             programFile
         )
     }
@@ -198,10 +198,10 @@ class TranspileTest : ITest {
 
         assertEquals(
             """
-            |class MultiplePass(val a : Int, val b : Double){
+            |class MultiplePass(val a : Int, val b : Double) {
             |    constructor(a : Int) : this(a, 12.1)
-            |}   
-            |""".trimMargin(),
+            |}
+            """.trimMargin(),
             programFile
         )
     }
