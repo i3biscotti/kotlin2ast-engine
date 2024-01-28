@@ -503,7 +503,7 @@ class ParserTest : ITest{
                 |        T[{]
                 |        T[}]
                 |    T[<EOF>]
-            """.trimMargin(),
+                |""".trimMargin(),
             programFile.multiLineString()
         )
     }
@@ -527,7 +527,7 @@ class ParserTest : ITest{
                 |        T[{]
                 |        T[}]
                 |    T[<EOF>]
-            """.trimMargin(),
+                |""".trimMargin(),
             programFile.multiLineString()
         )
     }

@@ -4,7 +4,7 @@ import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class AstTest : ITest{
+class AstTest : ITest {
     private fun parseResource(
         resourceName: String,
     ): ProgramFile {
@@ -293,6 +293,7 @@ class AstTest : ITest{
             ProgramFile(
                 listOf(
                     ClassDefinitionStatement(
+                        false,
                         "SimpleClass",
                         listOf(),
                         listOf(
@@ -306,6 +307,7 @@ class AstTest : ITest{
                             )
                         ),
                         listOf(),
+                        null,
                         null
                     )
                 ),
@@ -323,6 +325,7 @@ class AstTest : ITest{
             ProgramFile(
                 listOf(
                     ClassDefinitionStatement(
+                        false,
                         "SimpleClass",
                         listOf(
                             PropertyDeclaration(
@@ -364,6 +367,7 @@ class AstTest : ITest{
                             )
                         ),
                         listOf(),
+                        null,
                         null
                     )
                 ),
@@ -382,6 +386,7 @@ class AstTest : ITest{
             ProgramFile(
                 listOf(
                     ClassDefinitionStatement(
+                        false,
                         "SimpleClass",
                         listOf(
                             PropertyDeclaration(
@@ -458,6 +463,7 @@ class AstTest : ITest{
                                 null
                             )
                         ),
+                        null,
                         null
                     )
                 ),
@@ -475,6 +481,7 @@ class AstTest : ITest{
             ProgramFile(
                 listOf(
                     ClassDefinitionStatement(
+                        false,
                         "MultiplePass",
                         listOf(
                             PropertyDeclaration(
@@ -526,7 +533,7 @@ class AstTest : ITest{
                                         null
                                     ),
 
-                                ),
+                                    ),
                                 listOf(),
                                 ThisConstructorDefinition(
                                     listOf(
@@ -539,6 +546,7 @@ class AstTest : ITest{
                             )
                         ),
                         listOf(),
+                        null,
                         null
                     )
                 ),
@@ -551,11 +559,29 @@ class AstTest : ITest{
     @Test
     override fun privateClass() {
         val programFile = parseResource("task8/privateClass")
-        TODO()
 
         assertEquals(
             ProgramFile(
-                listOf(),
+                listOf(
+                    ClassDefinitionStatement(
+                        true,
+                        "SecretWar",
+                        listOf(),
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "SecretWar",
+                                "",
+                                listOf(),
+                                listOf(),
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(),
+                        null,
+                        null
+                    )
+                ),
                 null,
             ),
             programFile
@@ -564,12 +590,30 @@ class AstTest : ITest{
 
     @Test
     override fun classHierarchy() {
-        TODO()
         val programFile = parseResource("task8/classHierarchy")
 
         assertEquals(
             ProgramFile(
-                listOf(),
+                listOf(
+                    ClassDefinitionStatement(
+                        false,
+                        "SecretWars",
+                        listOf(),
+                        listOf(
+                            ConstructorDefinitionStatement(
+                                "SecretWars",
+                                "",
+                                listOf(),
+                                listOf(),
+                                null,
+                                null
+                            )
+                        ),
+                        listOf(),
+                        VariableValueType("Marvel"),
+                        null
+                    )
+                ),
                 null,
             ),
             programFile

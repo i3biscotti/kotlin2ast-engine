@@ -110,6 +110,10 @@ fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
 fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
     var classStatement = "class $name"
 
+    if (isPrivate){
+        classStatement = "private $classStatement"
+    }
+
     var classBodyBlock = "{}"
 
     if (methods.isNotEmpty() || constructors.isNotEmpty()) {
@@ -183,6 +187,10 @@ fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
         }
 
         classBodyBlock += "}"
+    }
+
+    if(parentClassType != null){
+        classStatement = "$classStatement : ${parentClassType.name}"
     }
 
     classStatement = "${generateIndentationSpace(depth)}$classStatement $classBodyBlock"

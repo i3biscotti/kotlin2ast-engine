@@ -105,7 +105,7 @@ functionDefinition
     block;
 
 classDefinition:
-    CLASS name=ID (PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE)?
+    PRIVATE? CLASS name=ID (PAREN_OPEN (parameter COMMA)* parameter? PAREN_CLOSE)? (COLONS parentClassType=type)?
     GRAPH_OPEN (NL+ (classStatement NL+)* )? GRAPH_CLOSE;
 
 classStatement

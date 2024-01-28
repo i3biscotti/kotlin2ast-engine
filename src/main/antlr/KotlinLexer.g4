@@ -73,6 +73,7 @@ GRAPH_OPEN                  : '{';
 GRAPH_CLOSE                 : '}';
 RETURN                      : 'return';
 
+PRIVATE                     : 'private';
 CLASS                       : 'class';
 CONSTRUCTOR                 : 'constructor';
 INIT                        : 'init';

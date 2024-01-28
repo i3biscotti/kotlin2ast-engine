@@ -326,11 +326,21 @@ fun ClassDefinitionStatementContext.toAst(considerPosition: Boolean): ClassDefin
         .filter { it.VAL() != null || it.VAR() != null }
         .map { it.toAstPropertyDeclaration(considerPosition) }
 
+    val isPrivate = cls.PRIVATE() != null
+
+    val parentClassType = if (cls.parentClassType != null) {
+        VariableValueType(cls.parentClassType.text)
+    } else {
+        null
+    }
+
     return ClassDefinitionStatement(
+        isPrivate,
         className,
         properties,
         constructors,
         methods,
+        parentClassType,
         toPosition(considerPosition)
     )
 }
@@ -353,12 +363,12 @@ fun ThisConstructorContext.toAst(considerPosition: Boolean): ThisConstructorDefi
 fun ParameterContext.toAstPropertyDeclaration(considerPosition: Boolean): PropertyDeclaration {
     val name = ID().text
     val type = antlr4ToAstValueType(type())
-    val propertyType = if(VAR() != null){
+    val propertyType = if (VAR() != null) {
         VariableType.variable
-    }else if(VAL() !=null ){
+    } else if (VAL() != null) {
         VariableType.immutable
-    }else {
-        throw  UnsupportedOperationException("Property $name not supported")
+    } else {
+        throw UnsupportedOperationException("Property $name not supported")
     }
 
     return PropertyDeclaration(
