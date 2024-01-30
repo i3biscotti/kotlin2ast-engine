@@ -64,7 +64,7 @@ expression
     | NOT  value=expression                                                             #UnaryLogicNegationExpression
     | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
-    | functionCall                                                                      #FunctionCallExpression
+    | functionOrClassInstanceCall                                                                      #FunctionOrClassInstanceCallExpression
     | objectProperty                                                                    #ObjectPropertyExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;
@@ -128,6 +128,6 @@ constructorBlock:
 
 thisConstructor: THIS PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE;
 
-functionCall: name=ID PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE;
+functionOrClassInstanceCall: name=ID PAREN_OPEN (expression COMMA)* expression? PAREN_CLOSE;
 objectProperty: objectName=(ID | THIS) DOT propertyName=ID;
-objectMethodCall: objectName=(ID | THIS) DOT functionCall;
+objectMethodCall: objectName=(ID | THIS) DOT functionOrClassInstanceCall;

@@ -133,7 +133,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is IntLiteralExpressionContext -> IntLiteralExpression(text, toPosition(considerPosition))
         is DoubleLiteralExpressionContext -> DoubleLiteralExpression(text, toPosition(considerPosition))
         is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
-        is FunctionCallExpressionContext -> toAst(considerPosition)
+        is FunctionOrClassInstanceCallExpressionContext -> toAst(considerPosition)
         is BinaryMathExpressionContext -> toAst(considerPosition)
         is BinaryLogicExpressionContext -> toAst(considerPosition)
         is UnaryMathExpressionContext -> toAst(considerPosition)
@@ -236,8 +236,8 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
     )
 }
 
-fun FunctionCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression {
-    val fn = functionCall()
+fun FunctionOrClassInstanceCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression {
+    val fn = functionOrClassInstanceCall()
     val fnName = fn.name.text
     val parameters = fn.expression().map { it.toAst(considerPosition) }
 
