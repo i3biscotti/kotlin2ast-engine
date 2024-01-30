@@ -281,8 +281,8 @@ class ParserTest : ITest{
             |            T[val]
             |            T[result]
             |            T[=]
-            |            FunctionCallExpression
-            |              FunctionCall
+            |            FunctionOrClassInstanceCallExpression
+            |              FunctionOrClassInstanceCall
             |                T[operations]
             |                T[(]
             |                IntLiteralExpression
@@ -526,6 +526,79 @@ class ParserTest : ITest{
                 |          T[Marvel]
                 |        T[{]
                 |        T[}]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
+
+    //region Task 9
+    @Test
+    override fun objectInstance() {
+        val programFile = parseResource("task9/objectInstance")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ValDeclarationStatement
+                |      T[val]
+                |      T[element]
+                |      T[=]
+                |      FunctionOrClassInstanceCallExpression
+                |        FunctionOrClassInstanceCall
+                |          T[ClassToInstance]
+                |          T[(]
+                |          T[)]
+                |    T[<EOF>]
+                |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun propertyAssignment() {
+        val programFile = parseResource("task9/propertyAssignment")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    ObjectPropertyAssignStatement
+            |      ObjectProperty
+            |        T[element]
+            |        T[.]
+            |        T[name]
+            |      T[=]
+            |      StringLiteralExpression
+            |        T["Pacco"]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun methodCall() {
+        val programFile = parseResource("task9/methodCall")
+            .toParseTree()
+
+        assertEquals(
+            """
+                |KotlinFile
+                |  Line
+                |    ExpressionDefinitionStatement
+                |      ObjectMethodCallExpression
+                |        ObjectMethodCall
+                |          T[element]
+                |          T[.]
+                |          FunctionOrClassInstanceCall
+                |            T[execute]
+                |            T[(]
+                |            T[)]
                 |    T[<EOF>]
                 |""".trimMargin(),
             programFile.multiLineString()

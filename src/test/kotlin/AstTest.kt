@@ -621,4 +621,58 @@ class AstTest : ITest {
 
     }
     //endregion
+
+
+    //region Task 9
+    @Test
+    override fun objectInstance() {
+        val programFile = parseResource("task9/objectInstance")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    VarDeclarationStatement(
+                        VariableType.immutable,
+                        "element",
+                        null,
+                        FunctionCallExpression(
+                            "ClassToInstance",
+                            listOf(),
+                            null,
+                        ),
+                        null,
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun propertyAssignment() {
+        val programFile = parseResource("task9/propertyAssignment")
+        assertEquals(
+            ProgramFile(
+                listOf(),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun methodCall() {
+        val programFile = parseResource("task9/methodCall")
+
+        assertEquals(
+            ProgramFile(
+                listOf(),
+                null
+            ),
+            programFile
+        )
+
+    }
+    //endregion
 }

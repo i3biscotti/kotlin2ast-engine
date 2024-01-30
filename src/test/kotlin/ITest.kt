@@ -30,7 +30,6 @@ interface ITest {
     //endregion
 
     //region Task 7
-
     fun voidFunctionWithoutParams()
 
 
@@ -41,7 +40,6 @@ interface ITest {
     //endregion
 
     //region Task 8
-
     fun emptyClass()
 
     fun classWithProperties()
@@ -53,5 +51,11 @@ interface ITest {
     fun privateClass()
 
     fun classHierarchy()
+    //endregion
+
+    //region Task 9
+    fun objectInstance()
+    fun propertyAssignment()
+    fun methodCall()
     //endregion
 }

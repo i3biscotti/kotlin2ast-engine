@@ -227,5 +227,21 @@ class TranspileTest : ITest {
     }
     //endregion
 
+    //region Task 9
+    @Test
+    override fun objectInstance() {
+        TODO("Not yet implemented")
+    }
+
+    @Test
+    override fun propertyAssignment() {
+        TODO("Not yet implemented")
+    }
+
+    @Test
+    override fun methodCall() {
+        TODO("Not yet implemented")
+    }
+    //endregion
 }
 

@@ -228,9 +228,33 @@ class LexerTest : ITest{
             tokens(lexerForResource("task8/classHierarchy"))
         )
     }
+
+
     //endregion
 
     //region Task 9
+    @Test
+    override fun objectInstance() {
+        assertEquals(
+            listOf("VAL", "ID", "ASSIGN", "ID", "PAREN_OPEN", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task9/objectInstance"))
+        )
+    }
 
+    @Test
+    override fun propertyAssignment() {
+        assertEquals(
+            listOf("ID","DOT", "ID", "ASSIGN", "STRING_LIT", "EOF"),
+            tokens(lexerForResource("task9/propertyAssignment"))
+        )
+    }
+
+    @Test
+    override fun methodCall() {
+        assertEquals(
+            listOf( "ID", "DOT", "ID", "PAREN_OPEN", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task9/methodCall"))
+        )
+    }
     //endregion
 }
