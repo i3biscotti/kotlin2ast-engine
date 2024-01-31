@@ -24,13 +24,14 @@ fun Statement.process(operation: ProcessOperationCallback) {
     operation(this)
 
     when (this) {
-        is VarDeclarationStatement -> this.value?.process(operation)
+        is VarDeclarationStatement -> this.value.process(operation)
         is AssignmentStatement -> this.value.process(operation)
         is ExpressionDefinitionStatement -> this.expression.process(operation)
         is FunctionDefinitionStatement -> process(operation)
         is ClassDefinitionStatement -> process(operation)
         is ReturnStatement -> this.value?.process(operation)
         is ConstructorDefinitionStatement -> return
+        is ObjectPropertyAssignmentStatement -> this.value.process(operation)
     }
 }
 

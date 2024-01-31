@@ -6,8 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("FunctionCallExpression")
 data class FunctionCallExpression(
-    val name: String,
-    val parameters: List<Expression>,
-    override val position: Position?
-) :
-    Expression()
+    val name: String, val parameters: List<Expression>, override val position: Position?
+) : Expression()

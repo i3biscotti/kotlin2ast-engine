@@ -42,6 +42,7 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
         is FunctionDefinitionStatementContext -> toAst(considerPosition)
         is ExpressionDefinitionStatementContext -> toAst(considerPosition)
         is ClassDefinitionStatementContext -> toAst(considerPosition)
+        is ObjectPropertyAssignmentStatementContext -> toAst(considerPosition)
         is ReturnStatementContext -> toAst(considerPosition)
         else -> throw NotImplementedError()
     }
@@ -132,7 +133,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is BoolLiteralExpressionContext -> BooleanLitExpression(text, toPosition(considerPosition))
         is IntLiteralExpressionContext -> IntLiteralExpression(text, toPosition(considerPosition))
         is DoubleLiteralExpressionContext -> DoubleLiteralExpression(text, toPosition(considerPosition))
-        is StringLiteralExpressionContext -> StringLit(text, toPosition(considerPosition))
+        is StringLiteralExpressionContext -> StringLiteralExpression(text, toPosition(considerPosition))
         is FunctionOrClassInstanceCallExpressionContext -> toAst(considerPosition)
         is BinaryMathExpressionContext -> toAst(considerPosition)
         is BinaryLogicExpressionContext -> toAst(considerPosition)
@@ -140,6 +141,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is UnaryLogicNegationExpressionContext -> toAst(considerPosition)
         is ParenthesisExpressionContext -> toAst(considerPosition)
         is VarReferenceExpressionContext -> toAst(considerPosition)
+        is ObjectMethodCallExpressionContext -> toAst(considerPosition)
         else -> throw NotImplementedError("${this.javaClass.kotlin.simpleName} not implemented")
     }
 }
@@ -345,6 +347,18 @@ fun ClassDefinitionStatementContext.toAst(considerPosition: Boolean): ClassDefin
     )
 }
 
+fun ObjectPropertyAssignmentStatementContext.toAst(considerPosition: Boolean): ObjectPropertyAssignmentStatement {
+    val objectProp = objectProperty()
+    val value = expression().toAst(considerPosition)
+
+    return ObjectPropertyAssignmentStatement(
+        objectProp.objectName.text,
+        objectProp.propertyName.text,
+        value,
+        toPosition(considerPosition)
+    )
+}
+
 fun MethodDefinitionStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
     val fn = functionDefinition()
 
@@ -379,3 +393,18 @@ fun ParameterContext.toAstPropertyDeclaration(considerPosition: Boolean): Proper
         toPosition(considerPosition)
     )
 }
+
+
+fun ObjectMethodCallExpressionContext.toAst(considerPosition: Boolean): ObjectMethodCallExpression {
+    val objectMethodCall = objectMethodCall()
+    val method = objectMethodCall.functionOrClassInstanceCall()
+    val params = method.expression().map { it.toAst(considerPosition) }
+
+    return ObjectMethodCallExpression(
+        objectMethodCall.objectName.text,
+        method.name.text,
+        params,
+        toPosition(considerPosition)
+    )
+}
+
