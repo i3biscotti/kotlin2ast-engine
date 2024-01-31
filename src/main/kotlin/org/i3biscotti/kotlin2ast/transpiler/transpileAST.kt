@@ -17,7 +17,7 @@ fun Node.transpile(): String {
 }
 
 fun ProgramFile.transpile(): String {
-    return lines.joinToString("\n") { it.transpile() }
+    return lines.joinToString("\n") { it.transpile(0) }
 }
 
 fun Statement.transpile(depth: Int = 0): String {
@@ -28,7 +28,8 @@ fun Statement.transpile(depth: Int = 0): String {
         is FunctionDefinitionStatement -> transpile(depth)
         is ExpressionDefinitionStatement -> transpile(depth)
         is ClassDefinitionStatement -> transpile(depth)
-        else -> throw NotImplementedError()
+        is ConstructorDefinitionStatement -> transpile(depth)
+        is ObjectPropertyAssignmentStatement -> transpile(depth)
     }
 }
 
@@ -78,7 +79,7 @@ fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
 
     if (parameters.isNotEmpty()) {
         val params = parameters.joinToString(", ") {
-            val type =it.valueType.transpile()
+            val type = it.valueType.transpile()
             "${it.name}: $type"
         }
 
@@ -110,7 +111,7 @@ fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
 fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
     var classStatement = "class $name"
 
-    if (isPrivate){
+    if (isPrivate) {
         classStatement = "private $classStatement"
     }
 
@@ -189,7 +190,7 @@ fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
         classBodyBlock += "}"
     }
 
-    if(parentClassType != null){
+    if (parentClassType != null) {
         classStatement = "$classStatement : ${parentClassType.name}"
     }
 
@@ -219,6 +220,10 @@ fun ConstructorDefinitionStatement.transpile(depth: Int = 0): String {
     return "${generateIndentationSpace(depth + 1)}constructor($params) : this($thisConstructorParams)$constructorBlock"
 }
 
+fun ObjectPropertyAssignmentStatement.transpile(depth: Int = 0) : String{
+    return "${generateIndentationSpace(depth)}$objectName.$propertyName = ${value.transpile()}"
+}
+
 fun ReturnStatement.transpile(depth: Int = 0): String {
     return generateIndentationSpace(depth) + if (value != null) {
         val valueTranspiled = value.transpile()
@@ -233,7 +238,7 @@ fun Expression.transpile(): String {
         is IntLiteralExpression -> value
         is DoubleLiteralExpression -> value
         is BooleanLitExpression -> value
-        is StringLit -> value
+        is StringLiteralExpression -> value
         is BinaryMathExpression -> transpile()
         is BinaryLogicExpression -> transpile()
         is UnaryMathExpression -> transpile()
@@ -241,7 +246,7 @@ fun Expression.transpile(): String {
         is VarReferenceExpression -> transpile()
         is ParenthesisExpression -> transpile()
         is FunctionCallExpression -> transpile()
-        else -> throw NotImplementedError()
+        is ObjectMethodCallExpression -> transpile()
     }
 }
 
@@ -303,4 +308,9 @@ fun ParenthesisExpression.transpile(): String {
 fun FunctionCallExpression.transpile(): String {
     val params = parameters.joinToString(", ") { it.transpile() }
     return "$name($params)"
+}
+
+fun ObjectMethodCallExpression.transpile(): String {
+    val paramsTranspiledInline = params.joinToString(", ") { it.transpile() }
+    return "$objectName.$methodName($paramsTranspiledInline)"
 }
