@@ -230,17 +230,32 @@ class TranspileTest : ITest {
     //region Task 9
     @Test
     override fun objectInstance() {
-        TODO("Not yet implemented")
+        val programFile = parseResource("task9/objectInstance")
+
+        assertEquals(
+            "val element = ClassToInstance()",
+            programFile
+        )
     }
 
     @Test
     override fun propertyAssignment() {
-        TODO("Not yet implemented")
+        val programFile = parseResource("task9/propertyAssignment")
+
+        assertEquals(
+            "element.name = \"Pacco\"",
+            programFile
+        )
     }
 
     @Test
     override fun methodCall() {
-        TODO("Not yet implemented")
+        val programFile = parseResource("task9/methodCall")
+
+        assertEquals(
+            "element.execute()",
+            programFile
+        )
     }
     //endregion
 }

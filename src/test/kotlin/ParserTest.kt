@@ -567,7 +567,7 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-            |    ObjectPropertyAssignStatement
+            |    ObjectPropertyAssignmentStatement
             |      ObjectProperty
             |        T[element]
             |        T[.]

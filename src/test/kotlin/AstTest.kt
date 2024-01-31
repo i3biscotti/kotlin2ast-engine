@@ -31,7 +31,7 @@ class AstTest : ITest {
                         VariableType.variable,
                         "name",
                         null,
-                        StringLit("\"Simone\"", null),
+                        StringLiteralExpression("\"Simone\"", null),
                         null
                     )
                 ),
@@ -652,9 +652,17 @@ class AstTest : ITest {
     @Test
     override fun propertyAssignment() {
         val programFile = parseResource("task9/propertyAssignment")
+
         assertEquals(
             ProgramFile(
-                listOf(),
+                listOf(
+                    ObjectPropertyAssignmentStatement(
+                        "element",
+                        "name",
+                        StringLiteralExpression("\"Pacco\"", null),
+                        null
+                    )
+                ),
                 null
             ),
             programFile
@@ -667,7 +675,18 @@ class AstTest : ITest {
 
         assertEquals(
             ProgramFile(
-                listOf(),
+                listOf(
+                    ExpressionDefinitionStatement(
+                        ObjectMethodCallExpression(
+                            "element",
+                            "execute",
+                            listOf(),
+                            null
+                        ),
+                        null
+
+                    )
+                ),
                 null
             ),
             programFile
