@@ -24,7 +24,7 @@ line: statement (NL+ | EOF);
     | functionDefinition                            #FunctionDefinitionStatement
     | classDefinition                               #ClassDefinitionStatement
     | expression                                    #ExpressionDefinitionStatement
-    | objectProperty ASSIGN expression              #ObjectPropertyAssignStatement
+    | objectProperty ASSIGN expression              #ObjectPropertyAssignmentStatement
     | RETURN expression                             #ReturnStatement
     | ifDefinition                                  #IfDefinitionStatement
     | whileDefinition                               #WhileDefinitionStatement
