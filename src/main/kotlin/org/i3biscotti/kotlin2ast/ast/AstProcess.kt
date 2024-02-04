@@ -32,6 +32,12 @@ fun Statement.process(operation: ProcessOperationCallback) {
         is ReturnStatement -> this.value?.process(operation)
         is ConstructorDefinitionStatement -> return
         is ObjectPropertyAssignmentStatement -> this.value.process(operation)
+        is IfDefinitionStatement -> process(operation)
+        is ElseBlock -> process(operation)
+        is ElseIfBlock -> process(operation)
+        is IfBlock -> process(operation)
+        is ForDefinitionStatement -> this.forCondition.process(operation)
+        is WhileDefinitionStatement -> this.whileCondition.process(operation)
     }
 }
 
@@ -53,6 +59,7 @@ fun Expression.process(operation: ProcessOperationCallback) {
         is UnaryExpression -> this.value.process(operation)
         is ParenthesisExpression -> this.value.process(operation)
         is FunctionCallExpression -> this.process(operation)
+        is ListOfExpression -> this.process(operation)
         else -> return
     }
 }
@@ -60,6 +67,17 @@ fun Expression.process(operation: ProcessOperationCallback) {
 fun BinaryExpression.process(operation: ProcessOperationCallback) {
     left.process(operation)
     right.process(operation)
+}
+
+fun WhileDefinitionStatement.process(operation: ProcessOperationCallback) {
+    whileCondition.process(operation)}
+
+fun ForDefinitionStatement.process(operation: ProcessOperationCallback) {
+    forCondition.process(operation)
+}
+
+fun ListOfExpression.process(operation: ProcessOperationCallback) {
+    items.forEach{ it.process(operation) }
 }
 
 fun FunctionCallExpression.process(operation: ProcessOperationCallback) {
