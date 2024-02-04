@@ -64,16 +64,31 @@ expression
     | NOT  value=expression                                                             #UnaryLogicNegationExpression
     | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
-    | functionOrClassInstanceCall                                                                      #FunctionOrClassInstanceCallExpression
+    | listOfDefinition                                                                  #ListOfExpression
+    | functionOrClassInstanceCall                                                       #FunctionOrClassInstanceCallExpression
     | objectProperty                                                                    #ObjectPropertyExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;
 
 //task3
-ifDefinition :
-    IF PAREN_OPEN ifCondition=expression PAREN_CLOSE ifBlock=block
-    (ELSE IF PAREN_OPEN elseIfCondition=expression PAREN_CLOSE elseIfBlock=block)*
-    (ELSE elseBlock=block)?
+ifBlock
+    :
+    IF PAREN_OPEN expression PAREN_CLOSE GRAPH_OPEN statement* GRAPH_CLOSE
+    ;
+
+elseIfBlock
+    :
+    ELSE IF PAREN_OPEN expression PAREN_CLOSE GRAPH_OPEN statement* GRAPH_CLOSE
+    ;
+
+elseBlock
+    :
+    ELSE GRAPH_OPEN statement* GRAPH_CLOSE
+    ;
+
+ifDefinition
+    :
+    ifBlock elseIfBlock* elseBlock?
     ;
 
 //task4
@@ -87,9 +102,8 @@ forDefinition :
     ;
 
 listOfDefinition :
-    LIST_OF PAREN_OPEN listOfCondition=expression PAREN_CLOSE
+    LIST_OF PAREN_OPEN items=expression PAREN_CLOSE
     ;
-
 
 parameter
     : (VAL | VAR )? ID COLONS type
