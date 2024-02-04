@@ -27,9 +27,15 @@ fun Statement.transpile(depth: Int = 0): String {
         is ReturnStatement -> transpile(depth)
         is FunctionDefinitionStatement -> transpile(depth)
         is ExpressionDefinitionStatement -> transpile(depth)
+        is IfDefinitionStatement -> transpile(depth)
+        is WhileDefinitionStatement -> transpile(depth)
+        is ForDefinitionStatement -> transpile(depth)
         is ClassDefinitionStatement -> transpile(depth)
         is ConstructorDefinitionStatement -> transpile(depth)
         is ObjectPropertyAssignmentStatement -> transpile(depth)
+        is ElseBlock -> transpile(depth)
+        is ElseIfBlock -> transpile(depth)
+        is IfBlock -> transpile(depth)
     }
 }
 
@@ -72,6 +78,28 @@ fun ExpressionDefinitionStatement.transpile(depth: Int = 0): String {
 fun AssignmentStatement.transpile(depth: Int = 0): String {
     val valueTranspiled = value.transpile()
     return "${generateIndentationSpace(depth)}$name = $valueTranspiled"
+}
+
+fun IfDefinitionStatement.transpile(depth: Int = 0): String {
+    val ifBlockTranspiled = ifBlock.transpile()
+    val elseIfBlockTranspiled = elseIfBlock?.map{it.transpile()}
+    val elseBlockTranspiled = elseBlock?.transpile()
+    return "${generateIndentationSpace(depth)} $ifBlockTranspiled $elseIfBlockTranspiled $elseBlockTranspiled"
+}
+
+fun WhileDefinitionStatement.transpile(depth: Int = 0): String {
+    val WhileConditionTranspiled = whileCondition.transpile()
+    return "${generateIndentationSpace(depth)} $WhileConditionTranspiled"
+}
+
+fun ForDefinitionStatement.transpile(depth: Int = 0): String {
+    val ForConditionTranspiled = forCondition.transpile()
+    return "${generateIndentationSpace(depth)} $ForConditionTranspiled"
+}
+
+fun ListOfExpression.transpile(depth: Int = 0): String {
+    val itemsTraspiled = items.map { it.transpile() }
+    return "${generateIndentationSpace(depth)} $itemsTraspiled"
 }
 
 fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
@@ -245,6 +273,7 @@ fun Expression.transpile(): String {
         is UnaryLogicNegationExpression -> transpile()
         is VarReferenceExpression -> transpile()
         is ParenthesisExpression -> transpile()
+        is ListOfExpression -> transpile()
         is FunctionCallExpression -> transpile()
         is ObjectMethodCallExpression -> transpile()
     }
