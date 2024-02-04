@@ -39,6 +39,9 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
         is ValDeclarationStatementContext -> toAst(considerPosition)
         is ConstDeclarationStatementContext -> toAst(considerPosition)
         is AssignStatementContext -> toAst(considerPosition)
+        is IfDefinitionStatementContext -> toAst(considerPosition)
+        is WhileDefinitionStatementContext -> toAst(considerPosition)
+        is ForDefinitionStatementContext -> toAst(considerPosition)
         is FunctionDefinitionStatementContext -> toAst(considerPosition)
         is ExpressionDefinitionStatementContext -> toAst(considerPosition)
         is ClassDefinitionStatementContext -> toAst(considerPosition)
@@ -128,6 +131,79 @@ fun ReturnStatementContext.toAst(considerPosition: Boolean): ReturnStatement {
     return ReturnStatement(exp, toPosition(considerPosition))
 }
 
+// task3
+fun IfDefinitionStatementContext.toAst(considerPosition: Boolean): IfDefinitionStatement {
+    val ifDefinition = this.ifDefinition()
+    val ifBlock = ifDefinition.ifBlock().toAst(considerPosition)
+    val elseIfBlock = ifDefinition.elseIfBlock().map { it.toAst(considerPosition) }
+    val elseBlock = ifDefinition.elseBlock().toAst(considerPosition)
+
+    return IfDefinitionStatement(
+        ifBlock,
+        elseIfBlock,
+        elseBlock,
+        toPosition(considerPosition)
+    )
+}
+
+fun IfBlockContext.toAst(considerPosition: Boolean) : IfBlock{
+        val condition = this.expression().toAst(considerPosition)
+        val statements = this.statement().map { it.toAst(considerPosition) }
+        val blockType = BlockType.IfBlock;
+
+    return IfBlock(
+        condition,
+        statements,
+        blockType,
+        toPosition(considerPosition),
+            );
+}
+
+fun ElseIfBlockContext.toAst(considerPosition: Boolean) : ElseIfBlock{
+    val condition = this.expression()?.toAst(considerPosition);
+    val statements = this.statement().map { it.toAst(considerPosition) }
+    val blockType = BlockType.ElseIfBlock;
+
+    return ElseIfBlock(
+        condition,
+        statements,
+        blockType,
+        toPosition(considerPosition),
+        );
+}
+
+fun ElseBlockContext.toAst(considerPosition: Boolean) : ElseBlock{
+    val statements = this.statement().map { it.toAst(considerPosition) }
+    val blockType = BlockType.ElseBlock;
+
+    return ElseBlock(
+        statements,
+        blockType,
+        toPosition(considerPosition),
+        );
+}
+
+
+//task4
+fun WhileDefinitionStatementContext.toAst(considerPosition: Boolean): WhileDefinitionStatement {
+    val whileStatement = whileDefinition()
+    val whileCondition = whileStatement.expression().toAst(considerPosition)
+
+    return WhileDefinitionStatement(
+        whileCondition,
+        toPosition(considerPosition))
+}
+
+//task5
+fun ForDefinitionStatementContext.toAst(considerPosition: Boolean): ForDefinitionStatement {
+    val forStatement = forDefinition()
+    val forCondition = forStatement.expression().toAst(considerPosition)
+
+    return ForDefinitionStatement(
+        forCondition,
+        toPosition(considerPosition))
+}
+
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
     return when (this) {
         is BoolLiteralExpressionContext -> BooleanLitExpression(text, toPosition(considerPosition))
@@ -141,6 +217,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is UnaryLogicNegationExpressionContext -> toAst(considerPosition)
         is ParenthesisExpressionContext -> toAst(considerPosition)
         is VarReferenceExpressionContext -> toAst(considerPosition)
+        is ListOfExpressionContext -> toAst(considerPosition)
         is ObjectMethodCallExpressionContext -> toAst(considerPosition)
         else -> throw NotImplementedError("${this.javaClass.kotlin.simpleName} not implemented")
     }
@@ -148,7 +225,6 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
 
 
 //task2
-
 fun VarReferenceExpressionContext.toAst(considerPosition: Boolean): VarReferenceExpression {
     val name = this.value.text
     return VarReferenceExpression(
@@ -236,6 +312,15 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
         value,
         toPosition(considerPosition)
     )
+}
+
+fun ListOfExpressionContext.toAst(considerPosition: Boolean): ListOfExpression {
+    val listStatement = listOfDefinition()
+    val items = listStatement.expression().let{ listOf(it)}.map { it.toAst(considerPosition) }
+
+    return ListOfExpression(
+        items,
+        toPosition(considerPosition))
 }
 
 fun FunctionOrClassInstanceCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression {
