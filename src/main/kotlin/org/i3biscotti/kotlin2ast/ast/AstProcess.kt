@@ -6,9 +6,10 @@ typealias ProcessOperationCallback = (Node) -> Unit
 
 fun Node.process(operation: ProcessOperationCallback) {
     when (this) {
-        is ProgramFile -> this.process(operation)
-        is Statement -> this.process(operation)
-        is Expression -> this.process(operation)
+        is ProgramFile -> process(operation)
+        is Statement -> process(operation)
+        is Expression -> process(operation)
+        is IfBlock -> process(operation)
     }
 }
 
@@ -33,12 +34,14 @@ fun Statement.process(operation: ProcessOperationCallback) {
         is ConstructorDefinitionStatement -> return
         is ObjectPropertyAssignmentStatement -> this.value.process(operation)
         is IfDefinitionStatement -> process(operation)
-        is ElseBlock -> process(operation)
-        is ElseIfBlock -> process(operation)
-        is IfBlock -> process(operation)
         is ForDefinitionStatement -> this.forCondition.process(operation)
         is WhileDefinitionStatement -> this.whileCondition.process(operation)
     }
+}
+
+fun IfBlock.process(operation: ProcessOperationCallback) {
+    condition?.process(operation)
+    statements.forEach { it.process(operation) }
 }
 
 fun FunctionDefinitionStatement.process(operation: ProcessOperationCallback) {
@@ -70,14 +73,15 @@ fun BinaryExpression.process(operation: ProcessOperationCallback) {
 }
 
 fun WhileDefinitionStatement.process(operation: ProcessOperationCallback) {
-    whileCondition.process(operation)}
+    whileCondition.process(operation)
+}
 
 fun ForDefinitionStatement.process(operation: ProcessOperationCallback) {
     forCondition.process(operation)
 }
 
 fun ListOfExpression.process(operation: ProcessOperationCallback) {
-    items.forEach{ it.process(operation) }
+    items.forEach { it.process(operation) }
 }
 
 fun FunctionCallExpression.process(operation: ProcessOperationCallback) {

@@ -146,41 +146,42 @@ fun IfDefinitionStatementContext.toAst(considerPosition: Boolean): IfDefinitionS
     )
 }
 
-fun IfBlockContext.toAst(considerPosition: Boolean) : IfBlock{
-        val condition = this.expression().toAst(considerPosition)
-        val statements = this.statement().map { it.toAst(considerPosition) }
-        val blockType = BlockType.IfBlock;
+fun IfBlockContext.toAst(considerPosition: Boolean): IfBlock {
+    val condition = this.expression().toAst(considerPosition)
+    val statements = this.statement().map { it.toAst(considerPosition) }
+    val blockType = BlockType.IfBlock;
 
     return IfBlock(
         condition,
         statements,
         blockType,
         toPosition(considerPosition),
-            );
+    );
 }
 
-fun ElseIfBlockContext.toAst(considerPosition: Boolean) : ElseIfBlock{
-    val condition = this.expression()?.toAst(considerPosition);
+fun ElseIfBlockContext.toAst(considerPosition: Boolean): IfBlock {
+    val condition = this.expression()!!.toAst(considerPosition);
     val statements = this.statement().map { it.toAst(considerPosition) }
     val blockType = BlockType.ElseIfBlock;
 
-    return ElseIfBlock(
+    return IfBlock(
         condition,
         statements,
         blockType,
         toPosition(considerPosition),
-        );
+    );
 }
 
-fun ElseBlockContext.toAst(considerPosition: Boolean) : ElseBlock{
+fun ElseBlockContext.toAst(considerPosition: Boolean): IfBlock {
     val statements = this.statement().map { it.toAst(considerPosition) }
     val blockType = BlockType.ElseBlock;
 
-    return ElseBlock(
+    return IfBlock(
+        null,
         statements,
         blockType,
         toPosition(considerPosition),
-        );
+    );
 }
 
 
@@ -191,7 +192,8 @@ fun WhileDefinitionStatementContext.toAst(considerPosition: Boolean): WhileDefin
 
     return WhileDefinitionStatement(
         whileCondition,
-        toPosition(considerPosition))
+        toPosition(considerPosition)
+    )
 }
 
 //task5
@@ -201,7 +203,8 @@ fun ForDefinitionStatementContext.toAst(considerPosition: Boolean): ForDefinitio
 
     return ForDefinitionStatement(
         forCondition,
-        toPosition(considerPosition))
+        toPosition(considerPosition)
+    )
 }
 
 fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
@@ -316,11 +319,12 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
 
 fun ListOfExpressionContext.toAst(considerPosition: Boolean): ListOfExpression {
     val listStatement = listOfDefinition()
-    val items = listStatement.expression().let{ listOf(it)}.map { it.toAst(considerPosition) }
+    val items = listStatement.expression().let { listOf(it) }.map { it.toAst(considerPosition) }
 
     return ListOfExpression(
         items,
-        toPosition(considerPosition))
+        toPosition(considerPosition)
+    )
 }
 
 fun FunctionOrClassInstanceCallExpressionContext.toAst(considerPosition: Boolean): FunctionCallExpression {

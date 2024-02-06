@@ -33,9 +33,6 @@ fun Statement.transpile(depth: Int = 0): String {
         is ClassDefinitionStatement -> transpile(depth)
         is ConstructorDefinitionStatement -> transpile(depth)
         is ObjectPropertyAssignmentStatement -> transpile(depth)
-        is ElseBlock -> transpile(depth)
-        is ElseIfBlock -> transpile(depth)
-        is IfBlock -> transpile(depth)
     }
 }
 
@@ -81,10 +78,39 @@ fun AssignmentStatement.transpile(depth: Int = 0): String {
 }
 
 fun IfDefinitionStatement.transpile(depth: Int = 0): String {
-    val ifBlockTranspiled = ifBlock.transpile()
-    val elseIfBlockTranspiled = elseIfBlock?.map{it.transpile()}
-    val elseBlockTranspiled = elseBlock?.transpile()
-    return "${generateIndentationSpace(depth)} $ifBlockTranspiled $elseIfBlockTranspiled $elseBlockTranspiled"
+    val ifBlockTranspiled = ifBlock.transpile(depth)
+    val elseIfBlockTranspiled = elseIfBlock?.map { it.transpile(depth) }
+    val elseBlockTranspiled = elseBlock?.transpile(depth)
+    return "${generateIndentationSpace(depth)}$ifBlockTranspiled $elseIfBlockTranspiled $elseBlockTranspiled"
+}
+
+fun IfBlock.transpile(depth: Int = 0): String {
+    var ifBlockTranspiled: String
+
+    var ifBlockKeyword = when (blockType) {
+        BlockType.IfBlock -> "if"
+        BlockType.ElseBlock -> "else"
+        BlockType.ElseIfBlock -> "else if"
+    }
+
+    ifBlockTranspiled = generateIndentationSpace(depth) + ifBlockKeyword
+
+    if (condition != null) {
+        ifBlockTranspiled += "(${condition.transpile()})"
+    }
+
+    if (statements.isNotEmpty()) {
+        val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
+        ifBlockTranspiled = """
+        |$ifBlockTranspiled {
+        |$statementsTranspiled
+        |${generateIndentationSpace(depth)}}
+        """.trimMargin()
+    } else {
+        ifBlockTranspiled = "$ifBlockTranspiled {\n${generateIndentationSpace(depth)}}"
+    }
+
+    return ifBlockTranspiled
 }
 
 fun WhileDefinitionStatement.transpile(depth: Int = 0): String {
@@ -98,8 +124,8 @@ fun ForDefinitionStatement.transpile(depth: Int = 0): String {
 }
 
 fun ListOfExpression.transpile(depth: Int = 0): String {
-    val itemsTraspiled = items.map { it.transpile() }
-    return "${generateIndentationSpace(depth)} $itemsTraspiled"
+    val itemsTranspiled = items.map { it.transpile() }
+    return "${generateIndentationSpace(depth)} $itemsTranspiled"
 }
 
 fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
@@ -248,7 +274,7 @@ fun ConstructorDefinitionStatement.transpile(depth: Int = 0): String {
     return "${generateIndentationSpace(depth + 1)}constructor($params) : this($thisConstructorParams)$constructorBlock"
 }
 
-fun ObjectPropertyAssignmentStatement.transpile(depth: Int = 0) : String{
+fun ObjectPropertyAssignmentStatement.transpile(depth: Int = 0): String {
     return "${generateIndentationSpace(depth)}$objectName.$propertyName = ${value.transpile()}"
 }
 

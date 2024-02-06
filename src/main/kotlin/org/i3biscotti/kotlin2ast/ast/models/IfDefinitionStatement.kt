@@ -5,10 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("IfDefinitionStatement")
-
 data class IfDefinitionStatement(
-    val ifBlock : Statement,
-    val elseIfBlock : List<Statement>?,
-    val elseBlock : Statement?,
+    val ifBlock : IfBlock,
+    val elseIfBlock : List<IfBlock>?,
+    val elseBlock : IfBlock?,
     override val position: Position?
 ) : Statement()
