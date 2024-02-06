@@ -87,7 +87,7 @@ fun IfDefinitionStatement.transpile(depth: Int = 0): String {
 fun IfBlock.transpile(depth: Int = 0): String {
     var ifBlockTranspiled: String
 
-    var ifBlockKeyword = when (blockType) {
+    val ifBlockKeyword = when (blockType) {
         BlockType.IfBlock -> "if"
         BlockType.ElseBlock -> "else"
         BlockType.ElseIfBlock -> "else if"
@@ -114,13 +114,19 @@ fun IfBlock.transpile(depth: Int = 0): String {
 }
 
 fun WhileDefinitionStatement.transpile(depth: Int = 0): String {
-    val WhileConditionTranspiled = whileCondition.transpile()
-    return "${generateIndentationSpace(depth)} $WhileConditionTranspiled"
+    val whileConditionTranspiled = whileCondition.transpile()
+    val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
+
+    return """
+        |${generateIndentationSpace(depth)}while($whileConditionTranspiled) {
+        |$statementsTranspiled
+        |${generateIndentationSpace(depth)}}
+        """.trimIndent()
 }
 
 fun ForDefinitionStatement.transpile(depth: Int = 0): String {
-    val ForConditionTranspiled = forCondition.transpile()
-    return "${generateIndentationSpace(depth)} $ForConditionTranspiled"
+    val forConditionTranspiled = forCondition.transpile()
+    return "${generateIndentationSpace(depth)} $forConditionTranspiled"
 }
 
 fun ListOfExpression.transpile(depth: Int = 0): String {

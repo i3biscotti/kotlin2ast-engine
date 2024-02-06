@@ -11,7 +11,7 @@ val module = SerializersModule {
         subclass(AssignmentStatement::class)
         subclass(IntLiteralExpression::class)
         subclass(DoubleLiteralExpression::class)
-        subclass(StringLit::class)
+        subclass(StringLiteralExpression::class)
         subclass(BooleanLitExpression::class)
         subclass(ClassDefinitionStatement::class)
     }

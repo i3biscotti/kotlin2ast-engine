@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("WhileDefinitionStatement")
-
 data class WhileDefinitionStatement(
     val whileCondition: Expression,
+    val statements: List<Statement>,
     override val position: Position?
 ) : Statement()

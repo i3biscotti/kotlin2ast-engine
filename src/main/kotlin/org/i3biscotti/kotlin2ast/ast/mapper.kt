@@ -51,7 +51,7 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
     }
 }
 
-fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType? {
+fun antlr4ToAstValueType(type: TypeContext): VariableValueType? {
     return when (type) {
         is IntTypeContext -> VariableValueType.INT
         is DoubleTypeContext -> VariableValueType.DOUBLE
@@ -59,7 +59,6 @@ fun <TypeContext> antlr4ToAstValueType(type: TypeContext): VariableValueType? {
         is StringTypeContext -> VariableValueType.STRING
         is UnitTypeContext -> VariableValueType.VOID
         is CustomTypeContext -> VariableValueType(type.ID().text)
-        null -> null
         else -> throw NotImplementedError("$type is not implemented")
     }
 }
@@ -149,39 +148,39 @@ fun IfDefinitionStatementContext.toAst(considerPosition: Boolean): IfDefinitionS
 fun IfBlockContext.toAst(considerPosition: Boolean): IfBlock {
     val condition = this.expression().toAst(considerPosition)
     val statements = this.statement().map { it.toAst(considerPosition) }
-    val blockType = BlockType.IfBlock;
+    val blockType = BlockType.IfBlock
 
     return IfBlock(
         condition,
         statements,
         blockType,
         toPosition(considerPosition),
-    );
+    )
 }
 
 fun ElseIfBlockContext.toAst(considerPosition: Boolean): IfBlock {
-    val condition = this.expression()!!.toAst(considerPosition);
+    val condition = this.expression()!!.toAst(considerPosition)
     val statements = this.statement().map { it.toAst(considerPosition) }
-    val blockType = BlockType.ElseIfBlock;
+    val blockType = BlockType.ElseIfBlock
 
     return IfBlock(
         condition,
         statements,
         blockType,
         toPosition(considerPosition),
-    );
+    )
 }
 
 fun ElseBlockContext.toAst(considerPosition: Boolean): IfBlock {
     val statements = this.statement().map { it.toAst(considerPosition) }
-    val blockType = BlockType.ElseBlock;
+    val blockType = BlockType.ElseBlock
 
     return IfBlock(
         null,
         statements,
         blockType,
         toPosition(considerPosition),
-    );
+    )
 }
 
 
@@ -189,9 +188,11 @@ fun ElseBlockContext.toAst(considerPosition: Boolean): IfBlock {
 fun WhileDefinitionStatementContext.toAst(considerPosition: Boolean): WhileDefinitionStatement {
     val whileStatement = whileDefinition()
     val whileCondition = whileStatement.expression().toAst(considerPosition)
+    val whileStatements = whileStatement.block().statement().map { it.toAst(considerPosition) }
 
     return WhileDefinitionStatement(
         whileCondition,
+        whileStatements,
         toPosition(considerPosition)
     )
 }
@@ -199,10 +200,14 @@ fun WhileDefinitionStatementContext.toAst(considerPosition: Boolean): WhileDefin
 //task5
 fun ForDefinitionStatementContext.toAst(considerPosition: Boolean): ForDefinitionStatement {
     val forStatement = forDefinition()
-    val forCondition = forStatement.expression().toAst(considerPosition)
 
+    val iteratorItem = forStatement.ID()
+    val iterator = forStatement.iterator.toAst(considerPosition)
+    val statements = forStatement.block().statement().map { it.toAst(considerPosition) }
+
+    //TODO: da sistemare dopo check task 5 con giulia
     return ForDefinitionStatement(
-        forCondition,
+        iterator,
         toPosition(considerPosition)
     )
 }

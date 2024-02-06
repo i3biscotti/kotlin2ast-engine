@@ -98,7 +98,7 @@ whileDefinition :
 
 //task5
 forDefinition :
-    FOR PAREN_OPEN ID IN forCondition=expression PAREN_CLOSE forBlock=block
+    FOR PAREN_OPEN ID IN iterator=expression PAREN_CLOSE forBlock=block
     ;
 
 listOfDefinition :
