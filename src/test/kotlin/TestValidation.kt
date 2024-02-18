@@ -41,6 +41,14 @@ class TestValidation : ITest{
         TODO("Not yet implemented")
     }
 
+    override fun testIfDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
+    override fun testWhileDefinitionStatement() {
+        TODO("Not yet implemented")
+    }
+
     @Test
     override fun voidFunctionWithoutParams() {
         TODO("Not yet implemented")
