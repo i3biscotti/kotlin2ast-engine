@@ -89,8 +89,8 @@ fun IfBlock.transpile(depth: Int = 0): String {
 
     val ifBlockKeyword = when (blockType) {
         BlockType.IfBlock -> "if"
-        BlockType.ElseBlock -> "else"
         BlockType.ElseIfBlock -> "else if"
+        BlockType.ElseBlock -> "else"
     }
 
     ifBlockTranspiled = generateIndentationSpace(depth) + ifBlockKeyword

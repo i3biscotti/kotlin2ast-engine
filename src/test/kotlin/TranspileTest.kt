@@ -112,6 +112,52 @@ class TranspileTest : ITest {
     }
     //endregion
 
+    //region Task 3
+    @Test
+    override fun testIfDefinitionStatement() {
+        val programFile = parseResource("task3/ifDefinitionStatement")
+
+        assertEquals(
+            """
+              |if (voto > 18) {
+              |  exam = "passed"
+              |}
+              |else if (voto == 18) {
+              |  exam = "passed"
+              |}
+              |else {
+              |  exam = "failed"
+              |}
+              """
+                .trimMargin(),
+            programFile
+        )
+    }
+    //endregion
+
+    //region Task 4
+
+    @Test
+    override fun testWhileDefinitionStatement() {
+        val programFile = parseResource("task4/whileDefinitionStatement")
+
+        assertEquals(
+            """
+            |while (condition) {
+            |  if (i < 17) {
+            |    i = i + 1
+            |  }
+            |  else {
+            |    condition = true
+            |  }
+            |}
+            """
+                .trimMargin(),
+            programFile
+        )
+    }
+
+
     //region Task 7
     @Test
     override fun voidFunctionWithoutParams() {
