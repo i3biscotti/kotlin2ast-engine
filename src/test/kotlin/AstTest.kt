@@ -101,29 +101,305 @@ class AstTest : ITest {
             programFile
         )
     }
-
-    override fun testExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-
     //endregion
+
+    //region Task 2
+    @Test
+    override fun testExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/expressionDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        BinaryLogicExpression(
+                            LogicOperand.notEqual,
+                            UnaryLogicNegationExpression(
+                                null,
+                                VarReferenceExpression("True", null)
+                            ),
+                            BinaryLogicExpression(
+                                LogicOperand.or,
+                                BinaryLogicExpression(
+                                    LogicOperand.and,
+                                    BinaryMathExpression(
+                                        MathOperand.division,
+                                        VarReferenceExpression("a", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    BinaryMathExpression(
+                                        MathOperand.times,
+                                        VarReferenceExpression("b", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    null
+                                ),
+                                BinaryLogicExpression(
+                                    LogicOperand.and,
+                                    BinaryMathExpression(
+                                        MathOperand.plus,
+                                        VarReferenceExpression("c", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    BinaryMathExpression(
+                                        MathOperand.minus,
+                                        VarReferenceExpression("d", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    null
+                                ),
+                                null
+                            ),
+                            null,
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun testBinaryMathExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/binaryMathExpressionDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        BinaryMathExpression(
+                            MathOperand.times,
+                            BinaryMathExpression(
+                                MathOperand.plus,
+                                IntLiteralExpression("3", null),
+                                IntLiteralExpression("4", null),
+                                null
+                            ),
+                            BinaryMathExpression(
+                                MathOperand.minus,
+                                IntLiteralExpression("3", null),
+                                IntLiteralExpression("7", null),
+                                null
+                            ),
+                            null
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun testBinaryLogicExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/binaryLogicExpressionDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        BinaryLogicExpression(
+                            LogicOperand.and,
+                            BinaryLogicExpression(
+                                LogicOperand.or,
+                                IntLiteralExpression("3", null),
+                                IntLiteralExpression("4", null),
+                                null
+                            ),
+                            BinaryLogicExpression(
+                                LogicOperand.or,
+                                IntLiteralExpression("3", null),
+                                IntLiteralExpression("7", null),
+                                null
+                            ),
+                            null
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun testUnaryMathExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/unaryMathExpressionDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        UnaryMathExpression(
+                            null,
+                            MathOperand.minus,
+                            IntLiteralExpression("3", null)
+                        ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+
+    @Test
+    override fun testUnaryLogicExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/unaryLogicExpressionDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        UnaryLogicNegationExpression(
+                            null,
+                            VarReferenceExpression("a", null)
+                            ),
+                        null
+                    )
+                ),
+                null
+            ),
+            programFile
+        )
+    }
+    //endregion
+
+    //region Task 3
+    @Test
+    override fun testIfDefinitionStatement() {
+        val programFile = parseResource("task3/ifDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    IfDefinitionStatement(
+                        IfBlock(
+                            BinaryLogicExpression(
+                                LogicOperand.greaterThan,
+                                VarReferenceExpression("voto", null),
+                                IntLiteralExpression("18", null),
+                                null
+                            ),
+                            listOf(
+                                AssignmentStatement(
+                                    "exam",
+                                    StringLiteralExpression("'passed'", null),
+                                    null
+                                )
+                            ),
+                            BlockType.IfBlock,
+                            null
+                        ),
+                        listOf(
+                            IfBlock(
+                                BinaryLogicExpression(
+                                    LogicOperand.equal,
+                                    VarReferenceExpression("voto", null),
+                                    IntLiteralExpression("18", null),
+                                    null
+                                ),
+                                listOf(
+                                    AssignmentStatement(
+                                        "exam",
+                                        StringLiteralExpression("'passed'", null),
+                                        null
+                                    )
+                                ),
+                                BlockType.ElseIfBlock,
+                                null
+                            ),
+                        ),
+                        IfBlock(
+                            null,
+                            listOf(
+                                AssignmentStatement(
+                                    "exam",
+                                    StringLiteralExpression("'failed'", null),
+                                    null
+                                )
+                            ),
+                            BlockType.ElseBlock,
+                            null
+                        ),
+                        null,
+                    )
+                ),
+                null,
+            ), programFile
+        )
+    }
+    //endregion
+
+    //region Task 4
+    @Test
+    override fun testWhileDefinitionStatement() {
+        val programFile = parseResource("task4/whileDefinitionStatement")
+
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    WhileDefinitionStatement(
+                        VarReferenceExpression("condition", null),
+                        listOf(
+                            IfDefinitionStatement(
+                                IfBlock(
+                                    BinaryLogicExpression(
+                                        LogicOperand.lessThan,
+                                        VarReferenceExpression("i", null),
+                                        IntLiteralExpression("17", null),
+                                        null
+                                    ),
+                                    listOf(
+                                        AssignmentStatement(
+                                            "i",
+                                            BinaryMathExpression(
+                                                MathOperand.plus,
+                                                VarReferenceExpression("i", null),
+                                                IntLiteralExpression("1", null),
+                                                null
+                                            ),
+                                            null
+                                        )
+                                    ),
+                                    BlockType.IfBlock,
+                                    null
+                                ),
+                                null,
+                                IfBlock(
+                                    null,
+                                    listOf(
+                                        AssignmentStatement(
+                                            "",
+                                            BooleanLitExpression("true",null),
+                                            null
+                                        )
+                                    ),
+                                    BlockType.ElseBlock,
+                                    null
+                                ),
+                                null
+                            )
+                        ),
+                        null
+                    )
+                ),
+                null
+            ), programFile
+        )
+    }
+    //endregion
+
 
     //region Task 7
     @Test
