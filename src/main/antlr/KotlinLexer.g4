@@ -83,7 +83,6 @@ DOT                         : '.';
 //TASK3
 
 IF                          : 'if';
-ELSE_IF                     : 'else' 'if';
 ELSE                        : 'else';
 
 //TASK4

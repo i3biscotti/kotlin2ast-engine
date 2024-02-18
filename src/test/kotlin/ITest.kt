@@ -29,6 +29,19 @@ interface ITest {
     fun testUnaryLogicExpressionDefinitionStatement()
     //endregion
 
+
+    //region Task 3
+
+    fun testIfDefinitionStatement()
+    //endregion
+
+
+    //region Task 4
+
+    fun testWhileDefinitionStatement()
+    //endregion
+
+
     //region Task 7
     fun voidFunctionWithoutParams()
 
