@@ -54,27 +54,86 @@ class LexerTest : ITest{
             tokens(lexerForResource("task1/assignmentStatement"))
         )
     }
+    //endregion
 
+    //region Task 2
+    @Test
     override fun testExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf("NOT", "PAREN_OPEN", "ID", "PAREN_CLOSE", "NOT_EQUAL", "PAREN_OPEN",
+                "PAREN_OPEN", "PAREN_OPEN","ID", "DIVISION", "INT_LIT", "PAREN_CLOSE",
+                "AND", "PAREN_OPEN", "ID", "TIMES", "INT_LIT", "PAREN_CLOSE",
+                "PAREN_CLOSE", "OR", "PAREN_OPEN", "PAREN_OPEN", "ID", "PLUS", "INT_LIT","PAREN_CLOSE",
+                "AND", "PAREN_OPEN", "ID", "MINUS", "INT_LIT", "PAREN_CLOSE", "PAREN_CLOSE",
+                "PAREN_CLOSE","EOF"),
+            tokens(lexerForResource("task2/expressionDefinitionStatement"))
+        )
     }
 
+    @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf("PAREN_OPEN", "INT_LIT", "PLUS", "INT_LIT", "PAREN_CLOSE", "TIMES",
+                "PAREN_OPEN", "INT_LIT", "MINUS", "INT_LIT", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task2/binaryMathExpressionDefinitionStatement"))
+        )
     }
 
+    @Test
     override fun testBinaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf("PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "AND",
+                "PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task2/binaryLogicExpressionDefinitionStatement"))
+        )
     }
 
+    @Test
     override fun testUnaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf("PAREN_OPEN", "MINUS", "INT_LIT", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task2/unaryMathExpressionDefinitionStatement"))
+        )
     }
 
+    @Test
     override fun testUnaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf("NOT","PAREN_OPEN", "ID", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task2/unaryLogicExpressionDefinitionStatement"))
+        )
     }
     //endregion
+
+    //region Task 3
+    @Test
+    override fun testIfDefinitionStatement() {
+        assertEquals(
+            listOf("IF", "PAREN_OPEN", "ID", "GREATER_THAN", "INT_LIT",
+                "PAREN_CLOSE", "GRAPH_OPEN", "NL" ,"ID", "ASSIGN", "STRING_LIT",
+                "NL", "GRAPH_CLOSE", "NL", "ELSE", "IF", "PAREN_OPEN", "ID",
+                "EQUAL", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "ID",
+                "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "NL" ,"ELSE", "GRAPH_OPEN",
+                "NL", "ID", "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "EOF"),
+            tokens(lexerForResource("task3/ifDefinitionStatement"))
+        )
+    }
+    //endregion
+
+    //region Task 4
+    @Test
+    override fun testWhileDefinitionStatement() {
+        assertEquals(
+            listOf("VAR", "INT", "ID", "ASSIGN", "INT_LIT",
+                "NL", "WHILE", "PAREN_OPEN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "IF",
+                "PAREN_OPEN", "ID", "LOWER_THAN", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
+                "ID", "ASSIGN", "ID", "PLUS", "INT_LIT", "NL", "GRAPH_CLOSE", "NL", "ELSE", "GRAPH_OPEN",
+                "NL", "ID", "ASSIGN", "BOOL_LIT", "NL", "GRAPH_CLOSE", "NL", "GRAPJ_CLOSE","EOF"),
+            tokens(lexerForResource("task3/whileDefinitionStatement"))
+        )
+    }
+    //endregion
+
 
     //region Task 7
     @Test
