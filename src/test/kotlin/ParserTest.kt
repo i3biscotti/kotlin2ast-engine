@@ -111,29 +111,308 @@ class ParserTest : ITest{
             programFile.multiLineString()
         )
     }
-
-    override fun testExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-
     //endregion
+
+    //region Task 2
+    @Test
+    override fun testExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/expressionDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    ExpressionDefinitionStatement
+            |       BinaryLogicExpression
+            |           UnaryLogicNegationExpression
+            |               T[!]
+            |               T[(]
+            |               VarReferenceExpression
+            |                   T[True]
+            |               T[)]
+            |           T[!=]
+            |           BinaryLogicExpression
+            |               T[(]
+            |               BinaryLogicExpression
+            |                   T[(]
+            |                   BinaryMathExpression
+            |                       VarReferenceExpression
+            |                           T[a]
+            |                       T[/]
+            |                       IntLiteralExpression
+            |                           T[3]
+            |                   T[)]
+            |                   T[&&]
+            |                   T[(]
+            |                   BinaryMathExpression
+            |                       VarReferenceExpression
+            |                           T[b]
+            |                       T[*]
+            |                       IntLiteralExpression
+            |                           T[3]
+            |                   T[)]
+            |               T[)]
+            |               T[||]
+            |               T[(]
+            |               BinaryLogicExpression
+            |                   T[(]
+            |                   BinaryMathExpression
+            |                       VarReferenceExpression
+            |                           T[c]
+            |                       T[+]
+            |                       IntLiteralExpression
+            |                           T[3]
+            |                   T[)]
+            |                   T[&&]
+            |                   T[(]
+            |                   BinaryMathExpression
+            |                       VarReferenceExpression
+            |                           T[d]
+            |                       T[-]
+            |                       IntLiteralExpression
+            |                           T[3]
+            |                   T[)]
+            |               T[)]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun testBinaryMathExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/binaryMathExpressionDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |      BinaryMathExpression
+            |          T[(]
+            |          BinaryMathExpression
+            |              BinaryMathExpression
+            |                  IntLiteralExpression
+            |                      T[3]
+            |                  T[+]
+            |                  IntLiteralExpression
+            |                      T[4]
+            |          T[)]
+            |          T[*]
+            |          T[(]
+            |          BinaryMathExpression
+            |              BinaryMathExpression
+            |                  IntLiteralExpression
+            |                      T[3]
+            |                  T[-]
+            |                  IntLiteralExpression
+            |                      T[7]
+            |          T[)]
+            |      T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun testBinaryLogicExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/binaryLogicExpressionDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |      BinaryLogicExpression
+            |          T[(]
+            |          BinaryLogicExpression
+            |              BinaryLogicExpression
+            |                  IntLiteralExpression
+            |                      T[3]
+            |                  T[||]
+            |                  IntLiteralExpression
+            |                      T[4]
+            |          T[)]
+            |          T[&&]
+            |          T[(]
+            |          BinaryLogicExpression
+            |              BinaryLogicExpression
+            |                  IntLiteralExpression
+            |                      T[3]
+            |                  T[||]
+            |                  IntLiteralExpression
+            |                      T[7]
+            |          T[)]
+            |      T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun testUnaryMathExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/unaryMathExpressionDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    UnaryMathExpression
+            |      T[(]
+            |      T[-]
+            |      IntLiteralExpression
+            |        T[3]
+            |      T[)]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun testUnaryLogicExpressionDefinitionStatement() {
+        val programFile = parseResource("task2/unaryLogicExpressionDefinitionStatement")
+            .toParseTree()
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    UnaryLogicNegationExpression
+            |      T[!]
+            |      T[(]
+            |      VarReferenceExpression
+            |        T[a]
+            |      T[)]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
+
+    //region Task 3
+    @Test
+    override fun testIfDefinitionStatement() {
+        val programFile = parseResource("task3/ifDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    IfDefinitionStatement
+            |      IfDefinition
+            |        IfBlock
+            |           T[if]
+            |           T[(]
+            |           BinaryLogicExpression
+            |               VarReferenceExpression
+            |                   T[ID]
+            |               T[>]
+            |               IntLiteralExpression
+            |                   T[18]
+            |           T[)]
+            |           T[{]
+            |           AssignStatement
+            |               T[exam]
+            |               T[=]
+            |               StringLiteralExpression
+            |                   T["passed"]
+            |           T[}]
+            |        ElseIfBlock
+            |           T[else]
+            |           T[if]
+            |           T[(]
+            |           BinaryLogicExpression
+            |               VarReferenceExpression
+            |                   T[ID]
+            |               T[==]
+            |               IntLiteralExpression
+            |                   T[18]
+            |           T[)]
+            |           T[{]
+            |           AssignStatement
+            |               T[exam]
+            |               T[=]
+            |               StringLiteralExpression
+            |                   T["passed"]
+            |           T[}]
+            |        ElseBlock
+            |           T[else]
+            |           T[(]
+            |           AssignStatement
+            |               T[exam]
+            |               T[=]
+            |               StringLiteralExpression
+            |                   T["failed"]
+            |           T[}]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
+
+
+    //region Task 4
+    @Test
+    override fun testWhileDefinitionStatement() {
+        val programFile = parseResource("task4/whileDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |    WhileDefinitionStatement
+            |       T[while]
+            |       T[(]
+            |       VarReferenceExpression
+            |           T[condition]
+            |       T[)]
+            |       Block
+            |       T[{]
+            |       IfDefinitionStatement
+            |           IfBlock
+            |               T[if]
+            |               T[(]
+            |               BinaryLogicExpression
+            |                   VarReferenceExpression
+            |                       T[i]
+            |                   T[<]
+            |                   IntLiteralExpression
+            |                       T[17]
+            |               T[)]
+            |               T[{]
+            |               AssignStatement
+            |                   T[i]
+            |                   T[=]
+            |                   BinaryMathExpression
+            |                       VarReferenceExpression
+            |                           T[i]
+            |                       T[+]
+            |                       IntLiteralExpression
+            |                           T[1]
+            |               T[}]
+            |               ElseIfBlock
+            |                   T[else]
+            |                   T[{]
+            |                   AssignStatement
+            |                       T[condition]
+            |                       T[=]
+            |                       BoolLiteralExpression
+            |                           T[true]
+            |                   T[}]
+            |       T[}]
+            |    T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
+
 
     //region Task 7
     @Test
