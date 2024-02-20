@@ -264,7 +264,7 @@ class AstTest : ITest {
                         UnaryLogicNegationExpression(
                             null,
                             VarReferenceExpression("a", null)
-                            ),
+                        ),
                         null
                     )
                 ),
@@ -349,6 +349,13 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
+                    VarDeclarationStatement(
+                        VariableType.variable,
+                        "i",
+                        VariableValueType.INT,
+                        IntLiteralExpression("1", null),
+                        null,
+                    ),
                     WhileDefinitionStatement(
                         VarReferenceExpression("condition", null),
                         listOf(
@@ -381,7 +388,7 @@ class AstTest : ITest {
                                     listOf(
                                         AssignmentStatement(
                                             "",
-                                            BooleanLitExpression("true",null),
+                                            BooleanLitExpression("true", null),
                                             null
                                         )
                                     ),

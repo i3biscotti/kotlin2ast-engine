@@ -124,12 +124,12 @@ class LexerTest : ITest{
     @Test
     override fun testWhileDefinitionStatement() {
         assertEquals(
-            listOf("VAR", "INT", "ID", "ASSIGN", "INT_LIT",
+            listOf("VAR", "ID", "ASSIGN", "INT_LIT",
                 "NL", "WHILE", "PAREN_OPEN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "IF",
                 "PAREN_OPEN", "ID", "LOWER_THAN", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
                 "ID", "ASSIGN", "ID", "PLUS", "INT_LIT", "NL", "GRAPH_CLOSE", "NL", "ELSE", "GRAPH_OPEN",
-                "NL", "ID", "ASSIGN", "BOOL_LIT", "NL", "GRAPH_CLOSE", "NL", "GRAPJ_CLOSE","EOF"),
-            tokens(lexerForResource("task3/whileDefinitionStatement"))
+                "NL", "ID", "ASSIGN", "BOOL_LIT", "NL", "GRAPH_CLOSE", "NL", "GRAPH_CLOSE","EOF"),
+            tokens(lexerForResource("task4/whileDefinitionStatement"))
         )
     }
     //endregion

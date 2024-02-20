@@ -143,6 +143,7 @@ class TranspileTest : ITest {
 
         assertEquals(
             """
+            |var i = 1
             |while (condition) {
             |  if (i < 17) {
             |    i = i + 1

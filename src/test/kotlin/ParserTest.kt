@@ -366,6 +366,12 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
+            |    VarDeclarationStatement
+            |       T[var]
+            |       T[i]
+            |       T[=]
+            |       IntLiteralExpression
+            |           T[1]
             |    WhileDefinitionStatement
             |       T[while]
             |       T[(]
