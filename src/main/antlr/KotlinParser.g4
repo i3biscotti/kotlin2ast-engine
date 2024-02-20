@@ -72,23 +72,19 @@ expression
 
 //task3
 ifBlock
-    :
-    IF PAREN_OPEN expression PAREN_CLOSE GRAPH_OPEN statement* GRAPH_CLOSE
+    : IF PAREN_OPEN expression PAREN_CLOSE block
     ;
 
 elseIfBlock
-    :
-    ELSE IF PAREN_OPEN expression PAREN_CLOSE GRAPH_OPEN statement* GRAPH_CLOSE
+    : ELSE IF PAREN_OPEN expression PAREN_CLOSE block
     ;
 
 elseBlock
-    :
-    ELSE GRAPH_OPEN statement* GRAPH_CLOSE
+    : ELSE block
     ;
 
 ifDefinition
-    :
-    ifBlock elseIfBlock* elseBlock?
+    : ifBlock elseIfBlock* elseBlock?
     ;
 
 //task4
@@ -102,7 +98,7 @@ forDefinition :
     ;
 
 listOfDefinition :
-    LIST_OF PAREN_OPEN items=expression PAREN_CLOSE
+    LIST_OF PAREN_OPEN (expression COMMA)* expression COMMA? PAREN_CLOSE
     ;
 
 parameter

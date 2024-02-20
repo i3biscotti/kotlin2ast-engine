@@ -51,7 +51,7 @@ fun StatementContext.toAst(considerPosition: Boolean = false): Statement {
     }
 }
 
-fun antlr4ToAstValueType(type: TypeContext): VariableValueType? {
+fun antlr4ToAstValueType(type: TypeContext?): VariableValueType? {
     return when (type) {
         is IntTypeContext -> VariableValueType.INT
         is DoubleTypeContext -> VariableValueType.DOUBLE
@@ -59,6 +59,7 @@ fun antlr4ToAstValueType(type: TypeContext): VariableValueType? {
         is StringTypeContext -> VariableValueType.STRING
         is UnitTypeContext -> VariableValueType.VOID
         is CustomTypeContext -> VariableValueType(type.ID().text)
+        null -> null
         else -> throw NotImplementedError("$type is not implemented")
     }
 }
@@ -147,7 +148,7 @@ fun IfDefinitionStatementContext.toAst(considerPosition: Boolean): IfDefinitionS
 
 fun IfBlockContext.toAst(considerPosition: Boolean): IfBlock {
     val condition = this.expression().toAst(considerPosition)
-    val statements = this.statement().map { it.toAst(considerPosition) }
+    val statements = this.block().statement().map { it.toAst(considerPosition) }
     val blockType = BlockType.IfBlock
 
     return IfBlock(
@@ -160,7 +161,7 @@ fun IfBlockContext.toAst(considerPosition: Boolean): IfBlock {
 
 fun ElseIfBlockContext.toAst(considerPosition: Boolean): IfBlock {
     val condition = this.expression()!!.toAst(considerPosition)
-    val statements = this.statement().map { it.toAst(considerPosition) }
+    val statements = this.block().statement().map { it.toAst(considerPosition) }
     val blockType = BlockType.ElseIfBlock
 
     return IfBlock(
@@ -172,7 +173,7 @@ fun ElseIfBlockContext.toAst(considerPosition: Boolean): IfBlock {
 }
 
 fun ElseBlockContext.toAst(considerPosition: Boolean): IfBlock {
-    val statements = this.statement().map { it.toAst(considerPosition) }
+    val statements = this.block().statement().map { it.toAst(considerPosition) }
     val blockType = BlockType.ElseBlock
 
     return IfBlock(
@@ -324,7 +325,7 @@ fun ParenthesisExpressionContext.toAst(considerPosition: Boolean): ParenthesisEx
 
 fun ListOfExpressionContext.toAst(considerPosition: Boolean): ListOfExpression {
     val listStatement = listOfDefinition()
-    val items = listStatement.expression().let { listOf(it) }.map { it.toAst(considerPosition) }
+    val items = listStatement.expression().map { it.toAst(considerPosition) }
 
     return ListOfExpression(
         items,

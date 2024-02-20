@@ -2,8 +2,7 @@ var i = 1
 while (condition) {
     if (i < 17) {
         i = i + 1
-    }
-    else {
+    } else {
         condition = true
     }
 }
