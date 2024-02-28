@@ -7,7 +7,7 @@ import org.i3biscotti.kotlin2ast.ast.models.*
 val module = SerializersModule {
     polymorphic(Node::class) {
         subclass(ProgramFile::class)
-        subclass(VarDeclarationStatement::class)
+        subclass(VariableDeclarationStatement::class)
         subclass(AssignmentStatement::class)
         subclass(IntLiteralExpression::class)
         subclass(DoubleLiteralExpression::class)
@@ -16,5 +16,4 @@ val module = SerializersModule {
         subclass(ClassDefinitionStatement::class)
     }
 }
-
 val format = Json { serializersModule = module }

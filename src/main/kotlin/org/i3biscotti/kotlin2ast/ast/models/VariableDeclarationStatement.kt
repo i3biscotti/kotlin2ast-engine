@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("VarDeclarationStatement")
-data class VarDeclarationStatement(
+data class VariableDeclarationStatement(
     val varType: VariableType,
     val name: String,
     val valueType: VariableValueType?,
-    val value: Expression,
+    val value: Expression?,
     override val position: Position?
 ) : Statement()
