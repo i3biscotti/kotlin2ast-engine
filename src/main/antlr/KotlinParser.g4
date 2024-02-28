@@ -66,7 +66,7 @@ expression
     | value=ID                                                                          #VarReferenceExpression
     | listOfDefinition                                                                  #ListOfExpression
     | functionOrClassInstanceCall                                                       #FunctionOrClassInstanceCallExpression
-    | objectProperty                                                                    #ObjectPropertyExpression
+    | objectProperty                                                                    #ObjectPropertyReferenceExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;
 
