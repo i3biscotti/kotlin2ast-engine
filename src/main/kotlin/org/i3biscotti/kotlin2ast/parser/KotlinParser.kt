@@ -3,7 +3,7 @@ package org.i3biscotti.kotlin2ast.parser
 import org.i3biscotti.kotlin2ast.ast.mapping.toAst
 import org.i3biscotti.kotlin2ast.ast.models.*
 import org.i3biscotti.kotlin2ast.parser.models.LangError
-import org.i3biscotti.kotlin2ast.validation.validate
+import org.i3biscotti.kotlin2ast.validation.ProgramValidator
 import java.io.*
 
 data class KotlinParsingResult(val root: ProgramFile?, val errors: List<LangError>) {
@@ -22,7 +22,7 @@ object KotlinParser {
         return if (parsingResult.isCorrect()) {
 
             val programFile: ProgramFile = parsingResult.root!!.toAst(considerPosition)
-            val semanticErrors = programFile.validate()
+            val semanticErrors = ProgramValidator(programFile).startValidation()
 
             KotlinParsingResult(programFile, parsingResult.errors + semanticErrors)
         } else {
