@@ -1,5 +1,5 @@
+import org.i3biscotti.kotlin2ast.ast.mapping.*
 import org.i3biscotti.kotlin2ast.ast.models.*
-import org.i3biscotti.kotlin2ast.ast.toAst
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -27,7 +27,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "name",
                         null,
@@ -48,7 +48,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.immutable,
                         "age",
                         VariableValueType.INT,
@@ -69,7 +69,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.constant,
                         "isOld",
                         VariableValueType.BOOLEAN,
@@ -112,8 +112,8 @@ class AstTest : ITest {
             ProgramFile(
                 listOf(
                     ExpressionDefinitionStatement(
-                        BinaryLogicExpression(
-                            LogicOperand.notEqual,
+                        BinaryComparisonExpression(
+                            ComparisonOperand.notEqual,
                             UnaryLogicNegationExpression(
                                 null,
                                 VarReferenceExpression("True", null)
@@ -285,8 +285,8 @@ class AstTest : ITest {
                 listOf(
                     IfDefinitionStatement(
                         IfBlock(
-                            BinaryLogicExpression(
-                                LogicOperand.greaterThan,
+                            BinaryComparisonExpression(
+                                ComparisonOperand.greaterThan,
                                 VarReferenceExpression("voto", null),
                                 IntLiteralExpression("18", null),
                                 null
@@ -303,8 +303,8 @@ class AstTest : ITest {
                         ),
                         listOf(
                             IfBlock(
-                                BinaryLogicExpression(
-                                    LogicOperand.equal,
+                                BinaryComparisonExpression(
+                                    ComparisonOperand.equal,
                                     VarReferenceExpression("voto", null),
                                     IntLiteralExpression("18", null),
                                     null
@@ -349,7 +349,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "i",
                         VariableValueType.INT,
@@ -361,8 +361,8 @@ class AstTest : ITest {
                         listOf(
                             IfDefinitionStatement(
                                 IfBlock(
-                                    BinaryLogicExpression(
-                                        LogicOperand.lessThan,
+                                    BinaryComparisonExpression(
+                                        ComparisonOperand.lessThan,
                                         VarReferenceExpression("i", null),
                                         IntLiteralExpression("17", null),
                                         null
@@ -504,19 +504,19 @@ class AstTest : ITest {
                         ),
                         VariableValueType.BOOLEAN,
                         listOf(
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.variable,
                                 "aIsGreaterThanB",
                                 null,
-                                BinaryLogicExpression(
-                                    LogicOperand.greaterThan,
+                                BinaryComparisonExpression(
+                                    ComparisonOperand.greaterThan,
                                     VarReferenceExpression("a", null),
                                     VarReferenceExpression("b", null),
                                     null
                                 ),
                                 null,
                             ),
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.immutable,
                                 "isGreaterAndCondition",
                                 null,
@@ -540,7 +540,7 @@ class AstTest : ITest {
                         listOf(),
                         VariableValueType.VOID,
                         listOf(
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.immutable,
                                 "result",
                                 null,
@@ -725,8 +725,8 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "pro2",
-                                        BinaryLogicExpression(
-                                            LogicOperand.lessThanOrEqual,
+                                        BinaryComparisonExpression(
+                                            ComparisonOperand.lessThanOrEqual,
                                             VarReferenceExpression("value", null),
                                             VarReferenceExpression("prop1", null),
                                             null
@@ -914,7 +914,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.immutable,
                         "element",
                         null,
