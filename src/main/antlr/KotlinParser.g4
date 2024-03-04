@@ -53,14 +53,18 @@ expression
     | left=expression     operand=MODULE*               right=expression                #BinaryMathExpression
     | left=expression     operand=AND                   right=expression                #BinaryLogicExpression
     | left=expression     operand=OR                    right=expression                #BinaryLogicExpression
-    | left=expression     operand=GREATER_THAN          right=expression                #BinaryLogicExpression
-    | left=expression     operand=LOWER_THAN            right=expression                #BinaryLogicExpression
-    | left=expression     operand=GREATER_EQUAL_THAN    right=expression                #BinaryLogicExpression
-    | left=expression     operand=LOWER_EQUAL_THAN      right=expression                #BinaryLogicExpression
-    | left=expression     operand=EQUAL                 right=expression                #BinaryLogicExpression
-    | left=expression     operand=NOT_EQUAL             right=expression                #BinaryLogicExpression
+    | left=expression     operand=GREATER_THAN          right=expression                #BinaryComparisonExpression
+    | left=expression     operand=LOWER_THAN            right=expression                #BinaryComparisonExpression
+    | left=expression     operand=GREATER_EQUAL_THAN    right=expression                #BinaryComparisonExpression
+    | left=expression     operand=LOWER_EQUAL_THAN      right=expression                #BinaryComparisonExpression
+    | left=expression     operand=EQUAL                 right=expression                #BinaryComparisonExpression
+    | left=expression     operand=NOT_EQUAL             right=expression                #BinaryComparisonExpression
     |                     operand=MINUS                 value=expression                #UnaryMathExpression
     |                     operand=PLUS                  value=expression                #UnaryMathExpression
+    | PLUS PLUS ID                                                                      #PreIncrementExpression
+    | ID PLUS PLUS                                                                      #PostIncrementExpression
+    | MINUS MINUS ID                                                                    #PreDecrementExpression
+    | ID MINUS MINUS                                                                    #PostDecrementExpression
     | NOT  value=expression                                                             #UnaryLogicNegationExpression
     | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression

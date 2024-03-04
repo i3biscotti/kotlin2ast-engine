@@ -38,7 +38,7 @@ fun VarDeclarationStatementContext.toAst(considerPosition: Boolean): VariableDec
 
 fun ValDeclarationStatementContext.toAst(considerPosition: Boolean): VariableDeclarationStatement {
     val name = this.ID().text
-    val value = this.expression().toAst(considerPosition)
+    val value = this.expression()?.toAst(considerPosition)
     val valueType = antlr4ToAstValueType(this.type())
 
     return VariableDeclarationStatement(

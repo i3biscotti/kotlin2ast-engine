@@ -12,6 +12,7 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is FunctionOrClassInstanceCallExpressionContext -> toAst(considerPosition)
         is BinaryMathExpressionContext -> toAst(considerPosition)
         is BinaryLogicExpressionContext -> toAst(considerPosition)
+        is BinaryComparisonExpressionContext -> toAst(considerPosition)
         is UnaryMathExpressionContext -> toAst(considerPosition)
         is UnaryLogicNegationExpressionContext -> toAst(considerPosition)
         is ParenthesisExpressionContext -> toAst(considerPosition)
@@ -19,6 +20,10 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is ListOfExpressionContext -> toAst(considerPosition)
         is ObjectMethodCallExpressionContext -> toAst(considerPosition)
         is ObjectPropertyReferenceExpressionContext -> toAst(considerPosition)
+        is PreIncrementExpressionContext -> PreIncrementExpression(this.ID().text, toPosition(considerPosition))
+        is PostIncrementExpressionContext -> PostIncrementExpression(this.ID().text, toPosition(considerPosition))
+        is PreDecrementExpressionContext -> PreDecrementExpression(this.ID().text, toPosition(considerPosition))
+        is PostDecrementExpressionContext -> PostDecrementExpression(this.ID().text, toPosition(considerPosition))
         else -> throw NotImplementedError("${this.javaClass.kotlin.simpleName} not implemented")
     }
 }
@@ -58,18 +63,35 @@ fun BinaryLogicExpressionContext.toAst(considerPosition: Boolean): BinaryLogicEx
     val left = this.left.toAst(considerPosition)
     val right = this.right.toAst(considerPosition)
     val operand: LogicOperand = when (this.operand.text) {
-        "&&" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.and
-        "||" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.or
-        "==" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.equal
-        "!=" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.notEqual
-        "<" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.lessThan
-        "<=" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.lessThanOrEqual
-        ">" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.greaterThan
-        ">=" -> org.i3biscotti.kotlin2ast.ast.models.LogicOperand.greaterThanOrEqual
+        "&&" -> LogicOperand.and
+        "||" -> LogicOperand.or
         else -> throw NotImplementedError()
     }
 
     return BinaryLogicExpression(
+        operand,
+        left,
+        right,
+        toPosition(considerPosition),
+    )
+}
+
+fun BinaryComparisonExpressionContext.toAst(considerPosition: Boolean): BinaryComparisonExpression {
+
+    val left = this.left.toAst(considerPosition)
+    val right = this.right.toAst(considerPosition)
+
+    val operand = when (this.operand.text) {
+        "==" -> ComparisonOperand.equal
+        "!=" -> ComparisonOperand.notEqual
+        "<" -> ComparisonOperand.lessThan
+        "<=" -> ComparisonOperand.lessThanOrEqual
+        ">" -> ComparisonOperand.greaterThan
+        ">=" -> ComparisonOperand.greaterThanOrEqual
+        else -> throw NotImplementedError()
+    }
+
+    return BinaryComparisonExpression(
         operand,
         left,
         right,

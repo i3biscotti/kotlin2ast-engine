@@ -299,8 +299,13 @@ fun Expression.transpile(): String {
         is DoubleLiteralExpression -> value
         is BooleanLitExpression -> value
         is StringLiteralExpression -> value
+        is PreIncrementExpression -> "++$name"
+        is PostIncrementExpression -> "$name++"
+        is PreDecrementExpression -> "--$name"
+        is PostDecrementExpression -> "$name--"
         is BinaryMathExpression -> transpile()
         is BinaryLogicExpression -> transpile()
+        is BinaryComparisonExpression -> transpile()
         is UnaryMathExpression -> transpile()
         is UnaryLogicNegationExpression -> transpile()
         is VarReferenceExpression -> transpile()
@@ -317,12 +322,6 @@ fun BinaryLogicExpression.transpile(): String {
     val operand = when (this.operand) {
         LogicOperand.and -> "&&"
         LogicOperand.or -> "||"
-        LogicOperand.equal -> "=="
-        LogicOperand.notEqual -> "!="
-        LogicOperand.lessThan -> "<"
-        LogicOperand.lessThanOrEqual -> "<="
-        LogicOperand.greaterThan -> ">"
-        LogicOperand.greaterThanOrEqual -> ">="
         LogicOperand.not -> throw UnsupportedOperationException()
     }
     val rightTranspiled = right.transpile()
@@ -338,6 +337,21 @@ fun BinaryMathExpression.transpile(): String {
         MathOperand.division -> "/"
         MathOperand.module -> "|"
     }
+    val rightTranspiled = right.transpile()
+    return "$leftTranspiled $operand $rightTranspiled"
+}
+fun BinaryComparisonExpression.transpile(): String {
+    val leftTranspiled = left.transpile()
+
+    val operand = when (this.operand) {
+        ComparisonOperand.equal -> "=="
+        ComparisonOperand.notEqual -> "!="
+        ComparisonOperand.lessThan -> "<"
+        ComparisonOperand.lessThanOrEqual -> "<="
+        ComparisonOperand.greaterThan -> ">"
+        ComparisonOperand.greaterThanOrEqual -> ">="
+    }
+
     val rightTranspiled = right.transpile()
     return "$leftTranspiled $operand $rightTranspiled"
 }
