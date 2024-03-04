@@ -13,7 +13,8 @@ internal fun prepareNewScope(scope: ScopeContext, statementsBlock: List<Statemen
             FunctionSign(
                 statement.name,
                 statement.returnType ?: VariableValueType.VOID,
-                statement.parameters.map { ParamSign(it.name, it.valueType) }
+                statement.parameters.map { ParamSign(it.name, it.valueType) },
+                statement.position!!.start
             )
         }
 
@@ -33,7 +34,8 @@ fun generateFunctionSign(statement: FunctionDefinitionStatement): FunctionSign {
     return FunctionSign(
         statement.name,
         statement.returnType ?: VariableValueType.VOID,
-        statement.parameters.map { ParamSign(it.name, it.valueType) }
+        statement.parameters.map { ParamSign(it.name, it.valueType) },
+        statement.position!!.start
     )
 }
 
@@ -42,7 +44,8 @@ fun generateConstructorFunctionSign(constr: ConstructorDefinitionStatement): Fun
     return FunctionSign(
         functionName,
         VariableValueType(constr.className),
-        constr.parameters.map { ParamSign(it.name, it.valueType) }
+        constr.parameters.map { ParamSign(it.name, it.valueType) },
+        constr.position!!.start
     )
 }
 
@@ -51,7 +54,8 @@ fun generateClassSign(context: ScopeContext, statement: ClassDefinitionStatement
         VariableSign(
             it.name,
             it.valueType ?: extractType(context, it.value!!),
-            true
+            true,
+            it.position!!.start
         )
     }
 
@@ -61,7 +65,8 @@ fun generateClassSign(context: ScopeContext, statement: ClassDefinitionStatement
         statement.name,
         classProperties,
         classMethods,
-        emptyMap()
+        emptyMap(),
+        statement.position!!.start
     )
 }
 

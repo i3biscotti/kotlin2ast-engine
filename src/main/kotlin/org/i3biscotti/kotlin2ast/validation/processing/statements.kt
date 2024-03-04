@@ -24,11 +24,22 @@ fun Statement.process(operation: ProcessOperationCallback, scope: ScopeContext) 
 fun VariableDeclarationStatement.process(operation: ProcessOperationCallback, scope: ScopeContext) {
     value?.process(operation, scope)
 
-    val varSign = VariableSign(
-        name,
-        valueType ?: extractType(scope, value!!),
-        varType == VariableType.variable
-    )
+    lateinit var varSign: VariableSign
+    try {
+        varSign = VariableSign(
+            name,
+            valueType ?: extractType(scope, value!!),
+            varType == VariableType.variable,
+            position!!.start
+        )
+    } catch (e: Exception) {
+        varSign = VariableSign(
+            name,
+            VariableValueType.DYNAMIC,
+            varType == VariableType.variable,
+            position!!.start
+        )
+    }
 
     scope.declaredVariables[name] = varSign
 }
@@ -47,25 +58,38 @@ fun FunctionDefinitionStatement.process(operation: ProcessOperationCallback, sco
     val functionScope = prepareNewScope(scope, statements)
 
     functionScope.declaredVariables.putAll(
-        parameters.map { it.name to VariableSign(it.name, it.valueType, true) }
+        parameters.map {
+            it.name to VariableSign(
+                it.name,
+                it.valueType,
+                true,
+                position!!.start
+            )
+        }
     )
 
-    statements.forEach { it.process(operation, scope) }
+    statements.forEach { it.process(operation, functionScope) }
 }
 
 fun ClassDefinitionStatement.process(operation: ProcessOperationCallback, scope: ScopeContext) {
     properties.forEach { it.process(operation, scope) }
 
-    val classScope = scope.wrap()
+    val classScope = prepareNewScope(scope, emptyList())
 
     classScope.declaredVariables.putAll(
-        properties.map { it.name to VariableSign(it.name, it.valueType, true) }
+        properties.map {
+            it.name to VariableSign(
+                it.name,
+                it.valueType,
+                true,
+                position!!.start,
+            )
+        }
     )
 
     val methodSigns = methods.map { it.name to generateFunctionSign(it) }
     val constructorSigns = constructors.map { it.constructorName to generateConstructorFunctionSign(it) }
     classScope.declaredFunctions.putAll(methodSigns + constructorSigns)
-
 
     constructors.forEach { it.process(operation, scope) }
     properties.forEach { it.process(operation, scope) }
