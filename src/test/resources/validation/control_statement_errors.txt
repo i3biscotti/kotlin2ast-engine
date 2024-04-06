@@ -1,0 +1,13 @@
+fun main() {
+  var a = 10
+
+  if(a + 2){
+    val s = 1
+  }
+
+  var i : int = 1
+
+  while(a > 2){
+    i++
+  }
+}

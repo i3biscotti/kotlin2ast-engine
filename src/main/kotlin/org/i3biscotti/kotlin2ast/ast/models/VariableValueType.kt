@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @SerialName("VariableValueType")
 data class VariableValueType(val name: String) {
     companion object {
+        val DYNAMIC = VariableValueType("dynamic")
         val INT = VariableValueType("int")
         val DOUBLE = VariableValueType("double")
         val STRING = VariableValueType("string")

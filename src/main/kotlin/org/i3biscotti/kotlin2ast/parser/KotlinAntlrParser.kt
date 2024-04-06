@@ -6,12 +6,14 @@ import org.antlr.v4.runtime.*
 import org.antlr.v4.runtime.atn.*
 import org.antlr.v4.runtime.dfa.DFA
 import org.i3biscotti.kotlin2ast.ast.models.Point
+import org.i3biscotti.kotlin2ast.parser.models.AntlrValidationError
+import org.i3biscotti.kotlin2ast.parser.models.LangError
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.nio.charset.Charset
 import java.util.*
 
-data class AntlrParsingResult(val root: KotlinParser.KotlinFileContext?, val errors: List<KotlinLangError>) {
+data class AntlrParsingResult(val root: KotlinParser.KotlinFileContext?, val errors: List<AntlrValidationError>) {
     fun isCorrect() = errors.isEmpty() && root != null
 }
 
@@ -21,7 +23,7 @@ fun String.toStream(charset: Charset = Charsets.UTF_8) =
 object KotlinAntlrParser {
 
     fun parse(inputStream: InputStream): AntlrParsingResult {
-        val lexicalAndSyntacticErrors = LinkedList<KotlinLangError>()
+        val lexicalAndSyntacticErrors = LinkedList<AntlrValidationError>()
         val errorListener = object : ANTLRErrorListener {
             override fun reportAmbiguity(
                 p0: Parser?,
@@ -52,7 +54,7 @@ object KotlinAntlrParser {
                 msg: String,
                 ex: RecognitionException?
             ) {
-                lexicalAndSyntacticErrors.add(KotlinLangError(msg, Point(line, charPositionInline)))
+                lexicalAndSyntacticErrors.add(AntlrValidationError(msg, Point(line, charPositionInline)))
             }
 
             override fun reportContextSensitivity(

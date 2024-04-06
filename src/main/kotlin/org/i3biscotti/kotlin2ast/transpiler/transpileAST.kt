@@ -22,7 +22,7 @@ fun ProgramFile.transpile(): String {
 
 fun Statement.transpile(depth: Int = 0): String {
     return when (this) {
-        is VarDeclarationStatement -> transpile(depth)
+        is VariableDeclarationStatement -> transpile(depth)
         is AssignmentStatement -> transpile(depth)
         is ReturnStatement -> transpile(depth)
         is FunctionDefinitionStatement -> transpile(depth)
@@ -47,7 +47,7 @@ fun VariableValueType.transpile(): String {
     }
 }
 
-fun VarDeclarationStatement.transpile(depth: Int = 0): String {
+fun VariableDeclarationStatement.transpile(depth: Int = 0): String {
     val variableTypeTranspiled = when (varType) {
         VariableType.immutable -> "val"
         VariableType.variable -> "var"
@@ -62,7 +62,7 @@ fun VarDeclarationStatement.transpile(depth: Int = 0): String {
         declarationTranspiled = "$declarationTranspiled : $valueTypeTranspiled"
     }
 
-    declarationTranspiled = "${generateIndentationSpace(depth)}$declarationTranspiled = ${value.transpile()}"
+    declarationTranspiled = "${generateIndentationSpace(depth)}$declarationTranspiled = ${value?.transpile()}"
 
     return declarationTranspiled
 }
@@ -307,8 +307,13 @@ fun Expression.transpile(): String {
         is DoubleLiteralExpression -> value
         is BooleanLitExpression -> value
         is StringLiteralExpression -> value
+        is PreIncrementExpression -> "++$name"
+        is PostIncrementExpression -> "$name++"
+        is PreDecrementExpression -> "--$name"
+        is PostDecrementExpression -> "$name--"
         is BinaryMathExpression -> transpile()
         is BinaryLogicExpression -> transpile()
+        is BinaryComparisonExpression -> transpile()
         is UnaryMathExpression -> transpile()
         is UnaryLogicNegationExpression -> transpile()
         is VarReferenceExpression -> transpile()
@@ -316,6 +321,7 @@ fun Expression.transpile(): String {
         is ListOfExpression -> transpile()
         is FunctionCallExpression -> transpile()
         is ObjectMethodCallExpression -> transpile()
+        is ObjectPropertyReferenceExpression -> transpile()
     }
 }
 
@@ -324,12 +330,6 @@ fun BinaryLogicExpression.transpile(): String {
     val operand = when (this.operand) {
         LogicOperand.and -> "&&"
         LogicOperand.or -> "||"
-        LogicOperand.equal -> "=="
-        LogicOperand.notEqual -> "!="
-        LogicOperand.lessThan -> "<"
-        LogicOperand.lessThanOrEqual -> "<="
-        LogicOperand.greaterThan -> ">"
-        LogicOperand.greaterThanOrEqual -> ">="
         LogicOperand.not -> throw UnsupportedOperationException()
     }
     val rightTranspiled = right.transpile()
@@ -345,6 +345,21 @@ fun BinaryMathExpression.transpile(): String {
         MathOperand.division -> "/"
         MathOperand.module -> "|"
     }
+    val rightTranspiled = right.transpile()
+    return "$leftTranspiled $operand $rightTranspiled"
+}
+fun BinaryComparisonExpression.transpile(): String {
+    val leftTranspiled = left.transpile()
+
+    val operand = when (this.operand) {
+        ComparisonOperand.equal -> "=="
+        ComparisonOperand.notEqual -> "!="
+        ComparisonOperand.lessThan -> "<"
+        ComparisonOperand.lessThanOrEqual -> "<="
+        ComparisonOperand.greaterThan -> ">"
+        ComparisonOperand.greaterThanOrEqual -> ">="
+    }
+
     val rightTranspiled = right.transpile()
     return "$leftTranspiled $operand $rightTranspiled"
 }
@@ -382,4 +397,8 @@ fun FunctionCallExpression.transpile(): String {
 fun ObjectMethodCallExpression.transpile(): String {
     val paramsTranspiledInline = params.joinToString(", ") { it.transpile() }
     return "$objectName.$methodName($paramsTranspiledInline)"
+}
+
+fun ObjectPropertyReferenceExpression.transpile(): String {
+    return "$objectName.$propertyName"
 }

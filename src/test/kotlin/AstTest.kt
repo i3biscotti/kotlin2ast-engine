@@ -1,5 +1,5 @@
+import org.i3biscotti.kotlin2ast.ast.mapping.*
 import org.i3biscotti.kotlin2ast.ast.models.*
-import org.i3biscotti.kotlin2ast.ast.toAst
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -27,7 +27,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "name",
                         null,
@@ -48,7 +48,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.immutable,
                         "age",
                         VariableValueType.INT,
@@ -69,7 +69,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.constant,
                         "isOld",
                         VariableValueType.BOOLEAN,
@@ -112,67 +112,55 @@ class AstTest : ITest {
             ProgramFile(
                 listOf(
                     ExpressionDefinitionStatement(
-                        UnaryLogicNegationExpression(
-                            null,
+                        BinaryComparisonExpression(
+                            ComparisonOperand.notEqual,
+                            UnaryLogicNegationExpression(
+                                null,
+                                VarReferenceExpression("True", null)
+                            ),
                             BinaryLogicExpression(
-                                LogicOperand.notEqual,
-                                ParenthesisExpression(
-                                    VarReferenceExpression("True", null),
+                                LogicOperand.or,
+                                BinaryLogicExpression(
+                                    LogicOperand.and,
+                                    BinaryMathExpression(
+                                        MathOperand.division,
+                                        VarReferenceExpression("a", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    BinaryMathExpression(
+                                        MathOperand.times,
+                                        VarReferenceExpression("b", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
                                     null
                                 ),
-                                ParenthesisExpression(
-                                    BinaryLogicExpression(
-                                        LogicOperand.or,
-                                        ParenthesisExpression(
-                                            BinaryLogicExpression(
-                                                LogicOperand.and,
-                                                ParenthesisExpression(
-                                                    BinaryMathExpression(
-                                                        MathOperand.division,
-                                                        VarReferenceExpression("a", null),
-                                                        IntLiteralExpression("3", null),
-                                                        null
-                                                    ),
-                                                    null),
-                                                ParenthesisExpression(
-                                                    BinaryMathExpression(
-                                                        MathOperand.times,
-                                                        VarReferenceExpression("b", null),
-                                                        IntLiteralExpression("3", null),
-                                                        null
-                                                    ),
-                                                    null
-                                                ),
-                                                null
-                                            ),
-                                            null
-                                        ),
-                                        ParenthesisExpression(
-                                            BinaryLogicExpression(
-                                                LogicOperand.and,
-                                                ParenthesisExpression(
-                                                    BinaryMathExpression(
-                                                        MathOperand.plus,
-                                                        VarReferenceExpression("c", null),
-                                                        IntLiteralExpression("3", null),
-                                                        null
-                                                    ),
-                                                    null),
-                                                ParenthesisExpression(
-                                                    BinaryMathExpression(
-                                                        MathOperand.minus,
-                                                        VarReferenceExpression("d", null),
-                                                        IntLiteralExpression("3", null),
-                                                        null),
-                                                    null),
-                                                null),
-                                            null),
-                                        null),
-                                    null),
-                                null)),
-                        null),
+                                BinaryLogicExpression(
+                                    LogicOperand.and,
+                                    BinaryMathExpression(
+                                        MathOperand.plus,
+                                        VarReferenceExpression("c", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    BinaryMathExpression(
+                                        MathOperand.minus,
+                                        VarReferenceExpression("d", null),
+                                        IntLiteralExpression("3", null),
+                                        null
+                                    ),
+                                    null
+                                ),
+                                null
+                            ),
+                            null,
+                        ),
+                        null
+                    )
                 ),
-                null),
+                null
+            ),
             programFile
         )
     }
@@ -310,8 +298,8 @@ class AstTest : ITest {
                 listOf(
                     IfDefinitionStatement(
                         IfBlock(
-                            BinaryLogicExpression(
-                                LogicOperand.greaterThan,
+                            BinaryComparisonExpression(
+                                ComparisonOperand.greaterThan,
                                 VarReferenceExpression("voto", null),
                                 IntLiteralExpression("18", null),
                                 null
@@ -319,7 +307,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression(""""passed"""", null),
+                                    StringLiteralExpression("'passed'", null),
                                     null
                                 )
                             ),
@@ -328,8 +316,8 @@ class AstTest : ITest {
                         ),
                         listOf(
                             IfBlock(
-                                BinaryLogicExpression(
-                                    LogicOperand.equal,
+                                BinaryComparisonExpression(
+                                    ComparisonOperand.equal,
                                     VarReferenceExpression("voto", null),
                                     IntLiteralExpression("18", null),
                                     null
@@ -337,7 +325,7 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "exam",
-                                        StringLiteralExpression(""""passed"""", null),
+                                        StringLiteralExpression("'passed'", null),
                                         null
                                     )
                                 ),
@@ -350,7 +338,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression(""""failed"""", null),
+                                    StringLiteralExpression("'failed'", null),
                                     null
                                 )
                             ),
@@ -374,10 +362,10 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "i",
-                        null,
+                        VariableValueType.INT,
                         IntLiteralExpression("1", null),
                         null,
                     ),
@@ -386,8 +374,8 @@ class AstTest : ITest {
                         listOf(
                             IfDefinitionStatement(
                                 IfBlock(
-                                    BinaryLogicExpression(
-                                        LogicOperand.lessThan,
+                                    BinaryComparisonExpression(
+                                        ComparisonOperand.lessThan,
                                         VarReferenceExpression("i", null),
                                         IntLiteralExpression("17", null),
                                         null
@@ -577,19 +565,19 @@ class AstTest : ITest {
                         ),
                         VariableValueType.BOOLEAN,
                         listOf(
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.variable,
                                 "aIsGreaterThanB",
                                 null,
-                                BinaryLogicExpression(
-                                    LogicOperand.greaterThan,
+                                BinaryComparisonExpression(
+                                    ComparisonOperand.greaterThan,
                                     VarReferenceExpression("a", null),
                                     VarReferenceExpression("b", null),
                                     null
                                 ),
                                 null,
                             ),
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.immutable,
                                 "isGreaterAndCondition",
                                 null,
@@ -613,7 +601,7 @@ class AstTest : ITest {
                         listOf(),
                         VariableValueType.VOID,
                         listOf(
-                            VarDeclarationStatement(
+                            VariableDeclarationStatement(
                                 VariableType.immutable,
                                 "result",
                                 null,
@@ -798,8 +786,8 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "pro2",
-                                        BinaryLogicExpression(
-                                            LogicOperand.lessThanOrEqual,
+                                        BinaryComparisonExpression(
+                                            ComparisonOperand.lessThanOrEqual,
                                             VarReferenceExpression("value", null),
                                             VarReferenceExpression("prop1", null),
                                             null
@@ -987,7 +975,7 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.immutable,
                         "element",
                         null,

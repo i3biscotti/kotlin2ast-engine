@@ -1,22 +1,12 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package org.i3biscotti.kotlin2ast.parser
 
-import org.i3biscotti.kotlin2ast.ast.*
-import org.i3biscotti.kotlin2ast.ast.models.Node
-import org.i3biscotti.kotlin2ast.ast.models.ProgramFile
-import org.i3biscotti.kotlin2ast.validation.validate
+import org.i3biscotti.kotlin2ast.ast.mapping.toAst
+import org.i3biscotti.kotlin2ast.ast.models.*
+import org.i3biscotti.kotlin2ast.parser.models.LangError
+import org.i3biscotti.kotlin2ast.validation.ProgramValidator
 import java.io.*
 
-fun <T : Node> Node.specificProcess(klass: Class<T>, operation: (T) -> Unit) {
-    process {
-        if (klass.isInstance(it)) {
-            operation(it as T)
-        }
-    }
-}
-
-data class KotlinParsingResult(val root: ProgramFile?, val errors: List<KotlinLangError>) {
+data class KotlinParsingResult(val root: ProgramFile?, val errors: List<LangError>) {
     fun isCorrect() = errors.isEmpty() && root != null
 }
 
@@ -32,7 +22,7 @@ object KotlinParser {
         return if (parsingResult.isCorrect()) {
 
             val programFile: ProgramFile = parsingResult.root!!.toAst(considerPosition)
-            val semanticErrors = programFile.validate()
+            val semanticErrors = ProgramValidator(programFile).startValidation()
 
             KotlinParsingResult(programFile, parsingResult.errors + semanticErrors)
         } else {

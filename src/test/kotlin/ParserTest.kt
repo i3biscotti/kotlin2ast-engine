@@ -108,7 +108,7 @@ class ParserTest : ITest{
             |        T[12.3]
             |    T[<EOF>]
             |""".trimMargin(),
-            programFile.multiLineString()
+            programFile.multiLineString(),
         )
     }
     //endregion

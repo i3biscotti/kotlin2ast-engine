@@ -1,0 +1,8 @@
+class Pizza()
+
+fun main() {
+    val margherita = Pizza()
+    margherita.impasto = "grano"
+    margherita.inforna()
+    val patatine = Condimento()
+}

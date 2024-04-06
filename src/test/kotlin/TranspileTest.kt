@@ -1,4 +1,4 @@
-import org.i3biscotti.kotlin2ast.ast.toAst
+import org.i3biscotti.kotlin2ast.ast.mapping.toAst
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.i3biscotti.kotlin2ast.transpiler.transpile
 import org.junit.Test

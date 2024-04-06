@@ -1,52 +1,65 @@
+import org.i3biscotti.kotlin2ast.ast.mapping.toAst
+import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
+import org.i3biscotti.kotlin2ast.validation.ProgramValidator
+import org.i3biscotti.kotlin2ast.validation.models.*
 import org.junit.Test
+import kotlin.test.assertEquals
 
-class TestValidation : ITest{
-    @Test
-    override fun testVarDeclarationStatement() {
-        TODO("Not yet implemented")
+class TestValidation {
+    private fun parseResource(
+        resourceName: String,
+    ): ProgramValidator {
+        val resource = this.javaClass.getResourceAsStream("/${resourceName}.txt")
+        val parseResult = resource?.let { KotlinAntlrParser.parse(it) }
+
+        if (parseResult != null) {
+            val root = parseResult.root?.toAst(true)
+                ?: throw Exception("ProgramFile was null")
+
+            return ProgramValidator(root)
+        } else {
+            throw Exception("result was null")
+        }
     }
 
     @Test
-    override fun testValDeclarationStatement() {
-        TODO("Not yet implemented")
+    fun variablesErrors() {
+        val programFile = parseResource("validation/variable_errors")
+        val errors = programFile.startValidation().map { it.javaClass.simpleName }
+
+        assertEquals(
+            listOf(
+                VarNotDeclaredError::class.simpleName!!,
+                VarImmutableError::class.simpleName!!,
+                VarAlreadyDeclaredError::class.simpleName!!,
+                VarTypeMismatchError::class.simpleName!!,
+                VarValueNotAssigned::class.simpleName!!,
+            ),
+            errors
+        )
+
     }
 
     @Test
-    override fun testConstDeclarationStatement() {
-        TODO("Not yet implemented")
+    fun controlStatementsErrors() {
+        val programFile = parseResource("validation/control_statement_errors")
+        val errors = programFile.startValidation().map { it.javaClass.simpleName }
+
+        assertEquals(
+            listOf(ExpressionMismatchError::class.simpleName!!),
+            errors,
+        )
     }
 
     @Test
-    override fun testAssignmentStatement() {
-        TODO("Not yet implemented")
-    }
+    fun missingMainFunction() {
+        val programFile = parseResource("validation/missing_main_function")
+        val errors = programFile.startValidation().map { it.javaClass.simpleName }
 
-    override fun testExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testBinaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryMathExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testUnaryLogicExpressionDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testIfDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
-    override fun testWhileDefinitionStatement() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf(MissingMainFunctionError::class.simpleName!!),
+            errors
+        )
     }
 
     override fun testForDefinitionStatement() {
@@ -54,64 +67,34 @@ class TestValidation : ITest{
     }
 
     @Test
-    override fun voidFunctionWithoutParams() {
-        TODO("Not yet implemented")
+    fun functionErrors() {
+        val programFile = parseResource("validation/function_errors")
+        val errors = programFile.startValidation()
+        val errorNames = errors.map { it.javaClass.simpleName }
+
+        assertEquals(
+            listOf(
+                FunctionMissingReturnError::class.simpleName!!,
+                FunctionReturnNotAllowedError::class.simpleName!!,
+                FunctionSignMismatchError::class.simpleName!!,
+                FunctionNotDefinedError::class.simpleName!!,
+            ),
+            errorNames
+        )
     }
 
     @Test
-    override fun intSumFunction() {
-        TODO("Not yet implemented")
-    }
+    fun classErrors() {
+        val programFile = parseResource("validation/class_errors")
+        val errors = programFile.startValidation().map { it.javaClass.simpleName }
 
-    @Test
-    override fun callFunction() {
-        TODO("Not yet implemented")
+        assertEquals(
+            listOf(
+                ClassPropertyNotDefinedError::class.simpleName!!,
+                ClassMethodNotDefinedError::class.simpleName!!,
+                FunctionNotDefinedError::class.simpleName!!,
+            ),
+            errors
+        )
     }
-
-    @Test
-    override fun emptyClass() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun classWithProperties() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun classWithMethods() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun classWithMultipleConstructors() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun privateClass() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun classHierarchy() {
-        TODO("Not yet implemented")
-    }
-
-    //region Task 9
-    @Test
-    override fun objectInstance() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun propertyAssignment() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    override fun methodCall() {
-        TODO("Not yet implemented")
-    }
-    //endregion
 }
