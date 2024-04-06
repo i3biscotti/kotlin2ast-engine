@@ -62,7 +62,7 @@ class TestValidation {
         )
     }
 
-    override fun testForDefinitionStatement() {
+    fun testForDefinitionStatement() {
         TODO("Not yet implemented")
     }
 

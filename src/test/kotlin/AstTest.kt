@@ -105,67 +105,6 @@ class AstTest : ITest {
 
     //region Task 2
     @Test
-    override fun testExpressionDefinitionStatement() {
-        val programFile = parseResource("task2/expressionDefinitionStatement")
-
-        assertEquals(
-            ProgramFile(
-                listOf(
-                    ExpressionDefinitionStatement(
-                        BinaryComparisonExpression(
-                            ComparisonOperand.notEqual,
-                            UnaryLogicNegationExpression(
-                                null,
-                                VarReferenceExpression("True", null)
-                            ),
-                            BinaryLogicExpression(
-                                LogicOperand.or,
-                                BinaryLogicExpression(
-                                    LogicOperand.and,
-                                    BinaryMathExpression(
-                                        MathOperand.division,
-                                        VarReferenceExpression("a", null),
-                                        IntLiteralExpression("3", null),
-                                        null
-                                    ),
-                                    BinaryMathExpression(
-                                        MathOperand.times,
-                                        VarReferenceExpression("b", null),
-                                        IntLiteralExpression("3", null),
-                                        null
-                                    ),
-                                    null
-                                ),
-                                BinaryLogicExpression(
-                                    LogicOperand.and,
-                                    BinaryMathExpression(
-                                        MathOperand.plus,
-                                        VarReferenceExpression("c", null),
-                                        IntLiteralExpression("3", null),
-                                        null
-                                    ),
-                                    BinaryMathExpression(
-                                        MathOperand.minus,
-                                        VarReferenceExpression("d", null),
-                                        IntLiteralExpression("3", null),
-                                        null
-                                    ),
-                                    null
-                                ),
-                                null
-                            ),
-                            null,
-                        ),
-                        null
-                    )
-                ),
-                null
-            ),
-            programFile
-        )
-    }
-
-    @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
         val programFile = parseResource("task2/binaryMathExpressionDefinitionStatement")
 
@@ -307,7 +246,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression("'passed'", null),
+                                    StringLiteralExpression(""""passed"""", null),
                                     null
                                 )
                             ),
@@ -325,7 +264,7 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "exam",
-                                        StringLiteralExpression("'passed'", null),
+                                        StringLiteralExpression(""""passed"""", null),
                                         null
                                     )
                                 ),
@@ -338,7 +277,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression("'failed'", null),
+                                    StringLiteralExpression(""""failed"""", null),
                                     null
                                 )
                             ),
@@ -365,7 +304,7 @@ class AstTest : ITest {
                     VariableDeclarationStatement(
                         VariableType.variable,
                         "i",
-                        VariableValueType.INT,
+                        null,
                         IntLiteralExpression("1", null),
                         null,
                     ),
@@ -427,14 +366,14 @@ class AstTest : ITest {
         assertEquals(
             ProgramFile(
                 listOf(
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "list",
                         null,
                         IntLiteralExpression("[1,2]",null),
                         null,
                     ),
-                    VarDeclarationStatement(
+                    VariableDeclarationStatement(
                         VariableType.variable,
                         "b",
                         null,

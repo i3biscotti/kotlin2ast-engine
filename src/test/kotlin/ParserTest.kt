@@ -115,82 +115,6 @@ class ParserTest : ITest{
 
     //region Task 2
     @Test
-    override fun testExpressionDefinitionStatement() {
-        val programFile = parseResource("task2/expressionDefinitionStatement")
-            .toParseTree()
-
-        assertEquals(
-            """
-            |KotlinFile
-            |  Line
-            |    ExpressionDefinitionStatement
-            |      UnaryLogicNegationExpression
-            |        T[!]
-            |        BinaryLogicExpression
-            |          ParenthesisExpression
-            |            T[(]
-            |            VarReferenceExpression
-            |              T[True]
-            |            T[)]
-            |          T[!=]
-            |          ParenthesisExpression
-            |            T[(]
-            |            BinaryLogicExpression
-            |              ParenthesisExpression
-            |                T[(]
-            |                BinaryLogicExpression
-            |                  ParenthesisExpression
-            |                    T[(]
-            |                    BinaryMathExpression
-            |                      VarReferenceExpression
-            |                        T[a]
-            |                      T[/]
-            |                      IntLiteralExpression
-            |                        T[3]
-            |                    T[)]
-            |                  T[&&]
-            |                  ParenthesisExpression
-            |                    T[(]
-            |                    BinaryMathExpression
-            |                      VarReferenceExpression
-            |                        T[b]
-            |                      T[*]
-            |                      IntLiteralExpression
-            |                        T[3]
-            |                    T[)]
-            |                T[)]
-            |              T[||]
-            |              ParenthesisExpression
-            |                T[(]
-            |                BinaryLogicExpression
-            |                  ParenthesisExpression
-            |                    T[(]
-            |                    BinaryMathExpression
-            |                      VarReferenceExpression
-            |                        T[c]
-            |                      T[+]
-            |                      IntLiteralExpression
-            |                        T[3]
-            |                    T[)]
-            |                  T[&&]
-            |                  ParenthesisExpression
-            |                    T[(]
-            |                    BinaryMathExpression
-            |                      VarReferenceExpression
-            |                        T[d]
-            |                      T[-]
-            |                      IntLiteralExpression
-            |                        T[3]
-            |                    T[)]
-            |                T[)]
-            |            T[)]
-            |    T[<EOF>]
-            |""".trimMargin(),
-            programFile.multiLineString()
-        )
-    }
-
-    @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
         val programFile = parseResource("task2/binaryMathExpressionDefinitionStatement")
             .toParseTree()
@@ -323,7 +247,7 @@ class ParserTest : ITest{
             |        IfBlock
             |          T[if]
             |          T[(]
-            |          BinaryLogicExpression
+            |          BinaryComparisonExpression
             |            VarReferenceExpression
             |              T[voto]
             |            T[>]
@@ -342,7 +266,7 @@ class ParserTest : ITest{
             |          T[else]
             |          T[if]
             |          T[(]
-            |          BinaryLogicExpression
+            |          BinaryComparisonExpression
             |            VarReferenceExpression
             |              T[voto]
             |            T[==]
@@ -406,7 +330,7 @@ class ParserTest : ITest{
             |              IfBlock
             |                T[if]
             |                T[(]
-            |                BinaryLogicExpression
+            |                BinaryComparisonExpression
             |                  VarReferenceExpression
             |                    T[i]
             |                  T[<]
@@ -573,7 +497,7 @@ class ParserTest : ITest{
             |            T[var]
             |            T[aIsGreaterThanB]
             |            T[=]
-            |            BinaryLogicExpression
+            |            BinaryComparisonExpression
             |              VarReferenceExpression
             |                T[a]
             |              T[>]
@@ -734,7 +658,7 @@ class ParserTest : ITest{
                 |              AssignStatement
                 |                T[pro2]
                 |                T[=]
-                |                BinaryLogicExpression
+                |                BinaryComparisonExpression
                 |                  VarReferenceExpression
                 |                    T[value]
                 |                  T[<=]

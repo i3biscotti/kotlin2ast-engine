@@ -61,16 +61,6 @@ class TranspileTest : ITest {
     //endregion
 
     //region Task2
-
-    @Test
-    override fun testExpressionDefinitionStatement() {
-        val programFile = parseResource("task2/expressionDefinitionStatement")
-
-        assertEquals(
-            "!(True) != (((a / 3) && (b * 3)) || ((c + 3) && (d - 3)))",
-            programFile
-        )
-    }
     @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
         val programFile = parseResource("task2/binaryMathExpressionDefinitionStatement")

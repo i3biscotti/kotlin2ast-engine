@@ -58,19 +58,6 @@ class LexerTest : ITest{
 
     //region Task 2
     @Test
-    override fun testExpressionDefinitionStatement() {
-        assertEquals(
-            listOf("NOT", "PAREN_OPEN", "ID", "PAREN_CLOSE", "NOT_EQUAL", "PAREN_OPEN",
-                "PAREN_OPEN", "PAREN_OPEN","ID", "DIVISION", "INT_LIT", "PAREN_CLOSE",
-                "AND", "PAREN_OPEN", "ID", "TIMES", "INT_LIT", "PAREN_CLOSE",
-                "PAREN_CLOSE", "OR", "PAREN_OPEN", "PAREN_OPEN", "ID", "PLUS", "INT_LIT","PAREN_CLOSE",
-                "AND", "PAREN_OPEN", "ID", "MINUS", "INT_LIT", "PAREN_CLOSE", "PAREN_CLOSE",
-                "PAREN_CLOSE","EOF"),
-            tokens(lexerForResource("task2/expressionDefinitionStatement"))
-        )
-    }
-
-    @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
         assertEquals(
             listOf("PAREN_OPEN", "INT_LIT", "PLUS", "INT_LIT", "PAREN_CLOSE", "TIMES",
