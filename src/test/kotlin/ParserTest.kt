@@ -124,56 +124,66 @@ class ParserTest : ITest{
             |KotlinFile
             |  Line
             |    ExpressionDefinitionStatement
-            |       BinaryLogicExpression
-            |           UnaryLogicNegationExpression
-            |               T[!]
-            |               T[(]
-            |               VarReferenceExpression
-            |                   T[True]
-            |               T[)]
-            |           T[!=]
-            |           BinaryLogicExpression
-            |               T[(]
-            |               BinaryLogicExpression
-            |                   T[(]
-            |                   BinaryMathExpression
-            |                       VarReferenceExpression
-            |                           T[a]
-            |                       T[/]
-            |                       IntLiteralExpression
-            |                           T[3]
-            |                   T[)]
-            |                   T[&&]
-            |                   T[(]
-            |                   BinaryMathExpression
-            |                       VarReferenceExpression
-            |                           T[b]
-            |                       T[*]
-            |                       IntLiteralExpression
-            |                           T[3]
-            |                   T[)]
-            |               T[)]
-            |               T[||]
-            |               T[(]
-            |               BinaryLogicExpression
-            |                   T[(]
-            |                   BinaryMathExpression
-            |                       VarReferenceExpression
-            |                           T[c]
-            |                       T[+]
-            |                       IntLiteralExpression
-            |                           T[3]
-            |                   T[)]
-            |                   T[&&]
-            |                   T[(]
-            |                   BinaryMathExpression
-            |                       VarReferenceExpression
-            |                           T[d]
-            |                       T[-]
-            |                       IntLiteralExpression
-            |                           T[3]
-            |                   T[)]
-            |               T[)]
+            |      UnaryLogicNegationExpression
+            |        T[!]
+            |        BinaryLogicExpression
+            |          ParenthesisExpression
+            |            T[(]
+            |            VarReferenceExpression
+            |              T[True]
+            |            T[)]
+            |          T[!=]
+            |          ParenthesisExpression
+            |            T[(]
+            |            BinaryLogicExpression
+            |              ParenthesisExpression
+            |                T[(]
+            |                BinaryLogicExpression
+            |                  ParenthesisExpression
+            |                    T[(]
+            |                    BinaryMathExpression
+            |                      VarReferenceExpression
+            |                        T[a]
+            |                      T[/]
+            |                      IntLiteralExpression
+            |                        T[3]
+            |                    T[)]
+            |                  T[&&]
+            |                  ParenthesisExpression
+            |                    T[(]
+            |                    BinaryMathExpression
+            |                      VarReferenceExpression
+            |                        T[b]
+            |                      T[*]
+            |                      IntLiteralExpression
+            |                        T[3]
+            |                    T[)]
+            |                T[)]
+            |              T[||]
+            |              ParenthesisExpression
+            |                T[(]
+            |                BinaryLogicExpression
+            |                  ParenthesisExpression
+            |                    T[(]
+            |                    BinaryMathExpression
+            |                      VarReferenceExpression
+            |                        T[c]
+            |                      T[+]
+            |                      IntLiteralExpression
+            |                        T[3]
+            |                    T[)]
+            |                  T[&&]
+            |                  ParenthesisExpression
+            |                    T[(]
+            |                    BinaryMathExpression
+            |                      VarReferenceExpression
+            |                        T[d]
+            |                      T[-]
+            |                      IntLiteralExpression
+            |                        T[3]
+            |                    T[)]
+            |                T[)]
+            |            T[)]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -189,27 +199,28 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
+            |    ExpressionDefinitionStatement
             |      BinaryMathExpression
+            |        ParenthesisExpression
             |          T[(]
             |          BinaryMathExpression
-            |              BinaryMathExpression
-            |                  IntLiteralExpression
-            |                      T[3]
-            |                  T[+]
-            |                  IntLiteralExpression
-            |                      T[4]
+            |            IntLiteralExpression
+            |              T[3]
+            |            T[+]
+            |            IntLiteralExpression
+            |              T[4]
             |          T[)]
-            |          T[*]
+            |        T[*]
+            |        ParenthesisExpression
             |          T[(]
             |          BinaryMathExpression
-            |              BinaryMathExpression
-            |                  IntLiteralExpression
-            |                      T[3]
-            |                  T[-]
-            |                  IntLiteralExpression
-            |                      T[7]
+            |            IntLiteralExpression
+            |              T[3]
+            |            T[-]
+            |            IntLiteralExpression
+            |              T[7]
             |          T[)]
-            |      T[<EOF>]
+            |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
         )
@@ -224,27 +235,28 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
+            |    ExpressionDefinitionStatement
             |      BinaryLogicExpression
+            |        ParenthesisExpression
             |          T[(]
             |          BinaryLogicExpression
-            |              BinaryLogicExpression
-            |                  IntLiteralExpression
-            |                      T[3]
-            |                  T[||]
-            |                  IntLiteralExpression
-            |                      T[4]
+            |            IntLiteralExpression
+            |              T[3]
+            |            T[||]
+            |            IntLiteralExpression
+            |              T[4]
             |          T[)]
-            |          T[&&]
+            |        T[&&]
+            |        ParenthesisExpression
             |          T[(]
             |          BinaryLogicExpression
-            |              BinaryLogicExpression
-            |                  IntLiteralExpression
-            |                      T[3]
-            |                  T[||]
-            |                  IntLiteralExpression
-            |                      T[7]
+            |            IntLiteralExpression
+            |              T[3]
+            |            T[||]
+            |            IntLiteralExpression
+            |              T[7]
             |          T[)]
-            |      T[<EOF>]
+            |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
         )
@@ -259,12 +271,14 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-            |    UnaryMathExpression
-            |      T[(]
-            |      T[-]
-            |      IntLiteralExpression
-            |        T[3]
-            |      T[)]
+            |    ExpressionDefinitionStatement
+            |      ParenthesisExpression
+            |        T[(]
+            |        UnaryMathExpression
+            |          T[-]
+            |          IntLiteralExpression
+            |            T[3]
+            |        T[)]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -279,12 +293,14 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-            |    UnaryLogicNegationExpression
-            |      T[!]
-            |      T[(]
-            |      VarReferenceExpression
-            |        T[a]
-            |      T[)]
+            |    ExpressionDefinitionStatement
+            |      UnaryLogicNegationExpression
+            |        T[!]
+            |        ParenthesisExpression
+            |          T[(]
+            |          VarReferenceExpression
+            |            T[a]
+            |          T[)]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -305,49 +321,52 @@ class ParserTest : ITest{
             |    IfDefinitionStatement
             |      IfDefinition
             |        IfBlock
-            |           T[if]
-            |           T[(]
-            |           BinaryLogicExpression
-            |               VarReferenceExpression
-            |                   T[ID]
-            |               T[>]
-            |               IntLiteralExpression
-            |                   T[18]
-            |           T[)]
-            |           T[{]
-            |           AssignStatement
-            |               T[exam]
-            |               T[=]
-            |               StringLiteralExpression
-            |                   T["passed"]
-            |           T[}]
+            |          T[if]
+            |          T[(]
+            |          BinaryLogicExpression
+            |            VarReferenceExpression
+            |              T[voto]
+            |            T[>]
+            |            IntLiteralExpression
+            |              T[18]
+            |          T[)]
+            |          Block
+            |            T[{]
+            |            AssignStatement
+            |              T[exam]
+            |              T[=]
+            |              StringLiteralExpression
+            |                T["passed"]
+            |            T[}]
             |        ElseIfBlock
-            |           T[else]
-            |           T[if]
-            |           T[(]
-            |           BinaryLogicExpression
-            |               VarReferenceExpression
-            |                   T[ID]
-            |               T[==]
-            |               IntLiteralExpression
-            |                   T[18]
-            |           T[)]
-            |           T[{]
-            |           AssignStatement
-            |               T[exam]
-            |               T[=]
-            |               StringLiteralExpression
-            |                   T["passed"]
-            |           T[}]
+            |          T[else]
+            |          T[if]
+            |          T[(]
+            |          BinaryLogicExpression
+            |            VarReferenceExpression
+            |              T[voto]
+            |            T[==]
+            |            IntLiteralExpression
+            |              T[18]
+            |          T[)]
+            |          Block
+            |            T[{]
+            |            AssignStatement
+            |              T[exam]
+            |              T[=]
+            |              StringLiteralExpression
+            |                T["passed"]
+            |            T[}]
             |        ElseBlock
-            |           T[else]
-            |           T[(]
-            |           AssignStatement
-            |               T[exam]
-            |               T[=]
-            |               StringLiteralExpression
-            |                   T["failed"]
-            |           T[}]
+            |          T[else]
+            |          Block
+            |            T[{]
+            |            AssignStatement
+            |              T[exam]
+            |              T[=]
+            |              StringLiteralExpression
+            |                T["failed"]
+            |            T[}]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -367,51 +386,56 @@ class ParserTest : ITest{
             |KotlinFile
             |  Line
             |    VarDeclarationStatement
-            |       T[var]
-            |       T[i]
-            |       T[=]
-            |       IntLiteralExpression
-            |           T[1]
+            |      T[var]
+            |      T[i]
+            |      T[=]
+            |      IntLiteralExpression
+            |        T[1]
+            |  Line
             |    WhileDefinitionStatement
-            |       T[while]
-            |       T[(]
-            |       VarReferenceExpression
-            |           T[condition]
-            |       T[)]
-            |       Block
-            |       T[{]
-            |       IfDefinitionStatement
-            |           IfBlock
-            |               T[if]
-            |               T[(]
-            |               BinaryLogicExpression
-            |                   VarReferenceExpression
-            |                       T[i]
-            |                   T[<]
-            |                   IntLiteralExpression
-            |                       T[17]
-            |               T[)]
-            |               T[{]
-            |               AssignStatement
-            |                   T[i]
-            |                   T[=]
-            |                   BinaryMathExpression
-            |                       VarReferenceExpression
-            |                           T[i]
-            |                       T[+]
-            |                       IntLiteralExpression
-            |                           T[1]
-            |               T[}]
-            |               ElseIfBlock
-            |                   T[else]
-            |                   T[{]
-            |                   AssignStatement
-            |                       T[condition]
-            |                       T[=]
-            |                       BoolLiteralExpression
-            |                           T[true]
-            |                   T[}]
-            |       T[}]
+            |      WhileDefinition
+            |        T[while]
+            |        T[(]
+            |        VarReferenceExpression
+            |          T[condition]
+            |        T[)]
+            |        Block
+            |          T[{]
+            |          IfDefinitionStatement
+            |            IfDefinition
+            |              IfBlock
+            |                T[if]
+            |                T[(]
+            |                BinaryLogicExpression
+            |                  VarReferenceExpression
+            |                    T[i]
+            |                  T[<]
+            |                  IntLiteralExpression
+            |                    T[17]
+            |                T[)]
+            |                Block
+            |                  T[{]
+            |                  AssignStatement
+            |                    T[i]
+            |                    T[=]
+            |                    BinaryMathExpression
+            |                      VarReferenceExpression
+            |                        T[i]
+            |                      T[+]
+            |                      IntLiteralExpression
+            |                        T[1]
+            |                  T[}]
+            |              ElseBlock
+            |                T[else]
+            |                Block
+            |                  T[{]
+            |                  AssignStatement
+            |                    T[condition]
+            |                    T[=]
+            |                    BoolLiteralExpression
+            |                      T[true]
+            |                  T[}]
+            |          T[}]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -419,6 +443,23 @@ class ParserTest : ITest{
     }
     //endregion
 
+
+    //region Task 5
+    @Test
+    override fun testForDefinitionStatement() {
+        val programFile = parseResource("task5/forDefinitionStatement")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+    //endregion
 
     //region Task 7
     @Test

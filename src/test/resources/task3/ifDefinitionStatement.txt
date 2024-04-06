@@ -1,9 +1,7 @@
-if (voto > 18) {
-    exam = "passed"
-}
-else if (voto == 18) {
-    exam = "passed"
-}
-else {
-    exam = "failed"
+if(voto > 18) {
+  exam = "passed"
+} else if (voto == 18) {
+  exam = "passed"
+} else {
+  exam = "failed"
 }

@@ -79,21 +79,29 @@ fun AssignmentStatement.transpile(depth: Int = 0): String {
 
 fun IfDefinitionStatement.transpile(depth: Int = 0): String {
     val ifBlockTranspiled = ifBlock.transpile(depth)
-    val elseIfBlockTranspiled = elseIfBlock?.map { it.transpile(depth) }
+    val elseIfBlockTranspiled = elseIfBlock?.joinToString(" "){ it.transpile(0) }
     val elseBlockTranspiled = elseBlock?.transpile(depth)
-    return "${generateIndentationSpace(depth)}$ifBlockTranspiled $elseIfBlockTranspiled $elseBlockTranspiled"
+    var compositeIf = "${generateIndentationSpace(depth)}$ifBlockTranspiled"
+    if (elseIfBlock != null && elseIfBlock.isNotEmpty()) {
+        compositeIf += " $elseIfBlockTranspiled"
+    }
+    if (elseBlock != null) {
+        compositeIf += " $elseBlockTranspiled"
+    }
+    return compositeIf
+
 }
 
 fun IfBlock.transpile(depth: Int = 0): String {
     var ifBlockTranspiled: String
 
     val ifBlockKeyword = when (blockType) {
-        BlockType.IfBlock -> "if"
-        BlockType.ElseIfBlock -> "else if"
+        BlockType.IfBlock -> "if "
+        BlockType.ElseIfBlock -> "else if "
         BlockType.ElseBlock -> "else"
     }
 
-    ifBlockTranspiled = generateIndentationSpace(depth) + ifBlockKeyword
+    ifBlockTranspiled = ifBlockKeyword
 
     if (condition != null) {
         ifBlockTranspiled += "(${condition.transpile()})"
@@ -118,10 +126,10 @@ fun WhileDefinitionStatement.transpile(depth: Int = 0): String {
     val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
 
     return """
-        |${generateIndentationSpace(depth)}while($whileConditionTranspiled) {
+        |while ($whileConditionTranspiled) {
         |$statementsTranspiled
         |${generateIndentationSpace(depth)}}
-        """.trimIndent()
+        """.trimMargin()
 }
 
 fun ForDefinitionStatement.transpile(depth: Int = 0): String {

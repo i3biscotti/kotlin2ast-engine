@@ -135,7 +135,7 @@ fun ReturnStatementContext.toAst(considerPosition: Boolean): ReturnStatement {
 fun IfDefinitionStatementContext.toAst(considerPosition: Boolean): IfDefinitionStatement {
     val ifDefinition = this.ifDefinition()
     val ifBlock = ifDefinition.ifBlock().toAst(considerPosition)
-    val elseIfBlock = ifDefinition.elseIfBlock().map { it.toAst(considerPosition) }
+    val elseIfBlock = ifDefinition.elseIfBlock()?.map { it.toAst(considerPosition) }
     val elseBlock = ifDefinition.elseBlock()?.toAst(considerPosition)
 
     return IfDefinitionStatement(

@@ -119,16 +119,14 @@ class TranspileTest : ITest {
 
         assertEquals(
             """
-              |if (voto > 18) {
-              |  exam = "passed"
-              |}
-              |else if (voto == 18) {
-              |  exam = "passed"
-              |}
-              |else {
-              |  exam = "failed"
-              |}
-              """
+            |if (voto > 18) {
+            |    exam = "passed"
+            |} else if (voto == 18) {
+            |    exam = "passed"
+            |} else {
+            |    exam = "failed"
+            |}
+            """
                 .trimMargin(),
             programFile
         )
@@ -145,19 +143,37 @@ class TranspileTest : ITest {
             """
             |var i = 1
             |while (condition) {
-            |  if (i < 17) {
-            |    i = i + 1
-            |  }
-            |  else {
-            |    condition = true
-            |  }
+            |    if (i < 17) {
+            |        i = i + 1
+            |    } else {
+            |        condition = true
+            |    }
             |}
             """
                 .trimMargin(),
             programFile
         )
     }
+    //endregion
 
+    //region Task 5
+
+    @Test
+    override fun testForDefinitionStatement() {
+        val programFile = parseResource("task5/forDefinitionStatement")
+
+        assertEquals(
+            """
+            |var list = [1,2]
+            |var b = 0
+            |for (int i in list) {
+            |    b = b + 1
+            |}
+            """
+                .trimMargin(),
+            programFile
+        )
+    }
 
     //region Task 7
     @Test

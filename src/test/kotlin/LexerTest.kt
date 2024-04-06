@@ -111,9 +111,9 @@ class LexerTest : ITest{
         assertEquals(
             listOf("IF", "PAREN_OPEN", "ID", "GREATER_THAN", "INT_LIT",
                 "PAREN_CLOSE", "GRAPH_OPEN", "NL" ,"ID", "ASSIGN", "STRING_LIT",
-                "NL", "GRAPH_CLOSE", "NL", "ELSE", "IF", "PAREN_OPEN", "ID",
+                "NL", "GRAPH_CLOSE", "ELSE", "IF", "PAREN_OPEN", "ID",
                 "EQUAL", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "ID",
-                "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "NL" ,"ELSE", "GRAPH_OPEN",
+                "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "ELSE", "GRAPH_OPEN",
                 "NL", "ID", "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "EOF"),
             tokens(lexerForResource("task3/ifDefinitionStatement"))
         )
@@ -134,6 +134,17 @@ class LexerTest : ITest{
     }
     //endregion
 
+    //region Task 5
+    @Test
+    override fun testForDefinitionStatement() {
+        assertEquals(
+            listOf("VAR", "ID", "ASSIGN", "LIST_OF", "NL", "VAR", "ID", "ASSIGN", "ID", "NL", "FOR",
+                   "PAREN_OPEN", "ID", "IN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
+                   "VAR", "ASSIGN", "ID", "NL", "GRAPH_CLOSE"),
+            tokens(lexerForResource("task5/forDefinitionStatement"))
+        )
+    }
+    //endregion
 
     //region Task 7
     @Test
