@@ -18,5 +18,10 @@ fun Expression.toProtobuf(): protocol.Expressions.Expression {
         is UnaryMathExpression -> TODO()
         is VarReferenceExpression -> TODO()
         is ObjectPropertyReferenceExpression -> TODO()
+        is BinaryComparisonExpression -> TODO()
+        is PreDecrementExpression -> TODO()
+        is PostIncrementExpression -> TODO()
+        is PostDecrementExpression -> TODO()
+        is PreIncrementExpression -> TODO()
     }
 }
