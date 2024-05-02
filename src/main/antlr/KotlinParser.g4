@@ -33,12 +33,13 @@ line: statement (NL+ | EOF);
     ;
 
  type
-    : STRING       #StringType
-    | INT          #IntType
-    | DOUBLE       #DoubleType
-    | BOOLEAN      #BooleanType
-    | UNIT         #UnitType
-    | ID           #CustomType
+    : STRING                    #StringType
+    | INT                       #IntType
+    | DOUBLE                    #DoubleType
+    | BOOLEAN                   #BooleanType
+    | UNIT                      #UnitType
+    | (LIST | LIST_DYNAMIC  )   #ListType
+    | ID                        #CustomType
     ;
 
 expression

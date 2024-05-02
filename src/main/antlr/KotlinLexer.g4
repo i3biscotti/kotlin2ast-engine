@@ -28,6 +28,8 @@ DOUBLE              : 'Double';
 STRING              : 'String';
 BOOLEAN             : 'Boolean';
 UNIT                : 'Unit';
+LIST                : 'List';
+LIST_DYNAMIC        : 'List<Any>';
 
 //Literals
 

@@ -12,6 +12,7 @@ data class VariableValueType(val name: String) {
         val DOUBLE = VariableValueType("double")
         val STRING = VariableValueType("string")
         val BOOLEAN = VariableValueType("boolean")
+        val LIST = VariableValueType("list")
         val VOID = VariableValueType("void")
     }
 }
