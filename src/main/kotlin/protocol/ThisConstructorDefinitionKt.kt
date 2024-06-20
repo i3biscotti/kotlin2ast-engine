@@ -98,9 +98,38 @@ public object ThisConstructorDefinitionKt {
       _builder.clearParameters()
     }
 
+
+    /**
+     * `optional .protocol.Position position = 2;`
+     */
+    public var position: protocol.PositionOuterClass.Position
+      @JvmName("getPosition")
+      get() = _builder.getPosition()
+      @JvmName("setPosition")
+      set(value) {
+        _builder.setPosition(value)
+      }
+    /**
+     * `optional .protocol.Position position = 2;`
+     */
+    public fun clearPosition() {
+      _builder.clearPosition()
+    }
+    /**
+     * `optional .protocol.Position position = 2;`
+     * @return Whether the position field is set.
+     */
+    public fun hasPosition(): kotlin.Boolean {
+      return _builder.hasPosition()
+    }
+    public val ThisConstructorDefinitionKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun protocol.Statements.ThisConstructorDefinition.copy(block: `protocol`.ThisConstructorDefinitionKt.Dsl.() -> kotlin.Unit): protocol.Statements.ThisConstructorDefinition =
   `protocol`.ThisConstructorDefinitionKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val protocol.Statements.ThisConstructorDefinitionOrBuilder.positionOrNull: protocol.PositionOuterClass.Position?
+  get() = if (hasPosition()) getPosition() else null
 

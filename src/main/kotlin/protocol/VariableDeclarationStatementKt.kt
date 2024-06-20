@@ -117,7 +117,7 @@ public object VariableDeclarationStatementKt {
     }
 
     /**
-     * `.protocol.Position position = 5;`
+     * `optional .protocol.Position position = 5;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -127,18 +127,20 @@ public object VariableDeclarationStatementKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 5;`
+     * `optional .protocol.Position position = 5;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 5;`
+     * `optional .protocol.Position position = 5;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val VariableDeclarationStatementKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

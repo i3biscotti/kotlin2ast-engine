@@ -412,27 +412,27 @@ public object ExpressionKt {
     }
 
     /**
-     * `.protocol.ParenthesisExpression parenthesysExpression = 18;`
+     * `.protocol.ParenthesisExpression parenthesisExpression = 18;`
      */
-    public var parenthesysExpression: protocol.Expressions.ParenthesisExpression
-      @JvmName("getParenthesysExpression")
-      get() = _builder.getParenthesysExpression()
-      @JvmName("setParenthesysExpression")
+    public var parenthesisExpression: protocol.Expressions.ParenthesisExpression
+      @JvmName("getParenthesisExpression")
+      get() = _builder.getParenthesisExpression()
+      @JvmName("setParenthesisExpression")
       set(value) {
-        _builder.setParenthesysExpression(value)
+        _builder.setParenthesisExpression(value)
       }
     /**
-     * `.protocol.ParenthesisExpression parenthesysExpression = 18;`
+     * `.protocol.ParenthesisExpression parenthesisExpression = 18;`
      */
-    public fun clearParenthesysExpression() {
-      _builder.clearParenthesysExpression()
+    public fun clearParenthesisExpression() {
+      _builder.clearParenthesisExpression()
     }
     /**
-     * `.protocol.ParenthesisExpression parenthesysExpression = 18;`
-     * @return Whether the parenthesysExpression field is set.
+     * `.protocol.ParenthesisExpression parenthesisExpression = 18;`
+     * @return Whether the parenthesisExpression field is set.
      */
-    public fun hasParenthesysExpression(): kotlin.Boolean {
-      return _builder.hasParenthesysExpression()
+    public fun hasParenthesisExpression(): kotlin.Boolean {
+      return _builder.hasParenthesisExpression()
     }
 
     /**
@@ -506,6 +506,30 @@ public object ExpressionKt {
     public fun hasObjectMethodCallExpression(): kotlin.Boolean {
       return _builder.hasObjectMethodCallExpression()
     }
+
+    /**
+     * `.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;`
+     */
+    public var binaryComparisonExpression: protocol.Expressions.BinaryComparisonExpression
+      @JvmName("getBinaryComparisonExpression")
+      get() = _builder.getBinaryComparisonExpression()
+      @JvmName("setBinaryComparisonExpression")
+      set(value) {
+        _builder.setBinaryComparisonExpression(value)
+      }
+    /**
+     * `.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;`
+     */
+    public fun clearBinaryComparisonExpression() {
+      _builder.clearBinaryComparisonExpression()
+    }
+    /**
+     * `.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;`
+     * @return Whether the binaryComparisonExpression field is set.
+     */
+    public fun hasBinaryComparisonExpression(): kotlin.Boolean {
+      return _builder.hasBinaryComparisonExpression()
+    }
     public val exprCase: protocol.Expressions.Expression.ExprCase
       @JvmName("getExprCase")
       get() = _builder.getExprCase()
@@ -567,8 +591,8 @@ public val protocol.Expressions.ExpressionOrBuilder.outputExpressionOrNull: prot
 public val protocol.Expressions.ExpressionOrBuilder.varReferenceExpressionOrNull: protocol.Expressions.VarReferenceExpression?
   get() = if (hasVarReferenceExpression()) getVarReferenceExpression() else null
 
-public val protocol.Expressions.ExpressionOrBuilder.parenthesysExpressionOrNull: protocol.Expressions.ParenthesisExpression?
-  get() = if (hasParenthesysExpression()) getParenthesysExpression() else null
+public val protocol.Expressions.ExpressionOrBuilder.parenthesisExpressionOrNull: protocol.Expressions.ParenthesisExpression?
+  get() = if (hasParenthesisExpression()) getParenthesisExpression() else null
 
 public val protocol.Expressions.ExpressionOrBuilder.functionCallExpressionOrNull: protocol.Expressions.FunctionCallExpression?
   get() = if (hasFunctionCallExpression()) getFunctionCallExpression() else null
@@ -578,4 +602,7 @@ public val protocol.Expressions.ExpressionOrBuilder.objectPropertyReferenceExpre
 
 public val protocol.Expressions.ExpressionOrBuilder.objectMethodCallExpressionOrNull: protocol.Expressions.ObjectMethodCallExpression?
   get() = if (hasObjectMethodCallExpression()) getObjectMethodCallExpression() else null
+
+public val protocol.Expressions.ExpressionOrBuilder.binaryComparisonExpressionOrNull: protocol.Expressions.BinaryComparisonExpression?
+  get() = if (hasBinaryComparisonExpression()) getBinaryComparisonExpression() else null
 

@@ -34,73 +34,73 @@ public object ListLiteralExpressionKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     public class ValueProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      */
-     public val value: com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>
+     public val value: com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getValueList()
       )
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      * @param value The value to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addValue")
-    public fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.add(value: com.google.protobuf.Any) {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.add(value: protocol.Expressions.Expression) {
       _builder.addValue(value)
     }
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      * @param value The value to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignValue")
     @Suppress("NOTHING_TO_INLINE")
-    public inline operator fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.plusAssign(value: com.google.protobuf.Any) {
+    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.plusAssign(value: protocol.Expressions.Expression) {
       add(value)
     }
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      * @param values The value to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllValue")
-    public fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.addAll(values: kotlin.collections.Iterable<com.google.protobuf.Any>) {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.addAll(values: kotlin.collections.Iterable<protocol.Expressions.Expression>) {
       _builder.addAllValue(values)
     }
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      * @param values The value to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllValue")
     @Suppress("NOTHING_TO_INLINE")
-    public inline operator fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.plusAssign(values: kotlin.collections.Iterable<com.google.protobuf.Any>) {
+    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.plusAssign(values: kotlin.collections.Iterable<protocol.Expressions.Expression>) {
       addAll(values)
     }
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      * @param index The index to set the value at.
      * @param value The value to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setValue")
-    public operator fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.set(index: kotlin.Int, value: com.google.protobuf.Any) {
+    public operator fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.set(index: kotlin.Int, value: protocol.Expressions.Expression) {
       _builder.setValue(index, value)
     }
     /**
-     * `repeated .google.protobuf.Any value = 1;`
+     * `repeated .protocol.Expression value = 1;`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearValue")
-    public fun com.google.protobuf.kotlin.DslList<com.google.protobuf.Any, ValueProxy>.clear() {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Expressions.Expression, ValueProxy>.clear() {
       _builder.clearValue()
     }
 
 
     /**
-     * `.protocol.Position position = 2;`
+     * `optional .protocol.Position position = 2;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -110,18 +110,20 @@ public object ListLiteralExpressionKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 2;`
+     * `optional .protocol.Position position = 2;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 2;`
+     * `optional .protocol.Position position = 2;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val ListLiteralExpressionKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

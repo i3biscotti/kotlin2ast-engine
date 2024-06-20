@@ -92,67 +92,67 @@ public object ClassDefinitionStatementKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     public class PropertiesProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      */
-     public val properties: com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>
+     public val properties: com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getPropertiesList()
       )
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      * @param value The properties to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addProperties")
-    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.add(value: protocol.Statements.PropertyDeclaration) {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.add(value: protocol.Statements.VariableDeclarationStatement) {
       _builder.addProperties(value)
     }
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      * @param value The properties to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignProperties")
     @Suppress("NOTHING_TO_INLINE")
-    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.plusAssign(value: protocol.Statements.PropertyDeclaration) {
+    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.plusAssign(value: protocol.Statements.VariableDeclarationStatement) {
       add(value)
     }
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      * @param values The properties to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllProperties")
-    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.addAll(values: kotlin.collections.Iterable<protocol.Statements.PropertyDeclaration>) {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.addAll(values: kotlin.collections.Iterable<protocol.Statements.VariableDeclarationStatement>) {
       _builder.addAllProperties(values)
     }
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      * @param values The properties to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllProperties")
     @Suppress("NOTHING_TO_INLINE")
-    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.plusAssign(values: kotlin.collections.Iterable<protocol.Statements.PropertyDeclaration>) {
+    public inline operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.plusAssign(values: kotlin.collections.Iterable<protocol.Statements.VariableDeclarationStatement>) {
       addAll(values)
     }
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      * @param index The index to set the value at.
      * @param value The properties to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setProperties")
-    public operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.set(index: kotlin.Int, value: protocol.Statements.PropertyDeclaration) {
+    public operator fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.set(index: kotlin.Int, value: protocol.Statements.VariableDeclarationStatement) {
       _builder.setProperties(index, value)
     }
     /**
-     * `repeated .protocol.PropertyDeclaration properties = 4;`
+     * `repeated .protocol.VariableDeclarationStatement properties = 4;`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearProperties")
-    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.PropertyDeclaration, PropertiesProxy>.clear() {
+    public fun com.google.protobuf.kotlin.DslList<protocol.Statements.VariableDeclarationStatement, PropertiesProxy>.clear() {
       _builder.clearProperties()
     }
 
@@ -326,7 +326,7 @@ public object ClassDefinitionStatementKt {
     }
 
     /**
-     * `.protocol.Position position = 8;`
+     * `optional .protocol.Position position = 8;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -336,18 +336,20 @@ public object ClassDefinitionStatementKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 8;`
+     * `optional .protocol.Position position = 8;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 8;`
+     * `optional .protocol.Position position = 8;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val ClassDefinitionStatementKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

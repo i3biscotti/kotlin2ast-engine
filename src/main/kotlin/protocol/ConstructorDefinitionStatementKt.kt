@@ -230,7 +230,7 @@ public object ConstructorDefinitionStatementKt {
     }
 
     /**
-     * `.protocol.Position position = 6;`
+     * `optional .protocol.Position position = 6;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -240,18 +240,20 @@ public object ConstructorDefinitionStatementKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 6;`
+     * `optional .protocol.Position position = 6;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 6;`
+     * `optional .protocol.Position position = 6;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val ConstructorDefinitionStatementKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

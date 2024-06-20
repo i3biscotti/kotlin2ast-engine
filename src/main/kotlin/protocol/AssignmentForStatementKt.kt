@@ -69,7 +69,7 @@ public object AssignmentForStatementKt {
     }
 
     /**
-     * `.protocol.Position position = 3;`
+     * `optional .protocol.Position position = 3;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -79,18 +79,20 @@ public object AssignmentForStatementKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 3;`
+     * `optional .protocol.Position position = 3;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 3;`
+     * `optional .protocol.Position position = 3;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val AssignmentForStatementKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

@@ -86,7 +86,7 @@ public object ObjectPropertyAssignmentStatementKt {
     }
 
     /**
-     * `.protocol.Position position = 4;`
+     * `optional .protocol.Position position = 4;`
      */
     public var position: protocol.PositionOuterClass.Position
       @JvmName("getPosition")
@@ -96,18 +96,20 @@ public object ObjectPropertyAssignmentStatementKt {
         _builder.setPosition(value)
       }
     /**
-     * `.protocol.Position position = 4;`
+     * `optional .protocol.Position position = 4;`
      */
     public fun clearPosition() {
       _builder.clearPosition()
     }
     /**
-     * `.protocol.Position position = 4;`
+     * `optional .protocol.Position position = 4;`
      * @return Whether the position field is set.
      */
     public fun hasPosition(): kotlin.Boolean {
       return _builder.hasPosition()
     }
+    public val ObjectPropertyAssignmentStatementKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic

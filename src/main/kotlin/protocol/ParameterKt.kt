@@ -91,6 +91,32 @@ public object ParameterKt {
     public fun hasValueType(): kotlin.Boolean {
       return _builder.hasValueType()
     }
+
+    /**
+     * `optional .protocol.Position position = 4;`
+     */
+    public var position: protocol.PositionOuterClass.Position
+      @JvmName("getPosition")
+      get() = _builder.getPosition()
+      @JvmName("setPosition")
+      set(value) {
+        _builder.setPosition(value)
+      }
+    /**
+     * `optional .protocol.Position position = 4;`
+     */
+    public fun clearPosition() {
+      _builder.clearPosition()
+    }
+    /**
+     * `optional .protocol.Position position = 4;`
+     * @return Whether the position field is set.
+     */
+    public fun hasPosition(): kotlin.Boolean {
+      return _builder.hasPosition()
+    }
+    public val ParameterKt.Dsl.positionOrNull: protocol.PositionOuterClass.Position?
+      get() = _builder.positionOrNull
   }
 }
 @kotlin.jvm.JvmSynthetic
@@ -99,4 +125,7 @@ public inline fun protocol.Statements.Parameter.copy(block: `protocol`.Parameter
 
 public val protocol.Statements.ParameterOrBuilder.valueTypeOrNull: protocol.Statements.VariableValueType?
   get() = if (hasValueType()) getValueType() else null
+
+public val protocol.Statements.ParameterOrBuilder.positionOrNull: protocol.PositionOuterClass.Position?
+  get() = if (hasPosition()) getPosition() else null
 

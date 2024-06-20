@@ -242,6 +242,30 @@ public object StatementKt {
     public fun hasForDefinitionStatement(): kotlin.Boolean {
       return _builder.hasForDefinitionStatement()
     }
+
+    /**
+     * `.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;`
+     */
+    public var functionDefinitionStatement: protocol.Statements.FunctionDefinitionStatement
+      @JvmName("getFunctionDefinitionStatement")
+      get() = _builder.getFunctionDefinitionStatement()
+      @JvmName("setFunctionDefinitionStatement")
+      set(value) {
+        _builder.setFunctionDefinitionStatement(value)
+      }
+    /**
+     * `.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;`
+     */
+    public fun clearFunctionDefinitionStatement() {
+      _builder.clearFunctionDefinitionStatement()
+    }
+    /**
+     * `.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;`
+     * @return Whether the functionDefinitionStatement field is set.
+     */
+    public fun hasFunctionDefinitionStatement(): kotlin.Boolean {
+      return _builder.hasFunctionDefinitionStatement()
+    }
     public val stmtCase: protocol.Statements.Statement.StmtCase
       @JvmName("getStmtCase")
       get() = _builder.getStmtCase()
@@ -281,4 +305,7 @@ public val protocol.Statements.StatementOrBuilder.whileDefinitionStatementOrNull
 
 public val protocol.Statements.StatementOrBuilder.forDefinitionStatementOrNull: protocol.Statements.ForDefinitionStatement?
   get() = if (hasForDefinitionStatement()) getForDefinitionStatement() else null
+
+public val protocol.Statements.StatementOrBuilder.functionDefinitionStatementOrNull: protocol.Statements.FunctionDefinitionStatement?
+  get() = if (hasFunctionDefinitionStatement()) getFunctionDefinitionStatement() else null
 
