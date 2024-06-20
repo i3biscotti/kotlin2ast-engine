@@ -4350,8 +4350,8 @@ public final class Base {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nbase.proto\022\010protocol\032\016position.proto\032\021" +
-      "expressions.proto\032\020statements.proto\"}\n\tA" +
+      "\n\nbase.proto\022\010protocol\032\016position.proto\032\020" +
+      "statements.proto\032\021expressions.proto\"}\n\tA" +
       "stObject\022&\n\010position\030\001 \001(\0132\022.protocol.Po" +
       "sitionH\000\022 \n\005point\030\002 \001(\0132\017.protocol.Point" +
       "H\000\022\036\n\004node\030\003 \001(\0132\016.protocol.NodeH\000B\006\n\004ty" +
@@ -4371,8 +4371,8 @@ public final class Base {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           protocol.PositionOuterClass.getDescriptor(),
-          protocol.Expressions.getDescriptor(),
           protocol.Statements.getDescriptor(),
+          protocol.Expressions.getDescriptor(),
         });
     internal_static_protocol_AstObject_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -4393,8 +4393,8 @@ public final class Base {
         internal_static_protocol_ProgramFile_descriptor,
         new java.lang.String[] { "Lines", "Position", });
     protocol.PositionOuterClass.getDescriptor();
-    protocol.Expressions.getDescriptor();
     protocol.Statements.getDescriptor();
+    protocol.Expressions.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

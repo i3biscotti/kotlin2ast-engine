@@ -21,32 +21,40 @@ public final class Statements {
   public enum VariableType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>VARIABLE = 0;</code>
+     * <code>TYPE = 0;</code>
      */
-    VARIABLE(0),
+    TYPE(0),
     /**
-     * <code>IMMUTABLE = 1;</code>
+     * <code>VARIABLE = 1;</code>
      */
-    IMMUTABLE(1),
+    VARIABLE(1),
     /**
-     * <code>CONSTANT = 2;</code>
+     * <code>IMMUTABLE = 2;</code>
      */
-    CONSTANT(2),
+    IMMUTABLE(2),
+    /**
+     * <code>CONSTANT = 3;</code>
+     */
+    CONSTANT(3),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>VARIABLE = 0;</code>
+     * <code>TYPE = 0;</code>
      */
-    public static final int VARIABLE_VALUE = 0;
+    public static final int TYPE_VALUE = 0;
     /**
-     * <code>IMMUTABLE = 1;</code>
+     * <code>VARIABLE = 1;</code>
      */
-    public static final int IMMUTABLE_VALUE = 1;
+    public static final int VARIABLE_VALUE = 1;
     /**
-     * <code>CONSTANT = 2;</code>
+     * <code>IMMUTABLE = 2;</code>
      */
-    public static final int CONSTANT_VALUE = 2;
+    public static final int IMMUTABLE_VALUE = 2;
+    /**
+     * <code>CONSTANT = 3;</code>
+     */
+    public static final int CONSTANT_VALUE = 3;
 
 
     public final int getNumber() {
@@ -73,9 +81,10 @@ public final class Statements {
      */
     public static VariableType forNumber(int value) {
       switch (value) {
-        case 0: return VARIABLE;
-        case 1: return IMMUTABLE;
-        case 2: return CONSTANT;
+        case 0: return TYPE;
+        case 1: return VARIABLE;
+        case 2: return IMMUTABLE;
+        case 3: return CONSTANT;
         default: return null;
       }
     }
@@ -246,9 +255,9 @@ public final class Statements {
   public enum ParameterType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>TYPE = 0;</code>
+     * <code>TYPED = 0;</code>
      */
-    TYPE(0),
+    TYPED(0),
     /**
      * <code>THIS = 1;</code>
      */
@@ -261,9 +270,9 @@ public final class Statements {
     ;
 
     /**
-     * <code>TYPE = 0;</code>
+     * <code>TYPED = 0;</code>
      */
-    public static final int TYPE_VALUE = 0;
+    public static final int TYPED_VALUE = 0;
     /**
      * <code>THIS = 1;</code>
      */
@@ -298,7 +307,7 @@ public final class Statements {
      */
     public static ParameterType forNumber(int value) {
       switch (value) {
-        case 0: return TYPE;
+        case 0: return TYPED;
         case 1: return THIS;
         case 2: return SUPER;
         default: return null;
@@ -1165,6 +1174,21 @@ public final class Statements {
      */
     protocol.Statements.ForDefinitionStatementOrBuilder getForDefinitionStatementOrBuilder();
 
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     * @return Whether the functionDefinitionStatement field is set.
+     */
+    boolean hasFunctionDefinitionStatement();
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     * @return The functionDefinitionStatement.
+     */
+    protocol.Statements.FunctionDefinitionStatement getFunctionDefinitionStatement();
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     */
+    protocol.Statements.FunctionDefinitionStatementOrBuilder getFunctionDefinitionStatementOrBuilder();
+
     protocol.Statements.Statement.StmtCase getStmtCase();
   }
   /**
@@ -1217,6 +1241,7 @@ public final class Statements {
       VARDECLARATIONSTATEMENT(7),
       WHILEDEFINITIONSTATEMENT(8),
       FORDEFINITIONSTATEMENT(9),
+      FUNCTIONDEFINITIONSTATEMENT(10),
       STMT_NOT_SET(0);
       private final int value;
       private StmtCase(int value) {
@@ -1243,6 +1268,7 @@ public final class Statements {
           case 7: return VARDECLARATIONSTATEMENT;
           case 8: return WHILEDEFINITIONSTATEMENT;
           case 9: return FORDEFINITIONSTATEMENT;
+          case 10: return FUNCTIONDEFINITIONSTATEMENT;
           case 0: return STMT_NOT_SET;
           default: return null;
         }
@@ -1537,6 +1563,37 @@ public final class Statements {
       return protocol.Statements.ForDefinitionStatement.getDefaultInstance();
     }
 
+    public static final int FUNCTIONDEFINITIONSTATEMENT_FIELD_NUMBER = 10;
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     * @return Whether the functionDefinitionStatement field is set.
+     */
+    @java.lang.Override
+    public boolean hasFunctionDefinitionStatement() {
+      return stmtCase_ == 10;
+    }
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     * @return The functionDefinitionStatement.
+     */
+    @java.lang.Override
+    public protocol.Statements.FunctionDefinitionStatement getFunctionDefinitionStatement() {
+      if (stmtCase_ == 10) {
+         return (protocol.Statements.FunctionDefinitionStatement) stmt_;
+      }
+      return protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+    }
+    /**
+     * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+     */
+    @java.lang.Override
+    public protocol.Statements.FunctionDefinitionStatementOrBuilder getFunctionDefinitionStatementOrBuilder() {
+      if (stmtCase_ == 10) {
+         return (protocol.Statements.FunctionDefinitionStatement) stmt_;
+      }
+      return protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1577,6 +1634,9 @@ public final class Statements {
       }
       if (stmtCase_ == 9) {
         output.writeMessage(9, (protocol.Statements.ForDefinitionStatement) stmt_);
+      }
+      if (stmtCase_ == 10) {
+        output.writeMessage(10, (protocol.Statements.FunctionDefinitionStatement) stmt_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1622,6 +1682,10 @@ public final class Statements {
       if (stmtCase_ == 9) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, (protocol.Statements.ForDefinitionStatement) stmt_);
+      }
+      if (stmtCase_ == 10) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, (protocol.Statements.FunctionDefinitionStatement) stmt_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1676,6 +1740,10 @@ public final class Statements {
           if (!getForDefinitionStatement()
               .equals(other.getForDefinitionStatement())) return false;
           break;
+        case 10:
+          if (!getFunctionDefinitionStatement()
+              .equals(other.getFunctionDefinitionStatement())) return false;
+          break;
         case 0:
         default:
       }
@@ -1726,6 +1794,10 @@ public final class Statements {
         case 9:
           hash = (37 * hash) + FORDEFINITIONSTATEMENT_FIELD_NUMBER;
           hash = (53 * hash) + getForDefinitionStatement().hashCode();
+          break;
+        case 10:
+          hash = (37 * hash) + FUNCTIONDEFINITIONSTATEMENT_FIELD_NUMBER;
+          hash = (53 * hash) + getFunctionDefinitionStatement().hashCode();
           break;
         case 0:
         default:
@@ -1888,6 +1960,9 @@ public final class Statements {
         if (forDefinitionStatementBuilder_ != null) {
           forDefinitionStatementBuilder_.clear();
         }
+        if (functionDefinitionStatementBuilder_ != null) {
+          functionDefinitionStatementBuilder_.clear();
+        }
         stmtCase_ = 0;
         stmt_ = null;
         return this;
@@ -1964,6 +2039,10 @@ public final class Statements {
         if (stmtCase_ == 9 &&
             forDefinitionStatementBuilder_ != null) {
           result.stmt_ = forDefinitionStatementBuilder_.build();
+        }
+        if (stmtCase_ == 10 &&
+            functionDefinitionStatementBuilder_ != null) {
+          result.stmt_ = functionDefinitionStatementBuilder_.build();
         }
       }
 
@@ -2046,6 +2125,10 @@ public final class Statements {
           }
           case FORDEFINITIONSTATEMENT: {
             mergeForDefinitionStatement(other.getForDefinitionStatement());
+            break;
+          }
+          case FUNCTIONDEFINITIONSTATEMENT: {
+            mergeFunctionDefinitionStatement(other.getFunctionDefinitionStatement());
             break;
           }
           case STMT_NOT_SET: {
@@ -2141,6 +2224,13 @@ public final class Statements {
                 stmtCase_ = 9;
                 break;
               } // case 74
+              case 82: {
+                input.readMessage(
+                    getFunctionDefinitionStatementFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                stmtCase_ = 10;
+                break;
+              } // case 82
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3450,6 +3540,148 @@ public final class Statements {
         onChanged();
         return forDefinitionStatementBuilder_;
       }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Statements.FunctionDefinitionStatement, protocol.Statements.FunctionDefinitionStatement.Builder, protocol.Statements.FunctionDefinitionStatementOrBuilder> functionDefinitionStatementBuilder_;
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       * @return Whether the functionDefinitionStatement field is set.
+       */
+      @java.lang.Override
+      public boolean hasFunctionDefinitionStatement() {
+        return stmtCase_ == 10;
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       * @return The functionDefinitionStatement.
+       */
+      @java.lang.Override
+      public protocol.Statements.FunctionDefinitionStatement getFunctionDefinitionStatement() {
+        if (functionDefinitionStatementBuilder_ == null) {
+          if (stmtCase_ == 10) {
+            return (protocol.Statements.FunctionDefinitionStatement) stmt_;
+          }
+          return protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+        } else {
+          if (stmtCase_ == 10) {
+            return functionDefinitionStatementBuilder_.getMessage();
+          }
+          return protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      public Builder setFunctionDefinitionStatement(protocol.Statements.FunctionDefinitionStatement value) {
+        if (functionDefinitionStatementBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          stmt_ = value;
+          onChanged();
+        } else {
+          functionDefinitionStatementBuilder_.setMessage(value);
+        }
+        stmtCase_ = 10;
+        return this;
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      public Builder setFunctionDefinitionStatement(
+          protocol.Statements.FunctionDefinitionStatement.Builder builderForValue) {
+        if (functionDefinitionStatementBuilder_ == null) {
+          stmt_ = builderForValue.build();
+          onChanged();
+        } else {
+          functionDefinitionStatementBuilder_.setMessage(builderForValue.build());
+        }
+        stmtCase_ = 10;
+        return this;
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      public Builder mergeFunctionDefinitionStatement(protocol.Statements.FunctionDefinitionStatement value) {
+        if (functionDefinitionStatementBuilder_ == null) {
+          if (stmtCase_ == 10 &&
+              stmt_ != protocol.Statements.FunctionDefinitionStatement.getDefaultInstance()) {
+            stmt_ = protocol.Statements.FunctionDefinitionStatement.newBuilder((protocol.Statements.FunctionDefinitionStatement) stmt_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            stmt_ = value;
+          }
+          onChanged();
+        } else {
+          if (stmtCase_ == 10) {
+            functionDefinitionStatementBuilder_.mergeFrom(value);
+          } else {
+            functionDefinitionStatementBuilder_.setMessage(value);
+          }
+        }
+        stmtCase_ = 10;
+        return this;
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      public Builder clearFunctionDefinitionStatement() {
+        if (functionDefinitionStatementBuilder_ == null) {
+          if (stmtCase_ == 10) {
+            stmtCase_ = 0;
+            stmt_ = null;
+            onChanged();
+          }
+        } else {
+          if (stmtCase_ == 10) {
+            stmtCase_ = 0;
+            stmt_ = null;
+          }
+          functionDefinitionStatementBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      public protocol.Statements.FunctionDefinitionStatement.Builder getFunctionDefinitionStatementBuilder() {
+        return getFunctionDefinitionStatementFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      @java.lang.Override
+      public protocol.Statements.FunctionDefinitionStatementOrBuilder getFunctionDefinitionStatementOrBuilder() {
+        if ((stmtCase_ == 10) && (functionDefinitionStatementBuilder_ != null)) {
+          return functionDefinitionStatementBuilder_.getMessageOrBuilder();
+        } else {
+          if (stmtCase_ == 10) {
+            return (protocol.Statements.FunctionDefinitionStatement) stmt_;
+          }
+          return protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.protocol.FunctionDefinitionStatement functionDefinitionStatement = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Statements.FunctionDefinitionStatement, protocol.Statements.FunctionDefinitionStatement.Builder, protocol.Statements.FunctionDefinitionStatementOrBuilder> 
+          getFunctionDefinitionStatementFieldBuilder() {
+        if (functionDefinitionStatementBuilder_ == null) {
+          if (!(stmtCase_ == 10)) {
+            stmt_ = protocol.Statements.FunctionDefinitionStatement.getDefaultInstance();
+          }
+          functionDefinitionStatementBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.Statements.FunctionDefinitionStatement, protocol.Statements.FunctionDefinitionStatement.Builder, protocol.Statements.FunctionDefinitionStatementOrBuilder>(
+                  (protocol.Statements.FunctionDefinitionStatement) stmt_,
+                  getParentForChildren(),
+                  isClean());
+          stmt_ = null;
+        }
+        stmtCase_ = 10;
+        onChanged();
+        return functionDefinitionStatementBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3546,17 +3778,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -3665,7 +3897,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -3673,7 +3905,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -3681,7 +3913,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -4294,14 +4526,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -4312,7 +4544,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -4328,7 +4560,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -4342,7 +4574,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -4363,7 +4595,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4376,7 +4608,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -4384,7 +4616,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -4395,7 +4627,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -4514,27 +4746,27 @@ public final class Statements {
         getParentNameBytes();
 
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
-    java.util.List<protocol.Statements.PropertyDeclaration> 
+    java.util.List<protocol.Statements.VariableDeclarationStatement> 
         getPropertiesList();
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
-    protocol.Statements.PropertyDeclaration getProperties(int index);
+    protocol.Statements.VariableDeclarationStatement getProperties(int index);
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     int getPropertiesCount();
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
-    java.util.List<? extends protocol.Statements.PropertyDeclarationOrBuilder> 
+    java.util.List<? extends protocol.Statements.VariableDeclarationStatementOrBuilder> 
         getPropertiesOrBuilderList();
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
-    protocol.Statements.PropertyDeclarationOrBuilder getPropertiesOrBuilder(
+    protocol.Statements.VariableDeclarationStatementOrBuilder getPropertiesOrBuilder(
         int index);
 
     /**
@@ -4601,17 +4833,17 @@ public final class Statements {
     protocol.Statements.VariableValueTypeOrBuilder getParentClassTypeOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -4755,41 +4987,41 @@ public final class Statements {
 
     public static final int PROPERTIES_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
-    private java.util.List<protocol.Statements.PropertyDeclaration> properties_;
+    private java.util.List<protocol.Statements.VariableDeclarationStatement> properties_;
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     @java.lang.Override
-    public java.util.List<protocol.Statements.PropertyDeclaration> getPropertiesList() {
+    public java.util.List<protocol.Statements.VariableDeclarationStatement> getPropertiesList() {
       return properties_;
     }
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends protocol.Statements.PropertyDeclarationOrBuilder> 
+    public java.util.List<? extends protocol.Statements.VariableDeclarationStatementOrBuilder> 
         getPropertiesOrBuilderList() {
       return properties_;
     }
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     @java.lang.Override
     public int getPropertiesCount() {
       return properties_.size();
     }
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     @java.lang.Override
-    public protocol.Statements.PropertyDeclaration getProperties(int index) {
+    public protocol.Statements.VariableDeclarationStatement getProperties(int index) {
       return properties_.get(index);
     }
     /**
-     * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+     * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
      */
     @java.lang.Override
-    public protocol.Statements.PropertyDeclarationOrBuilder getPropertiesOrBuilder(
+    public protocol.Statements.VariableDeclarationStatementOrBuilder getPropertiesOrBuilder(
         int index) {
       return properties_.get(index);
     }
@@ -4905,7 +5137,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 8;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -4913,7 +5145,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -4921,7 +5153,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 8;</code>
+     * <code>optional .protocol.Position position = 8;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -5525,9 +5757,9 @@ public final class Statements {
                 break;
               } // case 26
               case 34: {
-                protocol.Statements.PropertyDeclaration m =
+                protocol.Statements.VariableDeclarationStatement m =
                     input.readMessage(
-                        protocol.Statements.PropertyDeclaration.parser(),
+                        protocol.Statements.VariableDeclarationStatement.parser(),
                         extensionRegistry);
                 if (propertiesBuilder_ == null) {
                   ensurePropertiesIsMutable();
@@ -5791,22 +6023,22 @@ public final class Statements {
         return this;
       }
 
-      private java.util.List<protocol.Statements.PropertyDeclaration> properties_ =
+      private java.util.List<protocol.Statements.VariableDeclarationStatement> properties_ =
         java.util.Collections.emptyList();
       private void ensurePropertiesIsMutable() {
         if (!((bitField0_ & 0x00000008) != 0)) {
-          properties_ = new java.util.ArrayList<protocol.Statements.PropertyDeclaration>(properties_);
+          properties_ = new java.util.ArrayList<protocol.Statements.VariableDeclarationStatement>(properties_);
           bitField0_ |= 0x00000008;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocol.Statements.PropertyDeclaration, protocol.Statements.PropertyDeclaration.Builder, protocol.Statements.PropertyDeclarationOrBuilder> propertiesBuilder_;
+          protocol.Statements.VariableDeclarationStatement, protocol.Statements.VariableDeclarationStatement.Builder, protocol.Statements.VariableDeclarationStatementOrBuilder> propertiesBuilder_;
 
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public java.util.List<protocol.Statements.PropertyDeclaration> getPropertiesList() {
+      public java.util.List<protocol.Statements.VariableDeclarationStatement> getPropertiesList() {
         if (propertiesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(properties_);
         } else {
@@ -5814,7 +6046,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public int getPropertiesCount() {
         if (propertiesBuilder_ == null) {
@@ -5824,9 +6056,9 @@ public final class Statements {
         }
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public protocol.Statements.PropertyDeclaration getProperties(int index) {
+      public protocol.Statements.VariableDeclarationStatement getProperties(int index) {
         if (propertiesBuilder_ == null) {
           return properties_.get(index);
         } else {
@@ -5834,10 +6066,10 @@ public final class Statements {
         }
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder setProperties(
-          int index, protocol.Statements.PropertyDeclaration value) {
+          int index, protocol.Statements.VariableDeclarationStatement value) {
         if (propertiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5851,10 +6083,10 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder setProperties(
-          int index, protocol.Statements.PropertyDeclaration.Builder builderForValue) {
+          int index, protocol.Statements.VariableDeclarationStatement.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
           properties_.set(index, builderForValue.build());
@@ -5865,9 +6097,9 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public Builder addProperties(protocol.Statements.PropertyDeclaration value) {
+      public Builder addProperties(protocol.Statements.VariableDeclarationStatement value) {
         if (propertiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5881,10 +6113,10 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder addProperties(
-          int index, protocol.Statements.PropertyDeclaration value) {
+          int index, protocol.Statements.VariableDeclarationStatement value) {
         if (propertiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5898,10 +6130,10 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder addProperties(
-          protocol.Statements.PropertyDeclaration.Builder builderForValue) {
+          protocol.Statements.VariableDeclarationStatement.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
           properties_.add(builderForValue.build());
@@ -5912,10 +6144,10 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder addProperties(
-          int index, protocol.Statements.PropertyDeclaration.Builder builderForValue) {
+          int index, protocol.Statements.VariableDeclarationStatement.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
           properties_.add(index, builderForValue.build());
@@ -5926,10 +6158,10 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder addAllProperties(
-          java.lang.Iterable<? extends protocol.Statements.PropertyDeclaration> values) {
+          java.lang.Iterable<? extends protocol.Statements.VariableDeclarationStatement> values) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -5941,7 +6173,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder clearProperties() {
         if (propertiesBuilder_ == null) {
@@ -5954,7 +6186,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
       public Builder removeProperties(int index) {
         if (propertiesBuilder_ == null) {
@@ -5967,16 +6199,16 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public protocol.Statements.PropertyDeclaration.Builder getPropertiesBuilder(
+      public protocol.Statements.VariableDeclarationStatement.Builder getPropertiesBuilder(
           int index) {
         return getPropertiesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public protocol.Statements.PropertyDeclarationOrBuilder getPropertiesOrBuilder(
+      public protocol.Statements.VariableDeclarationStatementOrBuilder getPropertiesOrBuilder(
           int index) {
         if (propertiesBuilder_ == null) {
           return properties_.get(index);  } else {
@@ -5984,9 +6216,9 @@ public final class Statements {
         }
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public java.util.List<? extends protocol.Statements.PropertyDeclarationOrBuilder> 
+      public java.util.List<? extends protocol.Statements.VariableDeclarationStatementOrBuilder> 
            getPropertiesOrBuilderList() {
         if (propertiesBuilder_ != null) {
           return propertiesBuilder_.getMessageOrBuilderList();
@@ -5995,33 +6227,33 @@ public final class Statements {
         }
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public protocol.Statements.PropertyDeclaration.Builder addPropertiesBuilder() {
+      public protocol.Statements.VariableDeclarationStatement.Builder addPropertiesBuilder() {
         return getPropertiesFieldBuilder().addBuilder(
-            protocol.Statements.PropertyDeclaration.getDefaultInstance());
+            protocol.Statements.VariableDeclarationStatement.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public protocol.Statements.PropertyDeclaration.Builder addPropertiesBuilder(
+      public protocol.Statements.VariableDeclarationStatement.Builder addPropertiesBuilder(
           int index) {
         return getPropertiesFieldBuilder().addBuilder(
-            index, protocol.Statements.PropertyDeclaration.getDefaultInstance());
+            index, protocol.Statements.VariableDeclarationStatement.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.PropertyDeclaration properties = 4;</code>
+       * <code>repeated .protocol.VariableDeclarationStatement properties = 4;</code>
        */
-      public java.util.List<protocol.Statements.PropertyDeclaration.Builder> 
+      public java.util.List<protocol.Statements.VariableDeclarationStatement.Builder> 
            getPropertiesBuilderList() {
         return getPropertiesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocol.Statements.PropertyDeclaration, protocol.Statements.PropertyDeclaration.Builder, protocol.Statements.PropertyDeclarationOrBuilder> 
+          protocol.Statements.VariableDeclarationStatement, protocol.Statements.VariableDeclarationStatement.Builder, protocol.Statements.VariableDeclarationStatementOrBuilder> 
           getPropertiesFieldBuilder() {
         if (propertiesBuilder_ == null) {
           propertiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              protocol.Statements.PropertyDeclaration, protocol.Statements.PropertyDeclaration.Builder, protocol.Statements.PropertyDeclarationOrBuilder>(
+              protocol.Statements.VariableDeclarationStatement, protocol.Statements.VariableDeclarationStatement.Builder, protocol.Statements.VariableDeclarationStatementOrBuilder>(
                   properties_,
                   ((bitField0_ & 0x00000008) != 0),
                   getParentForChildren(),
@@ -6636,14 +6868,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000080) != 0);
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -6654,7 +6886,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -6670,7 +6902,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -6684,7 +6916,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -6705,7 +6937,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -6718,7 +6950,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000080;
@@ -6726,7 +6958,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -6737,7 +6969,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 8;</code>
+       * <code>optional .protocol.Position position = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -6811,1071 +7043,6 @@ public final class Statements {
 
     @java.lang.Override
     public protocol.Statements.ClassDefinitionStatement getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface PropertyDeclarationOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.PropertyDeclaration)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.protocol.VariableType varType = 1;</code>
-     * @return The enum numeric value on the wire for varType.
-     */
-    int getVarTypeValue();
-    /**
-     * <code>.protocol.VariableType varType = 1;</code>
-     * @return The varType.
-     */
-    protocol.Statements.VariableType getVarType();
-
-    /**
-     * <code>string name = 2;</code>
-     * @return The name.
-     */
-    java.lang.String getName();
-    /**
-     * <code>string name = 2;</code>
-     * @return The bytes for name.
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     * @return Whether the valueType field is set.
-     */
-    boolean hasValueType();
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     * @return The valueType.
-     */
-    protocol.Statements.VariableValueType getValueType();
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     */
-    protocol.Statements.VariableValueTypeOrBuilder getValueTypeOrBuilder();
-
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     * @return Whether the value field is set.
-     */
-    boolean hasValue();
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     * @return The value.
-     */
-    protocol.Expressions.Expression getValue();
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     */
-    protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
-  }
-  /**
-   * Protobuf type {@code protocol.PropertyDeclaration}
-   */
-  public static final class PropertyDeclaration extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.PropertyDeclaration)
-      PropertyDeclarationOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use PropertyDeclaration.newBuilder() to construct.
-    private PropertyDeclaration(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private PropertyDeclaration() {
-      varType_ = 0;
-      name_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new PropertyDeclaration();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return protocol.Statements.internal_static_protocol_PropertyDeclaration_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return protocol.Statements.internal_static_protocol_PropertyDeclaration_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocol.Statements.PropertyDeclaration.class, protocol.Statements.PropertyDeclaration.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int VARTYPE_FIELD_NUMBER = 1;
-    private int varType_ = 0;
-    /**
-     * <code>.protocol.VariableType varType = 1;</code>
-     * @return The enum numeric value on the wire for varType.
-     */
-    @java.lang.Override public int getVarTypeValue() {
-      return varType_;
-    }
-    /**
-     * <code>.protocol.VariableType varType = 1;</code>
-     * @return The varType.
-     */
-    @java.lang.Override public protocol.Statements.VariableType getVarType() {
-      protocol.Statements.VariableType result = protocol.Statements.VariableType.forNumber(varType_);
-      return result == null ? protocol.Statements.VariableType.UNRECOGNIZED : result;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object name_ = "";
-    /**
-     * <code>string name = 2;</code>
-     * @return The name.
-     */
-    @java.lang.Override
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @return The bytes for name.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int VALUETYPE_FIELD_NUMBER = 3;
-    private protocol.Statements.VariableValueType valueType_;
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     * @return Whether the valueType field is set.
-     */
-    @java.lang.Override
-    public boolean hasValueType() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     * @return The valueType.
-     */
-    @java.lang.Override
-    public protocol.Statements.VariableValueType getValueType() {
-      return valueType_ == null ? protocol.Statements.VariableValueType.getDefaultInstance() : valueType_;
-    }
-    /**
-     * <code>.protocol.VariableValueType valueType = 3;</code>
-     */
-    @java.lang.Override
-    public protocol.Statements.VariableValueTypeOrBuilder getValueTypeOrBuilder() {
-      return valueType_ == null ? protocol.Statements.VariableValueType.getDefaultInstance() : valueType_;
-    }
-
-    public static final int VALUE_FIELD_NUMBER = 4;
-    private protocol.Expressions.Expression value_;
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     * @return Whether the value field is set.
-     */
-    @java.lang.Override
-    public boolean hasValue() {
-      return ((bitField0_ & 0x00000002) != 0);
-    }
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     * @return The value.
-     */
-    @java.lang.Override
-    public protocol.Expressions.Expression getValue() {
-      return value_ == null ? protocol.Expressions.Expression.getDefaultInstance() : value_;
-    }
-    /**
-     * <code>.protocol.Expression value = 4;</code>
-     */
-    @java.lang.Override
-    public protocol.Expressions.ExpressionOrBuilder getValueOrBuilder() {
-      return value_ == null ? protocol.Expressions.Expression.getDefaultInstance() : value_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
-        output.writeEnum(1, varType_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(3, getValueType());
-      }
-      if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeMessage(4, getValue());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, varType_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getValueType());
-      }
-      if (((bitField0_ & 0x00000002) != 0)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getValue());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof protocol.Statements.PropertyDeclaration)) {
-        return super.equals(obj);
-      }
-      protocol.Statements.PropertyDeclaration other = (protocol.Statements.PropertyDeclaration) obj;
-
-      if (varType_ != other.varType_) return false;
-      if (!getName()
-          .equals(other.getName())) return false;
-      if (hasValueType() != other.hasValueType()) return false;
-      if (hasValueType()) {
-        if (!getValueType()
-            .equals(other.getValueType())) return false;
-      }
-      if (hasValue() != other.hasValue()) return false;
-      if (hasValue()) {
-        if (!getValue()
-            .equals(other.getValue())) return false;
-      }
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + VARTYPE_FIELD_NUMBER;
-      hash = (53 * hash) + varType_;
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      if (hasValueType()) {
-        hash = (37 * hash) + VALUETYPE_FIELD_NUMBER;
-        hash = (53 * hash) + getValueType().hashCode();
-      }
-      if (hasValue()) {
-        hash = (37 * hash) + VALUE_FIELD_NUMBER;
-        hash = (53 * hash) + getValue().hashCode();
-      }
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static protocol.Statements.PropertyDeclaration parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static protocol.Statements.PropertyDeclaration parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static protocol.Statements.PropertyDeclaration parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(protocol.Statements.PropertyDeclaration prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code protocol.PropertyDeclaration}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.PropertyDeclaration)
-        protocol.Statements.PropertyDeclarationOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return protocol.Statements.internal_static_protocol_PropertyDeclaration_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return protocol.Statements.internal_static_protocol_PropertyDeclaration_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocol.Statements.PropertyDeclaration.class, protocol.Statements.PropertyDeclaration.Builder.class);
-      }
-
-      // Construct using protocol.Statements.PropertyDeclaration.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getValueTypeFieldBuilder();
-          getValueFieldBuilder();
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        varType_ = 0;
-        name_ = "";
-        valueType_ = null;
-        if (valueTypeBuilder_ != null) {
-          valueTypeBuilder_.dispose();
-          valueTypeBuilder_ = null;
-        }
-        value_ = null;
-        if (valueBuilder_ != null) {
-          valueBuilder_.dispose();
-          valueBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return protocol.Statements.internal_static_protocol_PropertyDeclaration_descriptor;
-      }
-
-      @java.lang.Override
-      public protocol.Statements.PropertyDeclaration getDefaultInstanceForType() {
-        return protocol.Statements.PropertyDeclaration.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public protocol.Statements.PropertyDeclaration build() {
-        protocol.Statements.PropertyDeclaration result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public protocol.Statements.PropertyDeclaration buildPartial() {
-        protocol.Statements.PropertyDeclaration result = new protocol.Statements.PropertyDeclaration(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartial0(protocol.Statements.PropertyDeclaration result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.varType_ = varType_;
-        }
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.name_ = name_;
-        }
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.valueType_ = valueTypeBuilder_ == null
-              ? valueType_
-              : valueTypeBuilder_.build();
-          to_bitField0_ |= 0x00000001;
-        }
-        if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.value_ = valueBuilder_ == null
-              ? value_
-              : valueBuilder_.build();
-          to_bitField0_ |= 0x00000002;
-        }
-        result.bitField0_ |= to_bitField0_;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protocol.Statements.PropertyDeclaration) {
-          return mergeFrom((protocol.Statements.PropertyDeclaration)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(protocol.Statements.PropertyDeclaration other) {
-        if (other == protocol.Statements.PropertyDeclaration.getDefaultInstance()) return this;
-        if (other.varType_ != 0) {
-          setVarTypeValue(other.getVarTypeValue());
-        }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          bitField0_ |= 0x00000002;
-          onChanged();
-        }
-        if (other.hasValueType()) {
-          mergeValueType(other.getValueType());
-        }
-        if (other.hasValue()) {
-          mergeValue(other.getValue());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                varType_ = input.readEnum();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 8
-              case 18: {
-                name_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000002;
-                break;
-              } // case 18
-              case 26: {
-                input.readMessage(
-                    getValueTypeFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 26
-              case 34: {
-                input.readMessage(
-                    getValueFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000008;
-                break;
-              } // case 34
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private int varType_ = 0;
-      /**
-       * <code>.protocol.VariableType varType = 1;</code>
-       * @return The enum numeric value on the wire for varType.
-       */
-      @java.lang.Override public int getVarTypeValue() {
-        return varType_;
-      }
-      /**
-       * <code>.protocol.VariableType varType = 1;</code>
-       * @param value The enum numeric value on the wire for varType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVarTypeValue(int value) {
-        varType_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableType varType = 1;</code>
-       * @return The varType.
-       */
-      @java.lang.Override
-      public protocol.Statements.VariableType getVarType() {
-        protocol.Statements.VariableType result = protocol.Statements.VariableType.forNumber(varType_);
-        return result == null ? protocol.Statements.VariableType.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.protocol.VariableType varType = 1;</code>
-       * @param value The varType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVarType(protocol.Statements.VariableType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000001;
-        varType_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableType varType = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearVarType() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        varType_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>string name = 2;</code>
-       * @return The name.
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string name = 2;</code>
-       * @return The bytes for name.
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string name = 2;</code>
-       * @param value The name to set.
-       * @return This builder for chaining.
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        name_ = value;
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearName() {
-        name_ = getDefaultInstance().getName();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       * @param value The bytes for name to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        name_ = value;
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-
-      private protocol.Statements.VariableValueType valueType_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Statements.VariableValueType, protocol.Statements.VariableValueType.Builder, protocol.Statements.VariableValueTypeOrBuilder> valueTypeBuilder_;
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       * @return Whether the valueType field is set.
-       */
-      public boolean hasValueType() {
-        return ((bitField0_ & 0x00000004) != 0);
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       * @return The valueType.
-       */
-      public protocol.Statements.VariableValueType getValueType() {
-        if (valueTypeBuilder_ == null) {
-          return valueType_ == null ? protocol.Statements.VariableValueType.getDefaultInstance() : valueType_;
-        } else {
-          return valueTypeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public Builder setValueType(protocol.Statements.VariableValueType value) {
-        if (valueTypeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          valueType_ = value;
-        } else {
-          valueTypeBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public Builder setValueType(
-          protocol.Statements.VariableValueType.Builder builderForValue) {
-        if (valueTypeBuilder_ == null) {
-          valueType_ = builderForValue.build();
-        } else {
-          valueTypeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public Builder mergeValueType(protocol.Statements.VariableValueType value) {
-        if (valueTypeBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) != 0) &&
-            valueType_ != null &&
-            valueType_ != protocol.Statements.VariableValueType.getDefaultInstance()) {
-            getValueTypeBuilder().mergeFrom(value);
-          } else {
-            valueType_ = value;
-          }
-        } else {
-          valueTypeBuilder_.mergeFrom(value);
-        }
-        if (valueType_ != null) {
-          bitField0_ |= 0x00000004;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public Builder clearValueType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        valueType_ = null;
-        if (valueTypeBuilder_ != null) {
-          valueTypeBuilder_.dispose();
-          valueTypeBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public protocol.Statements.VariableValueType.Builder getValueTypeBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getValueTypeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      public protocol.Statements.VariableValueTypeOrBuilder getValueTypeOrBuilder() {
-        if (valueTypeBuilder_ != null) {
-          return valueTypeBuilder_.getMessageOrBuilder();
-        } else {
-          return valueType_ == null ?
-              protocol.Statements.VariableValueType.getDefaultInstance() : valueType_;
-        }
-      }
-      /**
-       * <code>.protocol.VariableValueType valueType = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Statements.VariableValueType, protocol.Statements.VariableValueType.Builder, protocol.Statements.VariableValueTypeOrBuilder> 
-          getValueTypeFieldBuilder() {
-        if (valueTypeBuilder_ == null) {
-          valueTypeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              protocol.Statements.VariableValueType, protocol.Statements.VariableValueType.Builder, protocol.Statements.VariableValueTypeOrBuilder>(
-                  getValueType(),
-                  getParentForChildren(),
-                  isClean());
-          valueType_ = null;
-        }
-        return valueTypeBuilder_;
-      }
-
-      private protocol.Expressions.Expression value_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> valueBuilder_;
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       * @return Whether the value field is set.
-       */
-      public boolean hasValue() {
-        return ((bitField0_ & 0x00000008) != 0);
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       * @return The value.
-       */
-      public protocol.Expressions.Expression getValue() {
-        if (valueBuilder_ == null) {
-          return value_ == null ? protocol.Expressions.Expression.getDefaultInstance() : value_;
-        } else {
-          return valueBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public Builder setValue(protocol.Expressions.Expression value) {
-        if (valueBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-        } else {
-          valueBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public Builder setValue(
-          protocol.Expressions.Expression.Builder builderForValue) {
-        if (valueBuilder_ == null) {
-          value_ = builderForValue.build();
-        } else {
-          valueBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public Builder mergeValue(protocol.Expressions.Expression value) {
-        if (valueBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) != 0) &&
-            value_ != null &&
-            value_ != protocol.Expressions.Expression.getDefaultInstance()) {
-            getValueBuilder().mergeFrom(value);
-          } else {
-            value_ = value;
-          }
-        } else {
-          valueBuilder_.mergeFrom(value);
-        }
-        if (value_ != null) {
-          bitField0_ |= 0x00000008;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public Builder clearValue() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        value_ = null;
-        if (valueBuilder_ != null) {
-          valueBuilder_.dispose();
-          valueBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public protocol.Expressions.Expression.Builder getValueBuilder() {
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return getValueFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      public protocol.Expressions.ExpressionOrBuilder getValueOrBuilder() {
-        if (valueBuilder_ != null) {
-          return valueBuilder_.getMessageOrBuilder();
-        } else {
-          return value_ == null ?
-              protocol.Expressions.Expression.getDefaultInstance() : value_;
-        }
-      }
-      /**
-       * <code>.protocol.Expression value = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> 
-          getValueFieldBuilder() {
-        if (valueBuilder_ == null) {
-          valueBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder>(
-                  getValue(),
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        return valueBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:protocol.PropertyDeclaration)
-    }
-
-    // @@protoc_insertion_point(class_scope:protocol.PropertyDeclaration)
-    private static final protocol.Statements.PropertyDeclaration DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new protocol.Statements.PropertyDeclaration();
-    }
-
-    public static protocol.Statements.PropertyDeclaration getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<PropertyDeclaration>
-        PARSER = new com.google.protobuf.AbstractParser<PropertyDeclaration>() {
-      @java.lang.Override
-      public PropertyDeclaration parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<PropertyDeclaration> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PropertyDeclaration> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public protocol.Statements.PropertyDeclaration getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7961,17 +7128,17 @@ public final class Statements {
         int index);
 
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -8164,7 +7331,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 5;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -8172,7 +7339,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -8180,7 +7347,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -9415,14 +8582,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000010) != 0);
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -9433,7 +8600,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -9449,7 +8616,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -9463,7 +8630,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -9484,7 +8651,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -9497,7 +8664,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000010;
@@ -9505,7 +8672,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -9516,7 +8683,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -9687,17 +8854,17 @@ public final class Statements {
     protocol.Statements.ThisConstructorDefinitionOrBuilder getThisConstructorOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -9930,7 +9097,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 6;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -9938,7 +9105,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -9946,7 +9113,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 6;</code>
+     * <code>optional .protocol.Position position = 6;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -11277,14 +10444,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000020) != 0);
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -11295,7 +10462,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -11311,7 +10478,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -11325,7 +10492,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -11346,7 +10513,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -11359,7 +10526,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000020;
@@ -11367,7 +10534,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -11378,7 +10545,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 6;</code>
+       * <code>optional .protocol.Position position = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -11484,6 +10651,21 @@ public final class Statements {
      */
     protocol.Expressions.ExpressionOrBuilder getParametersOrBuilder(
         int index);
+
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     * @return Whether the position field is set.
+     */
+    boolean hasPosition();
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     * @return The position.
+     */
+    protocol.PositionOuterClass.Position getPosition();
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     */
+    protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
   /**
    * Protobuf type {@code protocol.ThisConstructorDefinition}
@@ -11521,6 +10703,7 @@ public final class Statements {
               protocol.Statements.ThisConstructorDefinition.class, protocol.Statements.ThisConstructorDefinition.Builder.class);
     }
 
+    private int bitField0_;
     public static final int PARAMETERS_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
     private java.util.List<protocol.Expressions.Expression> parameters_;
@@ -11562,6 +10745,32 @@ public final class Statements {
       return parameters_.get(index);
     }
 
+    public static final int POSITION_FIELD_NUMBER = 2;
+    private protocol.PositionOuterClass.Position position_;
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     * @return Whether the position field is set.
+     */
+    @java.lang.Override
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     * @return The position.
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.Position getPosition() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+    /**
+     * <code>optional .protocol.Position position = 2;</code>
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -11579,6 +10788,9 @@ public final class Statements {
       for (int i = 0; i < parameters_.size(); i++) {
         output.writeMessage(1, parameters_.get(i));
       }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(2, getPosition());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -11591,6 +10803,10 @@ public final class Statements {
       for (int i = 0; i < parameters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, parameters_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getPosition());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -11609,6 +10825,11 @@ public final class Statements {
 
       if (!getParametersList()
           .equals(other.getParametersList())) return false;
+      if (hasPosition() != other.hasPosition()) return false;
+      if (hasPosition()) {
+        if (!getPosition()
+            .equals(other.getPosition())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -11623,6 +10844,10 @@ public final class Statements {
       if (getParametersCount() > 0) {
         hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
         hash = (53 * hash) + getParametersList().hashCode();
+      }
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -11743,13 +10968,20 @@ public final class Statements {
 
       // Construct using protocol.Statements.ThisConstructorDefinition.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getParametersFieldBuilder();
+          getPositionFieldBuilder();
+        }
       }
       @java.lang.Override
       public Builder clear() {
@@ -11762,6 +10994,11 @@ public final class Statements {
           parametersBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
+        }
         return this;
       }
 
@@ -11808,6 +11045,14 @@ public final class Statements {
 
       private void buildPartial0(protocol.Statements.ThisConstructorDefinition result) {
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.position_ = positionBuilder_ == null
+              ? position_
+              : positionBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -11880,6 +11125,9 @@ public final class Statements {
             }
           }
         }
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -11919,6 +11167,13 @@ public final class Statements {
                 }
                 break;
               } // case 10
+              case 18: {
+                input.readMessage(
+                    getPositionFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -12175,6 +11430,127 @@ public final class Statements {
         }
         return parametersBuilder_;
       }
+
+      private protocol.PositionOuterClass.Position position_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       * @return Whether the position field is set.
+       */
+      public boolean hasPosition() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       * @return The position.
+       */
+      public protocol.PositionOuterClass.Position getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        } else {
+          return positionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public Builder setPosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          position_ = value;
+        } else {
+          positionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public Builder setPosition(
+          protocol.PositionOuterClass.Position.Builder builderForValue) {
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
+        } else {
+          positionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public Builder mergePosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            position_ != null &&
+            position_ != protocol.PositionOuterClass.Position.getDefaultInstance()) {
+            getPositionBuilder().mergeFrom(value);
+          } else {
+            position_ = value;
+          }
+        } else {
+          positionBuilder_.mergeFrom(value);
+        }
+        if (position_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public Builder clearPosition() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
+        } else {
+          return position_ == null ?
+              protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder>(
+                  getPosition(),
+                  getParentForChildren(),
+                  isClean());
+          position_ = null;
+        }
+        return positionBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -12280,6 +11656,21 @@ public final class Statements {
      * <code>.protocol.VariableValueType valueType = 3;</code>
      */
     protocol.Statements.VariableValueTypeOrBuilder getValueTypeOrBuilder();
+
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return Whether the position field is set.
+     */
+    boolean hasPosition();
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return The position.
+     */
+    protocol.PositionOuterClass.Position getPosition();
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     */
+    protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
   /**
    * Protobuf type {@code protocol.Parameter}
@@ -12402,6 +11793,32 @@ public final class Statements {
       return valueType_ == null ? protocol.Statements.VariableValueType.getDefaultInstance() : valueType_;
     }
 
+    public static final int POSITION_FIELD_NUMBER = 4;
+    private protocol.PositionOuterClass.Position position_;
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return Whether the position field is set.
+     */
+    @java.lang.Override
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return The position.
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.Position getPosition() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -12419,11 +11836,14 @@ public final class Statements {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
-      if (type_ != protocol.Statements.ParameterType.TYPE.getNumber()) {
+      if (type_ != protocol.Statements.ParameterType.TYPED.getNumber()) {
         output.writeEnum(2, type_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(3, getValueType());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeMessage(4, getPosition());
       }
       getUnknownFields().writeTo(output);
     }
@@ -12437,13 +11857,17 @@ public final class Statements {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
       }
-      if (type_ != protocol.Statements.ParameterType.TYPE.getNumber()) {
+      if (type_ != protocol.Statements.ParameterType.TYPED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, type_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getValueType());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getPosition());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -12468,6 +11892,11 @@ public final class Statements {
         if (!getValueType()
             .equals(other.getValueType())) return false;
       }
+      if (hasPosition() != other.hasPosition()) return false;
+      if (hasPosition()) {
+        if (!getPosition()
+            .equals(other.getPosition())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -12486,6 +11915,10 @@ public final class Statements {
       if (hasValueType()) {
         hash = (37 * hash) + VALUETYPE_FIELD_NUMBER;
         hash = (53 * hash) + getValueType().hashCode();
+      }
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -12618,6 +12051,7 @@ public final class Statements {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getValueTypeFieldBuilder();
+          getPositionFieldBuilder();
         }
       }
       @java.lang.Override
@@ -12630,6 +12064,11 @@ public final class Statements {
         if (valueTypeBuilder_ != null) {
           valueTypeBuilder_.dispose();
           valueTypeBuilder_ = null;
+        }
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
         }
         return this;
       }
@@ -12676,6 +12115,12 @@ public final class Statements {
               ? valueType_
               : valueTypeBuilder_.build();
           to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.position_ = positionBuilder_ == null
+              ? position_
+              : positionBuilder_.build();
+          to_bitField0_ |= 0x00000002;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -12735,6 +12180,9 @@ public final class Statements {
         if (other.hasValueType()) {
           mergeValueType(other.getValueType());
         }
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -12778,6 +12226,13 @@ public final class Statements {
                 bitField0_ |= 0x00000004;
                 break;
               } // case 26
+              case 34: {
+                input.readMessage(
+                    getPositionFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -13040,6 +12495,127 @@ public final class Statements {
         }
         return valueTypeBuilder_;
       }
+
+      private protocol.PositionOuterClass.Position position_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       * @return Whether the position field is set.
+       */
+      public boolean hasPosition() {
+        return ((bitField0_ & 0x00000008) != 0);
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       * @return The position.
+       */
+      public protocol.PositionOuterClass.Position getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        } else {
+          return positionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder setPosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          position_ = value;
+        } else {
+          positionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder setPosition(
+          protocol.PositionOuterClass.Position.Builder builderForValue) {
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
+        } else {
+          positionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder mergePosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) != 0) &&
+            position_ != null &&
+            position_ != protocol.PositionOuterClass.Position.getDefaultInstance()) {
+            getPositionBuilder().mergeFrom(value);
+          } else {
+            position_ = value;
+          }
+        } else {
+          positionBuilder_.mergeFrom(value);
+        }
+        if (position_ != null) {
+          bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder clearPosition() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
+        } else {
+          return position_ == null ?
+              protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder>(
+                  getPosition(),
+                  getParentForChildren(),
+                  isClean());
+          position_ = null;
+        }
+        return positionBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -13124,17 +12700,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -13203,7 +12779,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -13211,7 +12787,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -13219,7 +12795,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -13736,14 +13312,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -13754,7 +13330,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -13770,7 +13346,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -13784,7 +13360,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -13805,7 +13381,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -13818,7 +13394,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -13826,7 +13402,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -13837,7 +13413,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -13975,17 +13551,17 @@ public final class Statements {
     protocol.Statements.IfBlockOrBuilder getElseBlockOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -14122,7 +13698,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -14130,7 +13706,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -14138,7 +13714,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -15127,14 +14703,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -15145,7 +14721,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -15161,7 +14737,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -15175,7 +14751,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -15196,7 +14772,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -15209,7 +14785,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -15217,7 +14793,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -15228,7 +14804,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -15362,17 +14938,17 @@ public final class Statements {
     protocol.Statements.BlockType getBlockType();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -15502,7 +15078,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -15510,7 +15086,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -15518,7 +15094,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -16423,14 +15999,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -16441,7 +16017,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -16457,7 +16033,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -16471,7 +16047,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -16492,7 +16068,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -16505,7 +16081,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -16513,7 +16089,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -16524,7 +16100,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -16647,17 +16223,17 @@ public final class Statements {
         int index);
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -16768,7 +16344,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -16776,7 +16352,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -16784,7 +16360,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -17614,14 +17190,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -17632,7 +17208,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17648,7 +17224,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -17662,7 +17238,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17683,7 +17259,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -17696,7 +17272,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -17704,7 +17280,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -17715,7 +17291,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -19002,17 +18578,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -19166,7 +18742,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 5;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -19174,7 +18750,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -19182,7 +18758,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -19203,7 +18779,7 @@ public final class Statements {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         output.writeEnum(1, varType_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
@@ -19227,7 +18803,7 @@ public final class Statements {
       if (size != -1) return size;
 
       size = 0;
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, varType_);
       }
@@ -20029,14 +19605,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000010) != 0);
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -20047,7 +19623,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -20063,7 +19639,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -20077,7 +19653,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -20098,7 +19674,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -20111,7 +19687,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000010;
@@ -20119,7 +19695,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -20130,7 +19706,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -20241,17 +19817,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -20360,7 +19936,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -20368,7 +19944,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -20376,7 +19952,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -20989,14 +20565,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -21007,7 +20583,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21023,7 +20599,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -21037,7 +20613,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21058,7 +20634,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -21071,7 +20647,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -21079,7 +20655,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -21090,7 +20666,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -21189,17 +20765,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -21268,7 +20844,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -21276,7 +20852,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -21284,7 +20860,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -21801,14 +21377,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -21819,7 +21395,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21835,7 +21411,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -21849,7 +21425,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21870,7 +21446,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -21883,7 +21459,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -21891,7 +21467,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -21902,7 +21478,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -22025,17 +21601,17 @@ public final class Statements {
         int index);
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -22146,7 +21722,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -22154,7 +21730,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -22162,7 +21738,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -22992,14 +22568,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -23010,7 +22586,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -23026,7 +22602,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -23040,7 +22616,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -23061,7 +22637,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -23074,7 +22650,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -23082,7 +22658,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -23093,7 +22669,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -24149,17 +23725,17 @@ public final class Statements {
     protocol.Statements.ForInitOrIncrementStatementOrBuilder getIncrementStatementOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -24280,7 +23856,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -24288,7 +23864,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -24296,7 +23872,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -25131,14 +24707,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -25149,7 +24725,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -25165,7 +24741,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -25179,7 +24755,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -25200,7 +24776,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -25213,7 +24789,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -25221,7 +24797,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -25232,7 +24808,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -25346,17 +24922,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getExpressionOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -25451,7 +25027,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -25459,7 +25035,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -25467,7 +25043,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -26143,14 +25719,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -26161,7 +25737,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -26177,7 +25753,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -26191,7 +25767,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -26212,7 +25788,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -26225,7 +25801,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -26233,7 +25809,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -26244,7 +25820,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -26366,17 +25942,17 @@ public final class Statements {
     protocol.Statements.VariableValueTypeOrBuilder getValueTypeOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -26504,7 +26080,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -26512,7 +26088,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -26520,7 +26096,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -26541,7 +26117,7 @@ public final class Statements {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         output.writeEnum(1, varType_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
@@ -26562,7 +26138,7 @@ public final class Statements {
       if (size != -1) return size;
 
       size = 0;
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, varType_);
       }
@@ -27208,14 +26784,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -27226,7 +26802,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -27242,7 +26818,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -27256,7 +26832,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -27277,7 +26853,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -27290,7 +26866,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -27298,7 +26874,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -27309,7 +26885,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -27432,17 +27008,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -27591,7 +27167,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -27599,7 +27175,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -27607,7 +27183,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -28316,14 +27892,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -28334,7 +27910,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -28350,7 +27926,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -28364,7 +27940,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -28385,7 +27961,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -28398,7 +27974,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -28406,7 +27982,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -28417,7 +27993,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -28516,17 +28092,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -28595,7 +28171,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -28603,7 +28179,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -28611,7 +28187,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -29128,14 +28704,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -29146,7 +28722,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -29162,7 +28738,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -29176,7 +28752,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -29197,7 +28773,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -29210,7 +28786,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -29218,7 +28794,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -29229,7 +28805,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -29366,17 +28942,17 @@ public final class Statements {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -29530,7 +29106,7 @@ public final class Statements {
     public static final int POSITION_FIELD_NUMBER = 5;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -29538,7 +29114,7 @@ public final class Statements {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -29546,7 +29122,7 @@ public final class Statements {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 5;</code>
+     * <code>optional .protocol.Position position = 5;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -29567,7 +29143,7 @@ public final class Statements {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         output.writeEnum(1, varType_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
@@ -29591,7 +29167,7 @@ public final class Statements {
       if (size != -1) return size;
 
       size = 0;
-      if (varType_ != protocol.Statements.VariableType.VARIABLE.getNumber()) {
+      if (varType_ != protocol.Statements.VariableType.TYPE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, varType_);
       }
@@ -30393,14 +29969,14 @@ public final class Statements {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000010) != 0);
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -30411,7 +29987,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -30427,7 +30003,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -30441,7 +30017,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -30462,7 +30038,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -30475,7 +30051,7 @@ public final class Statements {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000010;
@@ -30483,7 +30059,7 @@ public final class Statements {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -30494,7 +30070,7 @@ public final class Statements {
         }
       }
       /**
-       * <code>.protocol.Position position = 5;</code>
+       * <code>optional .protocol.Position position = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -30593,11 +30169,6 @@ public final class Statements {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_protocol_ClassDefinitionStatement_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_PropertyDeclaration_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_PropertyDeclaration_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protocol_FunctionDefinitionStatement_descriptor;
   private static final 
@@ -30707,9 +30278,9 @@ public final class Statements {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020statements.proto\022\010protocol\032\016position.p" +
-      "roto\032\021expressions.proto\"!\n\021VariableValue" +
-      "Type\022\014\n\004name\030\001 \001(\t\"\224\005\n\tStatement\022<\n\023assi" +
+      "\n\020statements.proto\022\010protocol\032\021expression" +
+      "s.proto\032\016position.proto\"!\n\021VariableValue" +
+      "Type\022\014\n\004name\030\001 \001(\t\"\342\005\n\tStatement\022<\n\023assi" +
       "gnmentStatement\030\001 \001(\0132\035.protocol.Assignm" +
       "entStatementH\000\022F\n\030classDefinitionStateme" +
       "nt\030\002 \001(\0132\".protocol.ClassDefinitionState" +
@@ -30725,117 +30296,126 @@ public final class Statements {
       "onStatementH\000\022F\n\030whileDefinitionStatemen" +
       "t\030\010 \001(\0132\".protocol.WhileDefinitionStatem" +
       "entH\000\022B\n\026forDefinitionStatement\030\t \001(\0132 ." +
-      "protocol.ForDefinitionStatementH\000B\006\n\004stm" +
-      "t\"n\n\023AssignmentStatement\022\014\n\004name\030\001 \001(\t\022#" +
-      "\n\005value\030\002 \001(\0132\024.protocol.Expression\022$\n\010p" +
-      "osition\030\003 \001(\0132\022.protocol.Position\"\367\002\n\030Cl" +
-      "assDefinitionStatement\0222\n\rencapsulation\030" +
-      "\001 \001(\0162\033.protocol.EncapsulationType\022\014\n\004na" +
-      "me\030\002 \001(\t\022\022\n\nparentName\030\003 \001(\t\0221\n\nproperti" +
-      "es\030\004 \003(\0132\035.protocol.PropertyDeclaration\022" +
-      ">\n\014constructors\030\005 \003(\0132(.protocol.Constru" +
-      "ctorDefinitionStatement\0226\n\007methods\030\006 \003(\013" +
-      "2%.protocol.FunctionDefinitionStatement\022" +
-      "4\n\017parentClassType\030\007 \001(\0132\033.protocol.Vari" +
-      "ableValueType\022$\n\010position\030\010 \001(\0132\022.protoc" +
-      "ol.Position\"\241\001\n\023PropertyDeclaration\022\'\n\007v" +
-      "arType\030\001 \001(\0162\026.protocol.VariableType\022\014\n\004" +
-      "name\030\002 \001(\t\022.\n\tvalueType\030\003 \001(\0132\033.protocol" +
-      ".VariableValueType\022#\n\005value\030\004 \001(\0132\024.prot" +
-      "ocol.Expression\"\324\001\n\033FunctionDefinitionSt" +
+      "protocol.ForDefinitionStatementH\000\022L\n\033fun" +
+      "ctionDefinitionStatement\030\n \001(\0132%.protoco" +
+      "l.FunctionDefinitionStatementH\000B\006\n\004stmt\"" +
+      "\200\001\n\023AssignmentStatement\022\014\n\004name\030\001 \001(\t\022#\n" +
+      "\005value\030\002 \001(\0132\024.protocol.Expression\022)\n\010po" +
+      "sition\030\003 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n" +
+      "\t_position\"\222\003\n\030ClassDefinitionStatement\022" +
+      "2\n\rencapsulation\030\001 \001(\0162\033.protocol.Encaps" +
+      "ulationType\022\014\n\004name\030\002 \001(\t\022\022\n\nparentName\030" +
+      "\003 \001(\t\022:\n\nproperties\030\004 \003(\0132&.protocol.Var" +
+      "iableDeclarationStatement\022>\n\014constructor" +
+      "s\030\005 \003(\0132(.protocol.ConstructorDefinition" +
+      "Statement\0226\n\007methods\030\006 \003(\0132%.protocol.Fu" +
+      "nctionDefinitionStatement\0224\n\017parentClass" +
+      "Type\030\007 \001(\0132\033.protocol.VariableValueType\022" +
+      ")\n\010position\030\010 \001(\0132\022.protocol.PositionH\000\210" +
+      "\001\001B\013\n\t_position\"\346\001\n\033FunctionDefinitionSt" +
       "atement\022\014\n\004name\030\001 \001(\t\022\'\n\nparameters\030\002 \003(" +
       "\0132\023.protocol.Parameter\022/\n\nreturnType\030\003 \001" +
       "(\0132\033.protocol.VariableValueType\022\'\n\nstate" +
-      "ments\030\004 \003(\0132\023.protocol.Statement\022$\n\010posi" +
-      "tion\030\005 \001(\0132\022.protocol.Position\"\374\001\n\036Const" +
-      "ructorDefinitionStatement\022\021\n\tclassName\030\001" +
-      " \001(\t\022\027\n\017constructorName\030\002 \001(\t\022\'\n\nparamet" +
-      "ers\030\003 \003(\0132\023.protocol.Parameter\022!\n\004body\030\004" +
-      " \003(\0132\023.protocol.Statement\022<\n\017thisConstru" +
-      "ctor\030\005 \001(\0132#.protocol.ThisConstructorDef" +
-      "inition\022$\n\010position\030\006 \001(\0132\022.protocol.Pos" +
-      "ition\"E\n\031ThisConstructorDefinition\022(\n\npa" +
-      "rameters\030\001 \003(\0132\024.protocol.Expression\"p\n\t" +
-      "Parameter\022\014\n\004name\030\001 \001(\t\022%\n\004type\030\002 \001(\0162\027." +
-      "protocol.ParameterType\022.\n\tvalueType\030\003 \001(" +
-      "\0132\033.protocol.VariableValueType\"j\n\035Expres" +
-      "sionDefinitionStatement\022#\n\005value\030\001 \001(\0132\024" +
-      ".protocol.Expression\022$\n\010position\030\002 \001(\0132\022" +
-      ".protocol.Position\"\260\001\n\025IfDefinitionState" +
-      "ment\022\"\n\007ifBlock\030\001 \001(\0132\021.protocol.IfBlock" +
-      "\022\'\n\014elseIfBlocks\030\002 \003(\0132\021.protocol.IfBloc" +
-      "k\022$\n\telseBlock\030\003 \001(\0132\021.protocol.IfBlock\022" +
-      "$\n\010position\030\004 \001(\0132\022.protocol.Position\"\251\001" +
-      "\n\007IfBlock\022\'\n\tcondition\030\001 \001(\0132\024.protocol." +
-      "Expression\022\'\n\nstatements\030\002 \003(\0132\023.protoco" +
-      "l.Statement\022&\n\tblockType\030\003 \001(\0162\023.protoco" +
-      "l.BlockType\022$\n\010position\030\004 \001(\0132\022.protocol" +
-      ".Position\"\222\001\n\030WhileDefinitionStatement\022\'" +
-      "\n\tcondition\030\001 \001(\0132\024.protocol.Expression\022" +
-      "\'\n\nstatements\030\002 \003(\0132\023.protocol.Statement" +
-      "\022$\n\010position\030\003 \001(\0132\022.protocol.Position\"\206" +
-      "\002\n\033ForInitOrIncrementStatement\022J\n\032varDec" +
-      "larationForStatement\030\001 \001(\0132$.protocol.Va" +
-      "rDeclarationForStatementH\000\022B\n\026assignment" +
-      "ForStatement\030\002 \001(\0132 .protocol.Assignment" +
-      "ForStatementH\000\022B\n\026expressionForStatement" +
-      "\030\003 \001(\0132 .protocol.ExpressionForStatement" +
-      "H\000B\023\n\021init_or_increment\"\316\001\n\032VarDeclarati" +
-      "onForStatement\022\'\n\007varType\030\001 \001(\0162\026.protoc" +
-      "ol.VariableType\022\014\n\004name\030\002 \001(\t\022.\n\tvalueTy" +
-      "pe\030\003 \001(\0132\033.protocol.VariableValueType\022#\n" +
-      "\005value\030\004 \001(\0132\024.protocol.Expression\022$\n\010po" +
-      "sition\030\005 \001(\0132\022.protocol.Position\"q\n\026Assi" +
+      "ments\030\004 \003(\0132\023.protocol.Statement\022)\n\010posi" +
+      "tion\030\005 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_" +
+      "position\"\216\002\n\036ConstructorDefinitionStatem" +
+      "ent\022\021\n\tclassName\030\001 \001(\t\022\027\n\017constructorNam" +
+      "e\030\002 \001(\t\022\'\n\nparameters\030\003 \003(\0132\023.protocol.P" +
+      "arameter\022!\n\004body\030\004 \003(\0132\023.protocol.Statem" +
+      "ent\022<\n\017thisConstructor\030\005 \001(\0132#.protocol." +
+      "ThisConstructorDefinition\022)\n\010position\030\006 " +
+      "\001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_positio" +
+      "n\"}\n\031ThisConstructorDefinition\022(\n\nparame" +
+      "ters\030\001 \003(\0132\024.protocol.Expression\022)\n\010posi" +
+      "tion\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_" +
+      "position\"\250\001\n\tParameter\022\014\n\004name\030\001 \001(\t\022%\n\004" +
+      "type\030\002 \001(\0162\027.protocol.ParameterType\022.\n\tv" +
+      "alueType\030\003 \001(\0132\033.protocol.VariableValueT" +
+      "ype\022)\n\010position\030\004 \001(\0132\022.protocol.Positio" +
+      "nH\000\210\001\001B\013\n\t_position\"|\n\035ExpressionDefinit" +
+      "ionStatement\022#\n\005value\030\001 \001(\0132\024.protocol.E" +
+      "xpression\022)\n\010position\030\002 \001(\0132\022.protocol.P" +
+      "ositionH\000\210\001\001B\013\n\t_position\"\302\001\n\025IfDefiniti" +
+      "onStatement\022\"\n\007ifBlock\030\001 \001(\0132\021.protocol." +
+      "IfBlock\022\'\n\014elseIfBlocks\030\002 \003(\0132\021.protocol" +
+      ".IfBlock\022$\n\telseBlock\030\003 \001(\0132\021.protocol.I" +
+      "fBlock\022)\n\010position\030\004 \001(\0132\022.protocol.Posi" +
+      "tionH\000\210\001\001B\013\n\t_position\"\273\001\n\007IfBlock\022\'\n\tco" +
+      "ndition\030\001 \001(\0132\024.protocol.Expression\022\'\n\ns" +
+      "tatements\030\002 \003(\0132\023.protocol.Statement\022&\n\t" +
+      "blockType\030\003 \001(\0162\023.protocol.BlockType\022)\n\010" +
+      "position\030\004 \001(\0132\022.protocol.PositionH\000\210\001\001B" +
+      "\013\n\t_position\"\244\001\n\030WhileDefinitionStatemen" +
+      "t\022\'\n\tcondition\030\001 \001(\0132\024.protocol.Expressi" +
+      "on\022\'\n\nstatements\030\002 \003(\0132\023.protocol.Statem" +
+      "ent\022)\n\010position\030\003 \001(\0132\022.protocol.Positio" +
+      "nH\000\210\001\001B\013\n\t_position\"\206\002\n\033ForInitOrIncreme" +
+      "ntStatement\022J\n\032varDeclarationForStatemen" +
+      "t\030\001 \001(\0132$.protocol.VarDeclarationForStat" +
+      "ementH\000\022B\n\026assignmentForStatement\030\002 \001(\0132" +
+      " .protocol.AssignmentForStatementH\000\022B\n\026e" +
+      "xpressionForStatement\030\003 \001(\0132 .protocol.E" +
+      "xpressionForStatementH\000B\023\n\021init_or_incre" +
+      "ment\"\340\001\n\032VarDeclarationForStatement\022\'\n\007v" +
+      "arType\030\001 \001(\0162\026.protocol.VariableType\022\014\n\004" +
+      "name\030\002 \001(\t\022.\n\tvalueType\030\003 \001(\0132\033.protocol" +
+      ".VariableValueType\022#\n\005value\030\004 \001(\0132\024.prot" +
+      "ocol.Expression\022)\n\010position\030\005 \001(\0132\022.prot" +
+      "ocol.PositionH\000\210\001\001B\013\n\t_position\"\203\001\n\026Assi" +
       "gnmentForStatement\022\014\n\004name\030\001 \001(\t\022#\n\005valu" +
-      "e\030\002 \001(\0132\024.protocol.Expression\022$\n\010positio" +
-      "n\030\003 \001(\0132\022.protocol.Position\"c\n\026Expressio" +
-      "nForStatement\022#\n\005value\030\001 \001(\0132\024.protocol." +
-      "Expression\022$\n\010position\030\002 \001(\0132\022.protocol." +
-      "Position\"\225\001\n\026ForDefinitionStatement\022,\n\014f" +
-      "orCondition\030\001 \001(\0132\026.protocol.ForConditio" +
-      "n\022\'\n\nstatements\030\002 \003(\0132\023.protocol.Stateme" +
-      "nt\022$\n\010position\030\003 \001(\0132\022.protocol.Position" +
-      "\"\223\001\n\014ForCondition\022>\n\024standardForConditio" +
-      "n\030\001 \001(\0132\036.protocol.StandardForConditionH" +
-      "\000\0226\n\020forEachCondition\030\002 \001(\0132\032.protocol.F" +
-      "orEachConditionH\000B\013\n\tcondition\"\356\001\n\024Stand" +
-      "ardForCondition\022<\n\rinitStatement\030\001 \001(\0132%" +
-      ".protocol.ForInitOrIncrementStatement\022/\n" +
-      "\021controlExpression\030\002 \001(\0132\024.protocol.Expr" +
-      "ession\022A\n\022incrementStatement\030\003 \001(\0132%.pro" +
-      "tocol.ForInitOrIncrementStatement\022$\n\010pos" +
-      "ition\030\004 \001(\0132\022.protocol.Position\"\224\001\n\020ForE" +
-      "achCondition\0220\n\016itemDefinition\030\001 \001(\0132\030.p" +
-      "rotocol.ItemDefinition\022(\n\nexpression\030\002 \001" +
-      "(\0132\024.protocol.Expression\022$\n\010position\030\003 \001" +
-      "(\0132\022.protocol.Position\"\235\001\n\016ItemDefinitio" +
-      "n\022\'\n\007varType\030\001 \001(\0162\026.protocol.VariableTy" +
-      "pe\022\014\n\004name\030\002 \001(\t\022.\n\tvalueType\030\003 \001(\0132\033.pr" +
-      "otocol.VariableValueType\022$\n\010position\030\004 \001" +
-      "(\0132\022.protocol.Position\"\230\001\n!ObjectPropert" +
-      "yAssignmentStatement\022\022\n\nobjectName\030\001 \001(\t" +
-      "\022\024\n\014propertyName\030\002 \001(\t\022#\n\005value\030\003 \001(\0132\024." +
-      "protocol.Expression\022$\n\010position\030\004 \001(\0132\022." +
-      "protocol.Position\"\\\n\017ReturnStatement\022#\n\005" +
-      "value\030\001 \001(\0132\024.protocol.Expression\022$\n\010pos" +
-      "ition\030\002 \001(\0132\022.protocol.Position\"\320\001\n\034Vari" +
-      "ableDeclarationStatement\022\'\n\007varType\030\001 \001(" +
-      "\0162\026.protocol.VariableType\022\014\n\004name\030\002 \001(\t\022" +
-      ".\n\tvalueType\030\003 \001(\0132\033.protocol.VariableVa" +
-      "lueType\022#\n\005value\030\004 \001(\0132\024.protocol.Expres" +
-      "sion\022$\n\010position\030\005 \001(\0132\022.protocol.Positi" +
-      "on*9\n\014VariableType\022\014\n\010VARIABLE\020\000\022\r\n\tIMMU" +
-      "TABLE\020\001\022\014\n\010CONSTANT\020\002*,\n\021EncapsulationTy" +
-      "pe\022\n\n\006PUBLIC\020\000\022\013\n\007PRIVATE\020\001*.\n\rParameter" +
-      "Type\022\010\n\004TYPE\020\000\022\010\n\004THIS\020\001\022\t\n\005SUPER\020\002*<\n\tB" +
-      "lockType\022\014\n\010IF_BLOCK\020\000\022\021\n\rELSE_IF_BLOCK\020" +
-      "\001\022\016\n\nELSE_BLOCK\020\002b\006proto3"
+      "e\030\002 \001(\0132\024.protocol.Expression\022)\n\010positio" +
+      "n\030\003 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_pos" +
+      "ition\"u\n\026ExpressionForStatement\022#\n\005value" +
+      "\030\001 \001(\0132\024.protocol.Expression\022)\n\010position" +
+      "\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_posi" +
+      "tion\"\247\001\n\026ForDefinitionStatement\022,\n\014forCo" +
+      "ndition\030\001 \001(\0132\026.protocol.ForCondition\022\'\n" +
+      "\nstatements\030\002 \003(\0132\023.protocol.Statement\022)" +
+      "\n\010position\030\003 \001(\0132\022.protocol.PositionH\000\210\001" +
+      "\001B\013\n\t_position\"\223\001\n\014ForCondition\022>\n\024stand" +
+      "ardForCondition\030\001 \001(\0132\036.protocol.Standar" +
+      "dForConditionH\000\0226\n\020forEachCondition\030\002 \001(" +
+      "\0132\032.protocol.ForEachConditionH\000B\013\n\tcondi" +
+      "tion\"\200\002\n\024StandardForCondition\022<\n\rinitSta" +
+      "tement\030\001 \001(\0132%.protocol.ForInitOrIncreme" +
+      "ntStatement\022/\n\021controlExpression\030\002 \001(\0132\024" +
+      ".protocol.Expression\022A\n\022incrementStateme" +
+      "nt\030\003 \001(\0132%.protocol.ForInitOrIncrementSt" +
+      "atement\022)\n\010position\030\004 \001(\0132\022.protocol.Pos" +
+      "itionH\000\210\001\001B\013\n\t_position\"\246\001\n\020ForEachCondi" +
+      "tion\0220\n\016itemDefinition\030\001 \001(\0132\030.protocol." +
+      "ItemDefinition\022(\n\nexpression\030\002 \001(\0132\024.pro" +
+      "tocol.Expression\022)\n\010position\030\003 \001(\0132\022.pro" +
+      "tocol.PositionH\000\210\001\001B\013\n\t_position\"\257\001\n\016Ite" +
+      "mDefinition\022\'\n\007varType\030\001 \001(\0162\026.protocol." +
+      "VariableType\022\014\n\004name\030\002 \001(\t\022.\n\tvalueType\030" +
+      "\003 \001(\0132\033.protocol.VariableValueType\022)\n\010po" +
+      "sition\030\004 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n" +
+      "\t_position\"\252\001\n!ObjectPropertyAssignmentS" +
+      "tatement\022\022\n\nobjectName\030\001 \001(\t\022\024\n\014property" +
+      "Name\030\002 \001(\t\022#\n\005value\030\003 \001(\0132\024.protocol.Exp" +
+      "ression\022)\n\010position\030\004 \001(\0132\022.protocol.Pos" +
+      "itionH\000\210\001\001B\013\n\t_position\"n\n\017ReturnStateme" +
+      "nt\022#\n\005value\030\001 \001(\0132\024.protocol.Expression\022" +
+      ")\n\010position\030\002 \001(\0132\022.protocol.PositionH\000\210" +
+      "\001\001B\013\n\t_position\"\342\001\n\034VariableDeclarationS" +
+      "tatement\022\'\n\007varType\030\001 \001(\0162\026.protocol.Var" +
+      "iableType\022\014\n\004name\030\002 \001(\t\022.\n\tvalueType\030\003 \001" +
+      "(\0132\033.protocol.VariableValueType\022#\n\005value" +
+      "\030\004 \001(\0132\024.protocol.Expression\022)\n\010position" +
+      "\030\005 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_posi" +
+      "tion*C\n\014VariableType\022\010\n\004TYPE\020\000\022\014\n\010VARIAB" +
+      "LE\020\001\022\r\n\tIMMUTABLE\020\002\022\014\n\010CONSTANT\020\003*,\n\021Enc" +
+      "apsulationType\022\n\n\006PUBLIC\020\000\022\013\n\007PRIVATE\020\001*" +
+      "/\n\rParameterType\022\t\n\005TYPED\020\000\022\010\n\004THIS\020\001\022\t\n" +
+      "\005SUPER\020\002*<\n\tBlockType\022\014\n\010IF_BLOCK\020\000\022\021\n\rE" +
+      "LSE_IF_BLOCK\020\001\022\016\n\nELSE_BLOCK\020\002b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          protocol.PositionOuterClass.getDescriptor(),
           protocol.Expressions.getDescriptor(),
+          protocol.PositionOuterClass.getDescriptor(),
         });
     internal_static_protocol_VariableValueType_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -30848,7 +30428,7 @@ public final class Statements {
     internal_static_protocol_Statement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Statement_descriptor,
-        new java.lang.String[] { "AssignmentStatement", "ClassDefinitionStatement", "ExpressionDefinitionStatement", "IfDefinitionStatement", "ObjectPropertyAssignmentStatement", "ReturnStatement", "VarDeclarationStatement", "WhileDefinitionStatement", "ForDefinitionStatement", "Stmt", });
+        new java.lang.String[] { "AssignmentStatement", "ClassDefinitionStatement", "ExpressionDefinitionStatement", "IfDefinitionStatement", "ObjectPropertyAssignmentStatement", "ReturnStatement", "VarDeclarationStatement", "WhileDefinitionStatement", "ForDefinitionStatement", "FunctionDefinitionStatement", "Stmt", });
     internal_static_protocol_AssignmentStatement_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_protocol_AssignmentStatement_fieldAccessorTable = new
@@ -30861,134 +30441,128 @@ public final class Statements {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ClassDefinitionStatement_descriptor,
         new java.lang.String[] { "Encapsulation", "Name", "ParentName", "Properties", "Constructors", "Methods", "ParentClassType", "Position", });
-    internal_static_protocol_PropertyDeclaration_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_protocol_PropertyDeclaration_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_PropertyDeclaration_descriptor,
-        new java.lang.String[] { "VarType", "Name", "ValueType", "Value", });
     internal_static_protocol_FunctionDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_protocol_FunctionDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_FunctionDefinitionStatement_descriptor,
         new java.lang.String[] { "Name", "Parameters", "ReturnType", "Statements", "Position", });
     internal_static_protocol_ConstructorDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_protocol_ConstructorDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ConstructorDefinitionStatement_descriptor,
         new java.lang.String[] { "ClassName", "ConstructorName", "Parameters", "Body", "ThisConstructor", "Position", });
     internal_static_protocol_ThisConstructorDefinition_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_protocol_ThisConstructorDefinition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ThisConstructorDefinition_descriptor,
-        new java.lang.String[] { "Parameters", });
+        new java.lang.String[] { "Parameters", "Position", });
     internal_static_protocol_Parameter_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_protocol_Parameter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Parameter_descriptor,
-        new java.lang.String[] { "Name", "Type", "ValueType", });
+        new java.lang.String[] { "Name", "Type", "ValueType", "Position", });
     internal_static_protocol_ExpressionDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_protocol_ExpressionDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ExpressionDefinitionStatement_descriptor,
         new java.lang.String[] { "Value", "Position", });
     internal_static_protocol_IfDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_protocol_IfDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_IfDefinitionStatement_descriptor,
         new java.lang.String[] { "IfBlock", "ElseIfBlocks", "ElseBlock", "Position", });
     internal_static_protocol_IfBlock_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_protocol_IfBlock_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_IfBlock_descriptor,
         new java.lang.String[] { "Condition", "Statements", "BlockType", "Position", });
     internal_static_protocol_WhileDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_protocol_WhileDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_WhileDefinitionStatement_descriptor,
         new java.lang.String[] { "Condition", "Statements", "Position", });
     internal_static_protocol_ForInitOrIncrementStatement_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_protocol_ForInitOrIncrementStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ForInitOrIncrementStatement_descriptor,
         new java.lang.String[] { "VarDeclarationForStatement", "AssignmentForStatement", "ExpressionForStatement", "InitOrIncrement", });
     internal_static_protocol_VarDeclarationForStatement_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_protocol_VarDeclarationForStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_VarDeclarationForStatement_descriptor,
         new java.lang.String[] { "VarType", "Name", "ValueType", "Value", "Position", });
     internal_static_protocol_AssignmentForStatement_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_protocol_AssignmentForStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_AssignmentForStatement_descriptor,
         new java.lang.String[] { "Name", "Value", "Position", });
     internal_static_protocol_ExpressionForStatement_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_protocol_ExpressionForStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ExpressionForStatement_descriptor,
         new java.lang.String[] { "Value", "Position", });
     internal_static_protocol_ForDefinitionStatement_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_protocol_ForDefinitionStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ForDefinitionStatement_descriptor,
         new java.lang.String[] { "ForCondition", "Statements", "Position", });
     internal_static_protocol_ForCondition_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_protocol_ForCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ForCondition_descriptor,
         new java.lang.String[] { "StandardForCondition", "ForEachCondition", "Condition", });
     internal_static_protocol_StandardForCondition_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_protocol_StandardForCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_StandardForCondition_descriptor,
         new java.lang.String[] { "InitStatement", "ControlExpression", "IncrementStatement", "Position", });
     internal_static_protocol_ForEachCondition_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_protocol_ForEachCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ForEachCondition_descriptor,
         new java.lang.String[] { "ItemDefinition", "Expression", "Position", });
     internal_static_protocol_ItemDefinition_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_protocol_ItemDefinition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ItemDefinition_descriptor,
         new java.lang.String[] { "VarType", "Name", "ValueType", "Position", });
     internal_static_protocol_ObjectPropertyAssignmentStatement_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_protocol_ObjectPropertyAssignmentStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ObjectPropertyAssignmentStatement_descriptor,
         new java.lang.String[] { "ObjectName", "PropertyName", "Value", "Position", });
     internal_static_protocol_ReturnStatement_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_protocol_ReturnStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ReturnStatement_descriptor,
         new java.lang.String[] { "Value", "Position", });
     internal_static_protocol_VariableDeclarationStatement_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_protocol_VariableDeclarationStatement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_VariableDeclarationStatement_descriptor,
         new java.lang.String[] { "VarType", "Name", "ValueType", "Value", "Position", });
-    protocol.PositionOuterClass.getDescriptor();
     protocol.Expressions.getDescriptor();
+    protocol.PositionOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

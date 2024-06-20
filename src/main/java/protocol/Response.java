@@ -2720,8 +2720,8 @@ public final class Response {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016response.proto\022\010protocol\032\016position.pro" +
-      "to\032\nbase.proto\"^\n\013AstResponse\022&\n\007program" +
+      "\n\016response.proto\022\010protocol\032\nbase.proto\032\016" +
+      "position.proto\"^\n\013AstResponse\022&\n\007program" +
       "\030\001 \001(\0132\025.protocol.ProgramFile\022\'\n\006errors\030" +
       "\002 \003(\0132\027.protocol.LanguageError\"C\n\rLangua" +
       "geError\022\017\n\007message\030\001 \001(\t\022!\n\010position\030\002 \001" +
@@ -2732,8 +2732,8 @@ public final class Response {
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          protocol.PositionOuterClass.getDescriptor(),
           protocol.Base.getDescriptor(),
+          protocol.PositionOuterClass.getDescriptor(),
         });
     internal_static_protocol_AstResponse_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2753,8 +2753,8 @@ public final class Response {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_TranspileResponse_descriptor,
         new java.lang.String[] { "Code", "Errors", });
-    protocol.PositionOuterClass.getDescriptor();
     protocol.Base.getDescriptor();
+    protocol.PositionOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

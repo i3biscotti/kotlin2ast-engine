@@ -158,30 +158,6 @@ public final class Expressions {
      * <code>NOT = 2;</code>
      */
     NOT(2),
-    /**
-     * <code>EQUAL = 3;</code>
-     */
-    EQUAL(3),
-    /**
-     * <code>LESS_THAN = 4;</code>
-     */
-    LESS_THAN(4),
-    /**
-     * <code>LESS_THAN_OR_EQUAL = 5;</code>
-     */
-    LESS_THAN_OR_EQUAL(5),
-    /**
-     * <code>GREATER_THAN = 6;</code>
-     */
-    GREATER_THAN(6),
-    /**
-     * <code>GREATER_THAN_OR_EQUAL = 7;</code>
-     */
-    GREATER_THAN_OR_EQUAL(7),
-    /**
-     * <code>NOT_EQUAL = 8;</code>
-     */
-    NOT_EQUAL(8),
     UNRECOGNIZED(-1),
     ;
 
@@ -197,30 +173,6 @@ public final class Expressions {
      * <code>NOT = 2;</code>
      */
     public static final int NOT_VALUE = 2;
-    /**
-     * <code>EQUAL = 3;</code>
-     */
-    public static final int EQUAL_VALUE = 3;
-    /**
-     * <code>LESS_THAN = 4;</code>
-     */
-    public static final int LESS_THAN_VALUE = 4;
-    /**
-     * <code>LESS_THAN_OR_EQUAL = 5;</code>
-     */
-    public static final int LESS_THAN_OR_EQUAL_VALUE = 5;
-    /**
-     * <code>GREATER_THAN = 6;</code>
-     */
-    public static final int GREATER_THAN_VALUE = 6;
-    /**
-     * <code>GREATER_THAN_OR_EQUAL = 7;</code>
-     */
-    public static final int GREATER_THAN_OR_EQUAL_VALUE = 7;
-    /**
-     * <code>NOT_EQUAL = 8;</code>
-     */
-    public static final int NOT_EQUAL_VALUE = 8;
 
 
     public final int getNumber() {
@@ -250,12 +202,6 @@ public final class Expressions {
         case 0: return AND;
         case 1: return OR;
         case 2: return NOT;
-        case 3: return EQUAL;
-        case 4: return LESS_THAN;
-        case 5: return LESS_THAN_OR_EQUAL;
-        case 6: return GREATER_THAN;
-        case 7: return GREATER_THAN_OR_EQUAL;
-        case 8: return NOT_EQUAL;
         default: return null;
       }
     }
@@ -310,6 +256,150 @@ public final class Expressions {
     }
 
     // @@protoc_insertion_point(enum_scope:protocol.LogicOperand)
+  }
+
+  /**
+   * Protobuf enum {@code protocol.ComparisonOperand}
+   */
+  public enum ComparisonOperand
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>EQUAL = 0;</code>
+     */
+    EQUAL(0),
+    /**
+     * <code>LESS_THAN = 1;</code>
+     */
+    LESS_THAN(1),
+    /**
+     * <code>LESS_THAN_OR_EQUAL = 2;</code>
+     */
+    LESS_THAN_OR_EQUAL(2),
+    /**
+     * <code>GREATER_THAN = 3;</code>
+     */
+    GREATER_THAN(3),
+    /**
+     * <code>GREATER_THAN_OR_EQUAL = 4;</code>
+     */
+    GREATER_THAN_OR_EQUAL(4),
+    /**
+     * <code>NOT_EQUAL = 5;</code>
+     */
+    NOT_EQUAL(5),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>EQUAL = 0;</code>
+     */
+    public static final int EQUAL_VALUE = 0;
+    /**
+     * <code>LESS_THAN = 1;</code>
+     */
+    public static final int LESS_THAN_VALUE = 1;
+    /**
+     * <code>LESS_THAN_OR_EQUAL = 2;</code>
+     */
+    public static final int LESS_THAN_OR_EQUAL_VALUE = 2;
+    /**
+     * <code>GREATER_THAN = 3;</code>
+     */
+    public static final int GREATER_THAN_VALUE = 3;
+    /**
+     * <code>GREATER_THAN_OR_EQUAL = 4;</code>
+     */
+    public static final int GREATER_THAN_OR_EQUAL_VALUE = 4;
+    /**
+     * <code>NOT_EQUAL = 5;</code>
+     */
+    public static final int NOT_EQUAL_VALUE = 5;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ComparisonOperand valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ComparisonOperand forNumber(int value) {
+      switch (value) {
+        case 0: return EQUAL;
+        case 1: return LESS_THAN;
+        case 2: return LESS_THAN_OR_EQUAL;
+        case 3: return GREATER_THAN;
+        case 4: return GREATER_THAN_OR_EQUAL;
+        case 5: return NOT_EQUAL;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ComparisonOperand>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ComparisonOperand> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ComparisonOperand>() {
+            public ComparisonOperand findValueByNumber(int number) {
+              return ComparisonOperand.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return protocol.Expressions.getDescriptor().getEnumTypes().get(2);
+    }
+
+    private static final ComparisonOperand[] VALUES = values();
+
+    public static ComparisonOperand valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ComparisonOperand(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:protocol.ComparisonOperand)
   }
 
   public interface ExpressionOrBuilder extends
@@ -557,19 +647,19 @@ public final class Expressions {
     protocol.Expressions.VarReferenceExpressionOrBuilder getVarReferenceExpressionOrBuilder();
 
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-     * @return Whether the parenthesysExpression field is set.
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+     * @return Whether the parenthesisExpression field is set.
      */
-    boolean hasParenthesysExpression();
+    boolean hasParenthesisExpression();
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-     * @return The parenthesysExpression.
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+     * @return The parenthesisExpression.
      */
-    protocol.Expressions.ParenthesisExpression getParenthesysExpression();
+    protocol.Expressions.ParenthesisExpression getParenthesisExpression();
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
      */
-    protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesysExpressionOrBuilder();
+    protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesisExpressionOrBuilder();
 
     /**
      * <code>.protocol.FunctionCallExpression functionCallExpression = 19;</code>
@@ -615,6 +705,21 @@ public final class Expressions {
      * <code>.protocol.ObjectMethodCallExpression objectMethodCallExpression = 21;</code>
      */
     protocol.Expressions.ObjectMethodCallExpressionOrBuilder getObjectMethodCallExpressionOrBuilder();
+
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     * @return Whether the binaryComparisonExpression field is set.
+     */
+    boolean hasBinaryComparisonExpression();
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     * @return The binaryComparisonExpression.
+     */
+    protocol.Expressions.BinaryComparisonExpression getBinaryComparisonExpression();
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     */
+    protocol.Expressions.BinaryComparisonExpressionOrBuilder getBinaryComparisonExpressionOrBuilder();
 
     protocol.Expressions.Expression.ExprCase getExprCase();
   }
@@ -675,10 +780,11 @@ public final class Expressions {
       INPUTEXPRESSION(15),
       OUTPUTEXPRESSION(16),
       VARREFERENCEEXPRESSION(17),
-      PARENTHESYSEXPRESSION(18),
+      PARENTHESISEXPRESSION(18),
       FUNCTIONCALLEXPRESSION(19),
       OBJECTPROPERTYREFERENCEEXPRESSION(20),
       OBJECTMETHODCALLEXPRESSION(21),
+      BINARYCOMPARISONEXPRESSION(22),
       EXPR_NOT_SET(0);
       private final int value;
       private ExprCase(int value) {
@@ -712,10 +818,11 @@ public final class Expressions {
           case 15: return INPUTEXPRESSION;
           case 16: return OUTPUTEXPRESSION;
           case 17: return VARREFERENCEEXPRESSION;
-          case 18: return PARENTHESYSEXPRESSION;
+          case 18: return PARENTHESISEXPRESSION;
           case 19: return FUNCTIONCALLEXPRESSION;
           case 20: return OBJECTPROPERTYREFERENCEEXPRESSION;
           case 21: return OBJECTMETHODCALLEXPRESSION;
+          case 22: return BINARYCOMPARISONEXPRESSION;
           case 0: return EXPR_NOT_SET;
           default: return null;
         }
@@ -1227,31 +1334,31 @@ public final class Expressions {
       return protocol.Expressions.VarReferenceExpression.getDefaultInstance();
     }
 
-    public static final int PARENTHESYSEXPRESSION_FIELD_NUMBER = 18;
+    public static final int PARENTHESISEXPRESSION_FIELD_NUMBER = 18;
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-     * @return Whether the parenthesysExpression field is set.
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+     * @return Whether the parenthesisExpression field is set.
      */
     @java.lang.Override
-    public boolean hasParenthesysExpression() {
+    public boolean hasParenthesisExpression() {
       return exprCase_ == 18;
     }
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-     * @return The parenthesysExpression.
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+     * @return The parenthesisExpression.
      */
     @java.lang.Override
-    public protocol.Expressions.ParenthesisExpression getParenthesysExpression() {
+    public protocol.Expressions.ParenthesisExpression getParenthesisExpression() {
       if (exprCase_ == 18) {
          return (protocol.Expressions.ParenthesisExpression) expr_;
       }
       return protocol.Expressions.ParenthesisExpression.getDefaultInstance();
     }
     /**
-     * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+     * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
      */
     @java.lang.Override
-    public protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesysExpressionOrBuilder() {
+    public protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesisExpressionOrBuilder() {
       if (exprCase_ == 18) {
          return (protocol.Expressions.ParenthesisExpression) expr_;
       }
@@ -1351,6 +1458,37 @@ public final class Expressions {
       return protocol.Expressions.ObjectMethodCallExpression.getDefaultInstance();
     }
 
+    public static final int BINARYCOMPARISONEXPRESSION_FIELD_NUMBER = 22;
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     * @return Whether the binaryComparisonExpression field is set.
+     */
+    @java.lang.Override
+    public boolean hasBinaryComparisonExpression() {
+      return exprCase_ == 22;
+    }
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     * @return The binaryComparisonExpression.
+     */
+    @java.lang.Override
+    public protocol.Expressions.BinaryComparisonExpression getBinaryComparisonExpression() {
+      if (exprCase_ == 22) {
+         return (protocol.Expressions.BinaryComparisonExpression) expr_;
+      }
+      return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+    }
+    /**
+     * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+     */
+    @java.lang.Override
+    public protocol.Expressions.BinaryComparisonExpressionOrBuilder getBinaryComparisonExpressionOrBuilder() {
+      if (exprCase_ == 22) {
+         return (protocol.Expressions.BinaryComparisonExpression) expr_;
+      }
+      return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1424,6 +1562,9 @@ public final class Expressions {
       }
       if (exprCase_ == 21) {
         output.writeMessage(21, (protocol.Expressions.ObjectMethodCallExpression) expr_);
+      }
+      if (exprCase_ == 22) {
+        output.writeMessage(22, (protocol.Expressions.BinaryComparisonExpression) expr_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1514,6 +1655,10 @@ public final class Expressions {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(21, (protocol.Expressions.ObjectMethodCallExpression) expr_);
       }
+      if (exprCase_ == 22) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(22, (protocol.Expressions.BinaryComparisonExpression) expr_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1596,8 +1741,8 @@ public final class Expressions {
               .equals(other.getVarReferenceExpression())) return false;
           break;
         case 18:
-          if (!getParenthesysExpression()
-              .equals(other.getParenthesysExpression())) return false;
+          if (!getParenthesisExpression()
+              .equals(other.getParenthesisExpression())) return false;
           break;
         case 19:
           if (!getFunctionCallExpression()
@@ -1610,6 +1755,10 @@ public final class Expressions {
         case 21:
           if (!getObjectMethodCallExpression()
               .equals(other.getObjectMethodCallExpression())) return false;
+          break;
+        case 22:
+          if (!getBinaryComparisonExpression()
+              .equals(other.getBinaryComparisonExpression())) return false;
           break;
         case 0:
         default:
@@ -1691,8 +1840,8 @@ public final class Expressions {
           hash = (53 * hash) + getVarReferenceExpression().hashCode();
           break;
         case 18:
-          hash = (37 * hash) + PARENTHESYSEXPRESSION_FIELD_NUMBER;
-          hash = (53 * hash) + getParenthesysExpression().hashCode();
+          hash = (37 * hash) + PARENTHESISEXPRESSION_FIELD_NUMBER;
+          hash = (53 * hash) + getParenthesisExpression().hashCode();
           break;
         case 19:
           hash = (37 * hash) + FUNCTIONCALLEXPRESSION_FIELD_NUMBER;
@@ -1705,6 +1854,10 @@ public final class Expressions {
         case 21:
           hash = (37 * hash) + OBJECTMETHODCALLEXPRESSION_FIELD_NUMBER;
           hash = (53 * hash) + getObjectMethodCallExpression().hashCode();
+          break;
+        case 22:
+          hash = (37 * hash) + BINARYCOMPARISONEXPRESSION_FIELD_NUMBER;
+          hash = (53 * hash) + getBinaryComparisonExpression().hashCode();
           break;
         case 0:
         default:
@@ -1888,8 +2041,8 @@ public final class Expressions {
         if (varReferenceExpressionBuilder_ != null) {
           varReferenceExpressionBuilder_.clear();
         }
-        if (parenthesysExpressionBuilder_ != null) {
-          parenthesysExpressionBuilder_.clear();
+        if (parenthesisExpressionBuilder_ != null) {
+          parenthesisExpressionBuilder_.clear();
         }
         if (functionCallExpressionBuilder_ != null) {
           functionCallExpressionBuilder_.clear();
@@ -1899,6 +2052,9 @@ public final class Expressions {
         }
         if (objectMethodCallExpressionBuilder_ != null) {
           objectMethodCallExpressionBuilder_.clear();
+        }
+        if (binaryComparisonExpressionBuilder_ != null) {
+          binaryComparisonExpressionBuilder_.clear();
         }
         exprCase_ = 0;
         expr_ = null;
@@ -2006,8 +2162,8 @@ public final class Expressions {
           result.expr_ = varReferenceExpressionBuilder_.build();
         }
         if (exprCase_ == 18 &&
-            parenthesysExpressionBuilder_ != null) {
-          result.expr_ = parenthesysExpressionBuilder_.build();
+            parenthesisExpressionBuilder_ != null) {
+          result.expr_ = parenthesisExpressionBuilder_.build();
         }
         if (exprCase_ == 19 &&
             functionCallExpressionBuilder_ != null) {
@@ -2020,6 +2176,10 @@ public final class Expressions {
         if (exprCase_ == 21 &&
             objectMethodCallExpressionBuilder_ != null) {
           result.expr_ = objectMethodCallExpressionBuilder_.build();
+        }
+        if (exprCase_ == 22 &&
+            binaryComparisonExpressionBuilder_ != null) {
+          result.expr_ = binaryComparisonExpressionBuilder_.build();
         }
       }
 
@@ -2132,8 +2292,8 @@ public final class Expressions {
             mergeVarReferenceExpression(other.getVarReferenceExpression());
             break;
           }
-          case PARENTHESYSEXPRESSION: {
-            mergeParenthesysExpression(other.getParenthesysExpression());
+          case PARENTHESISEXPRESSION: {
+            mergeParenthesisExpression(other.getParenthesisExpression());
             break;
           }
           case FUNCTIONCALLEXPRESSION: {
@@ -2146,6 +2306,10 @@ public final class Expressions {
           }
           case OBJECTMETHODCALLEXPRESSION: {
             mergeObjectMethodCallExpression(other.getObjectMethodCallExpression());
+            break;
+          }
+          case BINARYCOMPARISONEXPRESSION: {
+            mergeBinaryComparisonExpression(other.getBinaryComparisonExpression());
             break;
           }
           case EXPR_NOT_SET: {
@@ -2292,7 +2456,7 @@ public final class Expressions {
               } // case 138
               case 146: {
                 input.readMessage(
-                    getParenthesysExpressionFieldBuilder().getBuilder(),
+                    getParenthesisExpressionFieldBuilder().getBuilder(),
                     extensionRegistry);
                 exprCase_ = 18;
                 break;
@@ -2318,6 +2482,13 @@ public final class Expressions {
                 exprCase_ = 21;
                 break;
               } // case 170
+              case 178: {
+                input.readMessage(
+                    getBinaryComparisonExpressionFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                exprCase_ = 22;
+                break;
+              } // case 178
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -4623,68 +4794,68 @@ public final class Expressions {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Expressions.ParenthesisExpression, protocol.Expressions.ParenthesisExpression.Builder, protocol.Expressions.ParenthesisExpressionOrBuilder> parenthesysExpressionBuilder_;
+          protocol.Expressions.ParenthesisExpression, protocol.Expressions.ParenthesisExpression.Builder, protocol.Expressions.ParenthesisExpressionOrBuilder> parenthesisExpressionBuilder_;
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-       * @return Whether the parenthesysExpression field is set.
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+       * @return Whether the parenthesisExpression field is set.
        */
       @java.lang.Override
-      public boolean hasParenthesysExpression() {
+      public boolean hasParenthesisExpression() {
         return exprCase_ == 18;
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
-       * @return The parenthesysExpression.
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
+       * @return The parenthesisExpression.
        */
       @java.lang.Override
-      public protocol.Expressions.ParenthesisExpression getParenthesysExpression() {
-        if (parenthesysExpressionBuilder_ == null) {
+      public protocol.Expressions.ParenthesisExpression getParenthesisExpression() {
+        if (parenthesisExpressionBuilder_ == null) {
           if (exprCase_ == 18) {
             return (protocol.Expressions.ParenthesisExpression) expr_;
           }
           return protocol.Expressions.ParenthesisExpression.getDefaultInstance();
         } else {
           if (exprCase_ == 18) {
-            return parenthesysExpressionBuilder_.getMessage();
+            return parenthesisExpressionBuilder_.getMessage();
           }
           return protocol.Expressions.ParenthesisExpression.getDefaultInstance();
         }
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
-      public Builder setParenthesysExpression(protocol.Expressions.ParenthesisExpression value) {
-        if (parenthesysExpressionBuilder_ == null) {
+      public Builder setParenthesisExpression(protocol.Expressions.ParenthesisExpression value) {
+        if (parenthesisExpressionBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           expr_ = value;
           onChanged();
         } else {
-          parenthesysExpressionBuilder_.setMessage(value);
+          parenthesisExpressionBuilder_.setMessage(value);
         }
         exprCase_ = 18;
         return this;
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
-      public Builder setParenthesysExpression(
+      public Builder setParenthesisExpression(
           protocol.Expressions.ParenthesisExpression.Builder builderForValue) {
-        if (parenthesysExpressionBuilder_ == null) {
+        if (parenthesisExpressionBuilder_ == null) {
           expr_ = builderForValue.build();
           onChanged();
         } else {
-          parenthesysExpressionBuilder_.setMessage(builderForValue.build());
+          parenthesisExpressionBuilder_.setMessage(builderForValue.build());
         }
         exprCase_ = 18;
         return this;
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
-      public Builder mergeParenthesysExpression(protocol.Expressions.ParenthesisExpression value) {
-        if (parenthesysExpressionBuilder_ == null) {
+      public Builder mergeParenthesisExpression(protocol.Expressions.ParenthesisExpression value) {
+        if (parenthesisExpressionBuilder_ == null) {
           if (exprCase_ == 18 &&
               expr_ != protocol.Expressions.ParenthesisExpression.getDefaultInstance()) {
             expr_ = protocol.Expressions.ParenthesisExpression.newBuilder((protocol.Expressions.ParenthesisExpression) expr_)
@@ -4695,19 +4866,19 @@ public final class Expressions {
           onChanged();
         } else {
           if (exprCase_ == 18) {
-            parenthesysExpressionBuilder_.mergeFrom(value);
+            parenthesisExpressionBuilder_.mergeFrom(value);
           } else {
-            parenthesysExpressionBuilder_.setMessage(value);
+            parenthesisExpressionBuilder_.setMessage(value);
           }
         }
         exprCase_ = 18;
         return this;
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
-      public Builder clearParenthesysExpression() {
-        if (parenthesysExpressionBuilder_ == null) {
+      public Builder clearParenthesisExpression() {
+        if (parenthesisExpressionBuilder_ == null) {
           if (exprCase_ == 18) {
             exprCase_ = 0;
             expr_ = null;
@@ -4718,23 +4889,23 @@ public final class Expressions {
             exprCase_ = 0;
             expr_ = null;
           }
-          parenthesysExpressionBuilder_.clear();
+          parenthesisExpressionBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
-      public protocol.Expressions.ParenthesisExpression.Builder getParenthesysExpressionBuilder() {
-        return getParenthesysExpressionFieldBuilder().getBuilder();
+      public protocol.Expressions.ParenthesisExpression.Builder getParenthesisExpressionBuilder() {
+        return getParenthesisExpressionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
       @java.lang.Override
-      public protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesysExpressionOrBuilder() {
-        if ((exprCase_ == 18) && (parenthesysExpressionBuilder_ != null)) {
-          return parenthesysExpressionBuilder_.getMessageOrBuilder();
+      public protocol.Expressions.ParenthesisExpressionOrBuilder getParenthesisExpressionOrBuilder() {
+        if ((exprCase_ == 18) && (parenthesisExpressionBuilder_ != null)) {
+          return parenthesisExpressionBuilder_.getMessageOrBuilder();
         } else {
           if (exprCase_ == 18) {
             return (protocol.Expressions.ParenthesisExpression) expr_;
@@ -4743,16 +4914,16 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.ParenthesisExpression parenthesysExpression = 18;</code>
+       * <code>.protocol.ParenthesisExpression parenthesisExpression = 18;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.Expressions.ParenthesisExpression, protocol.Expressions.ParenthesisExpression.Builder, protocol.Expressions.ParenthesisExpressionOrBuilder> 
-          getParenthesysExpressionFieldBuilder() {
-        if (parenthesysExpressionBuilder_ == null) {
+          getParenthesisExpressionFieldBuilder() {
+        if (parenthesisExpressionBuilder_ == null) {
           if (!(exprCase_ == 18)) {
             expr_ = protocol.Expressions.ParenthesisExpression.getDefaultInstance();
           }
-          parenthesysExpressionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          parenthesisExpressionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               protocol.Expressions.ParenthesisExpression, protocol.Expressions.ParenthesisExpression.Builder, protocol.Expressions.ParenthesisExpressionOrBuilder>(
                   (protocol.Expressions.ParenthesisExpression) expr_,
                   getParentForChildren(),
@@ -4761,7 +4932,7 @@ public final class Expressions {
         }
         exprCase_ = 18;
         onChanged();
-        return parenthesysExpressionBuilder_;
+        return parenthesisExpressionBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -5189,6 +5360,148 @@ public final class Expressions {
         onChanged();
         return objectMethodCallExpressionBuilder_;
       }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.BinaryComparisonExpression, protocol.Expressions.BinaryComparisonExpression.Builder, protocol.Expressions.BinaryComparisonExpressionOrBuilder> binaryComparisonExpressionBuilder_;
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       * @return Whether the binaryComparisonExpression field is set.
+       */
+      @java.lang.Override
+      public boolean hasBinaryComparisonExpression() {
+        return exprCase_ == 22;
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       * @return The binaryComparisonExpression.
+       */
+      @java.lang.Override
+      public protocol.Expressions.BinaryComparisonExpression getBinaryComparisonExpression() {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          if (exprCase_ == 22) {
+            return (protocol.Expressions.BinaryComparisonExpression) expr_;
+          }
+          return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+        } else {
+          if (exprCase_ == 22) {
+            return binaryComparisonExpressionBuilder_.getMessage();
+          }
+          return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      public Builder setBinaryComparisonExpression(protocol.Expressions.BinaryComparisonExpression value) {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          expr_ = value;
+          onChanged();
+        } else {
+          binaryComparisonExpressionBuilder_.setMessage(value);
+        }
+        exprCase_ = 22;
+        return this;
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      public Builder setBinaryComparisonExpression(
+          protocol.Expressions.BinaryComparisonExpression.Builder builderForValue) {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          expr_ = builderForValue.build();
+          onChanged();
+        } else {
+          binaryComparisonExpressionBuilder_.setMessage(builderForValue.build());
+        }
+        exprCase_ = 22;
+        return this;
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      public Builder mergeBinaryComparisonExpression(protocol.Expressions.BinaryComparisonExpression value) {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          if (exprCase_ == 22 &&
+              expr_ != protocol.Expressions.BinaryComparisonExpression.getDefaultInstance()) {
+            expr_ = protocol.Expressions.BinaryComparisonExpression.newBuilder((protocol.Expressions.BinaryComparisonExpression) expr_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            expr_ = value;
+          }
+          onChanged();
+        } else {
+          if (exprCase_ == 22) {
+            binaryComparisonExpressionBuilder_.mergeFrom(value);
+          } else {
+            binaryComparisonExpressionBuilder_.setMessage(value);
+          }
+        }
+        exprCase_ = 22;
+        return this;
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      public Builder clearBinaryComparisonExpression() {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          if (exprCase_ == 22) {
+            exprCase_ = 0;
+            expr_ = null;
+            onChanged();
+          }
+        } else {
+          if (exprCase_ == 22) {
+            exprCase_ = 0;
+            expr_ = null;
+          }
+          binaryComparisonExpressionBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      public protocol.Expressions.BinaryComparisonExpression.Builder getBinaryComparisonExpressionBuilder() {
+        return getBinaryComparisonExpressionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      @java.lang.Override
+      public protocol.Expressions.BinaryComparisonExpressionOrBuilder getBinaryComparisonExpressionOrBuilder() {
+        if ((exprCase_ == 22) && (binaryComparisonExpressionBuilder_ != null)) {
+          return binaryComparisonExpressionBuilder_.getMessageOrBuilder();
+        } else {
+          if (exprCase_ == 22) {
+            return (protocol.Expressions.BinaryComparisonExpression) expr_;
+          }
+          return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.protocol.BinaryComparisonExpression binaryComparisonExpression = 22;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.BinaryComparisonExpression, protocol.Expressions.BinaryComparisonExpression.Builder, protocol.Expressions.BinaryComparisonExpressionOrBuilder> 
+          getBinaryComparisonExpressionFieldBuilder() {
+        if (binaryComparisonExpressionBuilder_ == null) {
+          if (!(exprCase_ == 22)) {
+            expr_ = protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+          }
+          binaryComparisonExpressionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.Expressions.BinaryComparisonExpression, protocol.Expressions.BinaryComparisonExpression.Builder, protocol.Expressions.BinaryComparisonExpressionOrBuilder>(
+                  (protocol.Expressions.BinaryComparisonExpression) expr_,
+                  getParentForChildren(),
+                  isClean());
+          expr_ = null;
+        }
+        exprCase_ = 22;
+        onChanged();
+        return binaryComparisonExpressionBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5270,17 +5583,17 @@ public final class Expressions {
         getValueBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -5363,7 +5676,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -5371,7 +5684,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -5379,7 +5692,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -5833,14 +6146,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -5851,7 +6164,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -5867,7 +6180,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -5881,7 +6194,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -5902,7 +6215,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -5915,7 +6228,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -5923,7 +6236,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -5934,7 +6247,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -6030,17 +6343,17 @@ public final class Expressions {
         getValueBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -6123,7 +6436,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -6131,7 +6444,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -6139,7 +6452,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -6593,14 +6906,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -6611,7 +6924,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -6627,7 +6940,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -6641,7 +6954,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -6662,7 +6975,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6675,7 +6988,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -6683,7 +6996,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -6694,7 +7007,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -6790,17 +7103,17 @@ public final class Expressions {
         getValueBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -6883,7 +7196,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -6891,7 +7204,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -6899,7 +7212,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -7353,14 +7666,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -7371,7 +7684,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -7387,7 +7700,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -7401,7 +7714,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -7422,7 +7735,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -7435,7 +7748,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -7443,7 +7756,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -7454,7 +7767,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -7550,17 +7863,17 @@ public final class Expressions {
         getValueBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -7643,7 +7956,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -7651,7 +7964,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -7659,7 +7972,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -8113,14 +8426,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -8131,7 +8444,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -8147,7 +8460,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -8161,7 +8474,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -8182,7 +8495,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -8195,7 +8508,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -8203,7 +8516,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -8214,7 +8527,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -8298,41 +8611,41 @@ public final class Expressions {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
-    java.util.List<com.google.protobuf.Any> 
+    java.util.List<protocol.Expressions.Expression> 
         getValueList();
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
-    com.google.protobuf.Any getValue(int index);
+    protocol.Expressions.Expression getValue(int index);
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     int getValueCount();
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
-    java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+    java.util.List<? extends protocol.Expressions.ExpressionOrBuilder> 
         getValueOrBuilderList();
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
-    com.google.protobuf.AnyOrBuilder getValueOrBuilder(
+    protocol.Expressions.ExpressionOrBuilder getValueOrBuilder(
         int index);
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -8375,41 +8688,41 @@ public final class Expressions {
     private int bitField0_;
     public static final int VALUE_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
-    private java.util.List<com.google.protobuf.Any> value_;
+    private java.util.List<protocol.Expressions.Expression> value_;
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<com.google.protobuf.Any> getValueList() {
+    public java.util.List<protocol.Expressions.Expression> getValueList() {
       return value_;
     }
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+    public java.util.List<? extends protocol.Expressions.ExpressionOrBuilder> 
         getValueOrBuilderList() {
       return value_;
     }
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     @java.lang.Override
     public int getValueCount() {
       return value_.size();
     }
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     @java.lang.Override
-    public com.google.protobuf.Any getValue(int index) {
+    public protocol.Expressions.Expression getValue(int index) {
       return value_.get(index);
     }
     /**
-     * <code>repeated .google.protobuf.Any value = 1;</code>
+     * <code>repeated .protocol.Expression value = 1;</code>
      */
     @java.lang.Override
-    public com.google.protobuf.AnyOrBuilder getValueOrBuilder(
+    public protocol.Expressions.ExpressionOrBuilder getValueOrBuilder(
         int index) {
       return value_.get(index);
     }
@@ -8417,7 +8730,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -8425,7 +8738,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -8433,7 +8746,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -8824,9 +9137,9 @@ public final class Expressions {
                 done = true;
                 break;
               case 10: {
-                com.google.protobuf.Any m =
+                protocol.Expressions.Expression m =
                     input.readMessage(
-                        com.google.protobuf.Any.parser(),
+                        protocol.Expressions.Expression.parser(),
                         extensionRegistry);
                 if (valueBuilder_ == null) {
                   ensureValueIsMutable();
@@ -8860,22 +9173,22 @@ public final class Expressions {
       }
       private int bitField0_;
 
-      private java.util.List<com.google.protobuf.Any> value_ =
+      private java.util.List<protocol.Expressions.Expression> value_ =
         java.util.Collections.emptyList();
       private void ensureValueIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          value_ = new java.util.ArrayList<com.google.protobuf.Any>(value_);
+          value_ = new java.util.ArrayList<protocol.Expressions.Expression>(value_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> valueBuilder_;
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> valueBuilder_;
 
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public java.util.List<com.google.protobuf.Any> getValueList() {
+      public java.util.List<protocol.Expressions.Expression> getValueList() {
         if (valueBuilder_ == null) {
           return java.util.Collections.unmodifiableList(value_);
         } else {
@@ -8883,7 +9196,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public int getValueCount() {
         if (valueBuilder_ == null) {
@@ -8893,9 +9206,9 @@ public final class Expressions {
         }
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public com.google.protobuf.Any getValue(int index) {
+      public protocol.Expressions.Expression getValue(int index) {
         if (valueBuilder_ == null) {
           return value_.get(index);
         } else {
@@ -8903,10 +9216,10 @@ public final class Expressions {
         }
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder setValue(
-          int index, com.google.protobuf.Any value) {
+          int index, protocol.Expressions.Expression value) {
         if (valueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8920,10 +9233,10 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder setValue(
-          int index, com.google.protobuf.Any.Builder builderForValue) {
+          int index, protocol.Expressions.Expression.Builder builderForValue) {
         if (valueBuilder_ == null) {
           ensureValueIsMutable();
           value_.set(index, builderForValue.build());
@@ -8934,9 +9247,9 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public Builder addValue(com.google.protobuf.Any value) {
+      public Builder addValue(protocol.Expressions.Expression value) {
         if (valueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8950,10 +9263,10 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder addValue(
-          int index, com.google.protobuf.Any value) {
+          int index, protocol.Expressions.Expression value) {
         if (valueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8967,10 +9280,10 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder addValue(
-          com.google.protobuf.Any.Builder builderForValue) {
+          protocol.Expressions.Expression.Builder builderForValue) {
         if (valueBuilder_ == null) {
           ensureValueIsMutable();
           value_.add(builderForValue.build());
@@ -8981,10 +9294,10 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder addValue(
-          int index, com.google.protobuf.Any.Builder builderForValue) {
+          int index, protocol.Expressions.Expression.Builder builderForValue) {
         if (valueBuilder_ == null) {
           ensureValueIsMutable();
           value_.add(index, builderForValue.build());
@@ -8995,10 +9308,10 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder addAllValue(
-          java.lang.Iterable<? extends com.google.protobuf.Any> values) {
+          java.lang.Iterable<? extends protocol.Expressions.Expression> values) {
         if (valueBuilder_ == null) {
           ensureValueIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -9010,7 +9323,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder clearValue() {
         if (valueBuilder_ == null) {
@@ -9023,7 +9336,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
       public Builder removeValue(int index) {
         if (valueBuilder_ == null) {
@@ -9036,16 +9349,16 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public com.google.protobuf.Any.Builder getValueBuilder(
+      public protocol.Expressions.Expression.Builder getValueBuilder(
           int index) {
         return getValueFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public com.google.protobuf.AnyOrBuilder getValueOrBuilder(
+      public protocol.Expressions.ExpressionOrBuilder getValueOrBuilder(
           int index) {
         if (valueBuilder_ == null) {
           return value_.get(index);  } else {
@@ -9053,9 +9366,9 @@ public final class Expressions {
         }
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+      public java.util.List<? extends protocol.Expressions.ExpressionOrBuilder> 
            getValueOrBuilderList() {
         if (valueBuilder_ != null) {
           return valueBuilder_.getMessageOrBuilderList();
@@ -9064,33 +9377,33 @@ public final class Expressions {
         }
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public com.google.protobuf.Any.Builder addValueBuilder() {
+      public protocol.Expressions.Expression.Builder addValueBuilder() {
         return getValueFieldBuilder().addBuilder(
-            com.google.protobuf.Any.getDefaultInstance());
+            protocol.Expressions.Expression.getDefaultInstance());
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public com.google.protobuf.Any.Builder addValueBuilder(
+      public protocol.Expressions.Expression.Builder addValueBuilder(
           int index) {
         return getValueFieldBuilder().addBuilder(
-            index, com.google.protobuf.Any.getDefaultInstance());
+            index, protocol.Expressions.Expression.getDefaultInstance());
       }
       /**
-       * <code>repeated .google.protobuf.Any value = 1;</code>
+       * <code>repeated .protocol.Expression value = 1;</code>
        */
-      public java.util.List<com.google.protobuf.Any.Builder> 
+      public java.util.List<protocol.Expressions.Expression.Builder> 
            getValueBuilderList() {
         return getValueFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> 
           getValueFieldBuilder() {
         if (valueBuilder_ == null) {
           valueBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+              protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder>(
                   value_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -9104,14 +9417,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -9122,7 +9435,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -9138,7 +9451,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -9152,7 +9465,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -9173,7 +9486,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -9186,7 +9499,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -9194,7 +9507,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -9205,7 +9518,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -10142,17 +10455,17 @@ public final class Expressions {
     protocol.Expressions.MathOperand getOperand();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -10266,7 +10579,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -10274,7 +10587,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -10282,7 +10595,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -11033,14 +11346,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -11051,7 +11364,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -11067,7 +11380,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -11081,7 +11394,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -11102,7 +11415,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -11115,7 +11428,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -11123,7 +11436,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -11134,7 +11447,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -11259,17 +11572,17 @@ public final class Expressions {
     protocol.Expressions.LogicOperand getOperand();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -11383,7 +11696,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -11391,7 +11704,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -11399,7 +11712,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -12150,14 +12463,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -12168,7 +12481,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -12184,7 +12497,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -12198,7 +12511,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -12219,7 +12532,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -12232,7 +12545,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -12240,7 +12553,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -12251,7 +12564,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -12330,6 +12643,1123 @@ public final class Expressions {
 
   }
 
+  public interface BinaryComparisonExpressionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.BinaryComparisonExpression)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     * @return Whether the left field is set.
+     */
+    boolean hasLeft();
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     * @return The left.
+     */
+    protocol.Expressions.Expression getLeft();
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     */
+    protocol.Expressions.ExpressionOrBuilder getLeftOrBuilder();
+
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     * @return Whether the right field is set.
+     */
+    boolean hasRight();
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     * @return The right.
+     */
+    protocol.Expressions.Expression getRight();
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     */
+    protocol.Expressions.ExpressionOrBuilder getRightOrBuilder();
+
+    /**
+     * <code>.protocol.ComparisonOperand operand = 3;</code>
+     * @return The enum numeric value on the wire for operand.
+     */
+    int getOperandValue();
+    /**
+     * <code>.protocol.ComparisonOperand operand = 3;</code>
+     * @return The operand.
+     */
+    protocol.Expressions.ComparisonOperand getOperand();
+
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return Whether the position field is set.
+     */
+    boolean hasPosition();
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return The position.
+     */
+    protocol.PositionOuterClass.Position getPosition();
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     */
+    protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
+  }
+  /**
+   * Protobuf type {@code protocol.BinaryComparisonExpression}
+   */
+  public static final class BinaryComparisonExpression extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:protocol.BinaryComparisonExpression)
+      BinaryComparisonExpressionOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use BinaryComparisonExpression.newBuilder() to construct.
+    private BinaryComparisonExpression(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private BinaryComparisonExpression() {
+      operand_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new BinaryComparisonExpression();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocol.Expressions.internal_static_protocol_BinaryComparisonExpression_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocol.Expressions.internal_static_protocol_BinaryComparisonExpression_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocol.Expressions.BinaryComparisonExpression.class, protocol.Expressions.BinaryComparisonExpression.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int LEFT_FIELD_NUMBER = 1;
+    private protocol.Expressions.Expression left_;
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     * @return Whether the left field is set.
+     */
+    @java.lang.Override
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     * @return The left.
+     */
+    @java.lang.Override
+    public protocol.Expressions.Expression getLeft() {
+      return left_ == null ? protocol.Expressions.Expression.getDefaultInstance() : left_;
+    }
+    /**
+     * <code>.protocol.Expression left = 1;</code>
+     */
+    @java.lang.Override
+    public protocol.Expressions.ExpressionOrBuilder getLeftOrBuilder() {
+      return left_ == null ? protocol.Expressions.Expression.getDefaultInstance() : left_;
+    }
+
+    public static final int RIGHT_FIELD_NUMBER = 2;
+    private protocol.Expressions.Expression right_;
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     * @return Whether the right field is set.
+     */
+    @java.lang.Override
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     * @return The right.
+     */
+    @java.lang.Override
+    public protocol.Expressions.Expression getRight() {
+      return right_ == null ? protocol.Expressions.Expression.getDefaultInstance() : right_;
+    }
+    /**
+     * <code>.protocol.Expression right = 2;</code>
+     */
+    @java.lang.Override
+    public protocol.Expressions.ExpressionOrBuilder getRightOrBuilder() {
+      return right_ == null ? protocol.Expressions.Expression.getDefaultInstance() : right_;
+    }
+
+    public static final int OPERAND_FIELD_NUMBER = 3;
+    private int operand_ = 0;
+    /**
+     * <code>.protocol.ComparisonOperand operand = 3;</code>
+     * @return The enum numeric value on the wire for operand.
+     */
+    @java.lang.Override public int getOperandValue() {
+      return operand_;
+    }
+    /**
+     * <code>.protocol.ComparisonOperand operand = 3;</code>
+     * @return The operand.
+     */
+    @java.lang.Override public protocol.Expressions.ComparisonOperand getOperand() {
+      protocol.Expressions.ComparisonOperand result = protocol.Expressions.ComparisonOperand.forNumber(operand_);
+      return result == null ? protocol.Expressions.ComparisonOperand.UNRECOGNIZED : result;
+    }
+
+    public static final int POSITION_FIELD_NUMBER = 4;
+    private protocol.PositionOuterClass.Position position_;
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return Whether the position field is set.
+     */
+    @java.lang.Override
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     * @return The position.
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.Position getPosition() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+    /**
+     * <code>optional .protocol.Position position = 4;</code>
+     */
+    @java.lang.Override
+    public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+      return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(1, getLeft());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeMessage(2, getRight());
+      }
+      if (operand_ != protocol.Expressions.ComparisonOperand.EQUAL.getNumber()) {
+        output.writeEnum(3, operand_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        output.writeMessage(4, getPosition());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getLeft());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getRight());
+      }
+      if (operand_ != protocol.Expressions.ComparisonOperand.EQUAL.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, operand_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getPosition());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocol.Expressions.BinaryComparisonExpression)) {
+        return super.equals(obj);
+      }
+      protocol.Expressions.BinaryComparisonExpression other = (protocol.Expressions.BinaryComparisonExpression) obj;
+
+      if (hasLeft() != other.hasLeft()) return false;
+      if (hasLeft()) {
+        if (!getLeft()
+            .equals(other.getLeft())) return false;
+      }
+      if (hasRight() != other.hasRight()) return false;
+      if (hasRight()) {
+        if (!getRight()
+            .equals(other.getRight())) return false;
+      }
+      if (operand_ != other.operand_) return false;
+      if (hasPosition() != other.hasPosition()) return false;
+      if (hasPosition()) {
+        if (!getPosition()
+            .equals(other.getPosition())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasLeft()) {
+        hash = (37 * hash) + LEFT_FIELD_NUMBER;
+        hash = (53 * hash) + getLeft().hashCode();
+      }
+      if (hasRight()) {
+        hash = (37 * hash) + RIGHT_FIELD_NUMBER;
+        hash = (53 * hash) + getRight().hashCode();
+      }
+      hash = (37 * hash) + OPERAND_FIELD_NUMBER;
+      hash = (53 * hash) + operand_;
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static protocol.Expressions.BinaryComparisonExpression parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static protocol.Expressions.BinaryComparisonExpression parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocol.Expressions.BinaryComparisonExpression parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocol.Expressions.BinaryComparisonExpression prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code protocol.BinaryComparisonExpression}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:protocol.BinaryComparisonExpression)
+        protocol.Expressions.BinaryComparisonExpressionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocol.Expressions.internal_static_protocol_BinaryComparisonExpression_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocol.Expressions.internal_static_protocol_BinaryComparisonExpression_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocol.Expressions.BinaryComparisonExpression.class, protocol.Expressions.BinaryComparisonExpression.Builder.class);
+      }
+
+      // Construct using protocol.Expressions.BinaryComparisonExpression.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getLeftFieldBuilder();
+          getRightFieldBuilder();
+          getPositionFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        left_ = null;
+        if (leftBuilder_ != null) {
+          leftBuilder_.dispose();
+          leftBuilder_ = null;
+        }
+        right_ = null;
+        if (rightBuilder_ != null) {
+          rightBuilder_.dispose();
+          rightBuilder_ = null;
+        }
+        operand_ = 0;
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocol.Expressions.internal_static_protocol_BinaryComparisonExpression_descriptor;
+      }
+
+      @java.lang.Override
+      public protocol.Expressions.BinaryComparisonExpression getDefaultInstanceForType() {
+        return protocol.Expressions.BinaryComparisonExpression.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public protocol.Expressions.BinaryComparisonExpression build() {
+        protocol.Expressions.BinaryComparisonExpression result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public protocol.Expressions.BinaryComparisonExpression buildPartial() {
+        protocol.Expressions.BinaryComparisonExpression result = new protocol.Expressions.BinaryComparisonExpression(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(protocol.Expressions.BinaryComparisonExpression result) {
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.left_ = leftBuilder_ == null
+              ? left_
+              : leftBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.right_ = rightBuilder_ == null
+              ? right_
+              : rightBuilder_.build();
+          to_bitField0_ |= 0x00000002;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.operand_ = operand_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.position_ = positionBuilder_ == null
+              ? position_
+              : positionBuilder_.build();
+          to_bitField0_ |= 0x00000004;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocol.Expressions.BinaryComparisonExpression) {
+          return mergeFrom((protocol.Expressions.BinaryComparisonExpression)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocol.Expressions.BinaryComparisonExpression other) {
+        if (other == protocol.Expressions.BinaryComparisonExpression.getDefaultInstance()) return this;
+        if (other.hasLeft()) {
+          mergeLeft(other.getLeft());
+        }
+        if (other.hasRight()) {
+          mergeRight(other.getRight());
+        }
+        if (other.operand_ != 0) {
+          setOperandValue(other.getOperandValue());
+        }
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getLeftFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getRightFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                operand_ = input.readEnum();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                input.readMessage(
+                    getPositionFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private protocol.Expressions.Expression left_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> leftBuilder_;
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       * @return Whether the left field is set.
+       */
+      public boolean hasLeft() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       * @return The left.
+       */
+      public protocol.Expressions.Expression getLeft() {
+        if (leftBuilder_ == null) {
+          return left_ == null ? protocol.Expressions.Expression.getDefaultInstance() : left_;
+        } else {
+          return leftBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public Builder setLeft(protocol.Expressions.Expression value) {
+        if (leftBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          left_ = value;
+        } else {
+          leftBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public Builder setLeft(
+          protocol.Expressions.Expression.Builder builderForValue) {
+        if (leftBuilder_ == null) {
+          left_ = builderForValue.build();
+        } else {
+          leftBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public Builder mergeLeft(protocol.Expressions.Expression value) {
+        if (leftBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0) &&
+            left_ != null &&
+            left_ != protocol.Expressions.Expression.getDefaultInstance()) {
+            getLeftBuilder().mergeFrom(value);
+          } else {
+            left_ = value;
+          }
+        } else {
+          leftBuilder_.mergeFrom(value);
+        }
+        if (left_ != null) {
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public Builder clearLeft() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        left_ = null;
+        if (leftBuilder_ != null) {
+          leftBuilder_.dispose();
+          leftBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public protocol.Expressions.Expression.Builder getLeftBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getLeftFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      public protocol.Expressions.ExpressionOrBuilder getLeftOrBuilder() {
+        if (leftBuilder_ != null) {
+          return leftBuilder_.getMessageOrBuilder();
+        } else {
+          return left_ == null ?
+              protocol.Expressions.Expression.getDefaultInstance() : left_;
+        }
+      }
+      /**
+       * <code>.protocol.Expression left = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> 
+          getLeftFieldBuilder() {
+        if (leftBuilder_ == null) {
+          leftBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder>(
+                  getLeft(),
+                  getParentForChildren(),
+                  isClean());
+          left_ = null;
+        }
+        return leftBuilder_;
+      }
+
+      private protocol.Expressions.Expression right_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> rightBuilder_;
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       * @return Whether the right field is set.
+       */
+      public boolean hasRight() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       * @return The right.
+       */
+      public protocol.Expressions.Expression getRight() {
+        if (rightBuilder_ == null) {
+          return right_ == null ? protocol.Expressions.Expression.getDefaultInstance() : right_;
+        } else {
+          return rightBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public Builder setRight(protocol.Expressions.Expression value) {
+        if (rightBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          right_ = value;
+        } else {
+          rightBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public Builder setRight(
+          protocol.Expressions.Expression.Builder builderForValue) {
+        if (rightBuilder_ == null) {
+          right_ = builderForValue.build();
+        } else {
+          rightBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public Builder mergeRight(protocol.Expressions.Expression value) {
+        if (rightBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            right_ != null &&
+            right_ != protocol.Expressions.Expression.getDefaultInstance()) {
+            getRightBuilder().mergeFrom(value);
+          } else {
+            right_ = value;
+          }
+        } else {
+          rightBuilder_.mergeFrom(value);
+        }
+        if (right_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public Builder clearRight() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        right_ = null;
+        if (rightBuilder_ != null) {
+          rightBuilder_.dispose();
+          rightBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public protocol.Expressions.Expression.Builder getRightBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getRightFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      public protocol.Expressions.ExpressionOrBuilder getRightOrBuilder() {
+        if (rightBuilder_ != null) {
+          return rightBuilder_.getMessageOrBuilder();
+        } else {
+          return right_ == null ?
+              protocol.Expressions.Expression.getDefaultInstance() : right_;
+        }
+      }
+      /**
+       * <code>.protocol.Expression right = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder> 
+          getRightFieldBuilder() {
+        if (rightBuilder_ == null) {
+          rightBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.Expressions.Expression, protocol.Expressions.Expression.Builder, protocol.Expressions.ExpressionOrBuilder>(
+                  getRight(),
+                  getParentForChildren(),
+                  isClean());
+          right_ = null;
+        }
+        return rightBuilder_;
+      }
+
+      private int operand_ = 0;
+      /**
+       * <code>.protocol.ComparisonOperand operand = 3;</code>
+       * @return The enum numeric value on the wire for operand.
+       */
+      @java.lang.Override public int getOperandValue() {
+        return operand_;
+      }
+      /**
+       * <code>.protocol.ComparisonOperand operand = 3;</code>
+       * @param value The enum numeric value on the wire for operand to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperandValue(int value) {
+        operand_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.ComparisonOperand operand = 3;</code>
+       * @return The operand.
+       */
+      @java.lang.Override
+      public protocol.Expressions.ComparisonOperand getOperand() {
+        protocol.Expressions.ComparisonOperand result = protocol.Expressions.ComparisonOperand.forNumber(operand_);
+        return result == null ? protocol.Expressions.ComparisonOperand.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.protocol.ComparisonOperand operand = 3;</code>
+       * @param value The operand to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOperand(protocol.Expressions.ComparisonOperand value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        operand_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protocol.ComparisonOperand operand = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOperand() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        operand_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private protocol.PositionOuterClass.Position position_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       * @return Whether the position field is set.
+       */
+      public boolean hasPosition() {
+        return ((bitField0_ & 0x00000008) != 0);
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       * @return The position.
+       */
+      public protocol.PositionOuterClass.Position getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        } else {
+          return positionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder setPosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          position_ = value;
+        } else {
+          positionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder setPosition(
+          protocol.PositionOuterClass.Position.Builder builderForValue) {
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
+        } else {
+          positionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder mergePosition(protocol.PositionOuterClass.Position value) {
+        if (positionBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) != 0) &&
+            position_ != null &&
+            position_ != protocol.PositionOuterClass.Position.getDefaultInstance()) {
+            getPositionBuilder().mergeFrom(value);
+          } else {
+            position_ = value;
+          }
+        } else {
+          positionBuilder_.mergeFrom(value);
+        }
+        if (position_ != null) {
+          bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public Builder clearPosition() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        position_ = null;
+        if (positionBuilder_ != null) {
+          positionBuilder_.dispose();
+          positionBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
+        } else {
+          return position_ == null ?
+              protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
+        }
+      }
+      /**
+       * <code>optional .protocol.Position position = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder>(
+                  getPosition(),
+                  getParentForChildren(),
+                  isClean());
+          position_ = null;
+        }
+        return positionBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:protocol.BinaryComparisonExpression)
+    }
+
+    // @@protoc_insertion_point(class_scope:protocol.BinaryComparisonExpression)
+    private static final protocol.Expressions.BinaryComparisonExpression DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocol.Expressions.BinaryComparisonExpression();
+    }
+
+    public static protocol.Expressions.BinaryComparisonExpression getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<BinaryComparisonExpression>
+        PARSER = new com.google.protobuf.AbstractParser<BinaryComparisonExpression>() {
+      @java.lang.Override
+      public BinaryComparisonExpression parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<BinaryComparisonExpression> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BinaryComparisonExpression> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public protocol.Expressions.BinaryComparisonExpression getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface UnaryMathExpressionOrBuilder extends
       // @@protoc_insertion_point(interface_extends:protocol.UnaryMathExpression)
       com.google.protobuf.MessageOrBuilder {
@@ -12361,17 +13791,17 @@ public final class Expressions {
     protocol.Expressions.MathOperand getOperand();
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -12459,7 +13889,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -12467,7 +13897,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -12475,7 +13905,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -13067,14 +14497,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -13085,7 +14515,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -13101,7 +14531,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -13115,7 +14545,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -13136,7 +14566,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -13149,7 +14579,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -13157,7 +14587,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -13168,7 +14598,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -13278,17 +14708,17 @@ public final class Expressions {
     protocol.Expressions.LogicOperand getOperand();
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -13376,7 +14806,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -13384,7 +14814,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -13392,7 +14822,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -13984,14 +15414,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -14002,7 +15432,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -14018,7 +15448,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -14032,7 +15462,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -14053,7 +15483,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -14066,7 +15496,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -14074,7 +15504,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -14085,7 +15515,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -14181,17 +15611,17 @@ public final class Expressions {
         getNameBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -14274,7 +15704,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -14282,7 +15712,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -14290,7 +15720,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -14744,14 +16174,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -14762,7 +16192,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -14778,7 +16208,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -14792,7 +16222,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -14813,7 +16243,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -14826,7 +16256,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -14834,7 +16264,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -14845,7 +16275,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -14941,17 +16371,17 @@ public final class Expressions {
         getNameBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -15034,7 +16464,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -15042,7 +16472,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -15050,7 +16480,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -15504,14 +16934,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -15522,7 +16952,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -15538,7 +16968,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -15552,7 +16982,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -15573,7 +17003,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -15586,7 +17016,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -15594,7 +17024,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -15605,7 +17035,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -15701,17 +17131,17 @@ public final class Expressions {
         getNameBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -15794,7 +17224,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -15802,7 +17232,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -15810,7 +17240,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -16264,14 +17694,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -16282,7 +17712,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -16298,7 +17728,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -16312,7 +17742,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -16333,7 +17763,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -16346,7 +17776,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -16354,7 +17784,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -16365,7 +17795,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -16461,17 +17891,17 @@ public final class Expressions {
         getNameBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -16554,7 +17984,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -16562,7 +17992,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -16570,7 +18000,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -17024,14 +18454,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -17042,7 +18472,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17058,7 +18488,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -17072,7 +18502,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17093,7 +18523,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -17106,7 +18536,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -17114,7 +18544,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -17125,7 +18555,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -17209,17 +18639,17 @@ public final class Expressions {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -17262,7 +18692,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -17270,7 +18700,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -17278,7 +18708,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -17636,14 +19066,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -17654,7 +19084,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17670,7 +19100,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -17684,7 +19114,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -17705,7 +19135,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -17718,7 +19148,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000001;
@@ -17726,7 +19156,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -17737,7 +19167,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -17836,17 +19266,17 @@ public final class Expressions {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -17915,7 +19345,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -17923,7 +19353,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -17931,7 +19361,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -18448,14 +19878,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -18466,7 +19896,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -18482,7 +19912,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -18496,7 +19926,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -18517,7 +19947,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -18530,7 +19960,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -18538,7 +19968,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -18549,7 +19979,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -18645,17 +20075,17 @@ public final class Expressions {
         getNameBytes();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -18738,7 +20168,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -18746,7 +20176,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -18754,7 +20184,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -19208,14 +20638,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -19226,7 +20656,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -19242,7 +20672,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -19256,7 +20686,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -19277,7 +20707,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -19290,7 +20720,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -19298,7 +20728,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -19309,7 +20739,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -19408,17 +20838,17 @@ public final class Expressions {
     protocol.Expressions.ExpressionOrBuilder getValueOrBuilder();
 
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -19487,7 +20917,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 2;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -19495,7 +20925,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -19503,7 +20933,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 2;</code>
+     * <code>optional .protocol.Position position = 2;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -20020,14 +21450,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -20038,7 +21468,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -20054,7 +21484,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -20068,7 +21498,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -20089,7 +21519,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -20102,7 +21532,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000002;
@@ -20110,7 +21540,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -20121,7 +21551,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 2;</code>
+       * <code>optional .protocol.Position position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -20241,17 +21671,17 @@ public final class Expressions {
         int index);
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -20376,7 +21806,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -20384,7 +21814,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -20392,7 +21822,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -21159,14 +22589,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -21177,7 +22607,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21193,7 +22623,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -21207,7 +22637,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -21228,7 +22658,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -21241,7 +22671,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -21249,7 +22679,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -21260,7 +22690,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -21368,17 +22798,17 @@ public final class Expressions {
         getPropertyNameBytes();
 
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -21501,7 +22931,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 3;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -21509,7 +22939,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -21517,7 +22947,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 3;</code>
+     * <code>optional .protocol.Position position = 3;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -22067,14 +23497,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -22085,7 +23515,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -22101,7 +23531,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -22115,7 +23545,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -22136,7 +23566,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -22149,7 +23579,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000004;
@@ -22157,7 +23587,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -22168,7 +23598,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 3;</code>
+       * <code>optional .protocol.Position position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -22300,17 +23730,17 @@ public final class Expressions {
         int index);
 
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     boolean hasPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     protocol.PositionOuterClass.Position getPosition();
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder();
   }
@@ -22475,7 +23905,7 @@ public final class Expressions {
     public static final int POSITION_FIELD_NUMBER = 4;
     private protocol.PositionOuterClass.Position position_;
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return Whether the position field is set.
      */
     @java.lang.Override
@@ -22483,7 +23913,7 @@ public final class Expressions {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      * @return The position.
      */
     @java.lang.Override
@@ -22491,7 +23921,7 @@ public final class Expressions {
       return position_ == null ? protocol.PositionOuterClass.Position.getDefaultInstance() : position_;
     }
     /**
-     * <code>.protocol.Position position = 4;</code>
+     * <code>optional .protocol.Position position = 4;</code>
      */
     @java.lang.Override
     public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
@@ -23354,14 +24784,14 @@ public final class Expressions {
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> positionBuilder_;
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return Whether the position field is set.
        */
       public boolean hasPosition() {
         return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        * @return The position.
        */
       public protocol.PositionOuterClass.Position getPosition() {
@@ -23372,7 +24802,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -23388,7 +24818,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder setPosition(
           protocol.PositionOuterClass.Position.Builder builderForValue) {
@@ -23402,7 +24832,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder mergePosition(protocol.PositionOuterClass.Position value) {
         if (positionBuilder_ == null) {
@@ -23423,7 +24853,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public Builder clearPosition() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -23436,7 +24866,7 @@ public final class Expressions {
         return this;
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.Position.Builder getPositionBuilder() {
         bitField0_ |= 0x00000008;
@@ -23444,7 +24874,7 @@ public final class Expressions {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       public protocol.PositionOuterClass.PositionOrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -23455,7 +24885,7 @@ public final class Expressions {
         }
       }
       /**
-       * <code>.protocol.Position position = 4;</code>
+       * <code>optional .protocol.Position position = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.PositionOuterClass.Position, protocol.PositionOuterClass.Position.Builder, protocol.PositionOuterClass.PositionOrBuilder> 
@@ -23580,6 +25010,11 @@ public final class Expressions {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_protocol_BinaryLogicExpression_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_BinaryComparisonExpression_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_BinaryComparisonExpression_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protocol_UnaryMathExpression_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -23653,103 +25088,118 @@ public final class Expressions {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021expressions.proto\022\010protocol\032\031google/pr" +
-      "otobuf/any.proto\032\016position.proto\"\340\t\n\nExp" +
-      "ression\022\"\n\006intLit\030\002 \001(\0132\020.protocol.IntLi" +
-      "tH\000\022\"\n\006decLit\030\003 \001(\0132\020.protocol.DecLitH\000\022" +
-      "(\n\tstringLit\030\004 \001(\0132\023.protocol.StringLitH" +
-      "\000\022$\n\007boolLit\030\005 \001(\0132\021.protocol.BoolLitH\000\022" +
-      "@\n\025listLiteralExpression\030\006 \001(\0132\037.protoco" +
-      "l.ListLiteralExpressionH\000\022>\n\024binaryMathE" +
-      "xpression\030\007 \001(\0132\036.protocol.BinaryMathExp" +
-      "ressionH\000\022@\n\025binaryLogicExpression\030\010 \001(\013" +
-      "2\037.protocol.BinaryLogicExpressionH\000\022<\n\023u" +
-      "naryMathExpression\030\t \001(\0132\035.protocol.Unar" +
-      "yMathExpressionH\000\022>\n\024unaryLogicExpressio" +
-      "n\030\n \001(\0132\036.protocol.UnaryLogicExpressionH" +
-      "\000\022B\n\026preIncrementExpression\030\013 \001(\0132 .prot" +
-      "ocol.PreIncrementExpressionH\000\022D\n\027postInc" +
-      "rementExpression\030\014 \001(\0132!.protocol.PostIn" +
-      "crementExpressionH\000\022B\n\026preDecrementExpre" +
-      "ssion\030\r \001(\0132 .protocol.PreDecrementExpre" +
-      "ssionH\000\022D\n\027postDecrementExpression\030\016 \001(\013" +
-      "2!.protocol.PostDecrementExpressionH\000\0224\n" +
-      "\017inputExpression\030\017 \001(\0132\031.protocol.InputE" +
-      "xpressionH\000\0226\n\020outputExpression\030\020 \001(\0132\032." +
-      "protocol.OutputExpressionH\000\022B\n\026varRefere" +
-      "nceExpression\030\021 \001(\0132 .protocol.VarRefere" +
-      "nceExpressionH\000\022@\n\025parenthesysExpression" +
-      "\030\022 \001(\0132\037.protocol.ParenthesisExpressionH" +
-      "\000\022B\n\026functionCallExpression\030\023 \001(\0132 .prot" +
-      "ocol.FunctionCallExpressionH\000\022X\n!objectP" +
-      "ropertyReferenceExpression\030\024 \001(\0132+.proto" +
-      "col.ObjectPropertyReferenceExpressionH\000\022" +
-      "J\n\032objectMethodCallExpression\030\025 \001(\0132$.pr" +
-      "otocol.ObjectMethodCallExpressionH\000B\006\n\004e" +
-      "xpr\"=\n\006IntLit\022\r\n\005value\030\001 \001(\t\022$\n\010position" +
-      "\030\002 \001(\0132\022.protocol.Position\"=\n\006DecLit\022\r\n\005" +
-      "value\030\001 \001(\t\022$\n\010position\030\002 \001(\0132\022.protocol" +
-      ".Position\"@\n\tStringLit\022\r\n\005value\030\001 \001(\t\022$\n" +
-      "\010position\030\002 \001(\0132\022.protocol.Position\">\n\007B" +
-      "oolLit\022\r\n\005value\030\001 \001(\t\022$\n\010position\030\002 \001(\0132" +
-      "\022.protocol.Position\"b\n\025ListLiteralExpres" +
-      "sion\022#\n\005value\030\001 \003(\0132\024.google.protobuf.An" +
-      "y\022$\n\010position\030\002 \001(\0132\022.protocol.Position\"" +
-      "[\n\020BinaryExpression\022\"\n\004left\030\001 \001(\0132\024.prot" +
-      "ocol.Expression\022#\n\005right\030\002 \001(\0132\024.protoco" +
-      "l.Expression\"\255\001\n\024BinaryMathExpression\022\"\n" +
-      "\004left\030\001 \001(\0132\024.protocol.Expression\022#\n\005rig" +
-      "ht\030\002 \001(\0132\024.protocol.Expression\022&\n\007operan" +
-      "d\030\003 \001(\0162\025.protocol.MathOperand\022$\n\010positi" +
-      "on\030\004 \001(\0132\022.protocol.Position\"\257\001\n\025BinaryL" +
-      "ogicExpression\022\"\n\004left\030\001 \001(\0132\024.protocol." +
-      "Expression\022#\n\005right\030\002 \001(\0132\024.protocol.Exp" +
-      "ression\022\'\n\007operand\030\003 \001(\0162\026.protocol.Logi" +
-      "cOperand\022$\n\010position\030\004 \001(\0132\022.protocol.Po" +
-      "sition\"\210\001\n\023UnaryMathExpression\022#\n\005value\030" +
-      "\001 \001(\0132\024.protocol.Expression\022&\n\007operand\030\002" +
-      " \001(\0162\025.protocol.MathOperand\022$\n\010position\030" +
-      "\003 \001(\0132\022.protocol.Position\"\212\001\n\024UnaryLogic" +
-      "Expression\022#\n\005value\030\001 \001(\0132\024.protocol.Exp" +
-      "ression\022\'\n\007operand\030\002 \001(\0162\026.protocol.Logi" +
-      "cOperand\022$\n\010position\030\004 \001(\0132\022.protocol.Po" +
-      "sition\"L\n\026PreIncrementExpression\022\014\n\004name" +
-      "\030\001 \001(\t\022$\n\010position\030\002 \001(\0132\022.protocol.Posi" +
-      "tion\"M\n\027PostIncrementExpression\022\014\n\004name\030" +
-      "\001 \001(\t\022$\n\010position\030\002 \001(\0132\022.protocol.Posit" +
-      "ion\"L\n\026PreDecrementExpression\022\014\n\004name\030\001 " +
-      "\001(\t\022$\n\010position\030\002 \001(\0132\022.protocol.Positio" +
-      "n\"M\n\027PostDecrementExpression\022\014\n\004name\030\001 \001" +
-      "(\t\022$\n\010position\030\002 \001(\0132\022.protocol.Position" +
-      "\"7\n\017InputExpression\022$\n\010position\030\002 \001(\0132\022." +
-      "protocol.Position\"]\n\020OutputExpression\022#\n" +
-      "\005value\030\001 \001(\0132\024.protocol.Expression\022$\n\010po" +
-      "sition\030\002 \001(\0132\022.protocol.Position\"L\n\026VarR" +
-      "eferenceExpression\022\014\n\004name\030\001 \001(\t\022$\n\010posi" +
-      "tion\030\002 \001(\0132\022.protocol.Position\"b\n\025Parent" +
-      "hesisExpression\022#\n\005value\030\001 \001(\0132\024.protoco" +
-      "l.Expression\022$\n\010position\030\002 \001(\0132\022.protoco" +
-      "l.Position\"v\n\026FunctionCallExpression\022\014\n\004" +
-      "name\030\001 \001(\t\022(\n\nparameters\030\002 \003(\0132\024.protoco" +
-      "l.Expression\022$\n\010position\030\003 \001(\0132\022.protoco" +
-      "l.Position\"s\n!ObjectPropertyReferenceExp" +
-      "ression\022\022\n\nobjectName\030\001 \001(\t\022\024\n\014propertyN" +
-      "ame\030\002 \001(\t\022$\n\010position\030\003 \001(\0132\022.protocol.P" +
-      "osition\"\224\001\n\032ObjectMethodCallExpression\022\022" +
-      "\n\nobjectName\030\001 \001(\t\022\022\n\nmethodName\030\002 \001(\t\022(" +
-      "\n\nparameters\030\003 \003(\0132\024.protocol.Expression" +
-      "\022$\n\010position\030\004 \001(\0132\022.protocol.Position*;" +
-      "\n\013MathOperand\022\010\n\004PLUS\020\000\022\t\n\005MINUS\020\001\022\t\n\005TI" +
-      "MES\020\002\022\014\n\010DIVISION\020\003*\226\001\n\014LogicOperand\022\007\n\003" +
-      "AND\020\000\022\006\n\002OR\020\001\022\007\n\003NOT\020\002\022\t\n\005EQUAL\020\003\022\r\n\tLES" +
-      "S_THAN\020\004\022\026\n\022LESS_THAN_OR_EQUAL\020\005\022\020\n\014GREA" +
-      "TER_THAN\020\006\022\031\n\025GREATER_THAN_OR_EQUAL\020\007\022\r\n" +
-      "\tNOT_EQUAL\020\010b\006proto3"
+      "\n\021expressions.proto\022\010protocol\032\016position." +
+      "proto\"\254\n\n\nExpression\022\"\n\006intLit\030\002 \001(\0132\020.p" +
+      "rotocol.IntLitH\000\022\"\n\006decLit\030\003 \001(\0132\020.proto" +
+      "col.DecLitH\000\022(\n\tstringLit\030\004 \001(\0132\023.protoc" +
+      "ol.StringLitH\000\022$\n\007boolLit\030\005 \001(\0132\021.protoc" +
+      "ol.BoolLitH\000\022@\n\025listLiteralExpression\030\006 " +
+      "\001(\0132\037.protocol.ListLiteralExpressionH\000\022>" +
+      "\n\024binaryMathExpression\030\007 \001(\0132\036.protocol." +
+      "BinaryMathExpressionH\000\022@\n\025binaryLogicExp" +
+      "ression\030\010 \001(\0132\037.protocol.BinaryLogicExpr" +
+      "essionH\000\022<\n\023unaryMathExpression\030\t \001(\0132\035." +
+      "protocol.UnaryMathExpressionH\000\022>\n\024unaryL" +
+      "ogicExpression\030\n \001(\0132\036.protocol.UnaryLog" +
+      "icExpressionH\000\022B\n\026preIncrementExpression" +
+      "\030\013 \001(\0132 .protocol.PreIncrementExpression" +
+      "H\000\022D\n\027postIncrementExpression\030\014 \001(\0132!.pr" +
+      "otocol.PostIncrementExpressionH\000\022B\n\026preD" +
+      "ecrementExpression\030\r \001(\0132 .protocol.PreD" +
+      "ecrementExpressionH\000\022D\n\027postDecrementExp" +
+      "ression\030\016 \001(\0132!.protocol.PostDecrementEx" +
+      "pressionH\000\0224\n\017inputExpression\030\017 \001(\0132\031.pr" +
+      "otocol.InputExpressionH\000\0226\n\020outputExpres" +
+      "sion\030\020 \001(\0132\032.protocol.OutputExpressionH\000" +
+      "\022B\n\026varReferenceExpression\030\021 \001(\0132 .proto" +
+      "col.VarReferenceExpressionH\000\022@\n\025parenthe" +
+      "sisExpression\030\022 \001(\0132\037.protocol.Parenthes" +
+      "isExpressionH\000\022B\n\026functionCallExpression" +
+      "\030\023 \001(\0132 .protocol.FunctionCallExpression" +
+      "H\000\022X\n!objectPropertyReferenceExpression\030" +
+      "\024 \001(\0132+.protocol.ObjectPropertyReference" +
+      "ExpressionH\000\022J\n\032objectMethodCallExpressi" +
+      "on\030\025 \001(\0132$.protocol.ObjectMethodCallExpr" +
+      "essionH\000\022J\n\032binaryComparisonExpression\030\026" +
+      " \001(\0132$.protocol.BinaryComparisonExpressi" +
+      "onH\000B\006\n\004expr\"O\n\006IntLit\022\r\n\005value\030\001 \001(\t\022)\n" +
+      "\010position\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001" +
+      "B\013\n\t_position\"O\n\006DecLit\022\r\n\005value\030\001 \001(\t\022)" +
+      "\n\010position\030\002 \001(\0132\022.protocol.PositionH\000\210\001" +
+      "\001B\013\n\t_position\"R\n\tStringLit\022\r\n\005value\030\001 \001" +
+      "(\t\022)\n\010position\030\002 \001(\0132\022.protocol.Position" +
+      "H\000\210\001\001B\013\n\t_position\"P\n\007BoolLit\022\r\n\005value\030\001" +
+      " \001(\t\022)\n\010position\030\002 \001(\0132\022.protocol.Positi" +
+      "onH\000\210\001\001B\013\n\t_position\"t\n\025ListLiteralExpre" +
+      "ssion\022#\n\005value\030\001 \003(\0132\024.protocol.Expressi" +
+      "on\022)\n\010position\030\002 \001(\0132\022.protocol.Position" +
+      "H\000\210\001\001B\013\n\t_position\"[\n\020BinaryExpression\022\"" +
+      "\n\004left\030\001 \001(\0132\024.protocol.Expression\022#\n\005ri" +
+      "ght\030\002 \001(\0132\024.protocol.Expression\"\277\001\n\024Bina" +
+      "ryMathExpression\022\"\n\004left\030\001 \001(\0132\024.protoco" +
+      "l.Expression\022#\n\005right\030\002 \001(\0132\024.protocol.E" +
+      "xpression\022&\n\007operand\030\003 \001(\0162\025.protocol.Ma" +
+      "thOperand\022)\n\010position\030\004 \001(\0132\022.protocol.P" +
+      "ositionH\000\210\001\001B\013\n\t_position\"\301\001\n\025BinaryLogi" +
+      "cExpression\022\"\n\004left\030\001 \001(\0132\024.protocol.Exp" +
+      "ression\022#\n\005right\030\002 \001(\0132\024.protocol.Expres" +
+      "sion\022\'\n\007operand\030\003 \001(\0162\026.protocol.LogicOp" +
+      "erand\022)\n\010position\030\004 \001(\0132\022.protocol.Posit" +
+      "ionH\000\210\001\001B\013\n\t_position\"\313\001\n\032BinaryComparis" +
+      "onExpression\022\"\n\004left\030\001 \001(\0132\024.protocol.Ex" +
+      "pression\022#\n\005right\030\002 \001(\0132\024.protocol.Expre" +
+      "ssion\022,\n\007operand\030\003 \001(\0162\033.protocol.Compar" +
+      "isonOperand\022)\n\010position\030\004 \001(\0132\022.protocol" +
+      ".PositionH\000\210\001\001B\013\n\t_position\"\232\001\n\023UnaryMat" +
+      "hExpression\022#\n\005value\030\001 \001(\0132\024.protocol.Ex" +
+      "pression\022&\n\007operand\030\002 \001(\0162\025.protocol.Mat" +
+      "hOperand\022)\n\010position\030\003 \001(\0132\022.protocol.Po" +
+      "sitionH\000\210\001\001B\013\n\t_position\"\234\001\n\024UnaryLogicE" +
+      "xpression\022#\n\005value\030\001 \001(\0132\024.protocol.Expr" +
+      "ession\022\'\n\007operand\030\002 \001(\0162\026.protocol.Logic" +
+      "Operand\022)\n\010position\030\004 \001(\0132\022.protocol.Pos" +
+      "itionH\000\210\001\001B\013\n\t_position\"^\n\026PreIncrementE" +
+      "xpression\022\014\n\004name\030\001 \001(\t\022)\n\010position\030\002 \001(" +
+      "\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_position\"" +
+      "_\n\027PostIncrementExpression\022\014\n\004name\030\001 \001(\t" +
+      "\022)\n\010position\030\002 \001(\0132\022.protocol.PositionH\000" +
+      "\210\001\001B\013\n\t_position\"^\n\026PreDecrementExpressi" +
+      "on\022\014\n\004name\030\001 \001(\t\022)\n\010position\030\002 \001(\0132\022.pro" +
+      "tocol.PositionH\000\210\001\001B\013\n\t_position\"_\n\027Post" +
+      "DecrementExpression\022\014\n\004name\030\001 \001(\t\022)\n\010pos" +
+      "ition\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t" +
+      "_position\"I\n\017InputExpression\022)\n\010position" +
+      "\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_posi" +
+      "tion\"o\n\020OutputExpression\022#\n\005value\030\001 \001(\0132" +
+      "\024.protocol.Expression\022)\n\010position\030\002 \001(\0132" +
+      "\022.protocol.PositionH\000\210\001\001B\013\n\t_position\"^\n" +
+      "\026VarReferenceExpression\022\014\n\004name\030\001 \001(\t\022)\n" +
+      "\010position\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001" +
+      "B\013\n\t_position\"t\n\025ParenthesisExpression\022#" +
+      "\n\005value\030\001 \001(\0132\024.protocol.Expression\022)\n\010p" +
+      "osition\030\002 \001(\0132\022.protocol.PositionH\000\210\001\001B\013" +
+      "\n\t_position\"\210\001\n\026FunctionCallExpression\022\014" +
+      "\n\004name\030\001 \001(\t\022(\n\nparameters\030\002 \003(\0132\024.proto" +
+      "col.Expression\022)\n\010position\030\003 \001(\0132\022.proto" +
+      "col.PositionH\000\210\001\001B\013\n\t_position\"\205\001\n!Objec" +
+      "tPropertyReferenceExpression\022\022\n\nobjectNa" +
+      "me\030\001 \001(\t\022\024\n\014propertyName\030\002 \001(\t\022)\n\010positi" +
+      "on\030\003 \001(\0132\022.protocol.PositionH\000\210\001\001B\013\n\t_po" +
+      "sition\"\246\001\n\032ObjectMethodCallExpression\022\022\n" +
+      "\nobjectName\030\001 \001(\t\022\022\n\nmethodName\030\002 \001(\t\022(\n" +
+      "\nparameters\030\003 \003(\0132\024.protocol.Expression\022" +
+      ")\n\010position\030\004 \001(\0132\022.protocol.PositionH\000\210" +
+      "\001\001B\013\n\t_position*;\n\013MathOperand\022\010\n\004PLUS\020\000" +
+      "\022\t\n\005MINUS\020\001\022\t\n\005TIMES\020\002\022\014\n\010DIVISION\020\003*(\n\014" +
+      "LogicOperand\022\007\n\003AND\020\000\022\006\n\002OR\020\001\022\007\n\003NOT\020\002*\201" +
+      "\001\n\021ComparisonOperand\022\t\n\005EQUAL\020\000\022\r\n\tLESS_" +
+      "THAN\020\001\022\026\n\022LESS_THAN_OR_EQUAL\020\002\022\020\n\014GREATE" +
+      "R_THAN\020\003\022\031\n\025GREATER_THAN_OR_EQUAL\020\004\022\r\n\tN" +
+      "OT_EQUAL\020\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.protobuf.AnyProto.getDescriptor(),
           protocol.PositionOuterClass.getDescriptor(),
         });
     internal_static_protocol_Expression_descriptor =
@@ -23757,7 +25207,7 @@ public final class Expressions {
     internal_static_protocol_Expression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Expression_descriptor,
-        new java.lang.String[] { "IntLit", "DecLit", "StringLit", "BoolLit", "ListLiteralExpression", "BinaryMathExpression", "BinaryLogicExpression", "UnaryMathExpression", "UnaryLogicExpression", "PreIncrementExpression", "PostIncrementExpression", "PreDecrementExpression", "PostDecrementExpression", "InputExpression", "OutputExpression", "VarReferenceExpression", "ParenthesysExpression", "FunctionCallExpression", "ObjectPropertyReferenceExpression", "ObjectMethodCallExpression", "Expr", });
+        new java.lang.String[] { "IntLit", "DecLit", "StringLit", "BoolLit", "ListLiteralExpression", "BinaryMathExpression", "BinaryLogicExpression", "UnaryMathExpression", "UnaryLogicExpression", "PreIncrementExpression", "PostIncrementExpression", "PreDecrementExpression", "PostDecrementExpression", "InputExpression", "OutputExpression", "VarReferenceExpression", "ParenthesisExpression", "FunctionCallExpression", "ObjectPropertyReferenceExpression", "ObjectMethodCallExpression", "BinaryComparisonExpression", "Expr", });
     internal_static_protocol_IntLit_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_protocol_IntLit_fieldAccessorTable = new
@@ -23806,85 +25256,90 @@ public final class Expressions {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_BinaryLogicExpression_descriptor,
         new java.lang.String[] { "Left", "Right", "Operand", "Position", });
-    internal_static_protocol_UnaryMathExpression_descriptor =
+    internal_static_protocol_BinaryComparisonExpression_descriptor =
       getDescriptor().getMessageTypes().get(9);
+    internal_static_protocol_BinaryComparisonExpression_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_BinaryComparisonExpression_descriptor,
+        new java.lang.String[] { "Left", "Right", "Operand", "Position", });
+    internal_static_protocol_UnaryMathExpression_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_protocol_UnaryMathExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_UnaryMathExpression_descriptor,
         new java.lang.String[] { "Value", "Operand", "Position", });
     internal_static_protocol_UnaryLogicExpression_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_protocol_UnaryLogicExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_UnaryLogicExpression_descriptor,
         new java.lang.String[] { "Value", "Operand", "Position", });
     internal_static_protocol_PreIncrementExpression_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_protocol_PreIncrementExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_PreIncrementExpression_descriptor,
         new java.lang.String[] { "Name", "Position", });
     internal_static_protocol_PostIncrementExpression_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_protocol_PostIncrementExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_PostIncrementExpression_descriptor,
         new java.lang.String[] { "Name", "Position", });
     internal_static_protocol_PreDecrementExpression_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_protocol_PreDecrementExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_PreDecrementExpression_descriptor,
         new java.lang.String[] { "Name", "Position", });
     internal_static_protocol_PostDecrementExpression_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_protocol_PostDecrementExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_PostDecrementExpression_descriptor,
         new java.lang.String[] { "Name", "Position", });
     internal_static_protocol_InputExpression_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_protocol_InputExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_InputExpression_descriptor,
         new java.lang.String[] { "Position", });
     internal_static_protocol_OutputExpression_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_protocol_OutputExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_OutputExpression_descriptor,
         new java.lang.String[] { "Value", "Position", });
     internal_static_protocol_VarReferenceExpression_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_protocol_VarReferenceExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_VarReferenceExpression_descriptor,
         new java.lang.String[] { "Name", "Position", });
     internal_static_protocol_ParenthesisExpression_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_protocol_ParenthesisExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ParenthesisExpression_descriptor,
         new java.lang.String[] { "Value", "Position", });
     internal_static_protocol_FunctionCallExpression_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_protocol_FunctionCallExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_FunctionCallExpression_descriptor,
         new java.lang.String[] { "Name", "Parameters", "Position", });
     internal_static_protocol_ObjectPropertyReferenceExpression_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_protocol_ObjectPropertyReferenceExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ObjectPropertyReferenceExpression_descriptor,
         new java.lang.String[] { "ObjectName", "PropertyName", "Position", });
     internal_static_protocol_ObjectMethodCallExpression_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_protocol_ObjectMethodCallExpression_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_ObjectMethodCallExpression_descriptor,
         new java.lang.String[] { "ObjectName", "MethodName", "Parameters", "Position", });
-    com.google.protobuf.AnyProto.getDescriptor();
     protocol.PositionOuterClass.getDescriptor();
   }
 
