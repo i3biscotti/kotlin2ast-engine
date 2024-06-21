@@ -264,7 +264,7 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "exam",
-                                        StringLiteralExpression(""""passed"""", null),
+                                        StringLiteralExpression("passed", null),
                                         null
                                     )
                                 ),

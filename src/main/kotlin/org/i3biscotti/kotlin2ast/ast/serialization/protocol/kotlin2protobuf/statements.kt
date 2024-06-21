@@ -166,6 +166,7 @@ fun ObjectPropertyAssignmentStatement.toProtobuf(): Statements.ObjectPropertyAss
 
     return protocol.objectPropertyAssignmentStatement {
         objectName = ast.objectName
+        propertyName = ast.propertyName
         value = ast.value.toProtobuf()
 
         if (ast.position != null) {
@@ -242,6 +243,12 @@ fun IfBlock.toProtobuf(): Statements.IfBlock {
     val ast = this;
 
     return protocol.ifBlock {
+        blockType = when (ast.blockType) {
+            BlockType.IfBlock -> Statements.BlockType.IF_BLOCK
+            BlockType.ElseIfBlock -> Statements.BlockType.ELSE_IF_BLOCK
+            BlockType.ElseBlock -> Statements.BlockType.ELSE_BLOCK
+        }
+
         if (ast.condition != null) {
             condition = ast.condition.toProtobuf()
         }

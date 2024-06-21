@@ -1,7 +1,17 @@
 package org.i3biscotti.kotlin2ast.ast.serialization.protocol.kotlin2protobuf
 
-import  protocol.PositionOuterClass
+import com.google.protobuf.GeneratedMessageV3
 import org.i3biscotti.kotlin2ast.ast.models.*
+import protocol.PositionOuterClass
+
+fun Node.toProtobuf() : GeneratedMessageV3{
+    return when(this) {
+        is ProgramFile -> this.toProtobuf()
+        is Statement -> this.toProtobuf()
+        is Expression -> this.toProtobuf()
+        else -> throw IllegalArgumentException("Unknown node type")
+    }
+}
 
 fun ProgramFile.toProtobuf(): protocol.Base.ProgramFile {
     val protoLines = this.lines.map { it.toProtobuf() }
