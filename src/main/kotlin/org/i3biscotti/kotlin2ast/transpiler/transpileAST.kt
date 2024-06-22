@@ -1,7 +1,7 @@
 package org.i3biscotti.kotlin2ast.transpiler
 
 import org.i3biscotti.kotlin2ast.ast.models.*
-import java.lang.UnsupportedOperationException
+import kotlin.UnsupportedOperationException
 
 val space = "    "
 
@@ -30,6 +30,9 @@ fun Statement.transpile(depth: Int = 0): String {
         is IfDefinitionStatement -> transpile(depth)
         is WhileDefinitionStatement -> transpile(depth)
         is ForDefinitionStatement -> transpile(depth)
+        is AssignmentForStatement -> transpile(depth)
+        is ExpressionForStatement -> transpile(depth)
+        is VarDeclarationForStatement -> transpile(depth)
         is ClassDefinitionStatement -> transpile(depth)
         is ConstructorDefinitionStatement -> transpile(depth)
         is ObjectPropertyAssignmentStatement -> transpile(depth)
@@ -133,8 +136,65 @@ fun WhileDefinitionStatement.transpile(depth: Int = 0): String {
 }
 
 fun ForDefinitionStatement.transpile(depth: Int = 0): String {
-    val forConditionTranspiled = forCondition.transpile()
-    return "${generateIndentationSpace(depth)} $forConditionTranspiled"
+
+
+    if (forCondition is StandardForCondition) {
+    val initStatement = forCondition.initStatement
+       lateinit var initStatementTranspiled : String
+
+     if ( initStatement is VarDeclarationForStatement ){
+         initStatementTranspiled =  VariableDeclarationStatement(
+               initStatement.varType,
+               initStatement.name,
+               initStatement.valueType,
+               initStatement.value,
+               initStatement.position,
+           ).transpile()
+        }else if(initStatement is AssignmentForStatement){
+         initStatementTranspiled =    AssignmentStatement(
+               initStatement.name,
+               initStatement.value,
+               initStatement.position,
+           ).transpile()
+        }
+
+        val whileStatements = mutableListOf<Statement>()
+        whileStatements.addAll(statements)
+        whileStatements.add(ExpressionDefinitionStatement(
+           expression =  (forCondition.incrementStatement as ExpressionDefinitionStatement).expression,
+           position =  null
+        ))
+
+        val forWhile = WhileDefinitionStatement(
+            forCondition.controlExpression,
+            whileStatements,
+            position = position
+        ).transpile(depth)
+
+        return """
+            |${generateIndentationSpace(depth)}$initStatementTranspiled
+            |${generateIndentationSpace(depth)}$forWhile
+        """.trimMargin()
+
+    } else if(forCondition is ForEachCondition) {
+        val forConditionTranspiled = forCondition.transpile()
+        val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
+
+        return """
+        |for ($forConditionTranspiled)
+        |$statementsTranspiled
+        |${generateIndentationSpace(depth)}}
+    """.trimMargin()
+    }
+        throw UnsupportedOperationException()
+
+}
+
+fun ForEachCondition.transpile(depth: Int = 0): String {
+    val itemDefinition = itemDefinition.transpile()
+    val value = value.transpile()
+
+    return "$itemDefinition in $value"
 }
 
 fun ListOfExpression.transpile(depth: Int = 0): String {
