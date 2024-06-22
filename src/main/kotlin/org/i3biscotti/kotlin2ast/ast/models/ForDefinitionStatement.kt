@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @SerialName("ForDefinitionStatement")
 
 data class ForDefinitionStatement(
-    val forCondition: Expression,
+    val forCondition: ForCondition,
+    val statements: List<Statement>,
     override val position: Position?
 ) : Statement()
