@@ -152,21 +152,31 @@ fun WhileDefinitionStatementContext.toAst(considerPosition: Boolean): WhileDefin
     )
 }
 
-//task5
 fun ForDefinitionStatementContext.toAst(considerPosition: Boolean): ForDefinitionStatement {
-    val forStatement = forDefinition()
+    val forDefinition = forDefinition()
+    val iterator = forDefinition.iterator.toAst(considerPosition)
 
-    val iteratorItem = forStatement.ID()
-    val iterator = forStatement.iterator.toAst(considerPosition)
-    val statements = forStatement.block().statement().map { it.toAst(considerPosition) }
+    val itemDefinition = ItemDefinition(
+        varType = VariableType.variable,
+        name = forDefinition.ID().text,
+        valueType = null,
+        position = toPosition(considerPosition)
+    )
 
-    //TODO: da sistemare dopo check task 5 con giulia
-    return ForDefinitionStatement(
+    val forCondition = ForEachCondition(
+        itemDefinition,
         iterator,
         toPosition(considerPosition)
     )
-}
 
+    val statements = forDefinition.forBlock?.statement()!!.map { it.toAst(considerPosition) }.toList()
+
+    return ForDefinitionStatement(
+        forCondition,
+        statements,
+        toPosition(considerPosition)
+    )
+}
 
 fun FunctionDefinitionStatementContext.toAst(considerPosition: Boolean): FunctionDefinitionStatement {
     val fn = functionDefinition()
