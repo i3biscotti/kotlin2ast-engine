@@ -1,10 +1,8 @@
 package org.i3biscotti.kotlin2ast.ast.models
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
-@SerialName("ClassDefinitionStatement")
+
+
 data class ClassDefinitionStatement(
     val isPrivate: Boolean,
     val name: String,

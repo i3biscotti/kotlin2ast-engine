@@ -18,6 +18,9 @@ fun Statement.process(operation: ProcessOperationCallback, scope: ScopeContext) 
         is AssignmentStatement -> this.value.process(operation, scope)
         is ConstructorDefinitionStatement -> return
         is ObjectPropertyAssignmentStatement -> this.value.process(operation, scope)
+        is AssignmentForStatement -> TODO()
+        is ExpressionForStatement -> TODO()
+        is VarDeclarationForStatement -> TODO()
     }
 }
 

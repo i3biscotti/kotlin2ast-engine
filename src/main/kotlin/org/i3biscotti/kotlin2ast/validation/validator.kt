@@ -59,7 +59,7 @@ class ProgramValidator(private val root: ProgramFile) {
         }
 
         if (node.value != null) {
-            lateinit var  expressionType : VariableValueType
+            lateinit var expressionType: VariableValueType
 
             try {
                 expressionType = extractType(scope, node.value)
@@ -379,18 +379,31 @@ class ProgramValidator(private val root: ProgramFile) {
     private fun setupForValidator() {
 
         nodeProcessor.addProcess(ForDefinitionStatement::class) { node, scope ->
-            TODO("Fix for condition before continue.")
-            val variableType = extractType(scope, node.forCondition)
+            if (node.forCondition is StandardForCondition) {
+                val controlConditionType = extractType(scope, node.forCondition.controlExpression)
+                if (controlConditionType != VariableValueType.BOOLEAN) {
+                    errors.add(
+                        ExpressionMismatchError(
+                            VariableValueType.BOOLEAN.name,
+                            controlConditionType.name,
+                            node.forCondition.controlExpression.position!!.start,
+                        ),
+                    )
+                }
+            } else if (node.forCondition is ForEachCondition) {
+                val iterableType = extractType(scope, node.forCondition.value)
 
-            if (variableType != VariableValueType.INT) {
-                errors.add(
-                    ExpressionMismatchError(
-                        VariableValueType.INT.name,
-                        variableType.name,
-                        node.forCondition.position!!.start,
-                    ),
-                )
+                if (iterableType != VariableValueType.LIST) {
+                    errors.add(
+                        ExpressionMismatchError(
+                            VariableValueType.LIST.name,
+                            iterableType.name,
+                            node.forCondition.position!!.start,
+                        ),
+                    )
+                }
             }
+
         }
 
     }

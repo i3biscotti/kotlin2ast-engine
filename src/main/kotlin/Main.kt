@@ -4,12 +4,10 @@ import io.ktor.server.netty.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.i3biscotti.kotlin2ast.ast.serialization.format
+
+
 import org.i3biscotti.kotlin2ast.networking.models.*
 import org.i3biscotti.kotlin2ast.parser.KotlinParser
-import org.i3biscotti.kotlin2ast.transpiler.transpile
 
 fun main(args: Array<String>) {
 
@@ -19,11 +17,8 @@ fun main(args: Array<String>) {
     embeddedServer(Netty, port = 8080) {
         routing {
             post("/transpile") {
-                val transpileReqText = call.receiveText()
-                val transpileReq = Json.decodeFromString<TranspileRequest>(transpileReqText)
 
-                val transpiledCode = transpileReq.ast.transpile()
-                call.respondText { transpiledCode }
+                call.respondText { "Hello, World!" }
             }
 
             post("/ast") {
@@ -33,8 +28,7 @@ fun main(args: Array<String>) {
                 val apiResponse = AstResponse(parsingResult.root!!)
 
                 call.respondText {
-                    format.encodeToString(apiResponse)
-                }
+"Hello"                }
                 /*
                 * call.respondText {
                     if (parsingResult.isCorrect()) {
