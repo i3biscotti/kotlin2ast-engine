@@ -112,7 +112,8 @@ class AstTest : ITest {
             ProgramFile(
                 listOf(
                     ExpressionDefinitionStatement(
-                        BinaryMathExpression(MathOperand.times,
+                        BinaryMathExpression(
+                            MathOperand.times,
                             ParenthesisExpression(
                                 BinaryMathExpression(
                                     MathOperand.plus,
@@ -136,7 +137,8 @@ class AstTest : ITest {
                         null
                     )
                 ),
-                null),
+                null
+            ),
             programFile
         )
     }
@@ -154,10 +156,12 @@ class AstTest : ITest {
                             ParenthesisExpression(
                                 BinaryLogicExpression(
                                     LogicOperand.or,
-                                    IntLiteralExpression("3",null),
+                                    IntLiteralExpression("3", null),
                                     IntLiteralExpression("4", null),
-                                    null),
-                                null),
+                                    null
+                                ),
+                                null
+                            ),
                             ParenthesisExpression(
                                 BinaryLogicExpression(
                                     LogicOperand.or,
@@ -172,7 +176,8 @@ class AstTest : ITest {
                         null
                     )
                 ),
-                null),
+                null
+            ),
 
             programFile
         )
@@ -192,7 +197,8 @@ class AstTest : ITest {
                                 MathOperand.minus,
                                 IntLiteralExpression("3", null)
                             ),
-                            null),
+                            null
+                        ),
                         null
                     )
                 ),
@@ -361,7 +367,7 @@ class AstTest : ITest {
     //region Task 5
     @Test
     override fun testForDefinitionStatement() {
-        val programFile = parseResource("task5/forDeclarationStatement")
+        val programFile = parseResource("task4/forDefinitionStatement")
 
         assertEquals(
             ProgramFile(
@@ -370,40 +376,55 @@ class AstTest : ITest {
                         VariableType.variable,
                         "list",
                         null,
-                        IntLiteralExpression("[1,2]",null),
-                        null,
+                        ListOfExpression(
+                            listOf(
+                                IntLiteralExpression("1", null),
+                                IntLiteralExpression("2", null)
+                            ),
+                            null
+                        ),
+                        null
                     ),
                     VariableDeclarationStatement(
                         VariableType.variable,
                         "b",
                         null,
-                        IntLiteralExpression("0",null),
-                        null,
+                        IntLiteralExpression("0", null),
+                        null
                     ),
                     ForDefinitionStatement(
-                        ParenthesisExpression(
-                            ListOfExpression(listOf(
-                                IntLiteralExpression("1", null),
-                                IntLiteralExpression("2", null),
-                                ), null),
+                        ForEachCondition(
+                            ItemDefinition(
+                                VariableType.variable,
+                                "i",
+                                null,
+                                null,
+                            ),
+                            ListOfExpression(
+                                listOf(
+                                    VarReferenceExpression("list", null),
+                                    ),
+                                null,
+                            ),
                             null,
+                        ),
+                        listOf(
+                            AssignmentStatement(
+                                "b",
+                                BinaryMathExpression(
+                                    MathOperand.plus,
+                                    VarReferenceExpression("b", null),
+                                    IntLiteralExpression("1", null),
+                                    null
+                                ),
+                                null
+                            )
                         ),
                         null
-                        ),
-                    AssignmentStatement(
-                        "b",
-                        BinaryMathExpression(
-                            MathOperand.plus,
-                            VarReferenceExpression("b", null),
-                            IntLiteralExpression("1", null),
-                            null,
-                        ),
-                        null,
                     ),
                 ),
                 null
-            ),
-            programFile
+            ), programFile
         )
     }
 

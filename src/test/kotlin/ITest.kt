@@ -70,7 +70,9 @@ interface ITest {
 
     //region Task 9
     fun objectInstance()
+
     fun propertyAssignment()
+
     fun methodCall()
     //endregion
 }

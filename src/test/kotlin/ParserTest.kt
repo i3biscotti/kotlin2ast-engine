@@ -378,7 +378,46 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-
+            |    VarDeclarationStatement
+            |      T[var]
+            |      T[list]
+            |      T[=]
+            |      T[[]
+            |      ListOfExpression
+            |        T[1]
+            |        T[2]
+            |      T[]]
+            |  Line
+            |    VarDeclarationStatement
+            |      T[var]
+            |      T[b]
+            |      T[=]
+            |      IntLiteralExpression
+            |        T[0]
+            |  Line
+            |    ForDefinitionStatement
+            |      forDefinition
+            |        T[for]
+            |        T[(]
+            |        ForEachCondition
+            |          ItemDefinition
+            |            T[i]
+            |            T[in]
+            |            ListOfExpression
+            |              VarReferenceExpression
+            |                T[list]
+            |        T[)]
+            |        T[{]
+            |        AssignmentStatement
+            |          T[b]
+            |          T[=]
+            |          VarReferenceExpression
+            |            T[b]
+            |            T[+]
+            |            IntLiteralExpression
+            |              T[1]
+            |        T[}]
+            |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
         )

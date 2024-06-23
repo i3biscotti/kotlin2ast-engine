@@ -1,5 +1,5 @@
 var list = [1,2]
 var b = 0
-for (int i in list) {
+for (i in list) {
     b = b + 1
 }
