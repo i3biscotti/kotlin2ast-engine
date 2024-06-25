@@ -363,6 +363,7 @@ class AstTest : ITest {
             ), programFile
         )
     }
+    //endregion
 
     //region Task 5
     @Test
@@ -427,6 +428,52 @@ class AstTest : ITest {
             ), programFile
         )
     }
+    //endregion
+
+    //region Task 6
+
+    @Test
+    override fun testInputExpression() {
+        val programFile = parseResource("task6/inputExpression")
+
+                assertEquals(
+                    ProgramFile(
+                        listOf(
+                            VariableDeclarationStatement(
+                                VariableType.immutable,
+                                "input",
+                                null,
+                                InputExpression(
+                                    null
+                                ),
+                                null
+                            )
+                        ),
+                        null
+                    ), programFile
+                )
+    }
+
+    @Test
+    override fun testOutputExpression() {
+        val programFile = parseResource("task6/outputExpression")
+
+        assertEquals(
+                    ProgramFile(
+                        listOf(
+                            ExpressionDefinitionStatement(
+                                OutputExpression(
+                                    VarReferenceExpression("input", null),
+                                    null
+                                ),
+                                null
+                            )
+                        ),
+                        null
+                    ), programFile
+        )
+    }
+    //end region
 
 
     //region Task 7

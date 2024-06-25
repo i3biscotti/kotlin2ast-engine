@@ -44,7 +44,18 @@ interface ITest {
     fun testForDefinitionStatement()
     //endregion
 
+
+    //region Task 6
+
+    fun testInputExpression()
+
+
+    fun testOutputExpression()
+    //endregion
+
+
     //region Task 7
+
     fun voidFunctionWithoutParams()
 
 

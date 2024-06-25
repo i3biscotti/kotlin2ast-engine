@@ -92,9 +92,15 @@ ELSE                        : 'else';
 WHILE                       : 'while';
 
 //TASK5
+
 FOR                         : 'for';
 LIST_OF                     : 'listOf';
 IN                          : 'in';
+
+//TASK6
+
+READLINE                    : 'readLine';
+PRINTLN                     : 'println'
 
 // Identifiers
 ID                 : [A-Za-z_][A-Za-z0-9_]* ;

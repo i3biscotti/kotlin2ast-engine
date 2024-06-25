@@ -18,6 +18,8 @@ fun ExpressionContext.toAst(considerPosition: Boolean): Expression {
         is ParenthesisExpressionContext -> toAst(considerPosition)
         is VarReferenceExpressionContext -> toAst(considerPosition)
         is ListOfExpressionContext -> toAst(considerPosition)
+        is InputExpressionContext -> toAst(considerPosition)
+        is OutputExpressionContext -> toAst(considerPosition)
         is ObjectMethodCallExpressionContext -> toAst(considerPosition)
         is ObjectPropertyReferenceExpressionContext -> toAst(considerPosition)
         is PreIncrementExpressionContext -> PreIncrementExpression(this.ID().text, toPosition(considerPosition))
@@ -141,6 +143,20 @@ fun ListOfExpressionContext.toAst(considerPosition: Boolean): ListOfExpression {
 
     return ListOfExpression(
         items,
+        toPosition(considerPosition)
+    )
+}
+
+fun InputExpressionContext.toAst(considerPosition: Boolean): InputExpression {
+    return InputExpression(
+        toPosition(considerPosition)
+    )
+}
+
+fun OutputExpressionContext.toAst(considerPosition: Boolean): OutputExpression {
+    val value = this.value?.toAst(considerPosition)
+    return OutputExpression(
+        value,
         toPosition(considerPosition)
     )
 }

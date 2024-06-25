@@ -424,6 +424,51 @@ class ParserTest : ITest{
     }
     //endregion
 
+    //region Task 6
+    @Test
+    override fun testInputExpression() {
+        val programFile = parseResource("task6/inputExpression")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |  ValDeclarationStatement
+            |    T[val]
+            |    T[input]
+            |    T[=]
+            |    InputExpression
+            |      T[readLine]
+            |      T[(]
+            |      T[)]
+            |  T[<EOF>]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
+    @Test
+    override fun testOutputExpression() {
+        val programFile = parseResource("task6/outputExpression")
+            .toParseTree()
+
+        assertEquals(
+            """
+            |KotlinFile
+            |  Line
+            |  ExpressionDefinitionStatement
+            |    OutputExpression
+            |      T[println]
+            |      T[(]
+            |      VarReferenceExpression
+            |        T[input]
+            |      T[)]
+            |""".trimMargin(),
+            programFile.multiLineString()
+        )
+    }
+
     //region Task 7
     @Test
     override fun voidFunctionWithoutParams() {

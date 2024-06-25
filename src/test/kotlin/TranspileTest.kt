@@ -156,7 +156,7 @@ class TranspileTest : ITest {
             """
             |var list = [1,2]
             |var b = 0
-            |for (int i in list) {
+            |for (i in list) {
             |    b = b + 1
             |}
             """
@@ -164,6 +164,36 @@ class TranspileTest : ITest {
             programFile
         )
     }
+    //endregion
+
+    //region Task 6
+    @Test
+    override fun testInputExpression() {
+        val programFile = parseResource("task6/inputExpression")
+
+        assertEquals(
+            """
+            |val input = readLine()
+            """
+                .trimMargin(),
+            programFile
+        )
+    }
+
+    @Test
+    override fun testOutputExpression() {
+        val programFile = parseResource("task6/outputExpression")
+
+        assertEquals(
+            """
+            |println(input)
+            """
+                .trimMargin(),
+            programFile
+        )
+    }
+    //endregion
+
 
     //region Task 7
     @Test

@@ -70,6 +70,8 @@ expression
     | PAREN_OPEN  value=expression  PAREN_CLOSE                                         #ParenthesisExpression
     | value=ID                                                                          #VarReferenceExpression
     | listOfDefinition                                                                  #ListOfExpression
+    | READLINE PAREN_OPEN PAREN_CLOSE                                                   #InputExpression
+    | PRINTLN PAREN_OPEN value=expression PAREN_CLOSE                                   #OutputExpression
     | functionOrClassInstanceCall                                                       #FunctionOrClassInstanceCallExpression
     | objectProperty                                                                    #ObjectPropertyReferenceExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
@@ -105,6 +107,9 @@ forDefinition :
 listOfDefinition :
     LIST_OF PAREN_OPEN (expression COMMA)* expression COMMA? PAREN_CLOSE
     ;
+
+//task6
+
 
 parameter
     : (VAL | VAR )? ID COLONS type

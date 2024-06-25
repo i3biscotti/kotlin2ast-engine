@@ -1,6 +1,7 @@
 package org.i3biscotti.kotlin2ast.transpiler
 
 import org.i3biscotti.kotlin2ast.ast.models.*
+import protocol.transpileRequest
 import kotlin.UnsupportedOperationException
 
 val space = "    "
@@ -379,9 +380,12 @@ fun Expression.transpile(): String {
         is VarReferenceExpression -> transpile()
         is ParenthesisExpression -> transpile()
         is ListOfExpression -> transpile()
+        is InputExpression -> transpile()
+        is OutputExpression -> transpile()
         is FunctionCallExpression -> transpile()
         is ObjectMethodCallExpression -> transpile()
         is ObjectPropertyReferenceExpression -> transpile()
+
     }
 }
 
@@ -447,6 +451,15 @@ fun VarReferenceExpression.transpile(): String {
 fun ParenthesisExpression.transpile(): String {
     val valueTranspiled = value.transpile()
     return "($valueTranspiled)"
+}
+
+fun InputExpression.transpile(): String {
+    return "readLine()"
+}
+
+fun OutputExpression.transpile(): String {
+    val valueTranspile = value.transpile()
+    return "println($valueTranspile)"
 }
 
 fun FunctionCallExpression.transpile(): String {

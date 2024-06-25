@@ -127,8 +127,26 @@ class LexerTest : ITest{
         assertEquals(
             listOf("VAR", "ID", "ASSIGN", "LIST_OF", "NL", "VAR", "ID", "ASSIGN", "ID", "NL", "FOR",
                    "PAREN_OPEN", "ID", "IN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
-                   "VAR", "ASSIGN", "ID", "NL", "GRAPH_CLOSE"),
+                   "VAR", "ASSIGN", "ID", "NL", "GRAPH_CLOSE","EOF"),
             tokens(lexerForResource("task5/forDefinitionStatement"))
+        )
+    }
+    //endregion
+
+    //region Task 5
+    @Test
+    override fun testInputExpression() {
+        assertEquals(
+            listOf("VAL", "ID", "ASSIGN", "READLINE", "PAREN_OPEN", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task6/inputExpression"))
+        )
+    }
+
+    @Test
+    override fun testOutputExpression() {
+        assertEquals(
+            listOf("PRINTLN", "PAREN_OPEN", "ID", "PAREN_CLOSE", "EOF"),
+            tokens(lexerForResource("task6/outputExpression"))
         )
     }
     //endregion
