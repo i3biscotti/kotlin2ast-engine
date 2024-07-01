@@ -228,6 +228,7 @@ fun ItemDefinition.toProtobuf(): Statements.ItemDefinition {
 
     return protocol.itemDefinition {
         name = ast.name
+        varType = ast.varType.toProtobuf()
 
         if(ast.valueType != null) {
            valueType =  protocol.variableValueType { name = ast.valueType!!.name }

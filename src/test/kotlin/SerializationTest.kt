@@ -1,10 +1,8 @@
-import com.google.protobuf.GeneratedMessageV3
 import org.i3biscotti.kotlin2ast.ast.mapping.toAst
 import org.i3biscotti.kotlin2ast.ast.models.*
 import org.i3biscotti.kotlin2ast.ast.serialization.protocol.kotlin2protobuf.toProtobuf
 import org.i3biscotti.kotlin2ast.parser.KotlinAntlrParser
 import org.junit.Test
-import protocol.unaryMathExpression
 import kotlin.test.assertEquals
 
 class SerializationTest : ITest {
@@ -490,7 +488,127 @@ class SerializationTest : ITest {
 
     @Test
     override fun testForDefinitionStatement() {
-        TODO("Not yet implemented")
+        val programFile = parseResource("task5/forDefinitionStatement")
+
+        assertEquals(
+            protocol.programFile {
+                lines.add(
+                    protocol.statement {
+                        varDeclarationStatement = protocol.variableDeclarationStatement {
+                            varType = protocol.Statements.VariableType.VARIABLE
+                            name = "list"
+                            value = protocol.expression {
+                                listLiteralExpression = protocol.listLiteralExpression {
+                                    value.add(protocol.expression { intLit = protocol.intLit { value = "1" } })
+                                    value.add(protocol.expression { intLit = protocol.intLit { value = "2" } })
+                                }
+                            }
+                        }
+                    })
+
+                lines.add(protocol.statement {
+                    varDeclarationStatement = protocol.variableDeclarationStatement {
+                        varType = protocol.Statements.VariableType.VARIABLE
+                        name = "b"
+                        value = protocol.expression {
+                            intLit = protocol.intLit { value = "0" }
+                        }
+                    }
+                })
+
+                lines.add(
+                    protocol.statement {
+                        forDefinitionStatement = protocol.forDefinitionStatement {
+                            forCondition = protocol.forCondition {
+                                forEachCondition = protocol.forEachCondition {
+                                    itemDefinition = protocol.itemDefinition {
+                                        varType = protocol.Statements.VariableType.VARIABLE
+                                        name = "i"
+                                    }
+                                    expression = protocol.expression {
+                                        varReferenceExpression = protocol.varReferenceExpression {
+                                            name = "list"
+                                        }
+                                    }
+                                }
+                            }
+
+                            statements.add(
+                                protocol.statement {
+                                    assignmentStatement = protocol.assignmentStatement {
+                                        name = "b"
+                                        value = protocol.expression {
+                                            binaryMathExpression = protocol.binaryMathExpression {
+                                                left = protocol.expression {
+                                                    varReferenceExpression = protocol.varReferenceExpression {
+                                                        name = "b"
+                                                    }
+                                                }
+                                                right = protocol.expression {
+                                                    varReferenceExpression = protocol.varReferenceExpression {
+                                                        name = "i"
+                                                    }
+                                                }
+                                                operand = protocol.Expressions.MathOperand.PLUS
+                                            }
+                                        }
+                                    }
+                                }
+                            )
+                        }
+                    }
+                )
+            },
+            programFile
+        )
+    }
+
+    @Test
+    override fun testInputExpression() {
+        val programFile = parseResource("task6/inputExpression")
+
+        assertEquals(
+            protocol.programFile {
+                lines.add(
+                    protocol.statement {
+                        varDeclarationStatement = protocol.variableDeclarationStatement {
+                            varType = protocol.Statements.VariableType.IMMUTABLE
+                            name = "input"
+                            value = protocol.expression {
+                                inputExpression = protocol.inputExpression {  }
+                            }
+                        }
+                    }
+                )
+            },
+            programFile
+        )
+    }
+
+    @Test
+    override fun testOutputExpression() {
+        val programFile = parseResource("task6/outputExpression")
+
+        assertEquals(
+            protocol.programFile {
+                lines.add(
+                    protocol.statement {
+                        expressionDefinitionStatement = protocol.expressionDefinitionStatement {
+                            value = protocol.expression {
+                                outputExpression = protocol.outputExpression {
+                                    value = protocol.expression {
+                                        varReferenceExpression = protocol.varReferenceExpression {
+                                            name = "input"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                )
+            },
+            programFile
+        )
     }
 
     @Test
