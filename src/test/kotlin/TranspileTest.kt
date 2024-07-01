@@ -154,10 +154,10 @@ class TranspileTest : ITest {
 
         assertEquals(
             """
-            |var list = [1,2]
+            |var list = listOf(1, 2)
             |var b = 0
             |for (i in list) {
-            |    b = b + 1
+            |    b = b + i
             |}
             """
                 .trimMargin(),

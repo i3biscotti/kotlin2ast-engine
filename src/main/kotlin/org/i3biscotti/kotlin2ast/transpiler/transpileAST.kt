@@ -182,7 +182,7 @@ fun ForDefinitionStatement.transpile(depth: Int = 0): String {
         val statementsTranspiled = statements.joinToString("\n") { it.transpile(depth + 1) }
 
         return """
-        |for ($forConditionTranspiled)
+        |for ($forConditionTranspiled) {
         |$statementsTranspiled
         |${generateIndentationSpace(depth)}}
     """.trimMargin()
@@ -192,15 +192,15 @@ fun ForDefinitionStatement.transpile(depth: Int = 0): String {
 }
 
 fun ForEachCondition.transpile(depth: Int = 0): String {
-    val itemDefinition = itemDefinition.transpile()
+    val itemDefinition = this.itemDefinition.name
     val value = value.transpile()
 
     return "$itemDefinition in $value"
 }
 
 fun ListOfExpression.transpile(depth: Int = 0): String {
-    val itemsTranspiled = items.map { it.transpile() }
-    return "${generateIndentationSpace(depth)} $itemsTranspiled"
+    val itemsTranspiled = items.map { it.transpile() }.joinToString(", ")
+    return "${generateIndentationSpace(depth)}listOf($itemsTranspiled)"
 }
 
 fun FunctionDefinitionStatement.transpile(depth: Int = 0): String {
