@@ -2,10 +2,9 @@ package org.i3biscotti.kotlin2ast.ast.serialization.protocol.kotlin2protobuf
 
 import org.i3biscotti.kotlin2ast.ast.models.*
 import protocol.Statements
-import protocol.statement
 
 fun Statement.toProtobuf(): Statements.Statement {
-    val stmt = this;
+    val stmt = this
 
     return protocol.statement {
 
@@ -20,17 +19,14 @@ fun Statement.toProtobuf(): Statements.Statement {
             is ObjectPropertyAssignmentStatement -> this.objectPropertyAssignmentStatement = stmt.toProtobuf()
             is ReturnStatement -> this.returnStatement = stmt.toProtobuf()
             is WhileDefinitionStatement -> this.whileDefinitionStatement = stmt.toProtobuf()
-            is ConstructorDefinitionStatement -> throw UnsupportedOperationException()
-            is AssignmentForStatement -> TODO()
-            is ExpressionForStatement -> TODO()
-            is VarDeclarationForStatement -> TODO()
+            else -> throw UnsupportedOperationException("${stmt.javaClass.simpleName} is not supported yet.")
         }
 
     }
 }
 
 fun VariableDeclarationStatement.toProtobuf(): Statements.VariableDeclarationStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.variableDeclarationStatement {
         name = ast.name
@@ -59,7 +55,7 @@ fun VariableType.toProtobuf(): Statements.VariableType {
 }
 
 fun AssignmentStatement.toProtobuf(): Statements.AssignmentStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.assignmentStatement {
         name = ast.name
@@ -72,7 +68,7 @@ fun AssignmentStatement.toProtobuf(): Statements.AssignmentStatement {
 }
 
 fun ClassDefinitionStatement.toProtobuf(): Statements.ClassDefinitionStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.classDefinitionStatement {
         name = ast.name
@@ -98,7 +94,7 @@ fun ClassDefinitionStatement.toProtobuf(): Statements.ClassDefinitionStatement {
 }
 
 fun PropertyDeclaration.toProtobuf(): Statements.VariableDeclarationStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.variableDeclarationStatement {
         name = ast.name
@@ -116,7 +112,7 @@ fun PropertyDeclaration.toProtobuf(): Statements.VariableDeclarationStatement {
 }
 
 fun ConstructorDefinitionStatement.toProtobuf(): Statements.ConstructorDefinitionStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.constructorDefinitionStatement {
         className = ast.className
@@ -135,7 +131,7 @@ fun ConstructorDefinitionStatement.toProtobuf(): Statements.ConstructorDefinitio
 }
 
 fun ThisConstructorDefinition.toProtobuf(): Statements.ThisConstructorDefinition {
-    val ast = this;
+    val ast = this
 
     return protocol.thisConstructorDefinition {
         parameters.addAll(ast.parameters.map { it.toProtobuf() })
@@ -147,7 +143,7 @@ fun ThisConstructorDefinition.toProtobuf(): Statements.ThisConstructorDefinition
 }
 
 fun Parameter.toProtobuf(): Statements.Parameter {
-    val ast = this;
+    val ast = this
 
     return protocol.parameter {
         name = ast.name
@@ -165,7 +161,7 @@ fun Parameter.toProtobuf(): Statements.Parameter {
 }
 
 fun ObjectPropertyAssignmentStatement.toProtobuf(): Statements.ObjectPropertyAssignmentStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.objectPropertyAssignmentStatement {
         objectName = ast.objectName
@@ -179,7 +175,7 @@ fun ObjectPropertyAssignmentStatement.toProtobuf(): Statements.ObjectPropertyAss
 }
 
 fun ExpressionDefinitionStatement.toProtobuf(): Statements.ExpressionDefinitionStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.expressionDefinitionStatement {
         value = ast.expression.toProtobuf()
@@ -191,12 +187,120 @@ fun ExpressionDefinitionStatement.toProtobuf(): Statements.ExpressionDefinitionS
 }
 
 fun ForDefinitionStatement.toProtobuf(): Statements.ForDefinitionStatement {
-    val ast = this;
-
-    TODO()
+    val ast = this
 
     return protocol.forDefinitionStatement {
+        forCondition = ast.forCondition.toProtobuf()
+        statements.addAll( ast.statements.map { it.toProtobuf() })
 
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun ForCondition.toProtobuf(): Statements.ForCondition {
+    val ast = this
+
+    return protocol.forCondition {
+        when (ast){
+            is ForEachCondition -> forEachCondition = ast.toProtobuf()
+            is StandardForCondition -> standardForCondition = ast.toProtobuf()
+        }
+    }
+}
+
+fun ForEachCondition.toProtobuf(): Statements.ForEachCondition {
+    val ast = this
+
+    return protocol.forEachCondition {
+        itemDefinition = ast.itemDefinition.toProtobuf()
+        expression = ast.value.toProtobuf()
+
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun ItemDefinition.toProtobuf(): Statements.ItemDefinition {
+    val ast = this
+
+    return protocol.itemDefinition {
+        name = ast.name
+
+        if(ast.valueType != null) {
+           valueType =  protocol.variableValueType { name = ast.valueType!!.name }
+        }
+
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun StandardForCondition.toProtobuf(): Statements.StandardForCondition {
+    val ast = this
+
+    return protocol.standardForCondition {
+        initStatement = ast.initStatement.toProtobuf()
+        controlExpression = ast.controlExpression.toProtobuf()
+        incrementStatement = ast.incrementStatement.toProtobuf()
+
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun ForInitOrIncrementStatement.toProtobuf(): Statements.ForInitOrIncrementStatement {
+    val ast = this
+
+    return protocol.forInitOrIncrementStatement {
+        when(ast){
+            is VarDeclarationForStatement -> varDeclarationForStatement = ast.toProtobuf()
+            is AssignmentForStatement -> assignmentForStatement = ast.toProtobuf()
+            is ExpressionForStatement -> expressionForStatement = ast.toProtobuf()
+        }
+    }
+}
+
+fun VarDeclarationForStatement.toProtobuf(): Statements.VarDeclarationForStatement {
+    val ast = this
+
+    return protocol.varDeclarationForStatement {
+        name = ast.name
+        varType = ast.varType.toProtobuf()
+        value = ast.value.toProtobuf()
+
+        if (ast.valueType != null) {
+            valueType = protocol.variableValueType { name = ast.valueType.name }
+        }
+
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun AssignmentForStatement.toProtobuf(): Statements.AssignmentForStatement {
+    val ast = this
+
+    return protocol.assignmentForStatement {
+        name = ast.name
+        value = ast.value.toProtobuf()
+
+        if (ast.position != null) {
+            position = ast.position.toProtobuf()
+        }
+    }
+}
+
+fun ExpressionForStatement.toProtobuf(): Statements.ExpressionForStatement {
+    val ast = this
+
+    return protocol.expressionForStatement {
+        value = ast.value.toProtobuf()
 
         if (ast.position != null) {
             position = ast.position.toProtobuf()
@@ -205,7 +309,7 @@ fun ForDefinitionStatement.toProtobuf(): Statements.ForDefinitionStatement {
 }
 
 fun FunctionDefinitionStatement.toProtobuf(): Statements.FunctionDefinitionStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.functionDefinitionStatement {
         name = ast.name
@@ -222,8 +326,10 @@ fun FunctionDefinitionStatement.toProtobuf(): Statements.FunctionDefinitionState
     }
 }
 
+
+
 fun IfDefinitionStatement.toProtobuf(): Statements.IfDefinitionStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.ifDefinitionStatement {
         ifBlock = ast.ifBlock.toProtobuf()
@@ -243,7 +349,7 @@ fun IfDefinitionStatement.toProtobuf(): Statements.IfDefinitionStatement {
 }
 
 fun IfBlock.toProtobuf(): Statements.IfBlock {
-    val ast = this;
+    val ast = this
 
     return protocol.ifBlock {
         blockType = when (ast.blockType) {
@@ -266,7 +372,7 @@ fun IfBlock.toProtobuf(): Statements.IfBlock {
 
 
 fun ReturnStatement.toProtobuf(): Statements.ReturnStatement {
-    val ast = this;
+    val ast = this
 
     return protocol.returnStatement {
         if (ast.value != null) {

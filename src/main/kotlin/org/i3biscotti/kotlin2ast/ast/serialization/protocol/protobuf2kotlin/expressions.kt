@@ -36,8 +36,12 @@ fun Expressions.Expression.toAst(): Expression {
         parenthesisExpression.toAst()
     } else if (hasObjectMethodCallExpression()) {
         return objectMethodCallExpression.toAst()
-    } else if (hasObjectMethodCallExpression()) {
-        return objectMethodCallExpression.toAst()
+    } else if (hasObjectPropertyReferenceExpression()) {
+        return objectPropertyReferenceExpression.toAst()
+    } else if (hasInputExpression()){
+        return inputExpression.toAst()
+    } else if (hasOutputExpression()){
+        return outputExpression.toAst()
     }
 
     throw IllegalArgumentException("Unknown expression type")
@@ -154,12 +158,17 @@ fun Expressions.BinaryComparisonExpression.toAst(): BinaryComparisonExpression {
     )
 }
 
-fun Expressions.InputExpression.toAst(): Expression {
-    TODO()
+fun Expressions.InputExpression.toAst(): InputExpression {
+    return InputExpression(
+        position = if (hasPosition()) position.toAst() else null
+    )
 }
 
-fun Expressions.OutputExpression.toAst(): Expression {
-    TODO()
+fun Expressions.OutputExpression.toAst(): OutputExpression {
+    return OutputExpression(
+        value = value.toAst(),
+        position = if (hasPosition()) position.toAst() else null
+    )
 }
 
 fun Expressions.ListLiteralExpression.toAst(): ListOfExpression {

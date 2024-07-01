@@ -1,4 +1,5 @@
 package org.i3biscotti.kotlin2ast.ast.models
+
 data class VarDeclarationForStatement(
     val varType: VariableType,
     val name: String,

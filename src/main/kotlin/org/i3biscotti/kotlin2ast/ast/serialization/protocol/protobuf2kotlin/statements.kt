@@ -2,6 +2,7 @@ package org.i3biscotti.kotlin2ast.ast.serialization.protocol.protobuf2kotlin
 
 import org.i3biscotti.kotlin2ast.ast.models.*
 import protocol.Statements
+import protocol.positionOrNull
 
 fun Statements.Statement.toAst(): Statement {
 
@@ -23,7 +24,7 @@ fun Statements.Statement.toAst(): Statement {
         return ifDefinitionStatement.toAst()
     } else if (this.hasFunctionDefinitionStatement()) {
         return functionDefinitionStatement.toAst()
-    } else if(this.hasWhileDefinitionStatement()) {
+    } else if (this.hasWhileDefinitionStatement()) {
         return whileDefinitionStatement.toAst()
     } else {
         throw UnsupportedOperationException()
@@ -94,7 +95,77 @@ fun Statements.ExpressionDefinitionStatement.toAst(): ExpressionDefinitionStatem
 fun Statements.ForDefinitionStatement.toAst(): ForDefinitionStatement {
     val proto = this
 
-    TODO()
+    return ForDefinitionStatement(
+        forCondition = proto.forCondition.toAst(),
+        statements = proto.statementsList.map { it.toAst() },
+        position = if (proto.hasPosition()) proto.position.toAst() else null
+    )
+}
+
+private fun Statements.ForCondition.toAst(): ForCondition {
+    val proto = this
+
+    if (proto.hasForEachCondition()) {
+        val condition = proto.forEachCondition
+        val itemDefinition = condition.itemDefinition
+
+        return ForEachCondition(
+            itemDefinition = ItemDefinition(
+                name = itemDefinition.name,
+                varType = itemDefinition.varType.toAst(),
+                valueType = VariableValueType(itemDefinition.valueType.name),
+                position = itemDefinition.positionOrNull?.toAst()
+
+            ),
+            value = condition.expression.toAst(),
+            position = if(condition.hasPosition()) condition.position.toAst() else null
+        )
+    } else if (proto.hasStandardForCondition()) {
+        val condition = proto.standardForCondition
+        val initialization = condition.initStatement.toAst()
+
+        return StandardForCondition(
+            initStatement = initialization,
+            controlExpression = condition.controlExpression.toAst(),
+            incrementStatement = condition.incrementStatement.toAst(),
+            position = condition.positionOrNull?.toAst()
+        )
+    } else {
+        throw UnsupportedOperationException()
+    }
+}
+
+fun Statements.ForInitOrIncrementStatement.toAst(): ForInitOrIncrementStatement {
+    val proto = this
+
+    if(proto.hasAssignmentForStatement()){
+        val assignment = proto.assignmentForStatement
+        return AssignmentForStatement(
+            name = assignment.name,
+            value = assignment.value.toAst(),
+            position = assignment.position.toAst()
+        )
+    } else if (proto.hasVarDeclarationForStatement()){
+        val declaration = proto.varDeclarationForStatement
+        return VarDeclarationForStatement(
+            varType = declaration.varType.toAst(),
+            name = declaration.name,
+            value = declaration.value.toAst(),
+            valueType = if(declaration.hasValueType()) VariableValueType(declaration.valueType.name) else null,
+            position = declaration.positionOrNull?.toAst()
+        )
+    }
+    else if(proto.hasExpressionForStatement()){
+        return ExpressionForStatement(
+            value = proto.expressionForStatement.value.toAst(),
+            position = proto.expressionForStatement.positionOrNull?.toAst()
+        )
+    }
+    else {
+        throw UnsupportedOperationException()
+    }
+
+
 }
 
 fun Statements.ObjectPropertyAssignmentStatement.toAst(): ObjectPropertyAssignmentStatement {
@@ -185,7 +256,7 @@ fun Statements.ConstructorDefinitionStatement.toAst(): ConstructorDefinitionStat
     )
 }
 
-fun Statements.ThisConstructorDefinition.toAst() : ThisConstructorDefinition {
+fun Statements.ThisConstructorDefinition.toAst(): ThisConstructorDefinition {
     val proto = this
 
     return ThisConstructorDefinition(

@@ -27,6 +27,8 @@ fun Expression.toProtobuf(): Expressions.Expression {
             is PreIncrementExpression -> preIncrementExpression = exp.toProtobuf()
             is PostDecrementExpression -> postDecrementExpression = exp.toProtobuf()
             is PreDecrementExpression -> preDecrementExpression = exp.toProtobuf()
+            is InputExpression -> inputExpression = exp.toProtobuf()
+            is OutputExpression -> outputExpression = exp.toProtobuf()
         }
     }
 
@@ -295,6 +297,28 @@ fun PreDecrementExpression.toProtobuf(): Expressions.PreDecrementExpression {
 
     return protocol.preDecrementExpression {
         name = expr.name
+
+        if (expr.position != null) {
+            position = expr.position.toProtobuf()
+        }
+    }
+}
+
+fun InputExpression.toProtobuf(): Expressions.InputExpression {
+    val expr = this
+
+    return protocol.inputExpression {
+        if (expr.position != null) {
+            position = expr.position.toProtobuf()
+        }
+    }
+}
+
+fun OutputExpression.toProtobuf(): Expressions.OutputExpression {
+    val expr = this
+
+    return protocol.outputExpression {
+        value = expr.value.toProtobuf()
 
         if (expr.position != null) {
             position = expr.position.toProtobuf()
