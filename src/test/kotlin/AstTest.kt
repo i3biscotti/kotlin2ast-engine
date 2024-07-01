@@ -252,7 +252,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression(""""passed"""", null),
+                                    StringLiteralExpression("\"passed\"", null),
                                     null
                                 )
                             ),
@@ -270,7 +270,7 @@ class AstTest : ITest {
                                 listOf(
                                     AssignmentStatement(
                                         "exam",
-                                        StringLiteralExpression("passed", null),
+                                        StringLiteralExpression("\"passed\"", null),
                                         null
                                     )
                                 ),
@@ -283,7 +283,7 @@ class AstTest : ITest {
                             listOf(
                                 AssignmentStatement(
                                     "exam",
-                                    StringLiteralExpression(""""failed"""", null),
+                                    StringLiteralExpression("\"failed\"" , null),
                                     null
                                 )
                             ),
@@ -368,7 +368,7 @@ class AstTest : ITest {
     //region Task 5
     @Test
     override fun testForDefinitionStatement() {
-        val programFile = parseResource("task4/forDefinitionStatement")
+        val programFile = parseResource("task5/forDefinitionStatement")
 
         assertEquals(
             ProgramFile(
@@ -401,12 +401,7 @@ class AstTest : ITest {
                                 null,
                                 null,
                             ),
-                            ListOfExpression(
-                                listOf(
-                                    VarReferenceExpression("list", null),
-                                    ),
-                                null,
-                            ),
+                            VarReferenceExpression("list", null),
                             null,
                         ),
                         listOf(
@@ -415,7 +410,7 @@ class AstTest : ITest {
                                 BinaryMathExpression(
                                     MathOperand.plus,
                                     VarReferenceExpression("b", null),
-                                    IntLiteralExpression("1", null),
+                                    VarReferenceExpression("i", null),
                                     null
                                 ),
                                 null
@@ -436,22 +431,22 @@ class AstTest : ITest {
     override fun testInputExpression() {
         val programFile = parseResource("task6/inputExpression")
 
-                assertEquals(
-                    ProgramFile(
-                        listOf(
-                            VariableDeclarationStatement(
-                                VariableType.immutable,
-                                "input",
-                                null,
-                                InputExpression(
-                                    null
-                                ),
-                                null
-                            )
+        assertEquals(
+            ProgramFile(
+                listOf(
+                    VariableDeclarationStatement(
+                        VariableType.immutable,
+                        "input",
+                        null,
+                        InputExpression(
+                            null
                         ),
                         null
-                    ), programFile
-                )
+                    )
+                ),
+                null
+            ), programFile
+        )
     }
 
     @Test
@@ -459,18 +454,18 @@ class AstTest : ITest {
         val programFile = parseResource("task6/outputExpression")
 
         assertEquals(
-                    ProgramFile(
-                        listOf(
-                            ExpressionDefinitionStatement(
-                                OutputExpression(
-                                    VarReferenceExpression("input", null),
-                                    null
-                                ),
-                                null
-                            )
+            ProgramFile(
+                listOf(
+                    ExpressionDefinitionStatement(
+                        OutputExpression(
+                            VarReferenceExpression("input", null),
+                            null
                         ),
                         null
-                    ), programFile
+                    )
+                ),
+                null
+            ), programFile
         )
     }
     //end region
