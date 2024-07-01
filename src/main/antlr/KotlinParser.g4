@@ -6,16 +6,6 @@ kotlinFile: lines=line+;
 
 line: statement (NL+ | EOF);
 
-/*
- var name = "Simone"
- val age : Int = 16
- var height : Double = 1.75
- const val text = "Hello World"
- */
-
- /* TASK 1 : VARIABILI
- --------------------------------------------*/
-
  statement
     : VAR ID (COLONS type)? ASSIGN expression       #VarDeclarationStatement
     | VAL ID (COLONS type)? ASSIGN expression       #ValDeclarationStatement

@@ -100,10 +100,10 @@ IN                          : 'in';
 //TASK6
 
 READLINE                    : 'readLine';
-PRINTLN                     : 'println'
+PRINTLN                     : 'println';
 
 // Identifiers
-ID                 : [A-Za-z_][A-Za-z0-9_]* ;
+ID                          : [A-Za-z_][A-Za-z0-9_]* ;
 
 UnterminatedStringLiteral
   : '"' (~["\\\r\n] | '\\' (. | EOF))*
