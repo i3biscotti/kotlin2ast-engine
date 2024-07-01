@@ -382,11 +382,16 @@ class ParserTest : ITest{
             |      T[var]
             |      T[list]
             |      T[=]
-            |      T[[]
             |      ListOfExpression
-            |        T[1]
-            |        T[2]
-            |      T[]]
+            |        ListOfDefinition
+            |          T[listOf]
+            |          T[(]
+            |          IntLiteralExpression
+            |            T[1]
+            |          T[,]
+            |          IntLiteralExpression
+            |            T[2]
+            |          T[)]
             |  Line
             |    VarDeclarationStatement
             |      T[var]
@@ -396,27 +401,26 @@ class ParserTest : ITest{
             |        T[0]
             |  Line
             |    ForDefinitionStatement
-            |      forDefinition
+            |      ForDefinition
             |        T[for]
             |        T[(]
-            |        ForEachCondition
-            |          ItemDefinition
-            |            T[i]
-            |            T[in]
-            |            ListOfExpression
-            |              VarReferenceExpression
-            |                T[list]
+            |        T[i]
+            |        T[in]
+            |        VarReferenceExpression
+            |          T[list]
             |        T[)]
-            |        T[{]
-            |        AssignmentStatement
-            |          T[b]
-            |          T[=]
-            |          VarReferenceExpression
+            |        Block
+            |          T[{]
+            |          AssignStatement
             |            T[b]
-            |            T[+]
-            |            IntLiteralExpression
-            |              T[1]
-            |        T[}]
+            |            T[=]
+            |            BinaryMathExpression
+            |              VarReferenceExpression
+            |                T[b]
+            |              T[+]
+            |              VarReferenceExpression
+            |                T[i]
+            |          T[}]
             |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
@@ -434,15 +438,15 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-            |  ValDeclarationStatement
-            |    T[val]
-            |    T[input]
-            |    T[=]
-            |    InputExpression
-            |      T[readLine]
-            |      T[(]
-            |      T[)]
-            |  T[<EOF>]
+            |    ValDeclarationStatement
+            |      T[val]
+            |      T[input]
+            |      T[=]
+            |      InputExpression
+            |        T[readLine]
+            |        T[(]
+            |        T[)]
+            |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
         )
@@ -457,13 +461,14 @@ class ParserTest : ITest{
             """
             |KotlinFile
             |  Line
-            |  ExpressionDefinitionStatement
-            |    OutputExpression
-            |      T[println]
-            |      T[(]
-            |      VarReferenceExpression
-            |        T[input]
-            |      T[)]
+            |    ExpressionDefinitionStatement
+            |      OutputExpression
+            |        T[println]
+            |        T[(]
+            |        VarReferenceExpression
+            |          T[input]
+            |        T[)]
+            |    T[<EOF>]
             |""".trimMargin(),
             programFile.multiLineString()
         )

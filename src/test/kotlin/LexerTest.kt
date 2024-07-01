@@ -3,7 +3,7 @@ import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
 
-class LexerTest : ITest{
+class LexerTest : ITest {
     private fun lexerForResource(resourceName: String): KotlinLexer {
         val resource = this.javaClass.getResourceAsStream("/${resourceName}.txt")
         val lexer = KotlinLexer(CharStreams.fromStream(resource))
@@ -60,8 +60,10 @@ class LexerTest : ITest{
     @Test
     override fun testBinaryMathExpressionDefinitionStatement() {
         assertEquals(
-            listOf("PAREN_OPEN", "INT_LIT", "PLUS", "INT_LIT", "PAREN_CLOSE", "TIMES",
-                "PAREN_OPEN", "INT_LIT", "MINUS", "INT_LIT", "PAREN_CLOSE", "EOF"),
+            listOf(
+                "PAREN_OPEN", "INT_LIT", "PLUS", "INT_LIT", "PAREN_CLOSE", "TIMES",
+                "PAREN_OPEN", "INT_LIT", "MINUS", "INT_LIT", "PAREN_CLOSE", "EOF"
+            ),
             tokens(lexerForResource("task2/binaryMathExpressionDefinitionStatement"))
         )
     }
@@ -69,8 +71,10 @@ class LexerTest : ITest{
     @Test
     override fun testBinaryLogicExpressionDefinitionStatement() {
         assertEquals(
-            listOf("PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "AND",
-                "PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "EOF"),
+            listOf(
+                "PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "AND",
+                "PAREN_OPEN", "INT_LIT", "OR", "INT_LIT", "PAREN_CLOSE", "EOF"
+            ),
             tokens(lexerForResource("task2/binaryLogicExpressionDefinitionStatement"))
         )
     }
@@ -86,7 +90,7 @@ class LexerTest : ITest{
     @Test
     override fun testUnaryLogicExpressionDefinitionStatement() {
         assertEquals(
-            listOf("NOT","PAREN_OPEN", "ID", "PAREN_CLOSE", "EOF"),
+            listOf("NOT", "PAREN_OPEN", "ID", "PAREN_CLOSE", "EOF"),
             tokens(lexerForResource("task2/unaryLogicExpressionDefinitionStatement"))
         )
     }
@@ -96,12 +100,14 @@ class LexerTest : ITest{
     @Test
     override fun testIfDefinitionStatement() {
         assertEquals(
-            listOf("IF", "PAREN_OPEN", "ID", "GREATER_THAN", "INT_LIT",
-                "PAREN_CLOSE", "GRAPH_OPEN", "NL" ,"ID", "ASSIGN", "STRING_LIT",
+            listOf(
+                "IF", "PAREN_OPEN", "ID", "GREATER_THAN", "INT_LIT",
+                "PAREN_CLOSE", "GRAPH_OPEN", "NL", "ID", "ASSIGN", "STRING_LIT",
                 "NL", "GRAPH_CLOSE", "ELSE", "IF", "PAREN_OPEN", "ID",
                 "EQUAL", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "ID",
-                "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "ELSE", "GRAPH_OPEN",
-                "NL", "ID", "ASSIGN", "STRING_LIT", "NL" ,"GRAPH_CLOSE", "EOF"),
+                "ASSIGN", "STRING_LIT", "NL", "GRAPH_CLOSE", "ELSE", "GRAPH_OPEN",
+                "NL", "ID", "ASSIGN", "STRING_LIT", "NL", "GRAPH_CLOSE", "EOF"
+            ),
             tokens(lexerForResource("task3/ifDefinitionStatement"))
         )
     }
@@ -111,11 +117,13 @@ class LexerTest : ITest{
     @Test
     override fun testWhileDefinitionStatement() {
         assertEquals(
-            listOf("VAR", "ID", "ASSIGN", "INT_LIT",
+            listOf(
+                "VAR", "ID", "ASSIGN", "INT_LIT",
                 "NL", "WHILE", "PAREN_OPEN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL", "IF",
                 "PAREN_OPEN", "ID", "LOWER_THAN", "INT_LIT", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
                 "ID", "ASSIGN", "ID", "PLUS", "INT_LIT", "NL", "GRAPH_CLOSE", "ELSE", "GRAPH_OPEN",
-                "NL", "ID", "ASSIGN", "BOOL_LIT", "NL", "GRAPH_CLOSE", "NL", "GRAPH_CLOSE","EOF"),
+                "NL", "ID", "ASSIGN", "BOOL_LIT", "NL", "GRAPH_CLOSE", "NL", "GRAPH_CLOSE", "EOF"
+            ),
             tokens(lexerForResource("task4/whileDefinitionStatement"))
         )
     }
@@ -125,9 +133,13 @@ class LexerTest : ITest{
     @Test
     override fun testForDefinitionStatement() {
         assertEquals(
-            listOf("VAR", "ID", "ASSIGN", "LIST_OF", "NL", "VAR", "ID", "ASSIGN", "ID", "NL", "FOR",
-                   "PAREN_OPEN", "ID", "IN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
-                   "VAR", "ASSIGN", "ID", "NL", "GRAPH_CLOSE","EOF"),
+            listOf(
+                "VAR", "ID", "ASSIGN", "LIST_OF", "PAREN_OPEN", "INT_LIT", "COMMA", "INT_LIT", "PAREN_CLOSE", "NL",
+                "VAR", "ID", "ASSIGN", "INT_LIT", "NL",
+                "FOR", "PAREN_OPEN", "ID", "IN", "ID", "PAREN_CLOSE", "GRAPH_OPEN", "NL",
+                "ID", "ASSIGN", "ID", "PLUS", "ID", "NL",
+                "GRAPH_CLOSE", "EOF"
+            ),
             tokens(lexerForResource("task5/forDefinitionStatement"))
         )
     }
@@ -256,7 +268,7 @@ class LexerTest : ITest{
                 "FUN", "ID", "PAREN_OPEN",
                 "ID", "COLONS", "INT",
                 "PAREN_CLOSE", "COLONS", "INT", "GRAPH_OPEN", "NL",
-                "ID", "ASSIGN", "ID", "LOWER_EQUAL_THAN", "ID","NL",
+                "ID", "ASSIGN", "ID", "LOWER_EQUAL_THAN", "ID", "NL",
                 "RETURN", "ID", "PLUS", "ID", "NL",
                 "GRAPH_CLOSE", "NL",
 
@@ -319,7 +331,7 @@ class LexerTest : ITest{
     @Test
     override fun propertyAssignment() {
         assertEquals(
-            listOf("ID","DOT", "ID", "ASSIGN", "STRING_LIT", "EOF"),
+            listOf("ID", "DOT", "ID", "ASSIGN", "STRING_LIT", "EOF"),
             tokens(lexerForResource("task9/propertyAssignment"))
         )
     }
@@ -327,7 +339,7 @@ class LexerTest : ITest{
     @Test
     override fun methodCall() {
         assertEquals(
-            listOf( "ID", "DOT", "ID", "PAREN_OPEN", "PAREN_CLOSE", "EOF"),
+            listOf("ID", "DOT", "ID", "PAREN_OPEN", "PAREN_CLOSE", "EOF"),
             tokens(lexerForResource("task9/methodCall"))
         )
     }
