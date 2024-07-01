@@ -154,7 +154,8 @@ fun InputExpressionContext.toAst(considerPosition: Boolean): InputExpression {
 }
 
 fun OutputExpressionContext.toAst(considerPosition: Boolean): OutputExpression {
-    val value = this.value?.toAst(considerPosition)
+    val value = this.value!!.toAst(considerPosition)
+
     return OutputExpression(
         value,
         toPosition(considerPosition)
