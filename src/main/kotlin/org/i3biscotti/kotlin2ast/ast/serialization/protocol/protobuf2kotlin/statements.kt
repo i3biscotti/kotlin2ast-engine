@@ -1,8 +1,7 @@
 package org.i3biscotti.kotlin2ast.ast.serialization.protocol.protobuf2kotlin
 
 import org.i3biscotti.kotlin2ast.ast.models.*
-import protocol.Statements
-import protocol.positionOrNull
+import protocol.*
 
 fun Statements.Statement.toAst(): Statement {
 
@@ -21,7 +20,7 @@ fun Statements.Statement.toAst(): Statement {
     } else if (this.hasObjectPropertyAssignmentStatement()) {
         return objectPropertyAssignmentStatement.toAst()
     } else if (this.hasClassDefinitionStatement()) {
-        return ifDefinitionStatement.toAst()
+        return classDefinitionStatement.toAst()
     } else if (this.hasFunctionDefinitionStatement()) {
         return functionDefinitionStatement.toAst()
     } else if (this.hasWhileDefinitionStatement()) {
@@ -39,9 +38,13 @@ fun Statements.VariableDeclarationStatement.toAst(): VariableDeclarationStatemen
         name = proto.name,
         varType = proto.varType.toAst(),
         value = proto.value?.toAst(),
-        valueType = VariableValueType(proto.valueType.name),
-        position = proto.position?.toAst()
+        valueType = proto.valueTypeOrNull?.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
+}
+
+fun Statements.VariableValueType.toAst(): VariableValueType {
+    return VariableValueType(this.name)
 }
 
 fun Statements.VariableType.toAst(): VariableType {
@@ -59,7 +62,7 @@ fun Statements.AssignmentStatement.toAst(): AssignmentStatement {
     return AssignmentStatement(
         name = proto.name,
         value = proto.value.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -68,7 +71,7 @@ fun Statements.ReturnStatement.toAst(): ReturnStatement {
 
     return ReturnStatement(
         value = proto.value.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -79,7 +82,7 @@ fun Statements.IfDefinitionStatement.toAst(): IfDefinitionStatement {
         ifBlock = proto.ifBlock.toAst(),
         elseIfBlock = proto.elseIfBlocksList.map { it.toAst() },
         elseBlock = proto.elseBlock.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -88,7 +91,7 @@ fun Statements.ExpressionDefinitionStatement.toAst(): ExpressionDefinitionStatem
 
     return ExpressionDefinitionStatement(
         expression = proto.value.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -113,12 +116,12 @@ private fun Statements.ForCondition.toAst(): ForCondition {
             itemDefinition = ItemDefinition(
                 name = itemDefinition.name,
                 varType = itemDefinition.varType.toAst(),
-                valueType = VariableValueType(itemDefinition.valueType.name),
+                valueType = itemDefinition.valueTypeOrNull?.toAst(),
                 position = itemDefinition.positionOrNull?.toAst()
 
             ),
             value = condition.expression.toAst(),
-            position = if(condition.hasPosition()) condition.position.toAst() else null
+            position = if (condition.hasPosition()) condition.position.toAst() else null
         )
     } else if (proto.hasStandardForCondition()) {
         val condition = proto.standardForCondition
@@ -138,30 +141,28 @@ private fun Statements.ForCondition.toAst(): ForCondition {
 fun Statements.ForInitOrIncrementStatement.toAst(): ForInitOrIncrementStatement {
     val proto = this
 
-    if(proto.hasAssignmentForStatement()){
+    if (proto.hasAssignmentForStatement()) {
         val assignment = proto.assignmentForStatement
         return AssignmentForStatement(
             name = assignment.name,
             value = assignment.value.toAst(),
             position = assignment.position.toAst()
         )
-    } else if (proto.hasVarDeclarationForStatement()){
+    } else if (proto.hasVarDeclarationForStatement()) {
         val declaration = proto.varDeclarationForStatement
         return VarDeclarationForStatement(
             varType = declaration.varType.toAst(),
             name = declaration.name,
             value = declaration.value.toAst(),
-            valueType = if(declaration.hasValueType()) VariableValueType(declaration.valueType.name) else null,
+            valueType =declaration.valueTypeOrNull?.toAst(),
             position = declaration.positionOrNull?.toAst()
         )
-    }
-    else if(proto.hasExpressionForStatement()){
+    } else if (proto.hasExpressionForStatement()) {
         return ExpressionForStatement(
             value = proto.expressionForStatement.value.toAst(),
             position = proto.expressionForStatement.positionOrNull?.toAst()
         )
-    }
-    else {
+    } else {
         throw UnsupportedOperationException()
     }
 
@@ -175,7 +176,7 @@ fun Statements.ObjectPropertyAssignmentStatement.toAst(): ObjectPropertyAssignme
         objectName = proto.objectName,
         propertyName = proto.propertyName,
         value = proto.value.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -188,8 +189,8 @@ fun Statements.ClassDefinitionStatement.toAst(): ClassDefinitionStatement {
         properties = proto.propertiesList.map { it.toPropertyAst() },
         methods = proto.methodsList.map { it.toAst() },
         constructors = proto.constructorsList.map { it.toAst() },
-        parentClassType = VariableValueType(proto.parentClassType.name),
-        position = proto.position.toAst()
+        parentClassType = proto.parentClassTypeOrNull?.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -199,9 +200,9 @@ fun Statements.VariableDeclarationStatement.toPropertyAst(): PropertyDeclaration
     return PropertyDeclaration(
         name = proto.name,
         varType = proto.varType.toAst(),
-        value = proto.value?.toAst(),
-        valueType = VariableValueType(proto.valueType.name),
-        position = proto.position.toAst()
+        value = proto.valueOrNull?.toAst(),
+        valueType = proto.valueType.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -212,8 +213,8 @@ fun Statements.FunctionDefinitionStatement.toAst(): FunctionDefinitionStatement 
         name = proto.name,
         parameters = proto.parametersList.map { it.toAst() },
         statements = proto.statementsList.map { it.toAst() },
-        returnType = VariableValueType(proto.returnType.name),
-        position = proto.position.toAst()
+        returnType = proto.returnTypeOrNull?.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -223,7 +224,7 @@ fun Statements.WhileDefinitionStatement.toAst(): WhileDefinitionStatement {
     return WhileDefinitionStatement(
         whileCondition = proto.condition.toAst(),
         statements = proto.statementsList.map { it.toAst() },
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -238,8 +239,8 @@ fun Statements.Parameter.toAst(): Parameter {
             Statements.ParameterType.SUPER -> ParameterType.SUPER
             else -> throw UnsupportedOperationException()
         },
-        valueType = VariableValueType(proto.valueType.name),
-        position = proto.position.toAst()
+        valueType = proto.valueType.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -251,8 +252,8 @@ fun Statements.ConstructorDefinitionStatement.toAst(): ConstructorDefinitionStat
         constructorName = proto.constructorName,
         parameters = proto.parametersList.map { it.toAst() },
         body = proto.bodyList.map { it.toAst() },
-        thisConstructor = proto.thisConstructor?.toAst(),
-        position = proto.position.toAst()
+        thisConstructor = proto.thisConstructorOrNull?.toAst(),
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -261,7 +262,7 @@ fun Statements.ThisConstructorDefinition.toAst(): ThisConstructorDefinition {
 
     return ThisConstructorDefinition(
         parameters = proto.parametersList.map { it.toAst() },
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 }
 
@@ -269,10 +270,10 @@ fun Statements.IfBlock.toAst(): IfBlock {
     val proto = this
 
     return IfBlock(
-        condition = proto.condition.toAst(),
+        condition = proto.conditionOrNull?.toAst(),
         statements = proto.statementsList.map { it.toAst() },
         blockType = proto.blockType.toAst(),
-        position = proto.position.toAst()
+        position = proto.positionOrNull?.toAst()
     )
 
 }

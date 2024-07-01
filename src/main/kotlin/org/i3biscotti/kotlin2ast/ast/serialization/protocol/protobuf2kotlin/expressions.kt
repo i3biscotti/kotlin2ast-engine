@@ -12,6 +12,8 @@ fun Expressions.Expression.toAst(): Expression {
         return decLit.toAst()
     } else if (hasBoolLit()) {
         return boolLit.toAst()
+    } else if (hasListLiteralExpression()) {
+        return listLiteralExpression.toAst()
     } else if (hasVarReferenceExpression()) {
         return varReferenceExpression.toAst()
     } else if (hasFunctionCallExpression()) {
@@ -23,28 +25,34 @@ fun Expressions.Expression.toAst(): Expression {
     } else if (hasBinaryLogicExpression()) {
         return binaryLogicExpression.toAst()
     } else if (hasUnaryLogicExpression()) {
-        return binaryLogicExpression.toAst()
+        return unaryLogicExpression.toAst()
     } else if (hasBinaryComparisonExpression()) {
         return binaryComparisonExpression.toAst()
     } else if (hasInputExpression()) {
         return inputExpression.toAst()
     } else if (hasOutputExpression()) {
         return outputExpression.toAst()
-    } else if (hasListLiteralExpression()) {
-        return listLiteralExpression.toAst()
     } else if (hasParenthesisExpression()) {
-        parenthesisExpression.toAst()
+        return parenthesisExpression.toAst()
     } else if (hasObjectMethodCallExpression()) {
         return objectMethodCallExpression.toAst()
     } else if (hasObjectPropertyReferenceExpression()) {
         return objectPropertyReferenceExpression.toAst()
-    } else if (hasInputExpression()){
+    } else if (hasInputExpression()) {
         return inputExpression.toAst()
-    } else if (hasOutputExpression()){
+    } else if (hasOutputExpression()) {
         return outputExpression.toAst()
+    } else if (hasPreDecrementExpression()){
+        return preDecrementExpression.toAst()
+    } else if (hasPostDecrementExpression()){
+        return postDecrementExpression.toAst()
+    } else if (hasPreIncrementExpression()){
+        return preIncrementExpression.toAst()
+    } else if (hasPostIncrementExpression()){
+        return postIncrementExpression.toAst()
     }
 
-    throw IllegalArgumentException("Unknown expression type")
+    throw IllegalArgumentException("Unknown expression => $this")
 }
 
 fun Expressions.IntLit.toAst(): IntLiteralExpression {
@@ -94,7 +102,7 @@ fun Expressions.BinaryMathExpression.toAst(): BinaryMathExpression {
     return BinaryMathExpression(
         left = left.toAst(),
         right = right.toAst(),
-        operand = when(operand){
+        operand = when (operand) {
             Expressions.MathOperand.PLUS -> MathOperand.plus
             Expressions.MathOperand.MINUS -> MathOperand.minus
             Expressions.MathOperand.TIMES -> MathOperand.times
@@ -109,7 +117,7 @@ fun Expressions.BinaryMathExpression.toAst(): BinaryMathExpression {
 fun Expressions.UnaryMathExpression.toAst(): UnaryMathExpression {
     return UnaryMathExpression(
         value = value.toAst(),
-        operand = when(operand) {
+        operand = when (operand) {
             Expressions.MathOperand.MINUS -> MathOperand.minus
             else -> throw UnsupportedOperationException()
         },
@@ -131,13 +139,13 @@ fun Expressions.BinaryLogicExpression.toAst(): BinaryLogicExpression {
 }
 
 fun Expressions.UnaryLogicExpression.toAst(): UnaryLogicNegationExpression {
-    if(operand == Expressions.LogicOperand.NOT) {
+    if (operand == Expressions.LogicOperand.NOT) {
         return UnaryLogicNegationExpression(
             value = value.toAst(),
             position = if (hasPosition()) position.toAst() else null
         )
-    }else {
-        throw  UnsupportedOperationException()
+    } else {
+        throw UnsupportedOperationException()
     }
 }
 
@@ -198,6 +206,34 @@ fun Expressions.ObjectPropertyReferenceExpression.toAst(): ObjectPropertyReferen
     return ObjectPropertyReferenceExpression(
         objectName = objectName,
         propertyName = propertyName,
+        position = if (hasPosition()) position.toAst() else null
+    )
+}
+
+fun Expressions.PreDecrementExpression.toAst(): PreDecrementExpression {
+    return PreDecrementExpression(
+        name = name,
+        position = if (hasPosition()) position.toAst() else null
+    )
+}
+
+fun Expressions.PostDecrementExpression.toAst(): PostDecrementExpression {
+    return PostDecrementExpression(
+        name = name,
+        position = if (hasPosition()) position.toAst() else null
+    )
+}
+
+fun Expressions.PreIncrementExpression.toAst(): PreIncrementExpression {
+    return PreIncrementExpression(
+        name = name,
+        position = if (hasPosition()) position.toAst() else null
+    )
+}
+
+fun Expressions.PostIncrementExpression.toAst(): PostIncrementExpression {
+    return PostIncrementExpression(
+        name = name,
         position = if (hasPosition()) position.toAst() else null
     )
 }
