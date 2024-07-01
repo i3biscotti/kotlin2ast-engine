@@ -8,6 +8,7 @@ fun Expression.getType(): VariableValueType {
         is BooleanLitExpression -> VariableValueType.BOOLEAN
         is DoubleLiteralExpression -> VariableValueType.DOUBLE
         is StringLiteralExpression -> VariableValueType.STRING
+        is InputExpression -> VariableValueType.STRING
         else -> throw NotImplementedError()
     }
 }
