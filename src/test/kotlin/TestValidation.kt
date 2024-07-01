@@ -62,10 +62,6 @@ class TestValidation {
         )
     }
 
-    fun testForDefinitionStatement() {
-        TODO("Not yet implemented")
-    }
-
     @Test
     fun functionErrors() {
         val programFile = parseResource("validation/function_errors")

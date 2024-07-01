@@ -237,8 +237,9 @@ class ProgramValidator(private val root: ProgramFile) {
 
     private fun validateClass(node: ClassDefinitionStatement, scope: ScopeContext): List<AstValidationError> {
         val errors = mutableListOf<AstValidationError>()
+        val classSign = scope.read<ClassSign>(node.name)
 
-        if (scope.read<ClassSign>(node.name) != null) {
+        if (classSign != null && classSign.position != node.position?.start) {
             errors.add(ClassAlreadyDeclaredError(node.name, node.position!!.start))
         }
 
@@ -259,10 +260,11 @@ class ProgramValidator(private val root: ProgramFile) {
     private fun validateFunctionCall(node: FunctionCallExpression, scope: ScopeContext): List<AstValidationError> {
         val errors = mutableListOf<AstValidationError>()
 
-        val function = scope.read<FunctionSign>(node.name)
+        val functionSign = scope.read<FunctionSign>(node.name)
+        val classSign = scope.read<ClassSign>(node.name)
 
-        if (function != null) {
-            val functionParams = function.parameters.map { it.type.name }
+        if (functionSign != null) {
+            val functionParams = functionSign.parameters.map { it.type.name }
             val callParams = node.parameters.map { extractType(scope, it).name }
 
             if (functionParams != callParams) {
@@ -275,7 +277,7 @@ class ProgramValidator(private val root: ProgramFile) {
                     ),
                 )
             }
-        } else {
+        } else if (classSign == null || node.parameters.isNotEmpty()){
             errors.add(
                 FunctionNotDefinedError(
                     node.name,
