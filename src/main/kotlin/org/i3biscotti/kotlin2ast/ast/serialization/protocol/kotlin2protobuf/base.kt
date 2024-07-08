@@ -1,16 +1,33 @@
 package org.i3biscotti.kotlin2ast.ast.serialization.protocol.kotlin2protobuf
 
-import com.google.protobuf.GeneratedMessageV3
+import com.google.protobuf.GeneratedMessage
 import org.i3biscotti.kotlin2ast.ast.models.*
+import org.i3biscotti.kotlin2ast.parser.models.AntlrValidationError
+import org.i3biscotti.kotlin2ast.parser.models.LangError
+import org.i3biscotti.kotlin2ast.validation.models.AstValidationError
 import protocol.PositionOuterClass
 
-fun Node.toProtobuf() : GeneratedMessageV3{
+fun Node.toProtobuf() : GeneratedMessage{
     return when(this) {
         is ProgramFile -> this.toProtobuf()
         is Statement -> this.toProtobuf()
         is Expression -> this.toProtobuf()
         else -> throw IllegalArgumentException("Unknown node type")
     }
+}
+
+fun LangError.toProtobuf(): protocol.Response.LanguageError {
+    val builder = protocol.Response.LanguageError.newBuilder()
+
+    when (this) {
+        is AntlrValidationError -> builder.setMessage(this.message)
+        is AstValidationError -> builder.setMessage(this.message)
+        else -> throw IllegalArgumentException("Unknown error type")
+    }
+
+    builder.position = this.position?.toProtobuf()
+
+    return builder.build()
 }
 
 fun ProgramFile.toProtobuf(): protocol.Base.ProgramFile {

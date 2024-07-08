@@ -1,7 +1,6 @@
 package org.i3biscotti.kotlin2ast.transpiler
 
 import org.i3biscotti.kotlin2ast.ast.models.*
-import protocol.transpileRequest
 import kotlin.UnsupportedOperationException
 
 val space = "    "

@@ -1,12 +1,75 @@
-POST  http://localhost:8080/ast
+POST  http://localhost:8080/generate-ast
 Accept: text/plain
 
-pi = 3.14
+{
+"code": "fun main(){ \n val pi = 3.14 \n }"
+}
+
 ###
 
-POST http://localhost:8080/transpile
-Accept: application/json
+POST http://localhost:8080/generate-code
+Accept: text/plain
 
 {
-"ast": {"type":"ProgramFile", "lines":[{"type":"AssignmentStatement","name":"pi","value":{"type":"DecLit","value":"3.14","position":{"start":{"line":1,"column":6},"end":{"line":1,"column":10}}},"position":{"start":{"line":1,"column":1},"end":{"line":1,"column":10}}}],"position":{"start":{"line":1,"column":1},"end":{"line":1,"column":15}}}
+"ast": {
+    "lines": [{
+      "functionDefinitionStatement": {
+        "name": "main",
+        "returnType": {
+          "name": "void"
+        },
+        "statements": [{
+          "varDeclarationStatement": {
+            "varType": "IMMUTABLE",
+            "name": "pi",
+            "value": {
+              "decLit": {
+                "value": "3.14",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "column": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "column": 15
+                  }
+                }
+              }
+            },
+            "position": {
+              "start": {
+                "line": 2,
+                "column": 2
+              },
+              "end": {
+                "line": 2,
+                "column": 15
+              }
+            }
+          }
+        }],
+        "position": {
+          "start": {
+            "line": 1,
+            "column": 1
+          },
+          "end": {
+            "line": 3,
+            "column": 3
+          }
+        }
+      }
+    }],
+    "position": {
+      "start": {
+        "line": 1,
+        "column": 1
+      },
+      "end": {
+        "line": 3,
+        "column": 8
+      }
+    }
+  }
 }

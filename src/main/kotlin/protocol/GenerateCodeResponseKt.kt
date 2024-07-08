@@ -5,30 +5,47 @@
 @file:Suppress("DEPRECATION")
 package protocol;
 
-@kotlin.jvm.JvmName("-initializetranspileResponse")
-public inline fun transpileResponse(block: protocol.TranspileResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.TranspileResponse =
-  protocol.TranspileResponseKt.Dsl._create(protocol.Response.TranspileResponse.newBuilder()).apply { block() }._build()
+@kotlin.jvm.JvmName("-initializegenerateCodeResponse")
+public inline fun generateCodeResponse(block: protocol.GenerateCodeResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.GenerateCodeResponse =
+  protocol.GenerateCodeResponseKt.Dsl._create(protocol.Response.GenerateCodeResponse.newBuilder()).apply { block() }._build()
 /**
- * Protobuf type `protocol.TranspileResponse`
+ * Protobuf type `protocol.GenerateCodeResponse`
  */
-public object TranspileResponseKt {
+public object GenerateCodeResponseKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   public class Dsl private constructor(
-    private val _builder: protocol.Response.TranspileResponse.Builder
+    private val _builder: protocol.Response.GenerateCodeResponse.Builder
   ) {
     public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: protocol.Response.TranspileResponse.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: protocol.Response.GenerateCodeResponse.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): protocol.Response.TranspileResponse = _builder.build()
+    internal fun _build(): protocol.Response.GenerateCodeResponse = _builder.build()
 
     /**
-     * `string code = 1;`
+     * `bool success = 1;`
+     */
+    public var success: kotlin.Boolean
+      @JvmName("getSuccess")
+      get() = _builder.getSuccess()
+      @JvmName("setSuccess")
+      set(value) {
+        _builder.setSuccess(value)
+      }
+    /**
+     * `bool success = 1;`
+     */
+    public fun clearSuccess() {
+      _builder.clearSuccess()
+    }
+
+    /**
+     * `string code = 2;`
      */
     public var code: kotlin.String
       @JvmName("getCode")
@@ -38,7 +55,7 @@ public object TranspileResponseKt {
         _builder.setCode(value)
       }
     /**
-     * `string code = 1;`
+     * `string code = 2;`
      */
     public fun clearCode() {
       _builder.clearCode()
@@ -51,7 +68,7 @@ public object TranspileResponseKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     public class ErrorsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      */
      public val errors: com.google.protobuf.kotlin.DslList<protocol.Response.LanguageError, ErrorsProxy>
       @kotlin.jvm.JvmSynthetic
@@ -59,7 +76,7 @@ public object TranspileResponseKt {
         _builder.getErrorsList()
       )
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param value The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -68,7 +85,7 @@ public object TranspileResponseKt {
       _builder.addErrors(value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param value The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -78,7 +95,7 @@ public object TranspileResponseKt {
       add(value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param values The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -87,7 +104,7 @@ public object TranspileResponseKt {
       _builder.addAllErrors(values)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param values The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -97,7 +114,7 @@ public object TranspileResponseKt {
       addAll(values)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param index The index to set the value at.
      * @param value The errors to set.
      */
@@ -107,7 +124,7 @@ public object TranspileResponseKt {
       _builder.setErrors(index, value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearErrors")
@@ -118,6 +135,6 @@ public object TranspileResponseKt {
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun protocol.Response.TranspileResponse.copy(block: `protocol`.TranspileResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.TranspileResponse =
-  `protocol`.TranspileResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+public inline fun protocol.Response.GenerateCodeResponse.copy(block: `protocol`.GenerateCodeResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.GenerateCodeResponse =
+  `protocol`.GenerateCodeResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 

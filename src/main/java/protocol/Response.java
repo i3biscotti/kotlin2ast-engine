@@ -15,62 +15,68 @@ public final class Response {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface AstResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.AstResponse)
+  public interface GenerateAstResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.GenerateAstResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return Whether the program field is set.
+     * <code>bool success = 1;</code>
+     * @return The success.
      */
-    boolean hasProgram();
-    /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return The program.
-     */
-    protocol.Base.ProgramFile getProgram();
-    /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     */
-    protocol.Base.ProgramFileOrBuilder getProgramOrBuilder();
+    boolean getSuccess();
 
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>.protocol.ProgramFile ast = 2;</code>
+     * @return Whether the ast field is set.
+     */
+    boolean hasAst();
+    /**
+     * <code>.protocol.ProgramFile ast = 2;</code>
+     * @return The ast.
+     */
+    protocol.Base.ProgramFile getAst();
+    /**
+     * <code>.protocol.ProgramFile ast = 2;</code>
+     */
+    protocol.Base.ProgramFileOrBuilder getAstOrBuilder();
+
+    /**
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     java.util.List<protocol.Response.LanguageError> 
         getErrorsList();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     protocol.Response.LanguageError getErrors(int index);
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     int getErrorsCount();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
         getErrorsOrBuilderList();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code protocol.AstResponse}
+   * Protobuf type {@code protocol.GenerateAstResponse}
    */
-  public static final class AstResponse extends
+  public static final class GenerateAstResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.AstResponse)
-      AstResponseOrBuilder {
+      // @@protoc_insertion_point(message_implements:protocol.GenerateAstResponse)
+      GenerateAstResponseOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use AstResponse.newBuilder() to construct.
-    private AstResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GenerateAstResponse.newBuilder() to construct.
+    private GenerateAstResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private AstResponse() {
+    private GenerateAstResponse() {
       errors_ = java.util.Collections.emptyList();
     }
 
@@ -78,61 +84,72 @@ public final class Response {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new AstResponse();
+      return new GenerateAstResponse();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return protocol.Response.internal_static_protocol_AstResponse_descriptor;
+      return protocol.Response.internal_static_protocol_GenerateAstResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return protocol.Response.internal_static_protocol_AstResponse_fieldAccessorTable
+      return protocol.Response.internal_static_protocol_GenerateAstResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              protocol.Response.AstResponse.class, protocol.Response.AstResponse.Builder.class);
+              protocol.Response.GenerateAstResponse.class, protocol.Response.GenerateAstResponse.Builder.class);
     }
 
     private int bitField0_;
-    public static final int PROGRAM_FIELD_NUMBER = 1;
-    private protocol.Base.ProgramFile program_;
+    public static final int SUCCESS_FIELD_NUMBER = 1;
+    private boolean success_ = false;
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return Whether the program field is set.
+     * <code>bool success = 1;</code>
+     * @return The success.
      */
     @java.lang.Override
-    public boolean hasProgram() {
+    public boolean getSuccess() {
+      return success_;
+    }
+
+    public static final int AST_FIELD_NUMBER = 2;
+    private protocol.Base.ProgramFile ast_;
+    /**
+     * <code>.protocol.ProgramFile ast = 2;</code>
+     * @return Whether the ast field is set.
+     */
+    @java.lang.Override
+    public boolean hasAst() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return The program.
+     * <code>.protocol.ProgramFile ast = 2;</code>
+     * @return The ast.
      */
     @java.lang.Override
-    public protocol.Base.ProgramFile getProgram() {
-      return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+    public protocol.Base.ProgramFile getAst() {
+      return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
     }
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
+     * <code>.protocol.ProgramFile ast = 2;</code>
      */
     @java.lang.Override
-    public protocol.Base.ProgramFileOrBuilder getProgramOrBuilder() {
-      return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+    public protocol.Base.ProgramFileOrBuilder getAstOrBuilder() {
+      return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
     }
 
-    public static final int ERRORS_FIELD_NUMBER = 2;
+    public static final int ERRORS_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
     private java.util.List<protocol.Response.LanguageError> errors_;
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public java.util.List<protocol.Response.LanguageError> getErrorsList() {
       return errors_;
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
@@ -140,21 +157,21 @@ public final class Response {
       return errors_;
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public int getErrorsCount() {
       return errors_.size();
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public protocol.Response.LanguageError getErrors(int index) {
       return errors_.get(index);
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
@@ -176,11 +193,14 @@ public final class Response {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (success_ != false) {
+        output.writeBool(1, success_);
+      }
       if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(1, getProgram());
+        output.writeMessage(2, getAst());
       }
       for (int i = 0; i < errors_.size(); i++) {
-        output.writeMessage(2, errors_.get(i));
+        output.writeMessage(3, errors_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -191,13 +211,17 @@ public final class Response {
       if (size != -1) return size;
 
       size = 0;
+      if (success_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, success_);
+      }
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getProgram());
+          .computeMessageSize(2, getAst());
       }
       for (int i = 0; i < errors_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, errors_.get(i));
+          .computeMessageSize(3, errors_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -209,15 +233,17 @@ public final class Response {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof protocol.Response.AstResponse)) {
+      if (!(obj instanceof protocol.Response.GenerateAstResponse)) {
         return super.equals(obj);
       }
-      protocol.Response.AstResponse other = (protocol.Response.AstResponse) obj;
+      protocol.Response.GenerateAstResponse other = (protocol.Response.GenerateAstResponse) obj;
 
-      if (hasProgram() != other.hasProgram()) return false;
-      if (hasProgram()) {
-        if (!getProgram()
-            .equals(other.getProgram())) return false;
+      if (getSuccess()
+          != other.getSuccess()) return false;
+      if (hasAst() != other.hasAst()) return false;
+      if (hasAst()) {
+        if (!getAst()
+            .equals(other.getAst())) return false;
       }
       if (!getErrorsList()
           .equals(other.getErrorsList())) return false;
@@ -232,9 +258,12 @@ public final class Response {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasProgram()) {
-        hash = (37 * hash) + PROGRAM_FIELD_NUMBER;
-        hash = (53 * hash) + getProgram().hashCode();
+      hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSuccess());
+      if (hasAst()) {
+        hash = (37 * hash) + AST_FIELD_NUMBER;
+        hash = (53 * hash) + getAst().hashCode();
       }
       if (getErrorsCount() > 0) {
         hash = (37 * hash) + ERRORS_FIELD_NUMBER;
@@ -245,44 +274,44 @@ public final class Response {
       return hash;
     }
 
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.AstResponse parseFrom(byte[] data)
+    public static protocol.Response.GenerateAstResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.AstResponse parseFrom(java.io.InputStream input)
+    public static protocol.Response.GenerateAstResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -290,26 +319,26 @@ public final class Response {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static protocol.Response.AstResponse parseDelimitedFrom(java.io.InputStream input)
+    public static protocol.Response.GenerateAstResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static protocol.Response.AstResponse parseDelimitedFrom(
+    public static protocol.Response.GenerateAstResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Response.AstResponse parseFrom(
+    public static protocol.Response.GenerateAstResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -322,7 +351,7 @@ public final class Response {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(protocol.Response.AstResponse prototype) {
+    public static Builder newBuilder(protocol.Response.GenerateAstResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -338,26 +367,26 @@ public final class Response {
       return builder;
     }
     /**
-     * Protobuf type {@code protocol.AstResponse}
+     * Protobuf type {@code protocol.GenerateAstResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.AstResponse)
-        protocol.Response.AstResponseOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protocol.GenerateAstResponse)
+        protocol.Response.GenerateAstResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return protocol.Response.internal_static_protocol_AstResponse_descriptor;
+        return protocol.Response.internal_static_protocol_GenerateAstResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return protocol.Response.internal_static_protocol_AstResponse_fieldAccessorTable
+        return protocol.Response.internal_static_protocol_GenerateAstResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                protocol.Response.AstResponse.class, protocol.Response.AstResponse.Builder.class);
+                protocol.Response.GenerateAstResponse.class, protocol.Response.GenerateAstResponse.Builder.class);
       }
 
-      // Construct using protocol.Response.AstResponse.newBuilder()
+      // Construct using protocol.Response.GenerateAstResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -370,7 +399,7 @@ public final class Response {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getProgramFieldBuilder();
+          getAstFieldBuilder();
           getErrorsFieldBuilder();
         }
       }
@@ -378,10 +407,11 @@ public final class Response {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        program_ = null;
-        if (programBuilder_ != null) {
-          programBuilder_.dispose();
-          programBuilder_ = null;
+        success_ = false;
+        ast_ = null;
+        if (astBuilder_ != null) {
+          astBuilder_.dispose();
+          astBuilder_ = null;
         }
         if (errorsBuilder_ == null) {
           errors_ = java.util.Collections.emptyList();
@@ -389,24 +419,24 @@ public final class Response {
           errors_ = null;
           errorsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return protocol.Response.internal_static_protocol_AstResponse_descriptor;
+        return protocol.Response.internal_static_protocol_GenerateAstResponse_descriptor;
       }
 
       @java.lang.Override
-      public protocol.Response.AstResponse getDefaultInstanceForType() {
-        return protocol.Response.AstResponse.getDefaultInstance();
+      public protocol.Response.GenerateAstResponse getDefaultInstanceForType() {
+        return protocol.Response.GenerateAstResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public protocol.Response.AstResponse build() {
-        protocol.Response.AstResponse result = buildPartial();
+      public protocol.Response.GenerateAstResponse build() {
+        protocol.Response.GenerateAstResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -414,19 +444,19 @@ public final class Response {
       }
 
       @java.lang.Override
-      public protocol.Response.AstResponse buildPartial() {
-        protocol.Response.AstResponse result = new protocol.Response.AstResponse(this);
+      public protocol.Response.GenerateAstResponse buildPartial() {
+        protocol.Response.GenerateAstResponse result = new protocol.Response.GenerateAstResponse(this);
         buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartialRepeatedFields(protocol.Response.AstResponse result) {
+      private void buildPartialRepeatedFields(protocol.Response.GenerateAstResponse result) {
         if (errorsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000004) != 0)) {
             errors_ = java.util.Collections.unmodifiableList(errors_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.errors_ = errors_;
         } else {
@@ -434,13 +464,16 @@ public final class Response {
         }
       }
 
-      private void buildPartial0(protocol.Response.AstResponse result) {
+      private void buildPartial0(protocol.Response.GenerateAstResponse result) {
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.program_ = programBuilder_ == null
-              ? program_
-              : programBuilder_.build();
+          result.success_ = success_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ast_ = astBuilder_ == null
+              ? ast_
+              : astBuilder_.build();
           to_bitField0_ |= 0x00000001;
         }
         result.bitField0_ |= to_bitField0_;
@@ -480,24 +513,27 @@ public final class Response {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protocol.Response.AstResponse) {
-          return mergeFrom((protocol.Response.AstResponse)other);
+        if (other instanceof protocol.Response.GenerateAstResponse) {
+          return mergeFrom((protocol.Response.GenerateAstResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(protocol.Response.AstResponse other) {
-        if (other == protocol.Response.AstResponse.getDefaultInstance()) return this;
-        if (other.hasProgram()) {
-          mergeProgram(other.getProgram());
+      public Builder mergeFrom(protocol.Response.GenerateAstResponse other) {
+        if (other == protocol.Response.GenerateAstResponse.getDefaultInstance()) return this;
+        if (other.getSuccess() != false) {
+          setSuccess(other.getSuccess());
+        }
+        if (other.hasAst()) {
+          mergeAst(other.getAst());
         }
         if (errorsBuilder_ == null) {
           if (!other.errors_.isEmpty()) {
             if (errors_.isEmpty()) {
               errors_ = other.errors_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureErrorsIsMutable();
               errors_.addAll(other.errors_);
@@ -510,7 +546,7 @@ public final class Response {
               errorsBuilder_.dispose();
               errorsBuilder_ = null;
               errors_ = other.errors_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               errorsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getErrorsFieldBuilder() : null;
@@ -545,14 +581,19 @@ public final class Response {
               case 0:
                 done = true;
                 break;
-              case 10: {
-                input.readMessage(
-                    getProgramFieldBuilder().getBuilder(),
-                    extensionRegistry);
+              case 8: {
+                success_ = input.readBool();
                 bitField0_ |= 0x00000001;
                 break;
-              } // case 10
+              } // case 8
               case 18: {
+                input.readMessage(
+                    getAstFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
                 protocol.Response.LanguageError m =
                     input.readMessage(
                         protocol.Response.LanguageError.parser(),
@@ -564,7 +605,7 @@ public final class Response {
                   errorsBuilder_.addMessage(m);
                 }
                 break;
-              } // case 18
+              } // case 26
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -582,133 +623,165 @@ public final class Response {
       }
       private int bitField0_;
 
-      private protocol.Base.ProgramFile program_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> programBuilder_;
+      private boolean success_ ;
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
-       * @return Whether the program field is set.
+       * <code>bool success = 1;</code>
+       * @return The success.
        */
-      public boolean hasProgram() {
-        return ((bitField0_ & 0x00000001) != 0);
+      @java.lang.Override
+      public boolean getSuccess() {
+        return success_;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
-       * @return The program.
+       * <code>bool success = 1;</code>
+       * @param value The success to set.
+       * @return This builder for chaining.
        */
-      public protocol.Base.ProgramFile getProgram() {
-        if (programBuilder_ == null) {
-          return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+      public Builder setSuccess(boolean value) {
+
+        success_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool success = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = false;
+        onChanged();
+        return this;
+      }
+
+      private protocol.Base.ProgramFile ast_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> astBuilder_;
+      /**
+       * <code>.protocol.ProgramFile ast = 2;</code>
+       * @return Whether the ast field is set.
+       */
+      public boolean hasAst() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>.protocol.ProgramFile ast = 2;</code>
+       * @return The ast.
+       */
+      public protocol.Base.ProgramFile getAst() {
+        if (astBuilder_ == null) {
+          return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
         } else {
-          return programBuilder_.getMessage();
+          return astBuilder_.getMessage();
         }
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public Builder setProgram(protocol.Base.ProgramFile value) {
-        if (programBuilder_ == null) {
+      public Builder setAst(protocol.Base.ProgramFile value) {
+        if (astBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          program_ = value;
+          ast_ = value;
         } else {
-          programBuilder_.setMessage(value);
+          astBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public Builder setProgram(
+      public Builder setAst(
           protocol.Base.ProgramFile.Builder builderForValue) {
-        if (programBuilder_ == null) {
-          program_ = builderForValue.build();
+        if (astBuilder_ == null) {
+          ast_ = builderForValue.build();
         } else {
-          programBuilder_.setMessage(builderForValue.build());
+          astBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public Builder mergeProgram(protocol.Base.ProgramFile value) {
-        if (programBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0) &&
-            program_ != null &&
-            program_ != protocol.Base.ProgramFile.getDefaultInstance()) {
-            getProgramBuilder().mergeFrom(value);
+      public Builder mergeAst(protocol.Base.ProgramFile value) {
+        if (astBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            ast_ != null &&
+            ast_ != protocol.Base.ProgramFile.getDefaultInstance()) {
+            getAstBuilder().mergeFrom(value);
           } else {
-            program_ = value;
+            ast_ = value;
           }
         } else {
-          programBuilder_.mergeFrom(value);
+          astBuilder_.mergeFrom(value);
         }
-        if (program_ != null) {
-          bitField0_ |= 0x00000001;
+        if (ast_ != null) {
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public Builder clearProgram() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        program_ = null;
-        if (programBuilder_ != null) {
-          programBuilder_.dispose();
-          programBuilder_ = null;
+      public Builder clearAst() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        ast_ = null;
+        if (astBuilder_ != null) {
+          astBuilder_.dispose();
+          astBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public protocol.Base.ProgramFile.Builder getProgramBuilder() {
-        bitField0_ |= 0x00000001;
+      public protocol.Base.ProgramFile.Builder getAstBuilder() {
+        bitField0_ |= 0x00000002;
         onChanged();
-        return getProgramFieldBuilder().getBuilder();
+        return getAstFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
-      public protocol.Base.ProgramFileOrBuilder getProgramOrBuilder() {
-        if (programBuilder_ != null) {
-          return programBuilder_.getMessageOrBuilder();
+      public protocol.Base.ProgramFileOrBuilder getAstOrBuilder() {
+        if (astBuilder_ != null) {
+          return astBuilder_.getMessageOrBuilder();
         } else {
-          return program_ == null ?
-              protocol.Base.ProgramFile.getDefaultInstance() : program_;
+          return ast_ == null ?
+              protocol.Base.ProgramFile.getDefaultInstance() : ast_;
         }
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> 
-          getProgramFieldBuilder() {
-        if (programBuilder_ == null) {
-          programBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getAstFieldBuilder() {
+        if (astBuilder_ == null) {
+          astBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder>(
-                  getProgram(),
+                  getAst(),
                   getParentForChildren(),
                   isClean());
-          program_ = null;
+          ast_ = null;
         }
-        return programBuilder_;
+        return astBuilder_;
       }
 
       private java.util.List<protocol.Response.LanguageError> errors_ =
         java.util.Collections.emptyList();
       private void ensureErrorsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           errors_ = new java.util.ArrayList<protocol.Response.LanguageError>(errors_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -716,7 +789,7 @@ public final class Response {
           protocol.Response.LanguageError, protocol.Response.LanguageError.Builder, protocol.Response.LanguageErrorOrBuilder> errorsBuilder_;
 
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<protocol.Response.LanguageError> getErrorsList() {
         if (errorsBuilder_ == null) {
@@ -726,7 +799,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public int getErrorsCount() {
         if (errorsBuilder_ == null) {
@@ -736,7 +809,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError getErrors(int index) {
         if (errorsBuilder_ == null) {
@@ -746,7 +819,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder setErrors(
           int index, protocol.Response.LanguageError value) {
@@ -763,7 +836,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder setErrors(
           int index, protocol.Response.LanguageError.Builder builderForValue) {
@@ -777,7 +850,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(protocol.Response.LanguageError value) {
         if (errorsBuilder_ == null) {
@@ -793,7 +866,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           int index, protocol.Response.LanguageError value) {
@@ -810,7 +883,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           protocol.Response.LanguageError.Builder builderForValue) {
@@ -824,7 +897,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           int index, protocol.Response.LanguageError.Builder builderForValue) {
@@ -838,7 +911,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addAllErrors(
           java.lang.Iterable<? extends protocol.Response.LanguageError> values) {
@@ -853,12 +926,12 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder clearErrors() {
         if (errorsBuilder_ == null) {
           errors_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           errorsBuilder_.clear();
@@ -866,7 +939,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder removeErrors(int index) {
         if (errorsBuilder_ == null) {
@@ -879,14 +952,14 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder getErrorsBuilder(
           int index) {
         return getErrorsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
           int index) {
@@ -896,7 +969,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
            getErrorsOrBuilderList() {
@@ -907,14 +980,14 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder addErrorsBuilder() {
         return getErrorsFieldBuilder().addBuilder(
             protocol.Response.LanguageError.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder addErrorsBuilder(
           int index) {
@@ -922,7 +995,7 @@ public final class Response {
             index, protocol.Response.LanguageError.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<protocol.Response.LanguageError.Builder> 
            getErrorsBuilderList() {
@@ -935,7 +1008,7 @@ public final class Response {
           errorsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               protocol.Response.LanguageError, protocol.Response.LanguageError.Builder, protocol.Response.LanguageErrorOrBuilder>(
                   errors_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000004) != 0),
                   getParentForChildren(),
                   isClean());
           errors_ = null;
@@ -955,23 +1028,23 @@ public final class Response {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protocol.AstResponse)
+      // @@protoc_insertion_point(builder_scope:protocol.GenerateAstResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:protocol.AstResponse)
-    private static final protocol.Response.AstResponse DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protocol.GenerateAstResponse)
+    private static final protocol.Response.GenerateAstResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new protocol.Response.AstResponse();
+      DEFAULT_INSTANCE = new protocol.Response.GenerateAstResponse();
     }
 
-    public static protocol.Response.AstResponse getDefaultInstance() {
+    public static protocol.Response.GenerateAstResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<AstResponse>
-        PARSER = new com.google.protobuf.AbstractParser<AstResponse>() {
+    private static final com.google.protobuf.Parser<GenerateAstResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GenerateAstResponse>() {
       @java.lang.Override
-      public AstResponse parsePartialFrom(
+      public GenerateAstResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -990,17 +1063,17 @@ public final class Response {
       }
     };
 
-    public static com.google.protobuf.Parser<AstResponse> parser() {
+    public static com.google.protobuf.Parser<GenerateAstResponse> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<AstResponse> getParserForType() {
+    public com.google.protobuf.Parser<GenerateAstResponse> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public protocol.Response.AstResponse getDefaultInstanceForType() {
+    public protocol.Response.GenerateAstResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1766,59 +1839,65 @@ public final class Response {
 
   }
 
-  public interface TranspileResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.TranspileResponse)
+  public interface GenerateCodeResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.GenerateCodeResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string code = 1;</code>
+     * <code>bool success = 1;</code>
+     * @return The success.
+     */
+    boolean getSuccess();
+
+    /**
+     * <code>string code = 2;</code>
      * @return The code.
      */
     java.lang.String getCode();
     /**
-     * <code>string code = 1;</code>
+     * <code>string code = 2;</code>
      * @return The bytes for code.
      */
     com.google.protobuf.ByteString
         getCodeBytes();
 
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     java.util.List<protocol.Response.LanguageError> 
         getErrorsList();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     protocol.Response.LanguageError getErrors(int index);
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     int getErrorsCount();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
         getErrorsOrBuilderList();
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code protocol.TranspileResponse}
+   * Protobuf type {@code protocol.GenerateCodeResponse}
    */
-  public static final class TranspileResponse extends
+  public static final class GenerateCodeResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.TranspileResponse)
-      TranspileResponseOrBuilder {
+      // @@protoc_insertion_point(message_implements:protocol.GenerateCodeResponse)
+      GenerateCodeResponseOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use TranspileResponse.newBuilder() to construct.
-    private TranspileResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GenerateCodeResponse.newBuilder() to construct.
+    private GenerateCodeResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TranspileResponse() {
+    private GenerateCodeResponse() {
       code_ = "";
       errors_ = java.util.Collections.emptyList();
     }
@@ -1827,27 +1906,38 @@ public final class Response {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new TranspileResponse();
+      return new GenerateCodeResponse();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return protocol.Response.internal_static_protocol_TranspileResponse_descriptor;
+      return protocol.Response.internal_static_protocol_GenerateCodeResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return protocol.Response.internal_static_protocol_TranspileResponse_fieldAccessorTable
+      return protocol.Response.internal_static_protocol_GenerateCodeResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              protocol.Response.TranspileResponse.class, protocol.Response.TranspileResponse.Builder.class);
+              protocol.Response.GenerateCodeResponse.class, protocol.Response.GenerateCodeResponse.Builder.class);
     }
 
-    public static final int CODE_FIELD_NUMBER = 1;
+    public static final int SUCCESS_FIELD_NUMBER = 1;
+    private boolean success_ = false;
+    /**
+     * <code>bool success = 1;</code>
+     * @return The success.
+     */
+    @java.lang.Override
+    public boolean getSuccess() {
+      return success_;
+    }
+
+    public static final int CODE_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
     private volatile java.lang.Object code_ = "";
     /**
-     * <code>string code = 1;</code>
+     * <code>string code = 2;</code>
      * @return The code.
      */
     @java.lang.Override
@@ -1864,7 +1954,7 @@ public final class Response {
       }
     }
     /**
-     * <code>string code = 1;</code>
+     * <code>string code = 2;</code>
      * @return The bytes for code.
      */
     @java.lang.Override
@@ -1882,18 +1972,18 @@ public final class Response {
       }
     }
 
-    public static final int ERRORS_FIELD_NUMBER = 2;
+    public static final int ERRORS_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
     private java.util.List<protocol.Response.LanguageError> errors_;
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public java.util.List<protocol.Response.LanguageError> getErrorsList() {
       return errors_;
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
@@ -1901,21 +1991,21 @@ public final class Response {
       return errors_;
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public int getErrorsCount() {
       return errors_.size();
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public protocol.Response.LanguageError getErrors(int index) {
       return errors_.get(index);
     }
     /**
-     * <code>repeated .protocol.LanguageError errors = 2;</code>
+     * <code>repeated .protocol.LanguageError errors = 3;</code>
      */
     @java.lang.Override
     public protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
@@ -1937,11 +2027,14 @@ public final class Response {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (success_ != false) {
+        output.writeBool(1, success_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, code_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, code_);
       }
       for (int i = 0; i < errors_.size(); i++) {
-        output.writeMessage(2, errors_.get(i));
+        output.writeMessage(3, errors_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1952,12 +2045,16 @@ public final class Response {
       if (size != -1) return size;
 
       size = 0;
+      if (success_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, success_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, code_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, code_);
       }
       for (int i = 0; i < errors_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, errors_.get(i));
+          .computeMessageSize(3, errors_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1969,11 +2066,13 @@ public final class Response {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof protocol.Response.TranspileResponse)) {
+      if (!(obj instanceof protocol.Response.GenerateCodeResponse)) {
         return super.equals(obj);
       }
-      protocol.Response.TranspileResponse other = (protocol.Response.TranspileResponse) obj;
+      protocol.Response.GenerateCodeResponse other = (protocol.Response.GenerateCodeResponse) obj;
 
+      if (getSuccess()
+          != other.getSuccess()) return false;
       if (!getCode()
           .equals(other.getCode())) return false;
       if (!getErrorsList()
@@ -1989,6 +2088,9 @@ public final class Response {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSuccess());
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + getCode().hashCode();
       if (getErrorsCount() > 0) {
@@ -2000,44 +2102,44 @@ public final class Response {
       return hash;
     }
 
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.TranspileResponse parseFrom(byte[] data)
+    public static protocol.Response.GenerateCodeResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Response.TranspileResponse parseFrom(java.io.InputStream input)
+    public static protocol.Response.GenerateCodeResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2045,26 +2147,26 @@ public final class Response {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static protocol.Response.TranspileResponse parseDelimitedFrom(java.io.InputStream input)
+    public static protocol.Response.GenerateCodeResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static protocol.Response.TranspileResponse parseDelimitedFrom(
+    public static protocol.Response.GenerateCodeResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Response.TranspileResponse parseFrom(
+    public static protocol.Response.GenerateCodeResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2077,7 +2179,7 @@ public final class Response {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(protocol.Response.TranspileResponse prototype) {
+    public static Builder newBuilder(protocol.Response.GenerateCodeResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2093,26 +2195,26 @@ public final class Response {
       return builder;
     }
     /**
-     * Protobuf type {@code protocol.TranspileResponse}
+     * Protobuf type {@code protocol.GenerateCodeResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.TranspileResponse)
-        protocol.Response.TranspileResponseOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protocol.GenerateCodeResponse)
+        protocol.Response.GenerateCodeResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return protocol.Response.internal_static_protocol_TranspileResponse_descriptor;
+        return protocol.Response.internal_static_protocol_GenerateCodeResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return protocol.Response.internal_static_protocol_TranspileResponse_fieldAccessorTable
+        return protocol.Response.internal_static_protocol_GenerateCodeResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                protocol.Response.TranspileResponse.class, protocol.Response.TranspileResponse.Builder.class);
+                protocol.Response.GenerateCodeResponse.class, protocol.Response.GenerateCodeResponse.Builder.class);
       }
 
-      // Construct using protocol.Response.TranspileResponse.newBuilder()
+      // Construct using protocol.Response.GenerateCodeResponse.newBuilder()
       private Builder() {
 
       }
@@ -2126,6 +2228,7 @@ public final class Response {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
+        success_ = false;
         code_ = "";
         if (errorsBuilder_ == null) {
           errors_ = java.util.Collections.emptyList();
@@ -2133,24 +2236,24 @@ public final class Response {
           errors_ = null;
           errorsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return protocol.Response.internal_static_protocol_TranspileResponse_descriptor;
+        return protocol.Response.internal_static_protocol_GenerateCodeResponse_descriptor;
       }
 
       @java.lang.Override
-      public protocol.Response.TranspileResponse getDefaultInstanceForType() {
-        return protocol.Response.TranspileResponse.getDefaultInstance();
+      public protocol.Response.GenerateCodeResponse getDefaultInstanceForType() {
+        return protocol.Response.GenerateCodeResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public protocol.Response.TranspileResponse build() {
-        protocol.Response.TranspileResponse result = buildPartial();
+      public protocol.Response.GenerateCodeResponse build() {
+        protocol.Response.GenerateCodeResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2158,19 +2261,19 @@ public final class Response {
       }
 
       @java.lang.Override
-      public protocol.Response.TranspileResponse buildPartial() {
-        protocol.Response.TranspileResponse result = new protocol.Response.TranspileResponse(this);
+      public protocol.Response.GenerateCodeResponse buildPartial() {
+        protocol.Response.GenerateCodeResponse result = new protocol.Response.GenerateCodeResponse(this);
         buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartialRepeatedFields(protocol.Response.TranspileResponse result) {
+      private void buildPartialRepeatedFields(protocol.Response.GenerateCodeResponse result) {
         if (errorsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000004) != 0)) {
             errors_ = java.util.Collections.unmodifiableList(errors_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.errors_ = errors_;
         } else {
@@ -2178,9 +2281,12 @@ public final class Response {
         }
       }
 
-      private void buildPartial0(protocol.Response.TranspileResponse result) {
+      private void buildPartial0(protocol.Response.GenerateCodeResponse result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.success_ = success_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
           result.code_ = code_;
         }
       }
@@ -2219,26 +2325,29 @@ public final class Response {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protocol.Response.TranspileResponse) {
-          return mergeFrom((protocol.Response.TranspileResponse)other);
+        if (other instanceof protocol.Response.GenerateCodeResponse) {
+          return mergeFrom((protocol.Response.GenerateCodeResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(protocol.Response.TranspileResponse other) {
-        if (other == protocol.Response.TranspileResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(protocol.Response.GenerateCodeResponse other) {
+        if (other == protocol.Response.GenerateCodeResponse.getDefaultInstance()) return this;
+        if (other.getSuccess() != false) {
+          setSuccess(other.getSuccess());
+        }
         if (!other.getCode().isEmpty()) {
           code_ = other.code_;
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (errorsBuilder_ == null) {
           if (!other.errors_.isEmpty()) {
             if (errors_.isEmpty()) {
               errors_ = other.errors_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureErrorsIsMutable();
               errors_.addAll(other.errors_);
@@ -2251,7 +2360,7 @@ public final class Response {
               errorsBuilder_.dispose();
               errorsBuilder_ = null;
               errors_ = other.errors_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               errorsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getErrorsFieldBuilder() : null;
@@ -2286,12 +2395,17 @@ public final class Response {
               case 0:
                 done = true;
                 break;
-              case 10: {
-                code_ = input.readStringRequireUtf8();
+              case 8: {
+                success_ = input.readBool();
                 bitField0_ |= 0x00000001;
                 break;
-              } // case 10
+              } // case 8
               case 18: {
+                code_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
                 protocol.Response.LanguageError m =
                     input.readMessage(
                         protocol.Response.LanguageError.parser(),
@@ -2303,7 +2417,7 @@ public final class Response {
                   errorsBuilder_.addMessage(m);
                 }
                 break;
-              } // case 18
+              } // case 26
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2321,9 +2435,41 @@ public final class Response {
       }
       private int bitField0_;
 
+      private boolean success_ ;
+      /**
+       * <code>bool success = 1;</code>
+       * @return The success.
+       */
+      @java.lang.Override
+      public boolean getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>bool success = 1;</code>
+       * @param value The success to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSuccess(boolean value) {
+
+        success_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool success = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = false;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object code_ = "";
       /**
-       * <code>string code = 1;</code>
+       * <code>string code = 2;</code>
        * @return The code.
        */
       public java.lang.String getCode() {
@@ -2339,7 +2485,7 @@ public final class Response {
         }
       }
       /**
-       * <code>string code = 1;</code>
+       * <code>string code = 2;</code>
        * @return The bytes for code.
        */
       public com.google.protobuf.ByteString
@@ -2356,7 +2502,7 @@ public final class Response {
         }
       }
       /**
-       * <code>string code = 1;</code>
+       * <code>string code = 2;</code>
        * @param value The code to set.
        * @return This builder for chaining.
        */
@@ -2364,22 +2510,22 @@ public final class Response {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         code_ = value;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
-       * <code>string code = 1;</code>
+       * <code>string code = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearCode() {
         code_ = getDefaultInstance().getCode();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
-       * <code>string code = 1;</code>
+       * <code>string code = 2;</code>
        * @param value The bytes for code to set.
        * @return This builder for chaining.
        */
@@ -2388,7 +2534,7 @@ public final class Response {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         code_ = value;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2396,9 +2542,9 @@ public final class Response {
       private java.util.List<protocol.Response.LanguageError> errors_ =
         java.util.Collections.emptyList();
       private void ensureErrorsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           errors_ = new java.util.ArrayList<protocol.Response.LanguageError>(errors_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -2406,7 +2552,7 @@ public final class Response {
           protocol.Response.LanguageError, protocol.Response.LanguageError.Builder, protocol.Response.LanguageErrorOrBuilder> errorsBuilder_;
 
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<protocol.Response.LanguageError> getErrorsList() {
         if (errorsBuilder_ == null) {
@@ -2416,7 +2562,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public int getErrorsCount() {
         if (errorsBuilder_ == null) {
@@ -2426,7 +2572,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError getErrors(int index) {
         if (errorsBuilder_ == null) {
@@ -2436,7 +2582,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder setErrors(
           int index, protocol.Response.LanguageError value) {
@@ -2453,7 +2599,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder setErrors(
           int index, protocol.Response.LanguageError.Builder builderForValue) {
@@ -2467,7 +2613,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(protocol.Response.LanguageError value) {
         if (errorsBuilder_ == null) {
@@ -2483,7 +2629,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           int index, protocol.Response.LanguageError value) {
@@ -2500,7 +2646,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           protocol.Response.LanguageError.Builder builderForValue) {
@@ -2514,7 +2660,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addErrors(
           int index, protocol.Response.LanguageError.Builder builderForValue) {
@@ -2528,7 +2674,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder addAllErrors(
           java.lang.Iterable<? extends protocol.Response.LanguageError> values) {
@@ -2543,12 +2689,12 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder clearErrors() {
         if (errorsBuilder_ == null) {
           errors_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           errorsBuilder_.clear();
@@ -2556,7 +2702,7 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public Builder removeErrors(int index) {
         if (errorsBuilder_ == null) {
@@ -2569,14 +2715,14 @@ public final class Response {
         return this;
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder getErrorsBuilder(
           int index) {
         return getErrorsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageErrorOrBuilder getErrorsOrBuilder(
           int index) {
@@ -2586,7 +2732,7 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<? extends protocol.Response.LanguageErrorOrBuilder> 
            getErrorsOrBuilderList() {
@@ -2597,14 +2743,14 @@ public final class Response {
         }
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder addErrorsBuilder() {
         return getErrorsFieldBuilder().addBuilder(
             protocol.Response.LanguageError.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public protocol.Response.LanguageError.Builder addErrorsBuilder(
           int index) {
@@ -2612,7 +2758,7 @@ public final class Response {
             index, protocol.Response.LanguageError.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.LanguageError errors = 2;</code>
+       * <code>repeated .protocol.LanguageError errors = 3;</code>
        */
       public java.util.List<protocol.Response.LanguageError.Builder> 
            getErrorsBuilderList() {
@@ -2625,7 +2771,7 @@ public final class Response {
           errorsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               protocol.Response.LanguageError, protocol.Response.LanguageError.Builder, protocol.Response.LanguageErrorOrBuilder>(
                   errors_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000004) != 0),
                   getParentForChildren(),
                   isClean());
           errors_ = null;
@@ -2645,23 +2791,23 @@ public final class Response {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protocol.TranspileResponse)
+      // @@protoc_insertion_point(builder_scope:protocol.GenerateCodeResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:protocol.TranspileResponse)
-    private static final protocol.Response.TranspileResponse DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protocol.GenerateCodeResponse)
+    private static final protocol.Response.GenerateCodeResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new protocol.Response.TranspileResponse();
+      DEFAULT_INSTANCE = new protocol.Response.GenerateCodeResponse();
     }
 
-    public static protocol.Response.TranspileResponse getDefaultInstance() {
+    public static protocol.Response.GenerateCodeResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<TranspileResponse>
-        PARSER = new com.google.protobuf.AbstractParser<TranspileResponse>() {
+    private static final com.google.protobuf.Parser<GenerateCodeResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GenerateCodeResponse>() {
       @java.lang.Override
-      public TranspileResponse parsePartialFrom(
+      public GenerateCodeResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2680,37 +2826,37 @@ public final class Response {
       }
     };
 
-    public static com.google.protobuf.Parser<TranspileResponse> parser() {
+    public static com.google.protobuf.Parser<GenerateCodeResponse> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TranspileResponse> getParserForType() {
+    public com.google.protobuf.Parser<GenerateCodeResponse> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public protocol.Response.TranspileResponse getDefaultInstanceForType() {
+    public protocol.Response.GenerateCodeResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_AstResponse_descriptor;
+    internal_static_protocol_GenerateAstResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_AstResponse_fieldAccessorTable;
+      internal_static_protocol_GenerateAstResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protocol_LanguageError_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_protocol_LanguageError_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_TranspileResponse_descriptor;
+    internal_static_protocol_GenerateCodeResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_TranspileResponse_fieldAccessorTable;
+      internal_static_protocol_GenerateCodeResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2721,13 +2867,14 @@ public final class Response {
   static {
     java.lang.String[] descriptorData = {
       "\n\016response.proto\022\010protocol\032\nbase.proto\032\016" +
-      "position.proto\"^\n\013AstResponse\022&\n\007program" +
-      "\030\001 \001(\0132\025.protocol.ProgramFile\022\'\n\006errors\030" +
-      "\002 \003(\0132\027.protocol.LanguageError\"C\n\rLangua" +
-      "geError\022\017\n\007message\030\001 \001(\t\022!\n\010position\030\002 \001" +
-      "(\0132\017.protocol.Point\"J\n\021TranspileResponse" +
-      "\022\014\n\004code\030\001 \001(\t\022\'\n\006errors\030\002 \003(\0132\027.protoco" +
-      "l.LanguageErrorb\006proto3"
+      "position.proto\"s\n\023GenerateAstResponse\022\017\n" +
+      "\007success\030\001 \001(\010\022\"\n\003ast\030\002 \001(\0132\025.protocol.P" +
+      "rogramFile\022\'\n\006errors\030\003 \003(\0132\027.protocol.La" +
+      "nguageError\"C\n\rLanguageError\022\017\n\007message\030" +
+      "\001 \001(\t\022!\n\010position\030\002 \001(\0132\017.protocol.Point" +
+      "\"^\n\024GenerateCodeResponse\022\017\n\007success\030\001 \001(" +
+      "\010\022\014\n\004code\030\002 \001(\t\022\'\n\006errors\030\003 \003(\0132\027.protoc" +
+      "ol.LanguageErrorb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2735,24 +2882,24 @@ public final class Response {
           protocol.Base.getDescriptor(),
           protocol.PositionOuterClass.getDescriptor(),
         });
-    internal_static_protocol_AstResponse_descriptor =
+    internal_static_protocol_GenerateAstResponse_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_protocol_AstResponse_fieldAccessorTable = new
+    internal_static_protocol_GenerateAstResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_AstResponse_descriptor,
-        new java.lang.String[] { "Program", "Errors", });
+        internal_static_protocol_GenerateAstResponse_descriptor,
+        new java.lang.String[] { "Success", "Ast", "Errors", });
     internal_static_protocol_LanguageError_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_protocol_LanguageError_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_LanguageError_descriptor,
         new java.lang.String[] { "Message", "Position", });
-    internal_static_protocol_TranspileResponse_descriptor =
+    internal_static_protocol_GenerateCodeResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_protocol_TranspileResponse_fieldAccessorTable = new
+    internal_static_protocol_GenerateCodeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_TranspileResponse_descriptor,
-        new java.lang.String[] { "Code", "Errors", });
+        internal_static_protocol_GenerateCodeResponse_descriptor,
+        new java.lang.String[] { "Success", "Code", "Errors", });
     protocol.Base.getDescriptor();
     protocol.PositionOuterClass.getDescriptor();
   }

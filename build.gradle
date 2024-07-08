@@ -52,7 +52,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
-    implementation 'com.google.protobuf:protobuf-kotlin:3.25.3'
+    implementation 'com.google.protobuf:protobuf-kotlin:4.27.2'
+    implementation 'com.google.protobuf:protobuf-java-util:4.27.2'
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'junit:junit:4.13.1'

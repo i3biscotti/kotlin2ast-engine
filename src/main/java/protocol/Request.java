@@ -15,8 +15,8 @@ public final class Request {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface AstRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.AstRequest)
+  public interface GenerateAstRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.GenerateAstRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -32,18 +32,18 @@ public final class Request {
         getCodeBytes();
   }
   /**
-   * Protobuf type {@code protocol.AstRequest}
+   * Protobuf type {@code protocol.GenerateAstRequest}
    */
-  public static final class AstRequest extends
+  public static final class GenerateAstRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.AstRequest)
-      AstRequestOrBuilder {
+      // @@protoc_insertion_point(message_implements:protocol.GenerateAstRequest)
+      GenerateAstRequestOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use AstRequest.newBuilder() to construct.
-    private AstRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GenerateAstRequest.newBuilder() to construct.
+    private GenerateAstRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private AstRequest() {
+    private GenerateAstRequest() {
       code_ = "";
     }
 
@@ -51,20 +51,20 @@ public final class Request {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new AstRequest();
+      return new GenerateAstRequest();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return protocol.Request.internal_static_protocol_AstRequest_descriptor;
+      return protocol.Request.internal_static_protocol_GenerateAstRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return protocol.Request.internal_static_protocol_AstRequest_fieldAccessorTable
+      return protocol.Request.internal_static_protocol_GenerateAstRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              protocol.Request.AstRequest.class, protocol.Request.AstRequest.Builder.class);
+              protocol.Request.GenerateAstRequest.class, protocol.Request.GenerateAstRequest.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
@@ -145,10 +145,10 @@ public final class Request {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof protocol.Request.AstRequest)) {
+      if (!(obj instanceof protocol.Request.GenerateAstRequest)) {
         return super.equals(obj);
       }
-      protocol.Request.AstRequest other = (protocol.Request.AstRequest) obj;
+      protocol.Request.GenerateAstRequest other = (protocol.Request.GenerateAstRequest) obj;
 
       if (!getCode()
           .equals(other.getCode())) return false;
@@ -170,44 +170,44 @@ public final class Request {
       return hash;
     }
 
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.AstRequest parseFrom(byte[] data)
+    public static protocol.Request.GenerateAstRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.AstRequest parseFrom(java.io.InputStream input)
+    public static protocol.Request.GenerateAstRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -215,26 +215,26 @@ public final class Request {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static protocol.Request.AstRequest parseDelimitedFrom(java.io.InputStream input)
+    public static protocol.Request.GenerateAstRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static protocol.Request.AstRequest parseDelimitedFrom(
+    public static protocol.Request.GenerateAstRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Request.AstRequest parseFrom(
+    public static protocol.Request.GenerateAstRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -247,7 +247,7 @@ public final class Request {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(protocol.Request.AstRequest prototype) {
+    public static Builder newBuilder(protocol.Request.GenerateAstRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -263,26 +263,26 @@ public final class Request {
       return builder;
     }
     /**
-     * Protobuf type {@code protocol.AstRequest}
+     * Protobuf type {@code protocol.GenerateAstRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.AstRequest)
-        protocol.Request.AstRequestOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protocol.GenerateAstRequest)
+        protocol.Request.GenerateAstRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return protocol.Request.internal_static_protocol_AstRequest_descriptor;
+        return protocol.Request.internal_static_protocol_GenerateAstRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return protocol.Request.internal_static_protocol_AstRequest_fieldAccessorTable
+        return protocol.Request.internal_static_protocol_GenerateAstRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                protocol.Request.AstRequest.class, protocol.Request.AstRequest.Builder.class);
+                protocol.Request.GenerateAstRequest.class, protocol.Request.GenerateAstRequest.Builder.class);
       }
 
-      // Construct using protocol.Request.AstRequest.newBuilder()
+      // Construct using protocol.Request.GenerateAstRequest.newBuilder()
       private Builder() {
 
       }
@@ -303,17 +303,17 @@ public final class Request {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return protocol.Request.internal_static_protocol_AstRequest_descriptor;
+        return protocol.Request.internal_static_protocol_GenerateAstRequest_descriptor;
       }
 
       @java.lang.Override
-      public protocol.Request.AstRequest getDefaultInstanceForType() {
-        return protocol.Request.AstRequest.getDefaultInstance();
+      public protocol.Request.GenerateAstRequest getDefaultInstanceForType() {
+        return protocol.Request.GenerateAstRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public protocol.Request.AstRequest build() {
-        protocol.Request.AstRequest result = buildPartial();
+      public protocol.Request.GenerateAstRequest build() {
+        protocol.Request.GenerateAstRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -321,14 +321,14 @@ public final class Request {
       }
 
       @java.lang.Override
-      public protocol.Request.AstRequest buildPartial() {
-        protocol.Request.AstRequest result = new protocol.Request.AstRequest(this);
+      public protocol.Request.GenerateAstRequest buildPartial() {
+        protocol.Request.GenerateAstRequest result = new protocol.Request.GenerateAstRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(protocol.Request.AstRequest result) {
+      private void buildPartial0(protocol.Request.GenerateAstRequest result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.code_ = code_;
@@ -369,16 +369,16 @@ public final class Request {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protocol.Request.AstRequest) {
-          return mergeFrom((protocol.Request.AstRequest)other);
+        if (other instanceof protocol.Request.GenerateAstRequest) {
+          return mergeFrom((protocol.Request.GenerateAstRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(protocol.Request.AstRequest other) {
-        if (other == protocol.Request.AstRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(protocol.Request.GenerateAstRequest other) {
+        if (other == protocol.Request.GenerateAstRequest.getDefaultInstance()) return this;
         if (!other.getCode().isEmpty()) {
           code_ = other.code_;
           bitField0_ |= 0x00000001;
@@ -516,23 +516,23 @@ public final class Request {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protocol.AstRequest)
+      // @@protoc_insertion_point(builder_scope:protocol.GenerateAstRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:protocol.AstRequest)
-    private static final protocol.Request.AstRequest DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protocol.GenerateAstRequest)
+    private static final protocol.Request.GenerateAstRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new protocol.Request.AstRequest();
+      DEFAULT_INSTANCE = new protocol.Request.GenerateAstRequest();
     }
 
-    public static protocol.Request.AstRequest getDefaultInstance() {
+    public static protocol.Request.GenerateAstRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<AstRequest>
-        PARSER = new com.google.protobuf.AbstractParser<AstRequest>() {
+    private static final com.google.protobuf.Parser<GenerateAstRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GenerateAstRequest>() {
       @java.lang.Override
-      public AstRequest parsePartialFrom(
+      public GenerateAstRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -551,101 +551,101 @@ public final class Request {
       }
     };
 
-    public static com.google.protobuf.Parser<AstRequest> parser() {
+    public static com.google.protobuf.Parser<GenerateAstRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<AstRequest> getParserForType() {
+    public com.google.protobuf.Parser<GenerateAstRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public protocol.Request.AstRequest getDefaultInstanceForType() {
+    public protocol.Request.GenerateAstRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface TranspileRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.TranspileRequest)
+  public interface GenerateCodeRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.GenerateCodeRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return Whether the program field is set.
+     * <code>.protocol.ProgramFile ast = 1;</code>
+     * @return Whether the ast field is set.
      */
-    boolean hasProgram();
+    boolean hasAst();
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return The program.
+     * <code>.protocol.ProgramFile ast = 1;</code>
+     * @return The ast.
      */
-    protocol.Base.ProgramFile getProgram();
+    protocol.Base.ProgramFile getAst();
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
+     * <code>.protocol.ProgramFile ast = 1;</code>
      */
-    protocol.Base.ProgramFileOrBuilder getProgramOrBuilder();
+    protocol.Base.ProgramFileOrBuilder getAstOrBuilder();
   }
   /**
-   * Protobuf type {@code protocol.TranspileRequest}
+   * Protobuf type {@code protocol.GenerateCodeRequest}
    */
-  public static final class TranspileRequest extends
+  public static final class GenerateCodeRequest extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.TranspileRequest)
-      TranspileRequestOrBuilder {
+      // @@protoc_insertion_point(message_implements:protocol.GenerateCodeRequest)
+      GenerateCodeRequestOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use TranspileRequest.newBuilder() to construct.
-    private TranspileRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GenerateCodeRequest.newBuilder() to construct.
+    private GenerateCodeRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TranspileRequest() {
+    private GenerateCodeRequest() {
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new TranspileRequest();
+      return new GenerateCodeRequest();
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return protocol.Request.internal_static_protocol_TranspileRequest_descriptor;
+      return protocol.Request.internal_static_protocol_GenerateCodeRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return protocol.Request.internal_static_protocol_TranspileRequest_fieldAccessorTable
+      return protocol.Request.internal_static_protocol_GenerateCodeRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              protocol.Request.TranspileRequest.class, protocol.Request.TranspileRequest.Builder.class);
+              protocol.Request.GenerateCodeRequest.class, protocol.Request.GenerateCodeRequest.Builder.class);
     }
 
     private int bitField0_;
-    public static final int PROGRAM_FIELD_NUMBER = 1;
-    private protocol.Base.ProgramFile program_;
+    public static final int AST_FIELD_NUMBER = 1;
+    private protocol.Base.ProgramFile ast_;
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return Whether the program field is set.
+     * <code>.protocol.ProgramFile ast = 1;</code>
+     * @return Whether the ast field is set.
      */
     @java.lang.Override
-    public boolean hasProgram() {
+    public boolean hasAst() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
-     * @return The program.
+     * <code>.protocol.ProgramFile ast = 1;</code>
+     * @return The ast.
      */
     @java.lang.Override
-    public protocol.Base.ProgramFile getProgram() {
-      return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+    public protocol.Base.ProgramFile getAst() {
+      return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
     }
     /**
-     * <code>.protocol.ProgramFile program = 1;</code>
+     * <code>.protocol.ProgramFile ast = 1;</code>
      */
     @java.lang.Override
-    public protocol.Base.ProgramFileOrBuilder getProgramOrBuilder() {
-      return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+    public protocol.Base.ProgramFileOrBuilder getAstOrBuilder() {
+      return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -663,7 +663,7 @@ public final class Request {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(1, getProgram());
+        output.writeMessage(1, getAst());
       }
       getUnknownFields().writeTo(output);
     }
@@ -676,7 +676,7 @@ public final class Request {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getProgram());
+          .computeMessageSize(1, getAst());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -688,15 +688,15 @@ public final class Request {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof protocol.Request.TranspileRequest)) {
+      if (!(obj instanceof protocol.Request.GenerateCodeRequest)) {
         return super.equals(obj);
       }
-      protocol.Request.TranspileRequest other = (protocol.Request.TranspileRequest) obj;
+      protocol.Request.GenerateCodeRequest other = (protocol.Request.GenerateCodeRequest) obj;
 
-      if (hasProgram() != other.hasProgram()) return false;
-      if (hasProgram()) {
-        if (!getProgram()
-            .equals(other.getProgram())) return false;
+      if (hasAst() != other.hasAst()) return false;
+      if (hasAst()) {
+        if (!getAst()
+            .equals(other.getAst())) return false;
       }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -709,53 +709,53 @@ public final class Request {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasProgram()) {
-        hash = (37 * hash) + PROGRAM_FIELD_NUMBER;
-        hash = (53 * hash) + getProgram().hashCode();
+      if (hasAst()) {
+        hash = (37 * hash) + AST_FIELD_NUMBER;
+        hash = (53 * hash) + getAst().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.TranspileRequest parseFrom(byte[] data)
+    public static protocol.Request.GenerateCodeRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protocol.Request.TranspileRequest parseFrom(java.io.InputStream input)
+    public static protocol.Request.GenerateCodeRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -763,26 +763,26 @@ public final class Request {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static protocol.Request.TranspileRequest parseDelimitedFrom(java.io.InputStream input)
+    public static protocol.Request.GenerateCodeRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static protocol.Request.TranspileRequest parseDelimitedFrom(
+    public static protocol.Request.GenerateCodeRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static protocol.Request.TranspileRequest parseFrom(
+    public static protocol.Request.GenerateCodeRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -795,7 +795,7 @@ public final class Request {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(protocol.Request.TranspileRequest prototype) {
+    public static Builder newBuilder(protocol.Request.GenerateCodeRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -811,26 +811,26 @@ public final class Request {
       return builder;
     }
     /**
-     * Protobuf type {@code protocol.TranspileRequest}
+     * Protobuf type {@code protocol.GenerateCodeRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.TranspileRequest)
-        protocol.Request.TranspileRequestOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protocol.GenerateCodeRequest)
+        protocol.Request.GenerateCodeRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return protocol.Request.internal_static_protocol_TranspileRequest_descriptor;
+        return protocol.Request.internal_static_protocol_GenerateCodeRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return protocol.Request.internal_static_protocol_TranspileRequest_fieldAccessorTable
+        return protocol.Request.internal_static_protocol_GenerateCodeRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                protocol.Request.TranspileRequest.class, protocol.Request.TranspileRequest.Builder.class);
+                protocol.Request.GenerateCodeRequest.class, protocol.Request.GenerateCodeRequest.Builder.class);
       }
 
-      // Construct using protocol.Request.TranspileRequest.newBuilder()
+      // Construct using protocol.Request.GenerateCodeRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -843,17 +843,17 @@ public final class Request {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getProgramFieldBuilder();
+          getAstFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        program_ = null;
-        if (programBuilder_ != null) {
-          programBuilder_.dispose();
-          programBuilder_ = null;
+        ast_ = null;
+        if (astBuilder_ != null) {
+          astBuilder_.dispose();
+          astBuilder_ = null;
         }
         return this;
       }
@@ -861,17 +861,17 @@ public final class Request {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return protocol.Request.internal_static_protocol_TranspileRequest_descriptor;
+        return protocol.Request.internal_static_protocol_GenerateCodeRequest_descriptor;
       }
 
       @java.lang.Override
-      public protocol.Request.TranspileRequest getDefaultInstanceForType() {
-        return protocol.Request.TranspileRequest.getDefaultInstance();
+      public protocol.Request.GenerateCodeRequest getDefaultInstanceForType() {
+        return protocol.Request.GenerateCodeRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public protocol.Request.TranspileRequest build() {
-        protocol.Request.TranspileRequest result = buildPartial();
+      public protocol.Request.GenerateCodeRequest build() {
+        protocol.Request.GenerateCodeRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -879,20 +879,20 @@ public final class Request {
       }
 
       @java.lang.Override
-      public protocol.Request.TranspileRequest buildPartial() {
-        protocol.Request.TranspileRequest result = new protocol.Request.TranspileRequest(this);
+      public protocol.Request.GenerateCodeRequest buildPartial() {
+        protocol.Request.GenerateCodeRequest result = new protocol.Request.GenerateCodeRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(protocol.Request.TranspileRequest result) {
+      private void buildPartial0(protocol.Request.GenerateCodeRequest result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.program_ = programBuilder_ == null
-              ? program_
-              : programBuilder_.build();
+          result.ast_ = astBuilder_ == null
+              ? ast_
+              : astBuilder_.build();
           to_bitField0_ |= 0x00000001;
         }
         result.bitField0_ |= to_bitField0_;
@@ -932,18 +932,18 @@ public final class Request {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protocol.Request.TranspileRequest) {
-          return mergeFrom((protocol.Request.TranspileRequest)other);
+        if (other instanceof protocol.Request.GenerateCodeRequest) {
+          return mergeFrom((protocol.Request.GenerateCodeRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(protocol.Request.TranspileRequest other) {
-        if (other == protocol.Request.TranspileRequest.getDefaultInstance()) return this;
-        if (other.hasProgram()) {
-          mergeProgram(other.getProgram());
+      public Builder mergeFrom(protocol.Request.GenerateCodeRequest other) {
+        if (other == protocol.Request.GenerateCodeRequest.getDefaultInstance()) return this;
+        if (other.hasAst()) {
+          mergeAst(other.getAst());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -973,7 +973,7 @@ public final class Request {
                 break;
               case 10: {
                 input.readMessage(
-                    getProgramFieldBuilder().getBuilder(),
+                    getAstFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000001;
                 break;
@@ -995,125 +995,125 @@ public final class Request {
       }
       private int bitField0_;
 
-      private protocol.Base.ProgramFile program_;
+      private protocol.Base.ProgramFile ast_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> programBuilder_;
+          protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> astBuilder_;
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
-       * @return Whether the program field is set.
+       * <code>.protocol.ProgramFile ast = 1;</code>
+       * @return Whether the ast field is set.
        */
-      public boolean hasProgram() {
+      public boolean hasAst() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
-       * @return The program.
+       * <code>.protocol.ProgramFile ast = 1;</code>
+       * @return The ast.
        */
-      public protocol.Base.ProgramFile getProgram() {
-        if (programBuilder_ == null) {
-          return program_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : program_;
+      public protocol.Base.ProgramFile getAst() {
+        if (astBuilder_ == null) {
+          return ast_ == null ? protocol.Base.ProgramFile.getDefaultInstance() : ast_;
         } else {
-          return programBuilder_.getMessage();
+          return astBuilder_.getMessage();
         }
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public Builder setProgram(protocol.Base.ProgramFile value) {
-        if (programBuilder_ == null) {
+      public Builder setAst(protocol.Base.ProgramFile value) {
+        if (astBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          program_ = value;
+          ast_ = value;
         } else {
-          programBuilder_.setMessage(value);
+          astBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public Builder setProgram(
+      public Builder setAst(
           protocol.Base.ProgramFile.Builder builderForValue) {
-        if (programBuilder_ == null) {
-          program_ = builderForValue.build();
+        if (astBuilder_ == null) {
+          ast_ = builderForValue.build();
         } else {
-          programBuilder_.setMessage(builderForValue.build());
+          astBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public Builder mergeProgram(protocol.Base.ProgramFile value) {
-        if (programBuilder_ == null) {
+      public Builder mergeAst(protocol.Base.ProgramFile value) {
+        if (astBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-            program_ != null &&
-            program_ != protocol.Base.ProgramFile.getDefaultInstance()) {
-            getProgramBuilder().mergeFrom(value);
+            ast_ != null &&
+            ast_ != protocol.Base.ProgramFile.getDefaultInstance()) {
+            getAstBuilder().mergeFrom(value);
           } else {
-            program_ = value;
+            ast_ = value;
           }
         } else {
-          programBuilder_.mergeFrom(value);
+          astBuilder_.mergeFrom(value);
         }
-        if (program_ != null) {
+        if (ast_ != null) {
           bitField0_ |= 0x00000001;
           onChanged();
         }
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public Builder clearProgram() {
+      public Builder clearAst() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        program_ = null;
-        if (programBuilder_ != null) {
-          programBuilder_.dispose();
-          programBuilder_ = null;
+        ast_ = null;
+        if (astBuilder_ != null) {
+          astBuilder_.dispose();
+          astBuilder_ = null;
         }
         onChanged();
         return this;
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public protocol.Base.ProgramFile.Builder getProgramBuilder() {
+      public protocol.Base.ProgramFile.Builder getAstBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getProgramFieldBuilder().getBuilder();
+        return getAstFieldBuilder().getBuilder();
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
-      public protocol.Base.ProgramFileOrBuilder getProgramOrBuilder() {
-        if (programBuilder_ != null) {
-          return programBuilder_.getMessageOrBuilder();
+      public protocol.Base.ProgramFileOrBuilder getAstOrBuilder() {
+        if (astBuilder_ != null) {
+          return astBuilder_.getMessageOrBuilder();
         } else {
-          return program_ == null ?
-              protocol.Base.ProgramFile.getDefaultInstance() : program_;
+          return ast_ == null ?
+              protocol.Base.ProgramFile.getDefaultInstance() : ast_;
         }
       }
       /**
-       * <code>.protocol.ProgramFile program = 1;</code>
+       * <code>.protocol.ProgramFile ast = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder> 
-          getProgramFieldBuilder() {
-        if (programBuilder_ == null) {
-          programBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getAstFieldBuilder() {
+        if (astBuilder_ == null) {
+          astBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               protocol.Base.ProgramFile, protocol.Base.ProgramFile.Builder, protocol.Base.ProgramFileOrBuilder>(
-                  getProgram(),
+                  getAst(),
                   getParentForChildren(),
                   isClean());
-          program_ = null;
+          ast_ = null;
         }
-        return programBuilder_;
+        return astBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1128,23 +1128,23 @@ public final class Request {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protocol.TranspileRequest)
+      // @@protoc_insertion_point(builder_scope:protocol.GenerateCodeRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:protocol.TranspileRequest)
-    private static final protocol.Request.TranspileRequest DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protocol.GenerateCodeRequest)
+    private static final protocol.Request.GenerateCodeRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new protocol.Request.TranspileRequest();
+      DEFAULT_INSTANCE = new protocol.Request.GenerateCodeRequest();
     }
 
-    public static protocol.Request.TranspileRequest getDefaultInstance() {
+    public static protocol.Request.GenerateCodeRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<TranspileRequest>
-        PARSER = new com.google.protobuf.AbstractParser<TranspileRequest>() {
+    private static final com.google.protobuf.Parser<GenerateCodeRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GenerateCodeRequest>() {
       @java.lang.Override
-      public TranspileRequest parsePartialFrom(
+      public GenerateCodeRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1163,32 +1163,32 @@ public final class Request {
       }
     };
 
-    public static com.google.protobuf.Parser<TranspileRequest> parser() {
+    public static com.google.protobuf.Parser<GenerateCodeRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TranspileRequest> getParserForType() {
+    public com.google.protobuf.Parser<GenerateCodeRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public protocol.Request.TranspileRequest getDefaultInstanceForType() {
+    public protocol.Request.GenerateCodeRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_AstRequest_descriptor;
+    internal_static_protocol_GenerateAstRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_AstRequest_fieldAccessorTable;
+      internal_static_protocol_GenerateAstRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_TranspileRequest_descriptor;
+    internal_static_protocol_GenerateCodeRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_TranspileRequest_fieldAccessorTable;
+      internal_static_protocol_GenerateCodeRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1198,28 +1198,28 @@ public final class Request {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rrequest.proto\022\010protocol\032\nbase.proto\"\032\n" +
-      "\nAstRequest\022\014\n\004code\030\001 \001(\t\":\n\020TranspileRe" +
-      "quest\022&\n\007program\030\001 \001(\0132\025.protocol.Progra" +
-      "mFileb\006proto3"
+      "\n\rrequest.proto\022\010protocol\032\nbase.proto\"\"\n" +
+      "\022GenerateAstRequest\022\014\n\004code\030\001 \001(\t\"9\n\023Gen" +
+      "erateCodeRequest\022\"\n\003ast\030\001 \001(\0132\025.protocol" +
+      ".ProgramFileb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           protocol.Base.getDescriptor(),
         });
-    internal_static_protocol_AstRequest_descriptor =
+    internal_static_protocol_GenerateAstRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_protocol_AstRequest_fieldAccessorTable = new
+    internal_static_protocol_GenerateAstRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_AstRequest_descriptor,
+        internal_static_protocol_GenerateAstRequest_descriptor,
         new java.lang.String[] { "Code", });
-    internal_static_protocol_TranspileRequest_descriptor =
+    internal_static_protocol_GenerateCodeRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_protocol_TranspileRequest_fieldAccessorTable = new
+    internal_static_protocol_GenerateCodeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_TranspileRequest_descriptor,
-        new java.lang.String[] { "Program", });
+        internal_static_protocol_GenerateCodeRequest_descriptor,
+        new java.lang.String[] { "Ast", });
     protocol.Base.getDescriptor();
   }
 

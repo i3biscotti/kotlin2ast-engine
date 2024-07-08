@@ -5,50 +5,67 @@
 @file:Suppress("DEPRECATION")
 package protocol;
 
-@kotlin.jvm.JvmName("-initializeastResponse")
-public inline fun astResponse(block: protocol.AstResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.AstResponse =
-  protocol.AstResponseKt.Dsl._create(protocol.Response.AstResponse.newBuilder()).apply { block() }._build()
+@kotlin.jvm.JvmName("-initializegenerateAstResponse")
+public inline fun generateAstResponse(block: protocol.GenerateAstResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.GenerateAstResponse =
+  protocol.GenerateAstResponseKt.Dsl._create(protocol.Response.GenerateAstResponse.newBuilder()).apply { block() }._build()
 /**
- * Protobuf type `protocol.AstResponse`
+ * Protobuf type `protocol.GenerateAstResponse`
  */
-public object AstResponseKt {
+public object GenerateAstResponseKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   public class Dsl private constructor(
-    private val _builder: protocol.Response.AstResponse.Builder
+    private val _builder: protocol.Response.GenerateAstResponse.Builder
   ) {
     public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: protocol.Response.AstResponse.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: protocol.Response.GenerateAstResponse.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): protocol.Response.AstResponse = _builder.build()
+    internal fun _build(): protocol.Response.GenerateAstResponse = _builder.build()
 
     /**
-     * `.protocol.ProgramFile program = 1;`
+     * `bool success = 1;`
      */
-    public var program: protocol.Base.ProgramFile
-      @JvmName("getProgram")
-      get() = _builder.getProgram()
-      @JvmName("setProgram")
+    public var success: kotlin.Boolean
+      @JvmName("getSuccess")
+      get() = _builder.getSuccess()
+      @JvmName("setSuccess")
       set(value) {
-        _builder.setProgram(value)
+        _builder.setSuccess(value)
       }
     /**
-     * `.protocol.ProgramFile program = 1;`
+     * `bool success = 1;`
      */
-    public fun clearProgram() {
-      _builder.clearProgram()
+    public fun clearSuccess() {
+      _builder.clearSuccess()
+    }
+
+    /**
+     * `.protocol.ProgramFile ast = 2;`
+     */
+    public var ast: protocol.Base.ProgramFile
+      @JvmName("getAst")
+      get() = _builder.getAst()
+      @JvmName("setAst")
+      set(value) {
+        _builder.setAst(value)
+      }
+    /**
+     * `.protocol.ProgramFile ast = 2;`
+     */
+    public fun clearAst() {
+      _builder.clearAst()
     }
     /**
-     * `.protocol.ProgramFile program = 1;`
-     * @return Whether the program field is set.
+     * `.protocol.ProgramFile ast = 2;`
+     * @return Whether the ast field is set.
      */
-    public fun hasProgram(): kotlin.Boolean {
-      return _builder.hasProgram()
+    public fun hasAst(): kotlin.Boolean {
+      return _builder.hasAst()
     }
 
     /**
@@ -58,7 +75,7 @@ public object AstResponseKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     public class ErrorsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      */
      public val errors: com.google.protobuf.kotlin.DslList<protocol.Response.LanguageError, ErrorsProxy>
       @kotlin.jvm.JvmSynthetic
@@ -66,7 +83,7 @@ public object AstResponseKt {
         _builder.getErrorsList()
       )
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param value The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -75,7 +92,7 @@ public object AstResponseKt {
       _builder.addErrors(value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param value The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -85,7 +102,7 @@ public object AstResponseKt {
       add(value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param values The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -94,7 +111,7 @@ public object AstResponseKt {
       _builder.addAllErrors(values)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param values The errors to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -104,7 +121,7 @@ public object AstResponseKt {
       addAll(values)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      * @param index The index to set the value at.
      * @param value The errors to set.
      */
@@ -114,7 +131,7 @@ public object AstResponseKt {
       _builder.setErrors(index, value)
     }
     /**
-     * `repeated .protocol.LanguageError errors = 2;`
+     * `repeated .protocol.LanguageError errors = 3;`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearErrors")
@@ -125,9 +142,9 @@ public object AstResponseKt {
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun protocol.Response.AstResponse.copy(block: `protocol`.AstResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.AstResponse =
-  `protocol`.AstResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+public inline fun protocol.Response.GenerateAstResponse.copy(block: `protocol`.GenerateAstResponseKt.Dsl.() -> kotlin.Unit): protocol.Response.GenerateAstResponse =
+  `protocol`.GenerateAstResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-public val protocol.Response.AstResponseOrBuilder.programOrNull: protocol.Base.ProgramFile?
-  get() = if (hasProgram()) getProgram() else null
+public val protocol.Response.GenerateAstResponseOrBuilder.astOrNull: protocol.Base.ProgramFile?
+  get() = if (hasAst()) getAst() else null
 
