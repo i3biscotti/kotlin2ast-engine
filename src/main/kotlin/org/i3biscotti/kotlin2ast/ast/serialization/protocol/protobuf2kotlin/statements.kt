@@ -52,6 +52,7 @@ fun Statements.VariableType.toAst(): VariableType {
         Statements.VariableType.IMMUTABLE -> VariableType.immutable
         Statements.VariableType.VARIABLE -> VariableType.variable
         Statements.VariableType.CONSTANT -> VariableType.constant
+        Statements.VariableType.TYPE -> VariableType.type
         else -> throw UnsupportedOperationException()
     }
 }

@@ -1,6 +1,7 @@
 package org.i3biscotti.kotlin2ast.validation.scope
 
 import org.i3biscotti.kotlin2ast.ast.models.*
+import org.i3biscotti.kotlin2ast.parser.models.LangError
 
 internal fun prepareNewScope(scope: ScopeContext, statementsBlock: List<Statement>): ScopeContext {
 
@@ -81,8 +82,7 @@ fun extractType(context: ScopeContext, e: Expression): VariableValueType =
         is UnaryMathExpression -> extractType(context, e.value)
         is ParenthesisExpression -> extractType(context, e.value)
         is VarReferenceExpression -> context.read<VariableSign>(e.name)?.type
-            ?: throw UnsupportedOperationException("Unknown expression type")
-
+            ?: VariableValueType.DYNAMIC
         is FunctionCallExpression -> extractTypeFromFunctionOrClassConstructor(e, context)
         is ObjectMethodCallExpression -> extractTypeFromClassMethod(e, context)
         is ObjectPropertyReferenceExpression -> extractTypeFromObjectProperty(e, context)

@@ -51,6 +51,7 @@ fun VariableType.toProtobuf(): Statements.VariableType {
         VariableType.immutable -> Statements.VariableType.IMMUTABLE
         VariableType.variable -> Statements.VariableType.VARIABLE
         VariableType.constant -> Statements.VariableType.CONSTANT
+        VariableType.type -> Statements.VariableType.TYPE
     }
 }
 

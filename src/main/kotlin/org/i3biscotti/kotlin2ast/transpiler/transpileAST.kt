@@ -55,6 +55,7 @@ fun VariableDeclarationStatement.transpile(depth: Int = 0): String {
         VariableType.immutable -> "val"
         VariableType.variable -> "var"
         VariableType.constant -> "const"
+        VariableType.type -> "var"
     }
 
     var declarationTranspiled = "$variableTypeTranspiled $name"
@@ -161,7 +162,7 @@ fun ForDefinitionStatement.transpile(depth: Int = 0): String {
         val whileStatements = mutableListOf<Statement>()
         whileStatements.addAll(statements)
         whileStatements.add(ExpressionDefinitionStatement(
-           expression =  (forCondition.incrementStatement as ExpressionDefinitionStatement).expression,
+           expression =  (forCondition.incrementStatement as ExpressionForStatement).value,
            position =  null
         ))
 
@@ -258,6 +259,7 @@ fun ClassDefinitionStatement.transpile(depth: Int = 0): String {
 
                 if (propFound != null) {
                     val propKeyword = when (propFound.varType) {
+                        VariableType.type -> "var"
                         VariableType.variable -> "var"
                         VariableType.immutable -> "val"
                         VariableType.constant -> "const"

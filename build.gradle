@@ -66,11 +66,11 @@ tasks {
 }
 
 compileKotlin {
-    dependsOn("generateGrammarSource")
+    dependsOn(":generateGrammarSource")
 }
 
 compileTestKotlin {
-    dependsOn("generateGrammarSource")
+    dependsOn(":generateTestGrammarSource")
 }
 
 test.outputs.upToDateWhen {false}
