@@ -33,7 +33,8 @@ line: statement (NL+ | EOF);
     ;
 
 expression
-    : value=BOOL_LIT                                                                    #BoolLiteralExpression
+    : functionOrClassInstanceCall                                                       #FunctionOrClassInstanceCallExpression
+    | value=BOOL_LIT                                                                    #BoolLiteralExpression
     | value=INT_LIT                                                                     #IntLiteralExpression
     | value=DOUBLE_LIT                                                                  #DoubleLiteralExpression
     | value=STRING_LIT                                                                  #StringLiteralExpression
@@ -41,7 +42,7 @@ expression
     | left=expression     operand=MINUS                 right=expression                #BinaryMathExpression
     | left=expression     operand=TIMES                 right=expression                #BinaryMathExpression
     | left=expression     operand=DIVISION              right=expression                #BinaryMathExpression
-    | left=expression     operand=MODULE*               right=expression                #BinaryMathExpression
+    | left=expression     operand=MODULE                right=expression                #BinaryMathExpression
     | left=expression     operand=AND                   right=expression                #BinaryLogicExpression
     | left=expression     operand=OR                    right=expression                #BinaryLogicExpression
     | left=expression     operand=GREATER_THAN          right=expression                #BinaryComparisonExpression
@@ -62,7 +63,6 @@ expression
     | listOfDefinition                                                                  #ListOfExpression
     | READLINE PAREN_OPEN PAREN_CLOSE                                                   #InputExpression
     | PRINTLN PAREN_OPEN value=expression PAREN_CLOSE                                   #OutputExpression
-    | functionOrClassInstanceCall                                                       #FunctionOrClassInstanceCallExpression
     | objectProperty                                                                    #ObjectPropertyReferenceExpression
     | objectMethodCall                                                                  #ObjectMethodCallExpression
     ;

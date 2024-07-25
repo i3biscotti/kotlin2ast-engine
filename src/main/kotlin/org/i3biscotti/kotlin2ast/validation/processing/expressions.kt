@@ -13,6 +13,7 @@ fun Expression.process(operation: ProcessOperationCallback, scope: ScopeContext)
         is ParenthesisExpression -> this.value.process(operation, scope)
         is FunctionCallExpression -> this.process(operation, scope)
         is ListOfExpression -> this.process(operation, scope)
+        is OutputExpression -> this.process(operation, scope)
         else -> return
     }
 }
@@ -28,4 +29,8 @@ fun ListOfExpression.process(operation: ProcessOperationCallback, scope: ScopeCo
 
 fun FunctionCallExpression.process(operation: ProcessOperationCallback, scope: ScopeContext) {
     parameters.forEach { it.process(operation, scope) }
+}
+
+fun OutputExpression.process(operation: ProcessOperationCallback, scope: ScopeContext) {
+    value.process(operation, scope)
 }

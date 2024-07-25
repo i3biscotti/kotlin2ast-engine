@@ -60,6 +60,7 @@ fun main() {
             }
 
             post("/generate-ast") {
+
                 val jsonRequest = call.receiveText()
                 val requestBuilder = GenerateAstRequest.newBuilder()
                 JsonFormat.parser().merge(jsonRequest, requestBuilder)
@@ -85,7 +86,7 @@ fun main() {
                     val response = protocol.generateAstResponse {
                         success = false
                         errors.add(
-                            protocol.languageError { message = e.message ?: "Dio cane" }
+                            protocol.languageError { message = e.message ?: "Error" }
                         )
                     }
                     call.respondText { getJsonFormat().print(response) }

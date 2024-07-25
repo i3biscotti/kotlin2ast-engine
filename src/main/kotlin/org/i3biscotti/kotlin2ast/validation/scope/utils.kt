@@ -77,8 +77,10 @@ fun extractType(context: ScopeContext, e: Expression): VariableValueType =
         is DoubleLiteralExpression -> VariableValueType.DOUBLE
         is BooleanLitExpression -> VariableValueType.BOOLEAN
         is StringLiteralExpression -> VariableValueType.STRING
-        is BinaryExpression -> extractType(context, e.left)
         is UnaryLogicNegationExpression -> VariableValueType.BOOLEAN
+        is BinaryLogicExpression -> VariableValueType.BOOLEAN
+        is BinaryComparisonExpression -> VariableValueType.BOOLEAN
+        is BinaryExpression -> extractType(context, e.left)
         is UnaryMathExpression -> extractType(context, e.value)
         is ParenthesisExpression -> extractType(context, e.value)
         is VarReferenceExpression -> context.read<VariableSign>(e.name)?.type

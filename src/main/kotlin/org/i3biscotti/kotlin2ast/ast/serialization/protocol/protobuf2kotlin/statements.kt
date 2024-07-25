@@ -82,7 +82,7 @@ fun Statements.IfDefinitionStatement.toAst(): IfDefinitionStatement {
     return IfDefinitionStatement(
         ifBlock = proto.ifBlock.toAst(),
         elseIfBlock = proto.elseIfBlocksList.map { it.toAst() },
-        elseBlock = proto.elseBlock.toAst(),
+        elseBlock = if(proto.hasElseBlock()) proto.elseBlock.toAst() else null,
         position = proto.positionOrNull?.toAst()
     )
 }
